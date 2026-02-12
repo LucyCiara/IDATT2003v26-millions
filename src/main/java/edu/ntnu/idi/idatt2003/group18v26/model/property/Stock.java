@@ -10,9 +10,9 @@ import java.util.List;
  * The current sales price is the last element in {@code prices}.
  */
 public class Stock {
-  private String symbol;
-  private String company;
-  private List<BigDecimal> prices;
+  private final String symbol;
+  private final String company;
+  private final List<BigDecimal> prices;
 
   /**
    * Initializes the stock with an initial sales price; the price history will
@@ -69,7 +69,7 @@ public class Stock {
   }
 
   /**
-   * Adds a new sales price to the {@code Prices} list.
+   * Adds a new sales price to the {@code prices} list.
    * 
    * @throws IllegalArgumentException if newPrice is {@code null}
    * @param newPrice the new price
@@ -79,5 +79,10 @@ public class Stock {
       throw new IllegalArgumentException("The new price cannot be null");
     }
     prices.add(newPrice);
+  }
+
+  @Override
+  public String toString() {
+    return symbol + " (" + company + ") - current price: " + getSalesPrice();
   }
 }
