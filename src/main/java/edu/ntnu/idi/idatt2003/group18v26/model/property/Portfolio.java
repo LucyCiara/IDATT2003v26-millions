@@ -20,7 +20,7 @@ public class Portfolio {
    * @return list of shares
    */
   public List<Share> getShares() {
-    return List.copyOf(shares);
+    return this.shares;
   }
 
   /**
