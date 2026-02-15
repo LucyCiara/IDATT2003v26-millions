@@ -2,8 +2,6 @@ package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
-
 import java.math.BigDecimal;
 
 import org.junit.jupiter.api.Test;
