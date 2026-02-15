@@ -47,7 +47,7 @@ public class Stock {
    * @return symbol
    */
   public String getSymbol() {
-    return symbol;
+    return this.symbol;
   }
 
   /**
@@ -56,7 +56,7 @@ public class Stock {
    * @return company
    */
   public String getCompany() {
-    return company;
+    return this.company;
   }
 
   /**
@@ -65,7 +65,7 @@ public class Stock {
    * @return the latest sales price
    */
   public BigDecimal getSalesPrice() {
-    return prices.get(prices.size() - 1);
+    return this.prices.get(this.prices.size() - 1);
   }
 
   /**
@@ -78,11 +78,11 @@ public class Stock {
     if (newPrice == null) {
       throw new IllegalArgumentException("The new price cannot be null");
     }
-    prices.add(newPrice);
+    this.prices.add(newPrice);
   }
 
   @Override
   public String toString() {
-    return symbol + " (" + company + ") - current price: " + getSalesPrice();
+    return this.symbol + " (" + this.company + ") - current price: " + this.getSalesPrice();
   }
 }
