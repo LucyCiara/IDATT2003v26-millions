@@ -33,8 +33,8 @@ public class Share {
     if (quantity == null || quantity.compareTo(BigDecimal.ZERO) <= 0) {
       throw new IllegalArgumentException("quantity must be a positive number");
     }
-    if (purchasePrice == null) {
-      throw new IllegalArgumentException("purchasePrice cannot be null");
+    if (purchasePrice == null || purchasePrice.compareTo(BigDecimal.ZERO) <= 0) {
+      throw new IllegalArgumentException("purchasePrice must be a positive number");
     }
     this.stock = stock;
     this.quantity = quantity;
