@@ -7,13 +7,13 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 
 public class ShareTest {
-  private final static Stock TEST_STOCK = new Stock("TTC", "TestINC", new BigDecimal(20051910.142113020518));
-  private final static BigDecimal TEST_QUANTITY = new BigDecimal(2005.1910);
-  private final static BigDecimal TEST_PURCHASE_PRICE = new BigDecimal(20051910.142113020518);
+  private final static Stock TEST_STOCK = new Stock("TTC", "TestINC", new BigDecimal("20051910.142113020518"));
+  private final static BigDecimal TEST_QUANTITY = new BigDecimal("2005.1910");
+  private final static BigDecimal TEST_PURCHASE_PRICE = new BigDecimal("20051910.142113020518");
 
-  private final static Stock WRONG_STOCK = new Stock("WGC", "WrongINC", new BigDecimal(2318151407.142113020518));
-  private final static BigDecimal WRONG_QUANTITY = new BigDecimal(231815.1407);
-  private final static BigDecimal WRONG_PURCHASE_PRICE = new BigDecimal(2318151407.142113020518);
+  private final static Stock WRONG_STOCK = new Stock("WGC", "WrongINC", new BigDecimal("2318151407.142113020518"));
+  private final static BigDecimal WRONG_QUANTITY = new BigDecimal("231815.1407");
+  private final static BigDecimal WRONG_PURCHASE_PRICE = new BigDecimal("2318151407.142113020518");
 
   private void constructorTest(Stock stock, BigDecimal quantity, BigDecimal purchase_price, boolean negativeTest) {
     boolean exceptionThrown = negativeTest;
@@ -32,7 +32,7 @@ public class ShareTest {
   }
 
   @Test
-  public void constuctorWithNullStockThrowsException() {
+  public void constructorWithNullStockThrowsException() {
     this.constructorTest(null, TEST_QUANTITY, TEST_PURCHASE_PRICE, true);
   }
 
@@ -67,8 +67,8 @@ public class ShareTest {
   }
 
   private void getMethodComparer(Share testShare, boolean negativeTest) {
-    if (testShare.getStock().equals(TEST_STOCK) && testShare.getQuantity().equals(TEST_QUANTITY)
-        && testShare.getPurchasePrice().equals(TEST_PURCHASE_PRICE)) {
+    if (testShare.stock().equals(TEST_STOCK) && testShare.quantity().equals(TEST_QUANTITY)
+        && testShare.purchasePrice().equals(TEST_PURCHASE_PRICE)) {
       assertFalse(negativeTest);
     }
   }

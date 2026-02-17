@@ -9,7 +9,7 @@ import java.util.List;
 public class Portfolio {
   private final List<Share> shares;
 
-  /** Constructs the portofolio that contains the list of shares the user has */
+  /** Constructs the portfolio that contains the list of shares the user has */
   public Portfolio() {
     this.shares = new ArrayList<>();
   }
@@ -35,7 +35,7 @@ public class Portfolio {
       throw new IllegalArgumentException("symbol cannot be null or blank");
     }
     for (Share share : this.shares) {
-      if (share.getStock().getSymbol().equalsIgnoreCase(symbol)) {
+      if (share.stock().getSymbol().equalsIgnoreCase(symbol)) {
         return share;
       }
     }

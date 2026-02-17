@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 public class StockTest {
   private final static String TEST_SYMBOL = "TTC";
   private final static String TEST_COMPANY = "TestINC";
-  private final static BigDecimal TEST_PRICE = new BigDecimal(20051910.142113020518);
+  private final static BigDecimal TEST_PRICE = new BigDecimal("20051910.142113020518");
   private final static String WRONG_SYMBOL = "WGC";
   private final static String WRONG_COMPANY = "WrongINC";
-  private final static BigDecimal WRONG_PRICE = new BigDecimal(2318151407.142113020518);
+  private final static BigDecimal WRONG_PRICE = new BigDecimal("2318151407.142113020518");
 
   private void constructorTest(String symbol, String company, BigDecimal price, boolean negativeTest) {
     boolean exceptionThrown = negativeTest;
@@ -32,7 +32,7 @@ public class StockTest {
   }
 
   @Test
-  public void constuctorWithNullSymbolThrowsException() {
+  public void constructorWithNullSymbolThrowsException() {
     this.constructorTest(null, TEST_COMPANY, TEST_PRICE, true);
   }
 
@@ -116,12 +116,13 @@ public class StockTest {
   public void toStringThrowsNoException() {
     Stock testStock = new Stock(TEST_SYMBOL, TEST_COMPANY, TEST_PRICE);
     boolean exceptionThrown = false;
+    boolean matches = false;
     try {
-      testStock.toString();
+      matches = testStock.toString().equals(TEST_SYMBOL + " (" + TEST_COMPANY + ") - current price: " + TEST_PRICE);
     } catch (Exception e) {
       exceptionThrown = true;
     } finally {
-      assertFalse(exceptionThrown);
+      assertFalse(exceptionThrown || !matches);
     }
   }
 }

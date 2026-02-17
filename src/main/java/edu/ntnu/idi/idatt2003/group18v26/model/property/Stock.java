@@ -65,7 +65,7 @@ public class Stock {
    * @return the latest sales price
    */
   public BigDecimal getSalesPrice() {
-    return this.prices.get(this.prices.size() - 1);
+    return this.prices.getLast();
   }
 
   /**

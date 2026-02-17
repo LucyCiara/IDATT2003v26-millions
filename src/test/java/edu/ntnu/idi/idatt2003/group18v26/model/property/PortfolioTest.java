@@ -9,15 +9,15 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class PortfolioTest {
-  private static final Share TEST_SHARE = new Share(new Stock("TTC", "TestINC", new BigDecimal(20051910.142113020518)),
-      new BigDecimal(2005.1910), new BigDecimal(20051910.142113020518));
+  private static final Share TEST_SHARE = new Share(new Stock("TTC", "TestINC", new BigDecimal("20051910.142113020518")),
+      new BigDecimal("2005.1910"), new BigDecimal("20051910.142113020518"));
 
-  private static final Share TEST_SHARE2 = new Share(new Stock("T2C", "TestCO", new BigDecimal(200519102.142113020518)),
-      new BigDecimal(2005.19102), new BigDecimal(200519102.142113020518));
+  private static final Share TEST_SHARE2 = new Share(new Stock("T2C", "TestCO", new BigDecimal("200519102.142113020518")),
+      new BigDecimal("2005.19102"), new BigDecimal("200519102.142113020518"));
 
   private static final Share WRONG_SHARE = new Share(
-      new Stock("WGC", "WrongINC", new BigDecimal(2318151407.142113020518)), new BigDecimal(2005.1910),
-      new BigDecimal(2318151407.142113020518));
+      new Stock("WGC", "WrongINC", new BigDecimal("2318151407.142113020518")), new BigDecimal("2005.1910"),
+      new BigDecimal("2318151407.142113020518"));
 
   @Test
   public void constructorThrowsNoException() {
@@ -83,12 +83,12 @@ public class PortfolioTest {
     this.removeShareTest(WRONG_SHARE, false, true);
   }
 
-  private void getShareTest(Share share, String symbol, boolean exceptionTest, boolean failTest) {
+  private void getShareTest(String symbol, boolean exceptionTest, boolean failTest) {
     Portfolio portfolio = new Portfolio();
     boolean matching = true;
     boolean exceptionThrown = exceptionTest;
     try {
-      portfolio.addShare(share);
+      portfolio.addShare(TEST_SHARE);
       Share outputShare = portfolio.getShare(symbol);
       matching = (TEST_SHARE.equals(outputShare) ^ failTest);
     } catch (Exception e) {
@@ -100,46 +100,46 @@ public class PortfolioTest {
 
   @Test
   public void getShareThrowsNoException() {
-    this.getShareTest(TEST_SHARE, TEST_SHARE.getStock().getSymbol(), false, false);
+    this.getShareTest(TEST_SHARE.stock().getSymbol(), false, false);
   }
 
   @Test
   public void getNullShareThrowsException() {
-    this.getShareTest(TEST_SHARE, null,  true, false);
+    this.getShareTest(null,  true, false);
   }
 
   @Test
   public void getEmptyShareThrowsException() {
-    this.getShareTest(TEST_SHARE, "",  true, false);
+    this.getShareTest("",  true, false);
   }
 
   @Test
   public void getWrongShareDoesNotMatch() {
-    this.getShareTest(TEST_SHARE, WRONG_SHARE.getStock().getSymbol(), false, true);
+    this.getShareTest(WRONG_SHARE.stock().getSymbol(), false, true);
   }
 
-  private void getSharesTest(List<Share> shares, boolean exceptionTest, boolean failTest) {
+  private void getSharesTest(List<Share> shares, boolean failTest) {
     Portfolio portfolio = new Portfolio();
     boolean matching = true;
-    boolean exceptionThrown = exceptionTest;
+    boolean exceptionThrown = false;
     try {
-      shares.stream().forEach(
-        (s) -> portfolio.addShare(s));
+      shares.forEach(
+              portfolio::addShare);
       matching = (portfolio.getShares().equals(Arrays.asList(new Share[] {TEST_SHARE, TEST_SHARE2})) ^ failTest);
     } catch (Exception e) {
-      exceptionThrown = !exceptionTest;
+      exceptionThrown = true;
     }
     assertFalse(exceptionThrown || !matching);
   }
 
   @Test
   public void getSharesThrowsNoException() {
-    this.getSharesTest(Arrays.asList(new Share[] { TEST_SHARE, TEST_SHARE2 }), false, false);
+    this.getSharesTest(Arrays.asList(new Share[] { TEST_SHARE, TEST_SHARE2 }), false);
   }
 
   @Test
   public void getWrongSharesDoesNotMatch() {
-    this.getSharesTest(Arrays.asList(new Share[] { WRONG_SHARE }), false, true);
+    this.getSharesTest(Arrays.asList(new Share[] { WRONG_SHARE }), true);
   }
 
   private void containsTest(Share share, boolean exceptionTest, boolean failTest) {
