@@ -18,7 +18,7 @@ public class StockTest {
   private void constructorTest(String symbol, String company, BigDecimal price, boolean negativeTest) {
     boolean exceptionThrown = negativeTest;
     try {
-      new Stock(TEST_SYMBOL, TEST_COMPANY, TEST_PRICE);
+      new Stock(symbol, company, price);
     } catch (Exception e) {
       exceptionThrown = !negativeTest;
     } finally {
@@ -57,7 +57,6 @@ public class StockTest {
   }
 
   private void getMethodComparer(Stock testStock, boolean negativeTest) {
-
     if (testStock.getSymbol().equals(TEST_SYMBOL) && testStock.getCompany().equals(TEST_COMPANY)
         && testStock.getSalesPrice().equals(TEST_PRICE)) {
       assertFalse(negativeTest);
@@ -90,5 +89,18 @@ public class StockTest {
     Stock testStock = new Stock(TEST_SYMBOL, TEST_COMPANY, WRONG_PRICE);
     testStock.addNewSalesPrice(TEST_PRICE);
     this.getMethodComparer(testStock, false);
+  }
+
+  @Test
+  public void addNewNullSalesPriceReturnsError() {
+    Stock testStock = new Stock(TEST_SYMBOL, TEST_COMPANY, TEST_PRICE);
+    boolean exceptionThrown = false;
+    try {
+      testStock.addNewSalesPrice(null);
+    } catch (Exception e) {
+      exceptionThrown = true;
+    } finally {
+      assertTrue(exceptionThrown);
+    }
   }
 }
