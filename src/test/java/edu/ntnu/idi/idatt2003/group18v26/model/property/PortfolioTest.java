@@ -83,14 +83,14 @@ public class PortfolioTest {
     this.removeShareTest(WRONG_SHARE, false, true);
   }
 
-  private void getShareTest(Share share, boolean exceptionTest, boolean failTest) {
+  private void getShareTest(Share share, String symbol, boolean exceptionTest, boolean failTest) {
     Portfolio portfolio = new Portfolio();
     boolean matching = true;
     boolean exceptionThrown = exceptionTest;
     try {
       portfolio.addShare(share);
-      Share outputShare = portfolio.getShare(share.getStock().getSymbol());
-      matching = (outputShare.equals(TEST_SHARE) ^ failTest);
+      Share outputShare = portfolio.getShare(symbol);
+      matching = (TEST_SHARE.equals(outputShare) ^ failTest);
     } catch (Exception e) {
       exceptionThrown = !exceptionTest;
     } finally {
@@ -100,17 +100,22 @@ public class PortfolioTest {
 
   @Test
   public void getShareThrowsNoException() {
-    this.getShareTest(TEST_SHARE, false, false);
+    this.getShareTest(TEST_SHARE, TEST_SHARE.getStock().getSymbol(), false, false);
   }
 
   @Test
   public void getNullShareThrowsException() {
-    this.getShareTest(null, true, false);
+    this.getShareTest(TEST_SHARE, null,  true, false);
+  }
+
+  @Test
+  public void getEmptyShareThrowsException() {
+    this.getShareTest(TEST_SHARE, "",  true, false);
   }
 
   @Test
   public void getWrongShareDoesNotMatch() {
-    this.getShareTest(WRONG_SHARE, false, true);
+    this.getShareTest(TEST_SHARE, WRONG_SHARE.getStock().getSymbol(), false, true);
   }
 
   private void getSharesTest(List<Share> shares, boolean exceptionTest, boolean failTest) {
@@ -142,8 +147,8 @@ public class PortfolioTest {
     boolean success = true;
     boolean exceptionThrown = exceptionTest;
     try {
-      portfolio.addShare(share);
-      success = (portfolio.contains(TEST_SHARE) ^ failTest);
+      portfolio.addShare(TEST_SHARE);
+      success = (portfolio.contains(share) ^ failTest);
     } catch (Exception e) {
       exceptionThrown = !exceptionTest;
     } finally {
