@@ -42,18 +42,18 @@ public class Stock {
   }
 
   /**
-   * Returns the ticker symbol of the stock as a {@code String}
+   * Returns the ticker symbol of the stock as a {@code String}.
    * 
-   * @return symbol
+   * @return symbol The stock's ticker symbol.
    */
   public String getSymbol() {
     return this.symbol;
   }
 
   /**
-   * Returns the company name of the stock as a {@code String}
+   * Returns the company name of the stock as a {@code String}.
    * 
-   * @return company
+   * @return company The name of the company tied to the stock.
    */
   public String getCompany() {
     return this.company;
@@ -70,9 +70,9 @@ public class Stock {
 
   /**
    * Adds a new sales price to the {@code prices} list.
-   * 
-   * @throws IllegalArgumentException if newPrice is {@code null}
+   *
    * @param newPrice the new price
+   * @throws IllegalArgumentException if newPrice is {@code null}
    */
   public void addNewSalesPrice(BigDecimal newPrice) {
     if (newPrice == null) {
