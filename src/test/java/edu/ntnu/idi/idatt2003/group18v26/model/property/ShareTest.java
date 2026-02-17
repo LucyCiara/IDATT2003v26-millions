@@ -56,6 +56,16 @@ public class ShareTest {
     this.constructorTest(TEST_STOCK, new BigDecimal(-1), TEST_PURCHASE_PRICE, true);
   }
 
+  @Test
+  public void constructorWithZeroPurchasePriceThrowsException() {
+    this.constructorTest(TEST_STOCK, TEST_QUANTITY, new BigDecimal(0), true);
+  }
+
+  @Test
+  public void constructorWithNegativePurchasePriceThrowsException() {
+    this.constructorTest(TEST_STOCK, TEST_QUANTITY, new BigDecimal(-1), true);
+  }
+
   private void getMethodComparer(Share testShare, boolean negativeTest) {
     if (testShare.getStock().equals(TEST_STOCK) && testShare.getQuantity().equals(TEST_QUANTITY)
         && testShare.getPurchasePrice().equals(TEST_PURCHASE_PRICE)) {
