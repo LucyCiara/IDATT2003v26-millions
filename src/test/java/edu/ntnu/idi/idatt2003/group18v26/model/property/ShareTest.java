@@ -7,13 +7,12 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 
 public class ShareTest {
-  private final static Stock TEST_STOCK = new Stock("TTC", "TestINC", new BigDecimal("20051910.142113020518"));
-  private final static BigDecimal TEST_QUANTITY = new BigDecimal("2005.1910");
-  private final static BigDecimal TEST_PURCHASE_PRICE = new BigDecimal("20051910.142113020518");
-
-  private final static Stock WRONG_STOCK = new Stock("WGC", "WrongINC", new BigDecimal("2318151407.142113020518"));
-  private final static BigDecimal WRONG_QUANTITY = new BigDecimal("231815.1407");
-  private final static BigDecimal WRONG_PURCHASE_PRICE = new BigDecimal("2318151407.142113020518");
+  private static final Stock TEST_STOCK = new Stock("TTC", "TestINC", new BigDecimal("20051910.142113020518"));
+  private static final BigDecimal TEST_QUANTITY = new BigDecimal("2005.1910");
+  private static final BigDecimal TEST_PURCHASE_PRICE = new BigDecimal("20051910.142113020518");
+  private static final Stock WRONG_STOCK = new Stock("WGC", "WrongINC", new BigDecimal("2318151407.142113020518"));
+  private static final BigDecimal WRONG_QUANTITY = new BigDecimal("231815.1407");
+  private static final BigDecimal WRONG_PURCHASE_PRICE = new BigDecimal("2318151407.142113020518");
 
   private void constructorTest(Stock stock, BigDecimal quantity, BigDecimal purchase_price, boolean negativeTest) {
     boolean exceptionThrown = negativeTest;

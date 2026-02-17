@@ -8,12 +8,12 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 
 public class StockTest {
-  private final static String TEST_SYMBOL = "TTC";
-  private final static String TEST_COMPANY = "TestINC";
-  private final static BigDecimal TEST_PRICE = new BigDecimal("20051910.142113020518");
-  private final static String WRONG_SYMBOL = "WGC";
-  private final static String WRONG_COMPANY = "WrongINC";
-  private final static BigDecimal WRONG_PRICE = new BigDecimal("2318151407.142113020518");
+  private static final String TEST_SYMBOL = "TTC";
+  private static final String TEST_COMPANY = "TestINC";
+  private static final BigDecimal TEST_PRICE = new BigDecimal("20051910.142113020518");
+  private static final String WRONG_SYMBOL = "WGC";
+  private static final String WRONG_COMPANY = "WrongINC";
+  private static final BigDecimal WRONG_PRICE = new BigDecimal("2318151407.142113020518");
 
   private void constructorTest(String symbol, String company, BigDecimal price, boolean negativeTest) {
     boolean exceptionThrown = negativeTest;
@@ -56,11 +56,13 @@ public class StockTest {
     this.constructorTest(TEST_SYMBOL, "", TEST_PRICE, true);
   }
 
-  @Test public void constructorWithZeroPurchasePriceThrowsException() {
+  @Test
+  public void constructorWithZeroPurchasePriceThrowsException() {
     this.constructorTest(TEST_SYMBOL, TEST_COMPANY, new BigDecimal(0), true);
   }
 
-  @Test public void constructorWithNegativePurchasePriceThrowsException() {
+  @Test
+  public void constructorWithNegativePurchasePriceThrowsException() {
     this.constructorTest(TEST_SYMBOL, TEST_COMPANY, new BigDecimal(-1), true);
   }
 

@@ -9,10 +9,12 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 public class PortfolioTest {
-  private static final Share TEST_SHARE = new Share(new Stock("TTC", "TestINC", new BigDecimal("20051910.142113020518")),
+  private static final Share TEST_SHARE = new Share(
+      new Stock("TTC", "TestINC", new BigDecimal("20051910.142113020518")),
       new BigDecimal("2005.1910"), new BigDecimal("20051910.142113020518"));
 
-  private static final Share TEST_SHARE2 = new Share(new Stock("T2C", "TestCO", new BigDecimal("200519102.142113020518")),
+  private static final Share TEST_SHARE2 = new Share(
+      new Stock("T2C", "TestCO", new BigDecimal("200519102.142113020518")),
       new BigDecimal("2005.19102"), new BigDecimal("200519102.142113020518"));
 
   private static final Share WRONG_SHARE = new Share(
@@ -105,12 +107,12 @@ public class PortfolioTest {
 
   @Test
   public void getNullShareThrowsException() {
-    this.getShareTest(null,  true, false);
+    this.getShareTest(null, true, false);
   }
 
   @Test
   public void getEmptyShareThrowsException() {
-    this.getShareTest("",  true, false);
+    this.getShareTest("", true, false);
   }
 
   @Test
@@ -124,8 +126,8 @@ public class PortfolioTest {
     boolean exceptionThrown = false;
     try {
       shares.forEach(
-              portfolio::addShare);
-      matching = (portfolio.getShares().equals(Arrays.asList(new Share[] {TEST_SHARE, TEST_SHARE2})) ^ failTest);
+          portfolio::addShare);
+      matching = (portfolio.getShares().equals(Arrays.asList(new Share[] { TEST_SHARE, TEST_SHARE2 })) ^ failTest);
     } catch (Exception e) {
       exceptionThrown = true;
     }

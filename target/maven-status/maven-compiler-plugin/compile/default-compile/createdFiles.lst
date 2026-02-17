@@ -1,3 +1,5 @@
-edu\ntnu\idi\idatt2003\group18v26\App.class
 edu\ntnu\idi\idatt2003\group18v26\model\property\Stock.class
+edu\ntnu\idi\idatt2003\group18v26\model\property\Portfolio.class
+edu\ntnu\idi\idatt2003\group18v26\App.class
 edu\ntnu\idi\idatt2003\group18v26\model\Player.class
+edu\ntnu\idi\idatt2003\group18v26\model\property\Share.class
