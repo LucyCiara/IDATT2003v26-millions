@@ -32,7 +32,7 @@ public class Stock {
     if (company == null || company.isBlank()) {
       throw new IllegalArgumentException("company cannot be blank");
     }
-    if (salesPrice == null) {
+    if (salesPrice == null || salesPrice.compareTo(BigDecimal.ZERO) <= 0) {
       throw new IllegalArgumentException("salesPrice cannot be null");
     }
     this.symbol = symbol;
@@ -42,21 +42,21 @@ public class Stock {
   }
 
   /**
-   * Returns the ticker symbol of the stock as a {@code String}
+   * Returns the ticker symbol of the stock as a {@code String}.
    * 
-   * @return symbol
+   * @return symbol The stock's ticker symbol.
    */
   public String getSymbol() {
-    return symbol;
+    return this.symbol;
   }
 
   /**
-   * Returns the company name of the stock as a {@code String}
+   * Returns the company name of the stock as a {@code String}.
    * 
-   * @return company
+   * @return company The name of the company tied to the stock.
    */
   public String getCompany() {
-    return company;
+    return this.company;
   }
 
   /**
@@ -65,24 +65,24 @@ public class Stock {
    * @return the latest sales price
    */
   public BigDecimal getSalesPrice() {
-    return prices.get(prices.size() - 1);
+    return this.prices.getLast();
   }
 
   /**
    * Adds a new sales price to the {@code prices} list.
-   * 
-   * @throws IllegalArgumentException if newPrice is {@code null}
+   *
    * @param newPrice the new price
+   * @throws IllegalArgumentException if newPrice is {@code null}
    */
   public void addNewSalesPrice(BigDecimal newPrice) {
     if (newPrice == null) {
       throw new IllegalArgumentException("The new price cannot be null");
     }
-    prices.add(newPrice);
+    this.prices.add(newPrice);
   }
 
   @Override
   public String toString() {
-    return symbol + " (" + company + ") - current price: " + getSalesPrice();
+    return this.symbol + " (" + this.company + ") - current price: " + this.getSalesPrice();
   }
 }

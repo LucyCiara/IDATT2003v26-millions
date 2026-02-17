@@ -7,9 +7,9 @@ import java.util.List;
  * Represents a player's portfolio, storing all purchased shares.
  */
 public class Portfolio {
-  private List<Share> shares;
+  private final List<Share> shares;
 
-  /** Constructs the portofolio that contains the list of shares the user has */
+  /** Constructs the portfolio that contains the list of shares the user has */
   public Portfolio() {
     this.shares = new ArrayList<>();
   }
@@ -34,8 +34,8 @@ public class Portfolio {
     if (symbol == null || symbol.isBlank()) {
       throw new IllegalArgumentException("symbol cannot be null or blank");
     }
-    for (Share share : shares) {
-      if (share.getStock().getSymbol().equalsIgnoreCase(symbol)) {
+    for (Share share : this.shares) {
+      if (share.stock().getSymbol().equalsIgnoreCase(symbol)) {
         return share;
       }
     }
@@ -52,7 +52,7 @@ public class Portfolio {
     if (share == null) {
       throw new IllegalArgumentException("share cannot be null");
     }
-    return shares.add(share);
+    return this.shares.add(share);
   }
 
   /**
@@ -65,7 +65,7 @@ public class Portfolio {
     if (share == null) {
       throw new IllegalArgumentException("share cannot be null");
     }
-    return shares.remove(share);
+    return this.shares.remove(share);
   }
 
   /**
@@ -79,6 +79,6 @@ public class Portfolio {
     if (share == null) {
       throw new IllegalArgumentException("The share cannot be null");
     }
-    return shares.contains(share);
+    return this.shares.contains(share);
   }
 }
