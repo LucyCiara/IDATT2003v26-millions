@@ -85,16 +85,17 @@ public class PortfolioTest {
 
   private void getShareTest(Share share, boolean exceptionTest, boolean failTest) {
     Portfolio portfolio = new Portfolio();
-    portfolio.addShare(share);
     boolean matching = true;
     boolean exceptionThrown = exceptionTest;
     try {
+      portfolio.addShare(share);
       Share outputShare = portfolio.getShare(share.getStock().getSymbol());
       matching = (outputShare.equals(TEST_SHARE) ^ failTest);
     } catch (Exception e) {
       exceptionThrown = !exceptionTest;
+    } finally {
+      assertFalse(exceptionThrown || !matching);
     }
-    assertFalse(exceptionThrown || !matching);
   }
 
   @Test
@@ -114,12 +115,12 @@ public class PortfolioTest {
 
   private void getSharesTest(List<Share> shares, boolean exceptionTest, boolean failTest) {
     Portfolio portfolio = new Portfolio();
-    shares.stream().forEach(
-        (s) -> portfolio.addShare(s));
     boolean matching = true;
     boolean exceptionThrown = exceptionTest;
     try {
-      matching = (portfolio.getShares().equals(shares) ^ failTest);
+      shares.stream().forEach(
+        (s) -> portfolio.addShare(s));
+      matching = (portfolio.getShares().equals(Arrays.asList(new Share[] {TEST_SHARE, TEST_SHARE2})) ^ failTest);
     } catch (Exception e) {
       exceptionThrown = !exceptionTest;
     }
@@ -138,15 +139,15 @@ public class PortfolioTest {
 
   private void containsTest(Share share, boolean exceptionTest, boolean failTest) {
     Portfolio portfolio = new Portfolio();
-    portfolio.addShare(share);
     boolean success = true;
     boolean exceptionThrown = exceptionTest;
     try {
+      portfolio.addShare(share);
       success = (portfolio.contains(TEST_SHARE) ^ failTest);
     } catch (Exception e) {
       exceptionThrown = !exceptionTest;
     } finally {
-      assertFalse(exceptionTest || !success);
+      assertFalse(exceptionThrown || !success);
     }
   }
 
