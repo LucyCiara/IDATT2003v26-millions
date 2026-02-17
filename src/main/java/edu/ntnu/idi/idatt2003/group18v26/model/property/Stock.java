@@ -32,7 +32,7 @@ public class Stock {
     if (company == null || company.isBlank()) {
       throw new IllegalArgumentException("company cannot be blank");
     }
-    if (salesPrice == null) {
+    if (salesPrice == null || salesPrice.compareTo(BigDecimal.ZERO) <= 0) {
       throw new IllegalArgumentException("salesPrice cannot be null");
     }
     this.symbol = symbol;
