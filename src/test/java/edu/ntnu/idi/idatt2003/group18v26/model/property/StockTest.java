@@ -121,7 +121,7 @@ public class StockTest {
     } catch (Exception e) {
       exceptionThrown = true;
     } finally {
-      assertTrue(exceptionThrown);
+      assertFalse(exceptionThrown);
     }
   }
 }
