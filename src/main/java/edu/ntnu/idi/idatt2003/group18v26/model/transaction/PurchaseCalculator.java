@@ -5,6 +5,16 @@ import java.math.BigDecimal;
  * The PurchaseCalculator class calculates the gross amount, commission, tax, and total for a purchase transaction.
  * It implements the TransactionCalculator interface and uses the purchase price and quantity from a Share object to
  * perform the calculations.
+ * 
+ * <p>The gross amount is calculated as:
+ * purchase price × quantity.
+ *
+ * <p>A commission of 0.5% of the gross amount is applied.
+ *
+ * <p>No tax is applied to purchase transactions.
+ *
+ * <p>The total amount is calculated as:
+ * gross + commission.
  */
 public class PurchaseCalculator implements TransactionCalculator{
   private BigDecimal purchasePrice;

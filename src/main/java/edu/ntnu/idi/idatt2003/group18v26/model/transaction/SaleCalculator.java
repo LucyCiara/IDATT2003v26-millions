@@ -5,6 +5,18 @@ import java.math.BigDecimal;
  * The SaleCalculator class calculates the gross amount, commission, tax, and total for a sale transaction.
  * It implements the TransactionCalculator interface and uses the purchase price, sales price, and quantity from
  * a Share object to perform the calculations. 
+ * 
+ * <p>The gross amount is calculated as:
+ * current sales price × quantity.
+ *
+ * <p>A commission of 1% of the gross amount is applied.
+ *
+ * <p>Tax is 30% of the profit, where profit is defined as:
+ * (gross - purchase cost).
+ * No tax is applied if the profit is zero or negative.
+ *
+ * <p>The total amount is calculated as:
+ * gross - commission - tax.
  */
 public class SaleCalculator implements TransactionCalculator {
   private BigDecimal purchasePrice;
