@@ -3,3 +3,7 @@ C:\Users\marjo\Documents\Github\IDATT2003v26-millions\src\main\java\edu\ntnu\idi
 C:\Users\marjo\Documents\Github\IDATT2003v26-millions\src\main\java\edu\ntnu\idi\idatt2003\group18v26\model\property\Portfolio.java
 C:\Users\marjo\Documents\Github\IDATT2003v26-millions\src\main\java\edu\ntnu\idi\idatt2003\group18v26\model\property\Share.java
 C:\Users\marjo\Documents\Github\IDATT2003v26-millions\src\main\java\edu\ntnu\idi\idatt2003\group18v26\model\property\Stock.java
+C:\Users\marjo\Documents\Github\IDATT2003v26-millions\src\main\java\edu\ntnu\idi\idatt2003\group18v26\model\transaction\PurchaseCalculator.java
+C:\Users\marjo\Documents\Github\IDATT2003v26-millions\src\main\java\edu\ntnu\idi\idatt2003\group18v26\model\transaction\SaleCalculator.java
+C:\Users\marjo\Documents\Github\IDATT2003v26-millions\src\main\java\edu\ntnu\idi\idatt2003\group18v26\model\transaction\TransactionArchive.java
+C:\Users\marjo\Documents\Github\IDATT2003v26-millions\src\main\java\edu\ntnu\idi\idatt2003\group18v26\model\transaction\TransactionCalculator.java

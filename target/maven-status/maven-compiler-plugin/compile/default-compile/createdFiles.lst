@@ -1,5 +1,8 @@
 edu\ntnu\idi\idatt2003\group18v26\model\property\Stock.class
+edu\ntnu\idi\idatt2003\group18v26\model\transaction\TransactionCalculator.class
 edu\ntnu\idi\idatt2003\group18v26\model\property\Portfolio.class
+edu\ntnu\idi\idatt2003\group18v26\model\transaction\SaleCalculator.class
+edu\ntnu\idi\idatt2003\group18v26\model\property\Share.class
+edu\ntnu\idi\idatt2003\group18v26\model\transaction\PurchaseCalculator.class
 edu\ntnu\idi\idatt2003\group18v26\App.class
 edu\ntnu\idi\idatt2003\group18v26\model\Player.class
-edu\ntnu\idi\idatt2003\group18v26\model\property\Share.class

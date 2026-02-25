@@ -21,11 +21,8 @@ public class PurchaseCalculator implements TransactionCalculator{
   private BigDecimal quantity;
 
   public PurchaseCalculator(Share share) {
-    if (purchasePrice == null || purchasePrice.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("purchasePrice must be a positive number");
-    }
-    if (quantity == null || quantity.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("quantity must be a positive number");
+    if (share == null) {
+    throw new IllegalArgumentException("Share cannot be null");
     }
     this.purchasePrice = share.purchasePrice();
     this.quantity = share.quantity();

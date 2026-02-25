@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.transaction;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.math.BigDecimal;
@@ -46,5 +47,11 @@ public class PurchaseCalculatorTest {
     this.constructorTest(null, true);
   }
 
+  @Test
+  public void calculateGrossReturnsCorrectValue() {
+    PurchaseCalculator calculator = new PurchaseCalculator(TEST_SHARE);
+    BigDecimal expectedGross = TEST_PURCHASE_PRICE.multiply(TEST_QUANTITY);
+    assertTrue(calculator.calculateGross().compareTo(expectedGross) == 0);
+  }
 
 }

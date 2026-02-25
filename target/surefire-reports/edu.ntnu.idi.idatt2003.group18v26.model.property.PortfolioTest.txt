@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: edu.ntnu.idi.idatt2003.group18v26.model.property.PortfolioTest
 -------------------------------------------------------------------------------
-Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.532 s -- in edu.ntnu.idi.idatt2003.group18v26.model.property.PortfolioTest
+Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.088 s -- in edu.ntnu.idi.idatt2003.group18v26.model.property.PortfolioTest
