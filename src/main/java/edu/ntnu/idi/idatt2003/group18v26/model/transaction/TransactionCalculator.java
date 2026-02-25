@@ -8,11 +8,32 @@ import java.math.BigDecimal;
  * Implementing classes should ensure that the calculations are accurate and reflect the business rules for the specific transaction type they represent.
  */
 public interface TransactionCalculator {
+  /**
+   * Calculates the gross amount of the transaction
+   * before deductions.
+   *
+   * @return gross amount
+   */
   BigDecimal calculateGross();
 
+  /**
+   * Calculates the commission charged for the transaction.
+   *
+   * @return commission amount
+   */
   BigDecimal calculateCommission();
 
+  /**
+   * Calculates the tax applied to the transaction.
+   *
+   * @return tax amount
+   */
   BigDecimal calculateTax();
 
+  /**
+   * Calculates the final total amount after commission and tax.
+   *
+   * @return total settlement amount
+   */
   BigDecimal calculateTotal();
 }

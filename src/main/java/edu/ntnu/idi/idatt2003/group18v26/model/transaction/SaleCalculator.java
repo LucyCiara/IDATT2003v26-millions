@@ -12,30 +12,41 @@ public class SaleCalculator implements TransactionCalculator {
   private BigDecimal quantity;
 
   public SaleCalculator(Share share) {
-    if (purchasePrice == null || purchasePrice.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("purchasePrice must be a positive number");
-    }
-    if (salesPrice == null || salesPrice.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("salesPrice cannot be null");
-    }
-    if (quantity == null || quantity.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("quantity must be a positive number");
+    if (share == null) {
+    throw new IllegalArgumentException("Share cannot be null");
     }
     this.purchasePrice = share.purchasePrice();
     this.salesPrice = share.stock().getSalesPrice();
     this.quantity = share.quantity();
   }
 
+  /**
+   * {@inheritDoc}
+   *
+   * <p>For sales, the gross amount equals
+   * current sales price multiplied by quantity.
+   */
   @Override
   public BigDecimal calculateGross() {
     return salesPrice.multiply(quantity);
   }
 
+  /**
+   * {@inheritDoc}
+   *
+   * <p>For sales, the commission is 1% of the gross amount.
+   */
   @Override
   public BigDecimal calculateCommission() {
     return calculateGross().multiply(new BigDecimal("0.01"));
   }
 
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The tax is 30% of the profit if the profit is positive.
+   * Returns {@code BigDecimal.ZERO} if there is no profit.
+   */
   @Override
   public BigDecimal calculateTax() {
     BigDecimal gross = calculateGross();
@@ -47,6 +58,12 @@ public class SaleCalculator implements TransactionCalculator {
     return profit.multiply(new BigDecimal("0.3"));
   }
 
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The total amount for a sale equals
+   * gross minus commission and tax.
+   */
   @Override
   public BigDecimal calculateTotal() {
     return calculateGross()
