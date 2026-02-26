@@ -10,7 +10,7 @@
     <artifactId>IDATT2003v26-millions</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>IDATT2003v26-millions</name>
-    <url>http://www.example.com</url>
+    <url>https://github.com/LucyCiara/IDATT2003v26-millions</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
