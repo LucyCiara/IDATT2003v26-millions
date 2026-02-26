@@ -1,4 +1,0 @@
-{
-  "java.configuration.updateBuildConfiguration": "interactive",
-  "java.jdt.ls.vmargs": "-Xmx8G -XX:+UseG1GC"
-}
