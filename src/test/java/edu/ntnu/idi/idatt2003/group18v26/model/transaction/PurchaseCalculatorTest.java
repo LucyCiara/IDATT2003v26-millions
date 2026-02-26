@@ -54,4 +54,27 @@ public class PurchaseCalculatorTest {
     assertTrue(calculator.calculateGross().compareTo(expectedGross) == 0);
   }
 
+private void calculationComparer(PurchaseCalculator calculator, Share share, boolean negativeTest) {
+  BigDecimal expectedGross = share.purchasePrice().multiply(share.quantity());
+  BigDecimal expectedCommission = expectedGross.multiply(new BigDecimal("0.005"));
+  BigDecimal expectedTotal = expectedGross.add(expectedCommission);
+
+  if (calculator.calculateGross().equals(expectedGross)
+    && calculator.calculateCommission().equals(expectedCommission)
+    && calculator.calculateTax().equals(BigDecimal.ZERO)
+    && calculator.calculateTotal().equals(expectedTotal)) {
+    assertFalse(negativeTest);
+  }
+}
+
+@Test
+public void calculateMethodsReturnCorrectValues() {
+  this.calculationComparer(new PurchaseCalculator(TEST_SHARE), TEST_SHARE, false);
+}
+
+@Test
+public void calculateMethodsReturnIncorrectValuesWithWrongShare() {
+  this.calculationComparer(new PurchaseCalculator(WRONG_SHARE), TEST_SHARE, true);
+}
+
 }

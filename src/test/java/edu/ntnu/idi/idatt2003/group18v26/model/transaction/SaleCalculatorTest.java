@@ -54,4 +54,48 @@ public class SaleCalculatorTest {
     BigDecimal expectedGross = TEST_STOCK.getSalesPrice().multiply(TEST_QUANTITY);
     assertTrue(calculator.calculateGross().compareTo(expectedGross) == 0);
   }
+
+private void calculationComparer(SaleCalculator calculator, Share share, boolean negativeTest) {
+  BigDecimal gross = share.stock().getSalesPrice().multiply(share.quantity());
+  BigDecimal commission = gross.multiply(new BigDecimal("0.01"));
+  BigDecimal purchaseCost = share.purchasePrice().multiply(share.quantity());
+  BigDecimal profit = gross.subtract(purchaseCost);
+
+  BigDecimal tax = BigDecimal.ZERO;
+  if (profit.compareTo(BigDecimal.ZERO) > 0) {
+    tax = profit.multiply(new BigDecimal("0.3"));
+  }
+
+  BigDecimal total = gross.subtract(commission).subtract(tax);
+
+  boolean correct =
+      calculator.calculateGross().equals(gross)
+      && calculator.calculateCommission().equals(commission)
+      && calculator.calculateTax().equals(tax)
+      && calculator.calculateTotal().equals(total);
+
+  assertFalse(correct == negativeTest);
+}
+
+@Test
+public void calculateMethodsReturnCorrectValuesWithProfit() {
+  SaleCalculator calculator = new SaleCalculator(TEST_SHARE);
+  this.calculationComparer(calculator, TEST_SHARE, false);
+}
+
+@Test
+  public void calculateMethodsReturnCorrectValuesWithLoss() {
+  Stock lossStock = new Stock("LOS", "LossCompany", new BigDecimal("50.00"));
+  Share lossShare = new Share(lossStock, TEST_QUANTITY, TEST_PURCHASE_PRICE);
+
+  SaleCalculator calculator = new SaleCalculator(lossShare);
+  this.calculationComparer(calculator, lossShare, false);
+}
+
+@Test
+public void calculateMethodsReturnIncorrectValuesWithWrongShare() {
+  SaleCalculator calculator = new SaleCalculator(WRONG_SHARE);
+  this.calculationComparer(calculator, TEST_SHARE, true);
+}
+
 }
