@@ -4,9 +4,9 @@ import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
 
 public class Transaction {
-  protected Share share;
-  protected int week;
-  protected TransactionCalculator calculator;
+  private Share share;
+  private int week;
+  private TransactionCalculator calculator;
   protected boolean committed;
 
   protected Transaction(Share share, int week, TransactionCalculator calculator) {
