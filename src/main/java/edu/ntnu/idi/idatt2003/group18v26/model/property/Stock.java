@@ -23,7 +23,7 @@ public class Stock {
    * @param salesPrice the initial/current sales price (non-null)
    * @throws IllegalArgumentException if {@code symbol} or {@code company} is
    *                                  null/blank,
-   *                                  or if {@code salesPrice} is null
+   *                                  or if {@code salesPrice} is null or negative/zero
    */
   public Stock(String symbol, String company, BigDecimal salesPrice) {
     if (symbol == null || symbol.isBlank()) {
@@ -32,8 +32,11 @@ public class Stock {
     if (company == null || company.isBlank()) {
       throw new IllegalArgumentException("company cannot be blank");
     }
-    if (salesPrice == null || salesPrice.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("salesPrice cannot be null");
+    if (salesPrice == null) {
+    throw new IllegalArgumentException("salesPrice cannot be null");
+    }
+    if (salesPrice.compareTo(BigDecimal.ZERO) <= 0) {
+      throw new IllegalArgumentException("salesPrice must be greater than zero");
     }
     this.symbol = symbol;
     this.company = company;
@@ -77,6 +80,9 @@ public class Stock {
   public void addNewSalesPrice(BigDecimal newPrice) {
     if (newPrice == null) {
       throw new IllegalArgumentException("The new price cannot be null");
+    }
+    if (newPrice.compareTo(BigDecimal.ZERO) <= 0) {
+      throw new IllegalArgumentException("The new price must be greater than zero");
     }
     this.prices.add(newPrice);
   }
