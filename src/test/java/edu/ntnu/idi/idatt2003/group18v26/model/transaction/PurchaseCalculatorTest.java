@@ -1,80 +1,105 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.transaction;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
 
 public class PurchaseCalculatorTest {
-  private static final Stock TEST_STOCK =
-      new Stock("TST", "TestCompany", new BigDecimal("50.00"));
 
-  private static final BigDecimal TEST_QUANTITY =
-      new BigDecimal("10");
+  private Share testShare;
+  private Share wrongShare;
 
-  private static final BigDecimal TEST_PURCHASE_PRICE =
-      new BigDecimal("100.00");
+  @BeforeEach
+  void setUp() {
+    Stock testStock = new Stock("TST", "TestCompany", new BigDecimal("50.00"));
 
-  private static final Share TEST_SHARE =
-      new Share(TEST_STOCK, TEST_QUANTITY, TEST_PURCHASE_PRICE);
+    testShare = new Share(
+        testStock,
+        new BigDecimal("10"),
+        new BigDecimal("100.00")
+    );
 
-  private static final Share WRONG_SHARE =
-      new Share(TEST_STOCK, new BigDecimal("5"), new BigDecimal("200.00"));
-
-  private void constructorTest(Share share, boolean negativeTest) {
-    boolean exceptionThrown = negativeTest;
-    try {
-      new PurchaseCalculator(share);
-    } catch (Exception e) {
-      exceptionThrown = !negativeTest;
-    } finally {
-      assertFalse(exceptionThrown);
-    }
+    wrongShare = new Share(
+        testStock,
+        new BigDecimal("5"),
+        new BigDecimal("150.00")
+    );
   }
 
   @Test
-  public void constructorThrowsNoException() {
-    this.constructorTest(TEST_SHARE, false);
+  void constructorCreatesCalculatorSuccessfully() {
+    assertDoesNotThrow(() -> new PurchaseCalculator(testShare));
   }
 
   @Test
-  public void constructorWithNullShareThrowsException() {
-    this.constructorTest(null, true);
+  void constructorWithNullShareThrowsException() {
+    IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> new PurchaseCalculator(null)
+    );
+
+    assertEquals("Share cannot be null", exception.getMessage());
   }
 
   @Test
-  public void calculateGrossReturnsCorrectValue() {
-    PurchaseCalculator calculator = new PurchaseCalculator(TEST_SHARE);
-    BigDecimal expectedGross = TEST_PURCHASE_PRICE.multiply(TEST_QUANTITY);
-    assertTrue(calculator.calculateGross().compareTo(expectedGross) == 0);
+  void calculateGrossReturnsCorrectValue() {
+    PurchaseCalculator calculator = new PurchaseCalculator(testShare);
+
+    BigDecimal expected = testShare.purchasePrice()
+        .multiply(testShare.quantity());
+
+    assertEquals(0, calculator.calculateGross().compareTo(expected));
   }
 
-private void calculationComparer(PurchaseCalculator calculator, Share share, boolean negativeTest) {
-  BigDecimal expectedGross = share.purchasePrice().multiply(share.quantity());
-  BigDecimal expectedCommission = expectedGross.multiply(new BigDecimal("0.005"));
-  BigDecimal expectedTotal = expectedGross.add(expectedCommission);
+  @Test
+  void calculateCommissionReturnsCorrectValue() {
+    PurchaseCalculator calculator = new PurchaseCalculator(testShare);
 
-  if (calculator.calculateGross().equals(expectedGross)
-    && calculator.calculateCommission().equals(expectedCommission)
-    && calculator.calculateTax().equals(BigDecimal.ZERO)
-    && calculator.calculateTotal().equals(expectedTotal)) {
-    assertFalse(negativeTest);
+    BigDecimal expectedGross = testShare.purchasePrice()
+        .multiply(testShare.quantity());
+
+    BigDecimal expectedCommission =
+        expectedGross.multiply(new BigDecimal("0.005"));
+
+    assertEquals(0, calculator.calculateCommission().compareTo(expectedCommission));
   }
-}
 
-@Test
-public void calculateMethodsReturnCorrectValues() {
-  this.calculationComparer(new PurchaseCalculator(TEST_SHARE), TEST_SHARE, false);
-}
 
-@Test
-public void calculateMethodsReturnIncorrectValuesWithWrongShare() {
-  this.calculationComparer(new PurchaseCalculator(WRONG_SHARE), TEST_SHARE, true);
-}
+  @Test
+  void calculateTaxReturnsZero() {
+    PurchaseCalculator calculator = new PurchaseCalculator(testShare);
+    assertEquals(BigDecimal.ZERO, calculator.calculateTax());
+  }
 
+
+  @Test
+  void calculateTotalReturnsCorrectValue() {
+    PurchaseCalculator calculator = new PurchaseCalculator(testShare);
+
+    BigDecimal expectedGross = testShare.purchasePrice().multiply(testShare.quantity());
+
+    BigDecimal expectedCommission = expectedGross.multiply(new BigDecimal("0.005"));
+
+    BigDecimal expectedTotal = expectedGross.add(expectedCommission);
+
+    assertEquals(0, calculator.calculateTotal().compareTo(expectedTotal));
+  }
+
+
+  @Test
+  void calculationsDifferForDifferentShares() {
+    PurchaseCalculator calculator1 = new PurchaseCalculator(testShare);
+    PurchaseCalculator calculator2 = new PurchaseCalculator(wrongShare);
+
+    assertNotEquals(
+        calculator1.calculateTotal(),
+        calculator2.calculateTotal()
+    );
+  }
 }
