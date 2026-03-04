@@ -23,12 +23,18 @@ public record Share(Stock stock, BigDecimal quantity, BigDecimal purchasePrice) 
    */
   public Share {
     if (stock == null) {
-      throw new IllegalArgumentException("Stock cannot  be null");
+      throw new IllegalArgumentException("Stock cannot be null");
     }
-    if (quantity == null || quantity.compareTo(BigDecimal.ZERO) <= 0) {
+    if (quantity == null) {
+      throw new IllegalArgumentException("quantity cannot be null");
+    }
+    if (quantity.compareTo(BigDecimal.ZERO) <= 0) {
       throw new IllegalArgumentException("quantity must be a positive number");
     }
-    if (purchasePrice == null || purchasePrice.compareTo(BigDecimal.ZERO) <= 0) {
+    if (purchasePrice == null) {
+      throw new IllegalArgumentException("purchasePrice cannot be null");
+    }
+    if (purchasePrice.compareTo(BigDecimal.ZERO) <= 0) {
       throw new IllegalArgumentException("purchasePrice must be a positive number");
     }
   }
