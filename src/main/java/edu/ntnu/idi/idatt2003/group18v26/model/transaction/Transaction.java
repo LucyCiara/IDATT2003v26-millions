@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt2003.group18v26.transaction;
+package edu.ntnu.idi.idatt2003.group18v26.model.transaction;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
@@ -27,7 +27,7 @@ public abstract class Transaction {
     return this.calculator;
   }
 
-  public boolean isCommited() {
+  public boolean isCommitted() {
     return this.committed;
   }
 

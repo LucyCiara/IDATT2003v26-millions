@@ -50,3 +50,5 @@ out/
 .settings/*
 .project
 .classpath
+bin/*
+google_checks.xml
