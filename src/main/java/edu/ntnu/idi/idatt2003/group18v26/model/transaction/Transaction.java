@@ -3,7 +3,7 @@ package edu.ntnu.idi.idatt2003.group18v26.transaction;
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
 
-public class Transaction {
+public abstract class Transaction {
   private Share share;
   private int week;
   private TransactionCalculator calculator;
@@ -24,14 +24,13 @@ public class Transaction {
   }
 
   public TransactionCalculator getCalculator() {
-    return this.TransactionCalculator;
+    return this.calculator;
   }
 
   public boolean isCommited() {
     return this.committed;
   }
 
-  public void commit(Player player) {
-  }
+  public abstract void commit(Player player);
 
 }

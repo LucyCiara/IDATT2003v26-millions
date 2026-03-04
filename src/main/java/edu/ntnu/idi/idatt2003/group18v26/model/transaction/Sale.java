@@ -11,7 +11,6 @@ public class Sale extends Transaction {
 
   @Override
   public void commit(Player player) {
-    player.withdrawMoney(this.getCalculator().calculateTotal());
-    super.commit(player);
+    // TODO: add commiting.
   }
 }
