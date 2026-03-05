@@ -83,7 +83,7 @@ public class PurchaseTest {
   public void cannotCommitWhenInsufficientMoney() {
     ArithmeticException exception = assertThrows(ArithmeticException.class,
         () -> this.tooBigPurchase.commit(this.testPlayer));
-    assertEquals("Player has insufficient money to buy this Share", exception.getMessage());
+    assertEquals("player has insufficient money to buy this Share", exception.getMessage());
     assertFalse(this.tooBigPurchase.isCommitted());
   }
 

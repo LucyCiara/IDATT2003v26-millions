@@ -21,7 +21,7 @@ public class Purchase extends Transaction {
     } else if (this.committed) {
       throw new UnsupportedOperationException("Can't commit the same Transaction more than once");
     } else {
-      throw new ArithmeticException("Player has insufficient money to buy this Share");
+      throw new ArithmeticException("player has insufficient money to buy this Share");
     }
   }
 }

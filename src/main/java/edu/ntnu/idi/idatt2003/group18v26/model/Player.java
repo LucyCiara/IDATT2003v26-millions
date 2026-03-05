@@ -2,8 +2,9 @@ package edu.ntnu.idi.idatt2003.group18v26.model;
 
 import java.math.BigDecimal;
 
-import edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio;**A class for the player.*/
+import edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio;
 
+/**A class for the player.*/
 public class Player {
   private String name;
   private BigDecimal startingMoney;

@@ -13,13 +13,15 @@ public class Sale extends Transaction {
     if (player == null) {
       throw new IllegalArgumentException("player can't be null");
     }
-    if (player.getPortfolio().contains(this.getShare())) {
+    if (player.getPortfolio().contains(this.getShare()) && !this.committed) {
       player.addMoney(this.getCalculator().calculateTotal());
       player.getPortfolio().removeShare(this.getShare());
       // TODO: Add itself to transaction archive.
       this.committed = true;
+    } else if (this.committed) {
+      throw new UnsupportedOperationException("Can't commit the same Transaction more than once");
     } else {
-      this.committed = false;
+      throw new UnsupportedOperationException("player has to own the Share to sell it");
     }
   }
 }
