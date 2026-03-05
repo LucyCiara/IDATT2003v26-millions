@@ -18,6 +18,8 @@ public abstract class Transaction {
     this.share = share;
     this.week = week;
     this.calculator = calculator;
+    this.committed = false;
+    this.committed = false;
   }
 
   public Share getShare() {

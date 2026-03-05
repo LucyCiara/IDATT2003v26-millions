@@ -13,13 +13,15 @@ public class Purchase extends Transaction {
     if (player == null) {
       throw new IllegalArgumentException("player can't be null");
     }
-    if (this.getCalculator().calculateTotal().compareTo(player.getMoney()) <= 0) {
+    if (this.getCalculator().calculateTotal().compareTo(player.getMoney()) <= 0 && !this.committed) {
       player.withdrawMoney(this.getCalculator().calculateTotal());
       player.getPortfolio().addShare(this.getShare());
       // TODO: add itself to Player's archive.
       this.committed = true;
+    } else if (this.committed) {
+      throw new UnsupportedOperationException("Can't commit the same Transaction more than once");
     } else {
-      this.committed = false;
+      throw new ArithmeticException("Player has insufficient money to buy this Share");
     }
   }
 }
