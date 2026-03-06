@@ -10,9 +10,14 @@ public abstract class Transaction {
   protected boolean committed;
 
   protected Transaction(Share share, int week, TransactionCalculator calculator) {
+    if (week < 0) {
+      throw new IllegalArgumentException("week can't be negative");
+    }
     this.share = share;
     this.week = week;
     this.calculator = calculator;
+    this.committed = false;
+    this.committed = false;
   }
 
   public Share getShare() {

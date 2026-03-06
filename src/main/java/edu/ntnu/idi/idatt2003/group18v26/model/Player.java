@@ -4,9 +4,7 @@ import java.math.BigDecimal;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio;
 
-/**
- * A class for the player.
- */
+/**A class for the player.*/
 public class Player {
   private String name;
   private BigDecimal startingMoney;
@@ -17,7 +15,7 @@ public class Player {
   /**
    * The constructor, which takes a name and the starting money.
    * 
-   * @param name The name of the player.
+   * @param name          The name of the player.
    * @param startingMoney The starting money for the player.
    */
   public Player(String name, BigDecimal startingMoney) {
