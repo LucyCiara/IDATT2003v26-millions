@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt2003.group18v26.model;
 import java.math.BigDecimal;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive;
 
 /**A class for the player.*/
 public class Player {
@@ -10,7 +11,7 @@ public class Player {
   private BigDecimal startingMoney;
   private BigDecimal money;
   private Portfolio portfolio;
-  // private TransactionArchive transArchive;
+  private TransactionArchive transArchive;
 
   /**
    * The constructor, which takes a name and the starting money.
@@ -32,6 +33,7 @@ public class Player {
     this.startingMoney = startingMoney;
     this.money = startingMoney;
     this.portfolio = new Portfolio();
+    this.transArchive = new TransactionArchive();
   }
 
   /**
@@ -89,5 +91,12 @@ public class Player {
     return this.portfolio;
   }
 
-  // public getTransactionArchive() { }
+  /**
+   * A get-method for the player's transaction archive object.
+   * 
+   * @return Returns the player's transaction archive.
+   */
+  public TransactionArchive getTransactionArchive() {
+    return this.transArchive;
+  }
 }
