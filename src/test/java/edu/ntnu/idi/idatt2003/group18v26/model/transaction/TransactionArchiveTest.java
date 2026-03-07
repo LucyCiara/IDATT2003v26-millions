@@ -3,8 +3,6 @@ package edu.ntnu.idi.idatt2003.group18v26.model.transaction;
 import org.junit.jupiter.api.BeforeEach;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
-import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase;
-import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Sale;
 import java.math.BigDecimal;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
