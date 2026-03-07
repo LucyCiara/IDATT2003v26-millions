@@ -63,7 +63,9 @@ public class TransactionArchive {
     if (week < 0) {
       throw new IllegalArgumentException("week can't be negative");
     }
-    return transactions.stream().filter(transaction -> transaction.getWeek() == week).collect(Collectors.toList());
+    return transactions.stream()
+        .filter(transaction -> transaction.getWeek() == week)
+        .collect(Collectors.toList());
   }
 
   /**
