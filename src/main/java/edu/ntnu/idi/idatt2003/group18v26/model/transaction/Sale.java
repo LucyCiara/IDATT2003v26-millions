@@ -16,7 +16,7 @@ public class Sale extends Transaction {
     if (player.getPortfolio().contains(this.getShare()) && !this.committed) {
       player.addMoney(this.getCalculator().calculateTotal());
       player.getPortfolio().removeShare(this.getShare());
-      // TODO: Add itself to transaction archive.
+      player.getTransactionArchive().add(this);
       this.committed = true;
     } else if (this.committed) {
       throw new UnsupportedOperationException("Can't commit the same Transaction more than once");

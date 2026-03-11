@@ -16,7 +16,7 @@ public class Purchase extends Transaction {
     if (this.getCalculator().calculateTotal().compareTo(player.getMoney()) <= 0 && !this.committed) {
       player.withdrawMoney(this.getCalculator().calculateTotal());
       player.getPortfolio().addShare(this.getShare());
-      // TODO: add itself to Player's archive.
+      player.getTransactionArchive().add(this);
       this.committed = true;
     } else if (this.committed) {
       throw new UnsupportedOperationException("Can't commit the same Transaction more than once");
