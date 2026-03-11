@@ -2,7 +2,6 @@ package edu.ntnu.idi.idatt2003.group18v26.model.transaction;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
-import edu.ntnu.idi.idatt2003.group18v26.transaction.Transaction;
 
 public class Sale extends Transaction {
   public Sale(Share share, int week) {
@@ -11,7 +10,18 @@ public class Sale extends Transaction {
 
   @Override
   public void commit(Player player) {
-    player.withdrawMoney(this.getCalculator().calculateTotal());
-    super.commit(player);
+    if (player == null) {
+      throw new IllegalArgumentException("player can't be null");
+    }
+    if (player.getPortfolio().contains(this.getShare()) && !this.committed) {
+      player.addMoney(this.getCalculator().calculateTotal());
+      player.getPortfolio().removeShare(this.getShare());
+      player.getTransactionArchive().add(this);
+      this.committed = true;
+    } else if (this.committed) {
+      throw new UnsupportedOperationException("Can't commit the same Transaction more than once");
+    } else {
+      throw new UnsupportedOperationException("player has to own the Share to sell it");
+    }
   }
 }
