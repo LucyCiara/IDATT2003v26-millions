@@ -1,130 +1,160 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.math.BigDecimal;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class StockTest {
-  private static final String TEST_SYMBOL = "TTC";
-  private static final String TEST_COMPANY = "TestINC";
-  private static final BigDecimal TEST_PRICE = new BigDecimal("20051910.142113020518");
-  private static final String WRONG_SYMBOL = "WGC";
-  private static final String WRONG_COMPANY = "WrongINC";
-  private static final BigDecimal WRONG_PRICE = new BigDecimal("2318151407.142113020518");
 
-  private void constructorTest(String symbol, String company, BigDecimal price, boolean negativeTest) {
-    boolean exceptionThrown = negativeTest;
-    try {
-      new Stock(symbol, company, price);
-    } catch (Exception e) {
-      exceptionThrown = !negativeTest;
-    } finally {
-      assertFalse(exceptionThrown);
-    }
+  private String testSymbol;
+  private String testCompany;
+  private BigDecimal testPrice;
+  private BigDecimal wrongPrice;
+
+  @BeforeEach
+  void setUp() {
+    testSymbol = "TTC";
+    testCompany = "TestINC";
+    testPrice = new BigDecimal("20051910.142113020518");
+    wrongPrice = new BigDecimal("2318151407.142113020518");
+  }
+
+  private void constructorTest(
+      String symbol,
+      String company,
+      BigDecimal price,
+      String expectedMessage) {
+
+    IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> new Stock(symbol, company, price)
+    );
+
+    assertEquals(expectedMessage, exception.getMessage());
   }
 
   @Test
-  public void constructorThrowsNoException() {
-    this.constructorTest(TEST_SYMBOL, TEST_COMPANY, TEST_PRICE, false);
+  void constructorCreatesValidStock() {
+    Stock stock = new Stock(testSymbol, testCompany, testPrice);
+
+    assertEquals(testSymbol, stock.getSymbol());
+    assertEquals(testCompany, stock.getCompany());
+    assertEquals(testPrice, stock.getSalesPrice());
   }
 
   @Test
-  public void constructorWithNullSymbolThrowsException() {
-    this.constructorTest(null, TEST_COMPANY, TEST_PRICE, true);
+  void constructorWithNullSymbolThrowsException() {
+    constructorTest(null, testCompany, testPrice, "symbol cannot be blank");
   }
 
   @Test
-  public void constructorWithNullCompanyThrowsException() {
-    this.constructorTest(TEST_SYMBOL, null, TEST_PRICE, true);
+  void constructorWithBlankSymbolThrowsException() {
+    constructorTest("", testCompany, testPrice, "symbol cannot be blank");
   }
 
   @Test
-  public void constructorWithNullPriceThrowsException() {
-    this.constructorTest(TEST_SYMBOL, TEST_COMPANY, null, true);
+  void constructorWithNullCompanyThrowsException() {
+    constructorTest(testSymbol, null, testPrice, "company cannot be blank");
   }
 
   @Test
-  public void constructorWithEmptySymbolThrowsException() {
-    this.constructorTest("", TEST_COMPANY, TEST_PRICE, true);
+  void constructorWithBlankCompanyThrowsException() {
+    constructorTest(testSymbol, "", testPrice, "company cannot be blank");
   }
 
   @Test
-  public void constructorWithEmptyCompanyThrowsException() {
-    this.constructorTest(TEST_SYMBOL, "", TEST_PRICE, true);
+  void constructorWithNullPriceThrowsException() {
+    constructorTest(testSymbol, testCompany, null, "salesPrice cannot be null");
   }
 
   @Test
-  public void constructorWithZeroPurchasePriceThrowsException() {
-    this.constructorTest(TEST_SYMBOL, TEST_COMPANY, new BigDecimal(0), true);
+  void constructorWithZeroPriceThrowsException() {
+    constructorTest(testSymbol, testCompany, BigDecimal.ZERO,
+        "salesPrice must be greater than zero");
   }
 
   @Test
-  public void constructorWithNegativePurchasePriceThrowsException() {
-    this.constructorTest(TEST_SYMBOL, TEST_COMPANY, new BigDecimal(-1), true);
-  }
-
-  private void getMethodComparer(Stock testStock, boolean negativeTest) {
-    if (testStock.getSymbol().equals(TEST_SYMBOL) && testStock.getCompany().equals(TEST_COMPANY)
-        && testStock.getSalesPrice().equals(TEST_PRICE)) {
-      assertFalse(negativeTest);
-    }
+  void constructorWithNegativePriceThrowsException() {
+    constructorTest(testSymbol, testCompany, new BigDecimal("-1"),
+        "salesPrice must be greater than zero");
   }
 
   @Test
-  public void getMethodsReturnCorrectInformation() {
+  void getSymbolReturnsCorrectSymbol() {
+      Stock stock = new Stock(testSymbol, testCompany, testPrice);
 
-    this.getMethodComparer(new Stock(TEST_SYMBOL, TEST_COMPANY, TEST_PRICE), false);
+      assertEquals(testSymbol, stock.getSymbol());
   }
 
   @Test
-  public void getSymbolReturnsOnlyCorrectSymbol() {
-    this.getMethodComparer(new Stock(WRONG_SYMBOL, TEST_COMPANY, TEST_PRICE), true);
+  void getCompanyReturnsCorrectCompany() {
+    Stock stock = new Stock(testSymbol, testCompany, testPrice);
+
+    assertEquals(testCompany, stock.getCompany());
   }
 
   @Test
-  public void getCompanyReturnsOnlyCorrectCompany() {
-    this.getMethodComparer(new Stock(TEST_SYMBOL, WRONG_COMPANY, TEST_PRICE), true);
+  void getSalesPriceReturnsInitialPrice() {
+      Stock stock = new Stock(testSymbol, testCompany, testPrice);
+
+      assertEquals(testPrice, stock.getSalesPrice());
   }
 
   @Test
-  public void getPriceReturnsOnlyCorrectPrice() {
-    this.getMethodComparer(new Stock(TEST_SYMBOL, TEST_COMPANY, WRONG_PRICE), true);
+  void getSalesPriceReturnsUpdatedPriceAfterAddingNewPrice() {
+    Stock stock = new Stock(testSymbol, testCompany, wrongPrice);
+
+    stock.addNewSalesPrice(testPrice);
+
+    assertEquals(testPrice, stock.getSalesPrice());
+  }
+
+
+
+  @Test
+  void addNewPriceUpdatesCurrentPrice() {
+    Stock stock = new Stock(testSymbol, testCompany, wrongPrice);
+
+    stock.addNewSalesPrice(testPrice);
+
+    assertEquals(testPrice, stock.getSalesPrice());
   }
 
   @Test
-  public void getPriceGetsNewPriceAfterAdding() {
-    Stock testStock = new Stock(TEST_SYMBOL, TEST_COMPANY, WRONG_PRICE);
-    testStock.addNewSalesPrice(TEST_PRICE);
-    this.getMethodComparer(testStock, false);
+  void addNewNullSalesPriceThrowsException() {
+    Stock stock = new Stock(testSymbol, testCompany, testPrice);
+
+    IllegalArgumentException exception = assertThrows(
+          IllegalArgumentException.class,
+          () -> stock.addNewSalesPrice(null)
+    );
+
+    assertEquals("The new price cannot be null", exception.getMessage());
   }
 
   @Test
-  public void addNewNullSalesPriceThrowsException() {
-    Stock testStock = new Stock(TEST_SYMBOL, TEST_COMPANY, TEST_PRICE);
-    boolean exceptionThrown = false;
-    try {
-      testStock.addNewSalesPrice(null);
-    } catch (Exception e) {
-      exceptionThrown = true;
-    } finally {
-      assertTrue(exceptionThrown);
-    }
-  }
+  void addNewNegativeSalesPriceThrowsException() {
+    Stock stock = new Stock(testSymbol, testCompany, testPrice);
+
+    IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> stock.addNewSalesPrice(BigDecimal.ZERO)
+    );
+
+    assertEquals("The new price must be greater than zero", exception.getMessage());
+}
 
   @Test
-  public void toStringThrowsNoException() {
-    Stock testStock = new Stock(TEST_SYMBOL, TEST_COMPANY, TEST_PRICE);
-    boolean exceptionThrown = false;
-    boolean matches = false;
-    try {
-      matches = testStock.toString().equals(TEST_SYMBOL + " (" + TEST_COMPANY + ") - current price: " + TEST_PRICE);
-    } catch (Exception e) {
-      exceptionThrown = true;
-    } finally {
-      assertFalse(exceptionThrown || !matches);
-    }
+  void toStringReturnsCorrectFormat() {
+    Stock stock = new Stock(testSymbol, testCompany, testPrice);
+
+    String expected =
+        testSymbol + " (" + testCompany + ") - current price: " + testPrice;
+
+    assertEquals(expected, stock.toString());
   }
 }

@@ -1,176 +1,150 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
-import java.util.Arrays;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class PortfolioTest {
-  private static final Share TEST_SHARE = new Share(
-      new Stock("TTC", "TestINC", new BigDecimal("20051910.142113020518")),
-      new BigDecimal("2005.1910"), new BigDecimal("20051910.142113020518"));
 
-  private static final Share TEST_SHARE2 = new Share(
-      new Stock("T2C", "TestCO", new BigDecimal("200519102.142113020518")),
-      new BigDecimal("2005.19102"), new BigDecimal("200519102.142113020518"));
+  private Portfolio portfolio;
+  private Share testShare;
+  private Share testShare2;
+  private Share wrongShare;
 
-  private static final Share WRONG_SHARE = new Share(
-      new Stock("WGC", "WrongINC", new BigDecimal("2318151407.142113020518")), new BigDecimal("2005.1910"),
-      new BigDecimal("2318151407.142113020518"));
+  @BeforeEach
+  void setUp() {
+    portfolio = new Portfolio();
 
-  @Test
-  public void constructorThrowsNoException() {
-    boolean exceptionThrown = false;
-    try {
-      new Portfolio();
-    } catch (Exception e) {
-      exceptionThrown = true;
-    } finally {
-      assertFalse(exceptionThrown);
-    }
+    testShare = new Share(
+        new Stock("TTC", "TestINC", new BigDecimal("100")),
+        new BigDecimal("10"),
+        new BigDecimal("100"));
+
+    testShare2 = new Share(
+        new Stock("ABC", "AnotherINC", new BigDecimal("200")),
+        new BigDecimal("5"),
+        new BigDecimal("200"));
+
+    wrongShare = new Share(
+        new Stock("WRG", "WrongINC", new BigDecimal("300")),
+        new BigDecimal("1"),
+        new BigDecimal("300"));
   }
 
-  private void addShareTest(Share share, boolean negativeTest) {
-    Portfolio portfolio = new Portfolio();
-    boolean exceptionThrown = negativeTest;
-    boolean success = true;
-    try {
-      success = portfolio.addShare(share);
-    } catch (Exception e) {
-      exceptionThrown = !negativeTest;
-    } finally {
-      assertFalse(exceptionThrown || !success);
-    }
-  }
 
   @Test
-  public void addShareThrowsNoException() {
-    this.addShareTest(TEST_SHARE, false);
+  void constructorCreatesEmptyPortfolio() {
+    assertTrue(portfolio.getShares().isEmpty());
+  }
+
+
+  @Test
+  void addShareAddsShareSuccessfully() {
+    assertTrue(portfolio.addShare(testShare));
+    assertTrue(portfolio.contains(testShare));
   }
 
   @Test
-  public void addNullShareThrowsException() {
-    this.addShareTest(null, true);
+  void addNullShareThrowsException() {
+    IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> portfolio.addShare(null)
+    );
+    assertEquals("share cannot be null", exception.getMessage());
   }
 
-  private void removeShareTest(Share share, boolean exceptionTest, boolean failTest) {
-    Portfolio portfolio = new Portfolio();
-    portfolio.addShare(TEST_SHARE);
-    boolean exceptionThrown = exceptionTest;
-    boolean success = true;
-    try {
-      success = (portfolio.removeShare(share) ^ failTest);
-    } catch (Exception e) {
-      exceptionThrown = !exceptionTest;
-    } finally {
-      assertFalse(exceptionThrown || !success);
-    }
+
+  @Test
+  void removeShareRemovesExistingShare() {
+    portfolio.addShare(testShare);
+    assertTrue(portfolio.removeShare(testShare));
+    assertFalse(portfolio.contains(testShare));
   }
 
   @Test
-  public void removeShareThrowsNoException() {
-    this.removeShareTest(TEST_SHARE, false, false);
+  void removeWrongShareReturnsFalse() {
+    portfolio.addShare(testShare);
+    assertFalse(portfolio.removeShare(wrongShare));
   }
 
   @Test
-  public void removeNullShareThrowsException() {
-    this.removeShareTest(null, true, false);
+  void removeNullShareThrowsException() {
+    IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> portfolio.removeShare(null)
+    );
+    assertEquals("share cannot be null", exception.getMessage());
+  }
+
+
+  @Test
+  void getShareReturnsCorrectShare() {
+    portfolio.addShare(testShare);
+    Share result = portfolio.getShare("TTC");
+    assertEquals(testShare, result);
   }
 
   @Test
-  public void removeWrongShareReturnsFalse() {
-    this.removeShareTest(WRONG_SHARE, false, true);
-  }
-
-  private void getShareTest(String symbol, boolean exceptionTest, boolean failTest) {
-    Portfolio portfolio = new Portfolio();
-    boolean matching = true;
-    boolean exceptionThrown = exceptionTest;
-    try {
-      portfolio.addShare(TEST_SHARE);
-      Share outputShare = portfolio.getShare(symbol);
-      matching = (TEST_SHARE.equals(outputShare) ^ failTest);
-    } catch (Exception e) {
-      exceptionThrown = !exceptionTest;
-    } finally {
-      assertFalse(exceptionThrown || !matching);
-    }
+  void getShareReturnsNullIfNotFound() {
+    portfolio.addShare(testShare);
+    assertNull(portfolio.getShare("NOT_EXISTING"));
   }
 
   @Test
-  public void getShareThrowsNoException() {
-    this.getShareTest(TEST_SHARE.stock().getSymbol(), false, false);
+  void getShareWithNullThrowsException() {
+    IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> portfolio.getShare(null)
+    );
+    assertEquals("symbol cannot be null or blank", exception.getMessage());
   }
 
   @Test
-  public void getNullShareThrowsException() {
-    this.getShareTest(null, true, false);
+  void getShareWithBlankThrowsException() {
+    IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> portfolio.getShare("")
+    );
+    assertEquals("symbol cannot be null or blank", exception.getMessage());
+  }
+
+
+  @Test
+  void getSharesReturnsAllShares() {
+    portfolio.addShare(testShare);
+    portfolio.addShare(testShare2);
+
+    List<Share> shares = portfolio.getShares();
+
+    assertEquals(2, shares.size());
+    assertTrue(shares.contains(testShare));
+    assertTrue(shares.contains(testShare2));
+  }
+
+
+
+  @Test
+  void containsReturnsTrueForExistingShare() {
+    portfolio.addShare(testShare);
+    assertTrue(portfolio.contains(testShare));
   }
 
   @Test
-  public void getEmptyShareThrowsException() {
-    this.getShareTest("", true, false);
+  void containsReturnsFalseForNonExistingShare() {
+    portfolio.addShare(testShare);
+    assertFalse(portfolio.contains(wrongShare));
   }
 
   @Test
-  public void getWrongShareDoesNotMatch() {
-    this.getShareTest(WRONG_SHARE.stock().getSymbol(), false, true);
+  void containsNullThrowsException() {
+    IllegalArgumentException exception = assertThrows(
+        IllegalArgumentException.class,
+        () -> portfolio.contains(null)
+    );
+    assertEquals("The share cannot be null", exception.getMessage());
   }
-
-  private void getSharesTest(List<Share> shares, boolean failTest) {
-    Portfolio portfolio = new Portfolio();
-    boolean matching = true;
-    boolean exceptionThrown = false;
-    try {
-      shares.forEach(
-          portfolio::addShare);
-      matching = (portfolio.getShares().equals(Arrays.asList(new Share[] { TEST_SHARE, TEST_SHARE2 })) ^ failTest);
-    } catch (Exception e) {
-      exceptionThrown = true;
-    }
-    assertFalse(exceptionThrown || !matching);
-  }
-
-  @Test
-  public void getSharesThrowsNoException() {
-    this.getSharesTest(Arrays.asList(new Share[] { TEST_SHARE, TEST_SHARE2 }), false);
-  }
-
-  @Test
-  public void getWrongSharesDoesNotMatch() {
-    this.getSharesTest(Arrays.asList(new Share[] { WRONG_SHARE }), true);
-  }
-
-  private void containsTest(Share share, boolean exceptionTest, boolean failTest) {
-    Portfolio portfolio = new Portfolio();
-    boolean success = true;
-    boolean exceptionThrown = exceptionTest;
-    try {
-      portfolio.addShare(TEST_SHARE);
-      success = (portfolio.contains(share) ^ failTest);
-    } catch (Exception e) {
-      exceptionThrown = !exceptionTest;
-    } finally {
-      assertFalse(exceptionThrown || !success);
-    }
-  }
-
-  @Test
-  public void containsThrowsNoException() {
-    this.containsTest(TEST_SHARE, false, false);
-  }
-
-  @Test
-  public void containsNullThrowsException() {
-    this.containsTest(null, true, false);
-  }
-
-  @Test
-  public void containsWrongShareReturnsFalse() {
-    this.containsTest(WRONG_SHARE, false, true);
-  }
-
 }
