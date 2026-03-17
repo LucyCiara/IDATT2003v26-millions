@@ -14,7 +14,7 @@ import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 
 public class Exchange {
   private String name;
-  private int week;
+  private int week = 0;
   private HashMap<String, Stock> stockMap;
   private Random random;
 
@@ -22,7 +22,9 @@ public class Exchange {
     ParameterValidator.stringChecker(name, "name");
     ParameterValidator.objectChecker(stocks, "stocks");
     this.name = name;
+    this.stockMap = new HashMap<String, Stock>();
     stocks.forEach(stock -> this.stockMap.put(stock.getSymbol(), stock));
+    this.random = new Random();
   }
 
   public String getName() {
@@ -45,7 +47,8 @@ public class Exchange {
     ParameterValidator.stringChecker(searchTerm, "searchTerm");
     List<Stock> resultStocks = new ArrayList<Stock>();
     for (Stock stock : this.stockMap.values()) {
-      if (stock.getSymbol().contains(searchTerm) || stock.getCompany().contains(searchTerm)) {
+      if (stock.getSymbol().toLowerCase().contains(searchTerm.toLowerCase())
+          || stock.getCompany().toLowerCase().contains(searchTerm.toLowerCase())) {
         resultStocks.add(stock);
       }
     }
