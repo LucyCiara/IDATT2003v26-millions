@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt2003.group18v26.filehandling;
+package edu.ntnu.idi.idatt2003.group18v26.model.filehandling;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;

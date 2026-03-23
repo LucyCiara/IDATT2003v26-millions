@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt2003.group18v26.filehandling;
+package edu.ntnu.idi.idatt2003.group18v26.model.filehandling;
 
 import java.io.IOException;
 import java.nio.file.Path;

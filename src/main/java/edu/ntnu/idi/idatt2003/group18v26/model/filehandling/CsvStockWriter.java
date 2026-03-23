@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt2003.group18v26.filehandling;
+package edu.ntnu.idi.idatt2003.group18v26.model.filehandling;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 
