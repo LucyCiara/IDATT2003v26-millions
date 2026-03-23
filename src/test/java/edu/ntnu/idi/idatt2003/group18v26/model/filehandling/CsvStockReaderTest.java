@@ -38,8 +38,9 @@ public class CsvStockReaderTest {
   @Test
   void testReadStockWithInvalidPathThrowsIOException() throws IOException {
     Path invalidPath = Path.of("src/test/resources/nonexistent.csv");
+    
     IOException exception = 
-    assertThrows(IOException.class, () -> reader.readStocks(invalidPath));
+        assertThrows(IOException.class, () -> reader.readStocks(invalidPath));
     String os = System.getProperty("os.name");
     if (os.contains("Windows")) {
       assertEquals("src\\test\\resources\\nonexistent.csv", exception.getMessage());
@@ -52,13 +53,13 @@ public class CsvStockReaderTest {
   void testParseLineThrowsIllegalArgumentExceptionForInvalidFormat() throws IOException {
     Path tempFile = Files.createTempFile("invalid", ".csv");
     try {
-        Files.writeString(tempFile, "Invalid,Stock\n");
-        
-        IllegalArgumentException exception = 
-            assertThrows(IllegalArgumentException.class, () -> reader.readStocks(tempFile));
-        assertEquals("Invalid stock data: Invalid,Stock", exception.getMessage());
+      Files.writeString(tempFile, "Invalid,Stock\n");
+      
+      IllegalArgumentException exception = 
+          assertThrows(IllegalArgumentException.class, () -> reader.readStocks(tempFile));
+      assertEquals("Invalid stock data: Invalid,Stock", exception.getMessage());
     } finally {
-        Files.deleteIfExists(tempFile);
+      Files.deleteIfExists(tempFile);
     }
   }
 }

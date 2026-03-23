@@ -29,17 +29,16 @@ public class CsvStockWriterTest {
   void testWriteStocksSucceeds() throws IOException {
     Path tempFile = Files.createTempFile("Valid", ".csv");
     try {
+      writer.writeStocks(this.stocks, tempFile);
 
-        writer.writeStocks(this.stocks, tempFile);
-
-        List<String> lines = Files.readAllLines(tempFile);
-        assertEquals(4, lines.size());
-        assertEquals("# Stock data", lines.get(0));
-        assertEquals("# Ticker,Name,Price", lines.get(1));
-        assertEquals("AAPL,Apple Inc.,150.00", lines.get(2));
-        assertEquals("GOOGL,Alphabet Inc.,2800.00", lines.get(3));
+      List<String> lines = Files.readAllLines(tempFile);
+      assertEquals(4, lines.size());
+      assertEquals("# Stock data", lines.get(0));
+      assertEquals("# Ticker,Name,Price", lines.get(1));
+      assertEquals("AAPL,Apple Inc.,150.00", lines.get(2));
+      assertEquals("GOOGL,Alphabet Inc.,2800.00", lines.get(3));
     } finally {
-        Files.deleteIfExists(tempFile);
+      Files.deleteIfExists(tempFile);
     }
   }
 
