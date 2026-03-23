@@ -27,4 +27,13 @@ public final class ParameterValidator {
       throw new IllegalArgumentException(String.format("%s must be larger than 0", variableName));
     }
   }
+
+  public static final void limitChecker(int limit, String variableName, int max, String variableName2) throws IllegalArgumentException {
+    if (limit <= 0) {
+      throw new IllegalArgumentException(String.format("%s must be larger than 0", variableName));
+    }
+    if (limit > max) {
+      throw new IllegalArgumentException(String.format("%s can't be larger than %s", variableName, variableName2));
+    }
+  }
 }

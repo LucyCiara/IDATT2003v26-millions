@@ -30,10 +30,9 @@ public class StockTest {
     Random random = new Random();
     this.prices = new ArrayList<BigDecimal>();
     for (Double price : random.doubles().limit(PRICES_TO_ADD).toArray()) {
-      this.prices.add(new BigDecimal(price));
+      this.prices.add(new BigDecimal(price * 10000));
     }
-  
-    }
+  }
 
   private void constructorTest(
       String symbol,

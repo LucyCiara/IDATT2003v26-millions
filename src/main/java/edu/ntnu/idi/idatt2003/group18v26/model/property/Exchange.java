@@ -83,10 +83,12 @@ public class Exchange {
   }
 
   public List<Stock> getGainers(int limit) {
-    return this.stockMap.values().stream().sorted().toList().subList(0, limit);
+    ParameterValidator.limitChecker(limit, "limit", this.stockMap.values().size(), "number of stocks");
+    return this.stockMap.values().stream().sorted((s1,s2) -> s1.getLatestPriceChange().compareTo(s2.getLatestPriceChange())).toList().reversed().subList(0, limit);
   }
 
   public List<Stock> getLosers(int limit) {
-    return this.stockMap.values().stream().sorted().toList().reversed().subList(0, limit);
+    ParameterValidator.limitChecker(limit, "limit", this.stockMap.values().size(), "number of stocks");
+    return this.stockMap.values().stream().sorted((s1,s2) -> s1.getLatestPriceChange().compareTo(s2.getLatestPriceChange())).toList().subList(0, limit);
   }
 }
