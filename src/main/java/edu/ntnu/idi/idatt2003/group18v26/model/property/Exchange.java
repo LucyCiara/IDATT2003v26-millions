@@ -81,4 +81,12 @@ public class Exchange {
     }
     this.week++;
   }
+
+  public List<Stock> getGainers(int limit) {
+    return this.stockMap.values().stream().sorted().toList().subList(0, limit);
+  }
+
+  public List<Stock> getLosers(int limit) {
+    return this.stockMap.values().stream().sorted().toList().reversed().subList(0, limit);
+  }
 }
