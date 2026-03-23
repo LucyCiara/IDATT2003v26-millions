@@ -40,7 +40,12 @@ public class CsvStockReaderTest {
     Path invalidPath = Path.of("src/test/resources/nonexistent.csv");
     IOException exception = 
     assertThrows(IOException.class, () -> reader.readStocks(invalidPath));
-    assertEquals("src\\test\\resources\\nonexistent.csv", exception.getMessage());
+    String os = System.getProperty("os.name");
+    if (os.contains("Windows")) {
+      assertEquals("src\\test\\resources\\nonexistent.csv", exception.getMessage());
+    } else {
+      assertEquals("src/test/resources/nonexistent.csv", exception.getMessage());
+    }
   }
 
   @Test
