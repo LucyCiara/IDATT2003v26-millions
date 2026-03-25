@@ -9,17 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestTemplate;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Transaction;
-
 
 public class ExchangeTest {
   private static final String TEST_EXCHANGE_NAME = "Wallstreet";
@@ -44,17 +41,15 @@ public class ExchangeTest {
     List<String> symbols = new ArrayList<String>();
     for (char c1 : alphabet) {
       for (char c2 : alphabet) {
-        symbols.add(new String(new char[] {c1, c2}));
+        symbols.add(new String(new char[] { c1, c2 }));
       }
     }
     for (int i = 0; i < symbols.size(); i++) {
       testStocks.add(
-        new Stock(
-          symbols.get(i),
-          symbols.get(i),
-          new BigDecimal(random.nextDouble() * 10000)
-        )
-      );
+          new Stock(
+              symbols.get(i),
+              symbols.get(i),
+              new BigDecimal(random.nextDouble() * 10000)));
     }
   }
 
@@ -205,11 +200,12 @@ public class ExchangeTest {
   @Test
   public void getGainersAndGetLosersWithMoreThanStocksLimitThrowsExpectedException() {
     Exchange exchange = new Exchange(TEST_EXCHANGE_NAME, testStocks);
-    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> exchange.getGainers(testStocks.size() + 1));
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        () -> exchange.getGainers(testStocks.size() + 1));
     assertEquals("limit can't be larger than number of stocks", exception.getMessage());
-    IllegalArgumentException exception2 = assertThrows(IllegalArgumentException.class, () -> exchange.getLosers(testStocks.size() + 1));
+    IllegalArgumentException exception2 = assertThrows(IllegalArgumentException.class,
+        () -> exchange.getLosers(testStocks.size() + 1));
     assertEquals("limit can't be larger than number of stocks", exception2.getMessage());
   }
 
 }
-

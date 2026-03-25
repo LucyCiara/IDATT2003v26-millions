@@ -10,6 +10,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio;
+import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
+import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
 
 /**
  * A class for testing the Player class.
@@ -196,5 +199,19 @@ public class PlayerTest {
     Portfolio notPlayerPortfolio = new Portfolio();
     assertEquals(playerPortfolio, testPlayer.getPortfolio());
     assertNotEquals(notPlayerPortfolio, testPlayer.getPortfolio());
+  }
+
+  @Test
+  void getNetWorthReturnsExpectedSum() {
+    Player testPlayer = new Player(this.testName, this.testStartingMoney);
+    BigDecimal expectedWorth = this.testStartingMoney;
+    assertEquals(0, testPlayer.getNetWorth().compareTo(expectedWorth));
+    testPlayer.addMoney(BigDecimal.TEN);
+    expectedWorth = expectedWorth.add(BigDecimal.TEN);
+    assertEquals(0, testPlayer.getNetWorth().compareTo(expectedWorth));
+    Share testShare
+        = new Share(new Stock("A", "B", BigDecimal.TEN), BigDecimal.TWO, BigDecimal.TEN);
+    testPlayer.getPortfolio().addShare(testShare);
+    expectedWorth = expectedWorth.add(new SaleCalculator(testShare).calculateTotal());
   }
 }
