@@ -88,9 +88,10 @@ public class Portfolio {
 
   public BigDecimal getNetWorth() {
     BigDecimal netWorth = BigDecimal.ZERO;
-    Iterator<BigDecimal> prices = this.shares.stream().map(s -> new SaleCalculator(s).calculateTotal()).iterator();
-    while (prices.hasNext()) {
-      netWorth.add(prices.next());
+    List<BigDecimal> prices
+        = this.shares.stream().map(s -> new SaleCalculator(s).calculateTotal()).toList();
+    for (BigDecimal price : prices) {
+      netWorth = netWorth.add(price);
     }
     return netWorth;
   }
