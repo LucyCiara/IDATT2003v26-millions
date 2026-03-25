@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive;
 
-/**A class for the player.*/
+/** A class for the player. */
 public class Player {
   private String name;
   private BigDecimal startingMoney;
@@ -98,5 +98,9 @@ public class Player {
    */
   public TransactionArchive getTransactionArchive() {
     return this.transArchive;
+  }
+
+  public BigDecimal getNetWorth() {
+    return this.money.add(this.portfolio.getNetWorth());
   }
 }
