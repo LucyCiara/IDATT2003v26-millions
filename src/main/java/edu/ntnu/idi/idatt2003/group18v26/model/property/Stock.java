@@ -23,7 +23,8 @@ public class Stock {
    * @param salesPrice the initial/current sales price (non-null)
    * @throws IllegalArgumentException if {@code symbol} or {@code company} is
    *                                  null/blank,
-   *                                  or if {@code salesPrice} is null or negative/zero
+   *                                  or if {@code salesPrice} is null or
+   *                                  negative/zero
    */
   public Stock(String symbol, String company, BigDecimal salesPrice) {
     if (symbol == null || symbol.isBlank()) {
@@ -33,7 +34,7 @@ public class Stock {
       throw new IllegalArgumentException("company cannot be blank");
     }
     if (salesPrice == null) {
-    throw new IllegalArgumentException("salesPrice cannot be null");
+      throw new IllegalArgumentException("salesPrice cannot be null");
     }
     if (salesPrice.compareTo(BigDecimal.ZERO) <= 0) {
       throw new IllegalArgumentException("salesPrice must be greater than zero");
@@ -90,5 +91,25 @@ public class Stock {
   @Override
   public String toString() {
     return this.symbol + " (" + this.company + ") - current price: " + this.getSalesPrice();
+  }
+
+  public List<BigDecimal> getHistoricalPrices() {
+    return this.prices;
+  }
+
+  public BigDecimal getHighestPrice() {
+    return this.prices.stream().max(BigDecimal::compareTo).get();
+  }
+
+  public BigDecimal getLowestPrice() {
+    return this.prices.stream().min(BigDecimal::compareTo).get();
+  }
+
+  public BigDecimal getLatestPriceChange() {
+    if (prices.size() == 1) {
+      return BigDecimal.ZERO;
+    } else {
+      return prices.getLast().subtract(prices.get(prices.size() - 2));
+    }
   }
 }

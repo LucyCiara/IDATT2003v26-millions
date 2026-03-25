@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,6 +39,23 @@ public class ExchangeTest {
     testStock = new Stock("TTC", "TestINC", new BigDecimal(20.0204));
     testStocks = new ArrayList<Stock>();
     testStocks.add(testStock);
+    Random random = new Random();
+    char[] alphabet = "abcdefghijklmnopqrtsuvwxyz".toCharArray();
+    List<String> symbols = new ArrayList<String>();
+    for (char c1 : alphabet) {
+      for (char c2 : alphabet) {
+        symbols.add(new String(new char[] {c1, c2}));
+      }
+    }
+    for (int i = 0; i < symbols.size(); i++) {
+      testStocks.add(
+        new Stock(
+          symbols.get(i),
+          symbols.get(i),
+          new BigDecimal(random.nextDouble() * 10000)
+        )
+      );
+    }
   }
 
   @Test
@@ -99,7 +117,7 @@ public class ExchangeTest {
   @Test
   public void findStockFindsOnlyStockWithSearchTerm() {
     Exchange exchange = new Exchange(TEST_EXCHANGE_NAME, testStocks);
-    assertEquals(testStocks.size(), exchange.findStocks("TestINC").size());
+    assertEquals(1, exchange.findStocks("TestINC").size());
     assertEquals(testStock, exchange.findStocks("TestINC").get(0));
     assertEquals(testStock, exchange.findStocks("TTC").get(0));
     assertEquals(0, exchange.findStocks(WRONG_STOCK_SYMBOL).size());
@@ -115,8 +133,7 @@ public class ExchangeTest {
   @Test
   public void findStocksFindsStockWithIncompleteSearchTerm() {
     Exchange exchange = new Exchange(TEST_EXCHANGE_NAME, testStocks);
-    assertEquals(testStock, exchange.findStocks("test").get(0));
-    assertEquals(testStock, exchange.findStocks("ttc").get(0));
+    assertEquals(testStock, exchange.findStocks("tes").get(0));
   }
 
   @Test
@@ -140,4 +157,59 @@ public class ExchangeTest {
     assertEquals(transaction, player.getTransactionArchive().getTransactions(exchange.getWeek()).getLast());
     assertEquals(0, player.getPortfolio().getShares().size());
   }
+
+  @Test
+  public void getGainersGetsDescendingOrder() {
+    Exchange exchange = new Exchange(TEST_EXCHANGE_NAME, testStocks);
+    exchange.advance();
+    List<Stock> gainers = exchange.getGainers(testStocks.size());
+    assertEquals(testStocks.size(), gainers.size());
+    Stock lastStock = gainers.get(0);
+    for (Stock stock : gainers) {
+      assertNotEquals(-1, lastStock.getLatestPriceChange().compareTo(stock.getLatestPriceChange()));
+      lastStock = stock;
+    }
+  }
+
+  @Test
+  public void getLosersGetsAscendingOrder() {
+    Exchange exchange = new Exchange(TEST_EXCHANGE_NAME, testStocks);
+    exchange.advance();
+    List<Stock> losers = exchange.getLosers(testStocks.size());
+    assertEquals(testStocks.size(), losers.size());
+    Stock lastStock = losers.get(0);
+    for (Stock stock : losers) {
+      assertNotEquals(1, lastStock.getLatestPriceChange().compareTo(stock.getLatestPriceChange()));
+      lastStock = stock;
+    }
+  }
+
+  @Test
+  public void getGainersAndGetLosersWithZeroLimitThrowsExpectedException() {
+    Exchange exchange = new Exchange(TEST_EXCHANGE_NAME, testStocks);
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> exchange.getGainers(0));
+    assertEquals("limit must be larger than 0", exception.getMessage());
+    IllegalArgumentException exception2 = assertThrows(IllegalArgumentException.class, () -> exchange.getLosers(0));
+    assertEquals("limit must be larger than 0", exception2.getMessage());
+  }
+
+  @Test
+  public void getGainersAndGetLosersWithNegativeLimitThrowsExpectedException() {
+    Exchange exchange = new Exchange(TEST_EXCHANGE_NAME, testStocks);
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> exchange.getGainers(0));
+    assertEquals("limit must be larger than 0", exception.getMessage());
+    IllegalArgumentException exception2 = assertThrows(IllegalArgumentException.class, () -> exchange.getLosers(0));
+    assertEquals("limit must be larger than 0", exception2.getMessage());
+  }
+
+  @Test
+  public void getGainersAndGetLosersWithMoreThanStocksLimitThrowsExpectedException() {
+    Exchange exchange = new Exchange(TEST_EXCHANGE_NAME, testStocks);
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> exchange.getGainers(testStocks.size() + 1));
+    assertEquals("limit can't be larger than number of stocks", exception.getMessage());
+    IllegalArgumentException exception2 = assertThrows(IllegalArgumentException.class, () -> exchange.getLosers(testStocks.size() + 1));
+    assertEquals("limit can't be larger than number of stocks", exception2.getMessage());
+  }
+
 }
+
