@@ -8,6 +8,8 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
+
 public class PortfolioTest {
 
   private Portfolio portfolio;
@@ -35,12 +37,10 @@ public class PortfolioTest {
         new BigDecimal("300"));
   }
 
-
   @Test
   void constructorCreatesEmptyPortfolio() {
     assertTrue(portfolio.getShares().isEmpty());
   }
-
 
   @Test
   void addShareAddsShareSuccessfully() {
@@ -52,11 +52,9 @@ public class PortfolioTest {
   void addNullShareThrowsException() {
     IllegalArgumentException exception = assertThrows(
         IllegalArgumentException.class,
-        () -> portfolio.addShare(null)
-    );
+        () -> portfolio.addShare(null));
     assertEquals("share cannot be null", exception.getMessage());
   }
-
 
   @Test
   void removeShareRemovesExistingShare() {
@@ -75,11 +73,9 @@ public class PortfolioTest {
   void removeNullShareThrowsException() {
     IllegalArgumentException exception = assertThrows(
         IllegalArgumentException.class,
-        () -> portfolio.removeShare(null)
-    );
+        () -> portfolio.removeShare(null));
     assertEquals("share cannot be null", exception.getMessage());
   }
-
 
   @Test
   void getShareReturnsCorrectShare() {
@@ -98,8 +94,7 @@ public class PortfolioTest {
   void getShareWithNullThrowsException() {
     IllegalArgumentException exception = assertThrows(
         IllegalArgumentException.class,
-        () -> portfolio.getShare(null)
-    );
+        () -> portfolio.getShare(null));
     assertEquals("symbol cannot be null or blank", exception.getMessage());
   }
 
@@ -107,11 +102,9 @@ public class PortfolioTest {
   void getShareWithBlankThrowsException() {
     IllegalArgumentException exception = assertThrows(
         IllegalArgumentException.class,
-        () -> portfolio.getShare("")
-    );
+        () -> portfolio.getShare(""));
     assertEquals("symbol cannot be null or blank", exception.getMessage());
   }
-
 
   @Test
   void getSharesReturnsAllShares() {
@@ -124,8 +117,6 @@ public class PortfolioTest {
     assertTrue(shares.contains(testShare));
     assertTrue(shares.contains(testShare2));
   }
-
-
 
   @Test
   void containsReturnsTrueForExistingShare() {
@@ -143,8 +134,17 @@ public class PortfolioTest {
   void containsNullThrowsException() {
     IllegalArgumentException exception = assertThrows(
         IllegalArgumentException.class,
-        () -> portfolio.contains(null)
-    );
+        () -> portfolio.contains(null));
     assertEquals("The share cannot be null", exception.getMessage());
+  }
+
+  @Test
+  void getNetWorthGetsExpectedSum() {
+    portfolio.addShare(testShare);
+    BigDecimal worth1 = new SaleCalculator(testShare).calculateTotal();
+    assertEquals(0, portfolio.getNetWorth().compareTo(worth1));
+    portfolio.addShare(testShare2);
+    BigDecimal worth2 = worth1.add(new SaleCalculator(testShare2).calculateTotal());
+    assertEquals(0, portfolio.getNetWorth().compareTo(worth2));
   }
 }
