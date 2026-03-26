@@ -1,10 +1,9 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
-import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
 
 /**
  * Represents a player's portfolio, storing all purchased shares.
@@ -12,7 +11,9 @@ import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
 public class Portfolio {
   private final List<Share> shares;
 
-  /** Constructs the portfolio that contains the list of shares the user has */
+  /**
+   * Constructs the portfolio that contains the list of shares the user has.
+   */
   public Portfolio() {
     this.shares = new ArrayList<>();
   }
@@ -30,8 +31,8 @@ public class Portfolio {
    * Returns the first share matching the given stock symbol, or null if not
    * found.
    *
-   * @param symbol the stock symbol to search for
-   * @return a matching share, or null if not found
+   * @param symbol The stock symbol to search for.
+   * @return A matching share, or null if not found.
    */
   public Share getShare(String symbol) {
     if (symbol == null || symbol.isBlank()) {
@@ -48,8 +49,8 @@ public class Portfolio {
   /**
    * Adds a share to the portfolio.
    *
-   * @param share the share to add
-   * @return true if added
+   * @param share The share to add.
+   * @return True if added.
    */
   public boolean addShare(Share share) {
     if (share == null) {
@@ -61,8 +62,8 @@ public class Portfolio {
   /**
    * Removes a share from the portfolio.
    *
-   * @param share the share to remove
-   * @return true if removed
+   * @param share The share to remove.
+   * @return True if removed.
    */
   public boolean removeShare(Share share) {
     if (share == null) {
@@ -85,9 +86,15 @@ public class Portfolio {
     return this.shares.contains(share);
   }
 
+  /**
+   * A method for getting the net worth of a Portfolio, or how much it is worth.
+   * 
+   * @return The amount of money the Portfolio is worth.
+   */
   public BigDecimal getNetWorth() {
     BigDecimal netWorth = BigDecimal.ZERO;
-    List<BigDecimal> prices = this.shares.stream().map(s -> new SaleCalculator(s).calculateTotal()).toList();
+    List<BigDecimal> prices
+        = this.shares.stream().map(s -> new SaleCalculator(s).calculateTotal()).toList();
     for (BigDecimal price : prices) {
       netWorth = netWorth.add(price);
     }
