@@ -76,7 +76,7 @@ What is the input and output of the program? What is the expected behaviour of t
 4. **Run the Application:**
   Start the program by running the main class:
     ```bash
-   mvn exec:java
+   mvn javafx:run
    
 5. **Input and Output**
   - Input: User interacts via terminal, selecting menu options, adding diary entries, choosing authors, and writing content.
