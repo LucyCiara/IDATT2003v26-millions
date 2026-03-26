@@ -1,7 +1,7 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.filehandling;
+
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,11 +13,13 @@ import java.util.List;
  * The CSV format includes a header line and each stock is written on a new line with the format:
  * symbol,company,price
  * Lines starting with '#' are treated as comments and are not written to the file.
- * The writer ensures that the stock data is correctly formatted and handles any necessary I/O operations.
+ * The writer ensures that the stock data is correctly formatted and handles any necessary I/O
+ * operations.
  */
-public class CsvStockWriter implements StockWriter{
+public class CsvStockWriter implements StockWriter {
 
-  /** {@inheritDoc} 
+  /**
+   * {@inheritDoc} 
    * This method writes stock data to a CSV file.
    */
   @Override
@@ -39,8 +41,9 @@ public class CsvStockWriter implements StockWriter{
 
   /**
    * Formats a Stock object into a CSV line.
-   * @param stock the Stock object to format
-   * @return a string representing the Stock in CSV format
+   * 
+   * @param stock the Stock object to format.
+   * @return a string representing the Stock in CSV format.
    */
   private String formatStock(Stock stock) {
     ParameterValidator.objectChecker(stock, "stock");
