@@ -44,7 +44,7 @@ public class PurchaseCalculatorTest {
         () -> new PurchaseCalculator(null)
     );
 
-    assertEquals("Share cannot be null", exception.getMessage());
+    assertEquals("share can't be null", exception.getMessage());
   }
 
   @Test

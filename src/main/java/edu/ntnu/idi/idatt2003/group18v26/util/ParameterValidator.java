@@ -67,6 +67,21 @@ public final class ParameterValidator {
   }
 
   /**
+   *  A method for checking the validity of an int variable.
+   * 
+   * @param intArg The int variable to check the validity of.
+   * @param variableName The name of the int variable to check.
+   * @throws IllegalArgumentException The exception thrown if the validation fails.
+   */
+  public static final void intChecker(int intArg, String variableName)
+      throws IllegalArgumentException {
+    if (intArg < 0) {
+      throw new IllegalArgumentException(
+        String.format("%s can't be negative", variableName));
+    }
+  }
+
+  /**
    * A method for checking the validity of a limit variable.
    * 
    * @param limit The limit variable to check the validity of.
