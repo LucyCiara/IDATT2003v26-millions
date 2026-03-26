@@ -19,13 +19,17 @@ public class Purchase extends Transaction {
   }
 
   /**
-   * Commits a purchase on a player, withdrawing the money from the Player, and adding the Share to
-   * the Player's Portfolio and TransactionArchive.
+   * Commits a purchase on a player, withdrawing the money from the Player, adding the Share to
+   * the Player's Portfolio, and adding the transaction to the Player's TransactionArchive.
    * 
    * @param player The player the purchase is performed on. Must be non-null.
+   * @throws UnsupportedOperationException Is thrown whenever there's an attempt to commit the same
+   *      Transaction more than once.
+   * @throws ArithmeticException Is thrown whenever the player has insufficient money to buy the
+   *      Share.
    */
   @Override
-  public void commit(Player player) {
+  public void commit(Player player) throws UnsupportedOperationException {
     if (player == null) {
       throw new IllegalArgumentException("player can't be null");
     }
