@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.transaction;
 
+import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -43,9 +44,7 @@ public class TransactionArchive {
    * @throws IllegalArgumentException if the transaction is null.
    */
   public boolean add(Transaction transaction) {
-    if (transaction == null) {
-      throw new IllegalArgumentException("The transaction cannot be null");
-    }
+    ParameterValidator.objectChecker(transaction, "transaction");
     transactions.add(transaction);
     return true;
   }
@@ -68,9 +67,7 @@ public class TransactionArchive {
    * @throws IllegalArgumentException if the provided week is negative.
    */
   public List<Transaction> getTransactions(int week) {
-    if (week < 0) {
-      throw new IllegalArgumentException("week can't be negative");
-    }
+    ParameterValidator.intChecker(week, "week");
     return transactions.stream()
         .filter(transaction -> transaction.getWeek() == week)
         .collect(Collectors.toList());
@@ -85,9 +82,7 @@ public class TransactionArchive {
    * @throws IllegalArgumentException if the provided week is negative.
    */
   public List<Transaction> getPurchases(int week) {
-    if (week < 0) {
-      throw new IllegalArgumentException("week can't be negative");
-    }
+    ParameterValidator.intChecker(week, "week");
     return transactions.stream()
         .filter(transaction -> transaction instanceof Purchase && transaction.getWeek() == week)
         .collect(Collectors.toList());
@@ -102,9 +97,7 @@ public class TransactionArchive {
    * @throws IllegalArgumentException if the provided week is negative.
    */
   public List<Transaction> getSales(int week) {
-    if (week < 0) {
-      throw new IllegalArgumentException("week can't be negative");
-    }
+    ParameterValidator.intChecker(week, "week");
     return transactions.stream()
         .filter(transaction -> transaction instanceof Sale && transaction.getWeek() == week)
         .collect(Collectors.toList());

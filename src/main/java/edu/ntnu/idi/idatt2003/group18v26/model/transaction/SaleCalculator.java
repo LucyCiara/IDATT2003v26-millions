@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.transaction;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
+import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import java.math.BigDecimal;
 
 /**
@@ -32,9 +33,7 @@ public class SaleCalculator implements TransactionCalculator {
    * @param share The share to calculate the purchase of. Must be non-null.
    */
   public SaleCalculator(Share share) {
-    if (share == null) {
-      throw new IllegalArgumentException("Share cannot be null");
-    }
+    ParameterValidator.objectChecker(share, "share");
     this.purchasePrice = share.purchasePrice();
     this.salesPrice = share.stock().getSalesPrice();
     this.quantity = share.quantity();

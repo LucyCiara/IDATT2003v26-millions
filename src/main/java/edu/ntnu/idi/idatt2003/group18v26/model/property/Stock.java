@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
+import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,18 +28,9 @@ public class Stock {
    *                                  negative/zero
    */
   public Stock(String symbol, String company, BigDecimal salesPrice) {
-    if (symbol == null || symbol.isBlank()) {
-      throw new IllegalArgumentException("symbol cannot be blank");
-    }
-    if (company == null || company.isBlank()) {
-      throw new IllegalArgumentException("company cannot be blank");
-    }
-    if (salesPrice == null) {
-      throw new IllegalArgumentException("salesPrice cannot be null");
-    }
-    if (salesPrice.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("salesPrice must be greater than zero");
-    }
+    ParameterValidator.stringChecker(symbol, "symbol");
+    ParameterValidator.stringChecker(company, "company");
+    ParameterValidator.bigDecimalChecker(salesPrice, "salesPrice");
     this.symbol = symbol;
     this.company = company;
     this.prices = new ArrayList<>();
@@ -79,12 +71,7 @@ public class Stock {
    * @throws IllegalArgumentException if newPrice is {@code null}
    */
   public void addNewSalesPrice(BigDecimal newPrice) {
-    if (newPrice == null) {
-      throw new IllegalArgumentException("The new price cannot be null");
-    }
-    if (newPrice.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("The new price must be greater than zero");
-    }
+    ParameterValidator.bigDecimalChecker(newPrice, "newPrice");
     this.prices.add(newPrice);
   }
 

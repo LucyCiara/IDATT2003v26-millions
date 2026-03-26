@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt2003.group18v26.model;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive;
+import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
@@ -20,15 +21,8 @@ public class Player {
    * @param startingMoney The starting money for the player.
    */
   public Player(String name, BigDecimal startingMoney) {
-    if (name == null) {
-      throw new IllegalArgumentException("name can't be null");
-    } else if (name.isBlank()) {
-      throw new IllegalArgumentException("name can't be blank");
-    } else if (startingMoney == null) {
-      throw new IllegalArgumentException("startingMoney can't be null");
-    } else if (startingMoney.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("startingMoney must be a positive non-zero number");
-    }
+    ParameterValidator.stringChecker(name, "name");
+    ParameterValidator.bigDecimalChecker(startingMoney, "startingMoney");
     this.name = name;
     this.startingMoney = startingMoney;
     this.money = startingMoney;
@@ -60,11 +54,7 @@ public class Player {
    * @param moneyToAdd The amount of money to add.
    */
   public void addMoney(BigDecimal moneyToAdd) {
-    if (moneyToAdd == null) {
-      throw new IllegalArgumentException("moneyToAdd can't be null");
-    } else if (moneyToAdd.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("moneyToAdd must be a positive non-zero number");
-    }
+    ParameterValidator.bigDecimalChecker(moneyToAdd, "moneyToAdd");
     this.money = this.money.add(moneyToAdd);
   }
 
@@ -74,11 +64,7 @@ public class Player {
    * @param moneyToWithdraw The amount of money to withdraw.
    */
   public void withdrawMoney(BigDecimal moneyToWithdraw) {
-    if (moneyToWithdraw == null) {
-      throw new IllegalArgumentException("moneyToWithdraw can't be null");
-    } else if (moneyToWithdraw.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("moneyToWithdraw must be a positive non-zero number");
-    }
+    ParameterValidator.bigDecimalChecker(moneyToWithdraw, "moneyToWithdraw");
     this.money = this.money.subtract(moneyToWithdraw);
   }
 

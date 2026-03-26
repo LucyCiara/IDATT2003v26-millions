@@ -53,7 +53,7 @@ public class PortfolioTest {
     IllegalArgumentException exception = assertThrows(
         IllegalArgumentException.class,
         () -> portfolio.addShare(null));
-    assertEquals("share cannot be null", exception.getMessage());
+    assertEquals("share can't be null", exception.getMessage());
   }
 
   @Test
@@ -74,7 +74,7 @@ public class PortfolioTest {
     IllegalArgumentException exception = assertThrows(
         IllegalArgumentException.class,
         () -> portfolio.removeShare(null));
-    assertEquals("share cannot be null", exception.getMessage());
+    assertEquals("share can't be null", exception.getMessage());
   }
 
   @Test
@@ -95,7 +95,7 @@ public class PortfolioTest {
     IllegalArgumentException exception = assertThrows(
         IllegalArgumentException.class,
         () -> portfolio.getShare(null));
-    assertEquals("symbol cannot be null or blank", exception.getMessage());
+    assertEquals("symbol can't be null", exception.getMessage());
   }
 
   @Test
@@ -103,7 +103,7 @@ public class PortfolioTest {
     IllegalArgumentException exception = assertThrows(
         IllegalArgumentException.class,
         () -> portfolio.getShare(""));
-    assertEquals("symbol cannot be null or blank", exception.getMessage());
+    assertEquals("symbol can't be blank", exception.getMessage());
   }
 
   @Test
@@ -135,7 +135,7 @@ public class PortfolioTest {
     IllegalArgumentException exception = assertThrows(
         IllegalArgumentException.class,
         () -> portfolio.contains(null));
-    assertEquals("The share cannot be null", exception.getMessage());
+    assertEquals("share can't be null", exception.getMessage());
   }
 
   @Test

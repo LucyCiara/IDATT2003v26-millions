@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt2003.group18v26.model.transaction;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
+import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 
 /**
  * An abstract class for creating transactions.
@@ -21,13 +22,12 @@ public abstract class Transaction {
    * @param calculator The TransactionCalculator for calculating purchase/sale cost.
    */
   protected Transaction(Share share, int week, TransactionCalculator calculator) {
-    if (week < 0) {
-      throw new IllegalArgumentException("week can't be negative");
-    }
+    ParameterValidator.objectChecker(share, "share");
+    ParameterValidator.intChecker(week, "week");
+    ParameterValidator.objectChecker(calculator, "calculator");
     this.share = share;
     this.week = week;
     this.calculator = calculator;
-    this.committed = false;
     this.committed = false;
   }
 

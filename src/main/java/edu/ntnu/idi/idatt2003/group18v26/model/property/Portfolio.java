@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
+import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +36,7 @@ public class Portfolio {
    * @return A matching share, or null if not found.
    */
   public Share getShare(String symbol) {
-    if (symbol == null || symbol.isBlank()) {
-      throw new IllegalArgumentException("symbol cannot be null or blank");
-    }
+    ParameterValidator.stringChecker(symbol, "symbol");
     for (Share share : this.shares) {
       if (share.stock().getSymbol().equalsIgnoreCase(symbol)) {
         return share;
@@ -53,9 +52,7 @@ public class Portfolio {
    * @return True if added.
    */
   public boolean addShare(Share share) {
-    if (share == null) {
-      throw new IllegalArgumentException("share cannot be null");
-    }
+    ParameterValidator.objectChecker(share, "share");
     return this.shares.add(share);
   }
 
@@ -64,11 +61,10 @@ public class Portfolio {
    *
    * @param share The share to remove.
    * @return True if removed.
+   * @throws IllegalArgumentException if share is null
    */
   public boolean removeShare(Share share) {
-    if (share == null) {
-      throw new IllegalArgumentException("share cannot be null");
-    }
+    ParameterValidator.objectChecker(share, "share");
     return this.shares.remove(share);
   }
 
@@ -80,9 +76,7 @@ public class Portfolio {
    * @throws IllegalArgumentException if share is null
    */
   public boolean contains(Share share) {
-    if (share == null) {
-      throw new IllegalArgumentException("The share cannot be null");
-    }
+    ParameterValidator.objectChecker(share, "share");
     return this.shares.contains(share);
   }
 

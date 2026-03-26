@@ -79,7 +79,7 @@ public class PlayerTest {
   public void zeroStartingMoneyPlayerConstructorThrowsExpectedException() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> new Player(this.testName, BigDecimal.ZERO));
-    assertEquals("startingMoney must be a positive non-zero number", exception.getMessage());
+    assertEquals("startingMoney must be larger than 0", exception.getMessage());
   }
 
   /**
@@ -90,7 +90,7 @@ public class PlayerTest {
   public void negativeStartingMoneyPlayerConstructorThrowsExpectedException() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> new Player(this.testName, this.negativeStartingMoney));
-    assertEquals("startingMoney must be a positive non-zero number", exception.getMessage());
+    assertEquals("startingMoney must be larger than 0", exception.getMessage());
   }
 
   /**
@@ -134,7 +134,7 @@ public class PlayerTest {
   public void zeroMoneyToAddThrowsExpectedException() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> new Player(testName, testStartingMoney).addMoney(BigDecimal.ZERO));
-    assertEquals("moneyToAdd must be a positive non-zero number", exception.getMessage());
+    assertEquals("moneyToAdd must be larger than 0", exception.getMessage());
   }
 
   /**
@@ -145,7 +145,7 @@ public class PlayerTest {
   public void negativeMoneyToAddThrowsExpectedException() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> new Player(testName, testStartingMoney).addMoney(this.negativeStartingMoney));
-    assertEquals("moneyToAdd must be a positive non-zero number", exception.getMessage());
+    assertEquals("moneyToAdd must be larger than 0", exception.getMessage());
   }
 
   /**
@@ -179,7 +179,7 @@ public class PlayerTest {
   public void zeroMoneyToWithdrawThrowsExpectedException() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> new Player(testName, testStartingMoney).withdrawMoney(BigDecimal.ZERO));
-    assertEquals("moneyToWithdraw must be a positive non-zero number", exception.getMessage());
+    assertEquals("moneyToWithdraw must be larger than 0", exception.getMessage());
   }
 
   /**
@@ -190,7 +190,7 @@ public class PlayerTest {
   public void negativeMoneyToWithdrawThrowsExpectedException() {
     IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
         () -> new Player(testName, testStartingMoney).withdrawMoney(this.negativeStartingMoney));
-    assertEquals("moneyToWithdraw must be a positive non-zero number", exception.getMessage());
+    assertEquals("moneyToWithdraw must be larger than 0", exception.getMessage());
   }
 
   /**

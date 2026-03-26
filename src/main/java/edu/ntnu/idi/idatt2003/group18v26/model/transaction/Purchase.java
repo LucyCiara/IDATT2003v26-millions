@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt2003.group18v26.model.transaction;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
+import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 
 /**
  * A class to perform a purchase of a share using a player.
@@ -30,9 +31,7 @@ public class Purchase extends Transaction {
    */
   @Override
   public void commit(Player player) throws UnsupportedOperationException {
-    if (player == null) {
-      throw new IllegalArgumentException("player can't be null");
-    }
+    ParameterValidator.objectChecker(player, "player");
     if (this.getCalculator().calculateTotal().compareTo(player.getMoney()) <= 0
         && !this.committed) {
       player.withdrawMoney(this.getCalculator().calculateTotal());

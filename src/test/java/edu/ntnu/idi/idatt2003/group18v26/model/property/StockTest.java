@@ -59,39 +59,39 @@ public class StockTest {
 
   @Test
   void constructorWithNullSymbolThrowsException() {
-    constructorTest(null, testCompany, testPrice, "symbol cannot be blank");
+    constructorTest(null, testCompany, testPrice, "symbol can't be null");
   }
 
   @Test
   void constructorWithBlankSymbolThrowsException() {
-    constructorTest("", testCompany, testPrice, "symbol cannot be blank");
+    constructorTest("", testCompany, testPrice, "symbol can't be blank");
   }
 
   @Test
   void constructorWithNullCompanyThrowsException() {
-    constructorTest(testSymbol, null, testPrice, "company cannot be blank");
+    constructorTest(testSymbol, null, testPrice, "company can't be null");
   }
 
   @Test
   void constructorWithBlankCompanyThrowsException() {
-    constructorTest(testSymbol, "", testPrice, "company cannot be blank");
+    constructorTest(testSymbol, "", testPrice, "company can't be blank");
   }
 
   @Test
   void constructorWithNullPriceThrowsException() {
-    constructorTest(testSymbol, testCompany, null, "salesPrice cannot be null");
+    constructorTest(testSymbol, testCompany, null, "salesPrice can't be null");
   }
 
   @Test
   void constructorWithZeroPriceThrowsException() {
     constructorTest(testSymbol, testCompany, BigDecimal.ZERO,
-        "salesPrice must be greater than zero");
+        "salesPrice must be larger than 0");
   }
 
   @Test
   void constructorWithNegativePriceThrowsException() {
     constructorTest(testSymbol, testCompany, new BigDecimal("-1"),
-        "salesPrice must be greater than zero");
+        "salesPrice must be larger than 0");
   }
 
   @Test
@@ -144,7 +144,7 @@ public class StockTest {
           () -> stock.addNewSalesPrice(null)
     );
 
-    assertEquals("The new price cannot be null", exception.getMessage());
+    assertEquals("newPrice can't be null", exception.getMessage());
   }
 
   @Test
@@ -156,7 +156,7 @@ public class StockTest {
         () -> stock.addNewSalesPrice(BigDecimal.ZERO)
     );
 
-    assertEquals("The new price must be greater than zero", exception.getMessage());
+    assertEquals("newPrice must be larger than 0", exception.getMessage());
 }
 
   @Test
