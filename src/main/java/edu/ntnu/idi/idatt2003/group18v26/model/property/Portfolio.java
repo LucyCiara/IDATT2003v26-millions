@@ -2,7 +2,6 @@ package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
@@ -88,8 +87,7 @@ public class Portfolio {
 
   public BigDecimal getNetWorth() {
     BigDecimal netWorth = BigDecimal.ZERO;
-    List<BigDecimal> prices
-        = this.shares.stream().map(s -> new SaleCalculator(s).calculateTotal()).toList();
+    List<BigDecimal> prices = this.shares.stream().map(s -> new SaleCalculator(s).calculateTotal()).toList();
     for (BigDecimal price : prices) {
       netWorth = netWorth.add(price);
     }

@@ -112,7 +112,7 @@ public class Player {
     if (weeksOfTrade >= 20 && profit.compareTo(BigDecimal.ONE) >= 0) {
       return "Speculator";
     } else if (weeksOfTrade >= 10
-        && profit.compareTo(new BigDecimal(0.2).setScale(1, RoundingMode.FLOOR)) >= 0) {
+        && profit.compareTo(new BigDecimal("0.2")) >= 0) {
       return "Investor";
     } else {
       return "Novice";

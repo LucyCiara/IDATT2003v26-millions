@@ -40,7 +40,8 @@ public class PlayerTest {
   }
 
   /**
-   * A method for checking if the player's constructor throws the expected exception when the name input is null.
+   * A method for checking if the player's constructor throws the expected
+   * exception when the name input is null.
    */
   @Test
   public void nullNamePlayerConstructorThrowsExpectedException() {
@@ -50,7 +51,8 @@ public class PlayerTest {
   }
 
   /**
-   * A method for checking if the player's constructor throws the expected exception when the name input is empty.
+   * A method for checking if the player's constructor throws the expected
+   * exception when the name input is empty.
    */
   @Test
   public void emptyNamePlayerConstructorThrowsExpectedException() {
@@ -60,7 +62,8 @@ public class PlayerTest {
   }
 
   /**
-   * A method for checking if the player's constructor throws the expected exception when the startingMoney is null.
+   * A method for checking if the player's constructor throws the expected
+   * exception when the startingMoney is null.
    */
   @Test
   public void nullStartingMoneyPlayerConstructorThrowsExpectedException() {
@@ -69,7 +72,8 @@ public class PlayerTest {
   }
 
   /**
-   * A method for checking if the player's constructor throws the expected exception when the startingMoney is zero.
+   * A method for checking if the player's constructor throws the expected
+   * exception when the startingMoney is zero.
    */
   @Test
   public void zeroStartingMoneyPlayerConstructorThrowsExpectedException() {
@@ -79,7 +83,8 @@ public class PlayerTest {
   }
 
   /**
-   * A method for checking if the player's constructor throws the expected exception when the startingMoney is negative.
+   * A method for checking if the player's constructor throws the expected
+   * exception when the startingMoney is negative.
    */
   @Test
   public void negativeStartingMoneyPlayerConstructorThrowsExpectedException() {
@@ -89,7 +94,8 @@ public class PlayerTest {
   }
 
   /**
-   * A method for checking if the player's getName method returns the name and nothing but the name.
+   * A method for checking if the player's getName method returns the name and
+   * nothing but the name.
    */
   @Test
   public void getNameReturnsNameAndOnlyTheName() {
@@ -99,7 +105,8 @@ public class PlayerTest {
   }
 
   /**
-   * A method for checking if the player's unmodified money is the same as the starting money.
+   * A method for checking if the player's unmodified money is the same as the
+   * starting money.
    */
   @Test
   public void unModifiedMoneyIsStartingMoney() {
@@ -109,7 +116,8 @@ public class PlayerTest {
   }
 
   /**
-   * A method for checking if adding null money causes the expected exception to be thrown.
+   * A method for checking if adding null money causes the expected exception to
+   * be thrown.
    */
   @Test
   public void nullMoneyToAddThrowsExpectedException() {
@@ -119,7 +127,8 @@ public class PlayerTest {
   }
 
   /**
-   * A method for checking if adding zero money causes the expected exception to be thrown.
+   * A method for checking if adding zero money causes the expected exception to
+   * be thrown.
    */
   @Test
   public void zeroMoneyToAddThrowsExpectedException() {
@@ -129,7 +138,8 @@ public class PlayerTest {
   }
 
   /**
-   * A method for checking if adding negative money causes the expected exception to be thrown.
+   * A method for checking if adding negative money causes the expected exception
+   * to be thrown.
    */
   @Test
   public void negativeMoneyToAddThrowsExpectedException() {
@@ -151,7 +161,8 @@ public class PlayerTest {
   }
 
   /**
-   * A method for checking if withdrawing null money causes the expected exception to be thrown.
+   * A method for checking if withdrawing null money causes the expected exception
+   * to be thrown.
    */
   @Test
   public void nullMoneyToWithdrawThrowsExpectedException() {
@@ -161,7 +172,8 @@ public class PlayerTest {
   }
 
   /**
-   * A method for checking if withdrawing zero money causes the expected exception to be thrown.
+   * A method for checking if withdrawing zero money causes the expected exception
+   * to be thrown.
    */
   @Test
   public void zeroMoneyToWithdrawThrowsExpectedException() {
@@ -171,7 +183,8 @@ public class PlayerTest {
   }
 
   /**
-   * A method for checking if withdrawing negative money causes the expected exception to be thrown.
+   * A method for checking if withdrawing negative money causes the expected
+   * exception to be thrown.
    */
   @Test
   public void negativeMoneyToWithdrawThrowsExpectedException() {
@@ -181,7 +194,8 @@ public class PlayerTest {
   }
 
   /**
-   * A method for checking if getMoney returns the correct money after withdrawing.
+   * A method for checking if getMoney returns the correct money after
+   * withdrawing.
    */
   @Test
   public void withdrawMoneyReturnsCorrectNewMoney() {
@@ -193,7 +207,8 @@ public class PlayerTest {
   }
 
   /**
-   * A method for checking if getPortfolio gets the portfolio, and not another portfolio.
+   * A method for checking if getPortfolio gets the portfolio, and not another
+   * portfolio.
    */
   @Test
   public void getPortfolioGetsOnlyPortfolio() {
@@ -212,8 +227,7 @@ public class PlayerTest {
     testPlayer.addMoney(BigDecimal.TEN);
     expectedWorth = expectedWorth.add(BigDecimal.TEN);
     assertEquals(0, testPlayer.getNetWorth().compareTo(expectedWorth));
-    Share testShare
-        = new Share(new Stock("A", "B", BigDecimal.TEN), BigDecimal.TWO, BigDecimal.TEN);
+    Share testShare = new Share(new Stock("A", "B", BigDecimal.TEN), BigDecimal.TWO, BigDecimal.TEN);
     testPlayer.getPortfolio().addShare(testShare);
     expectedWorth = expectedWorth.add(new SaleCalculator(testShare).calculateTotal());
   }
@@ -226,22 +240,19 @@ public class PlayerTest {
     assertEquals(0, testPlayer.getNetWorth().compareTo(testStartingMoney));
     assertEquals(expectedStatus, testPlayer.getStatus());
 
-    BigDecimal investorProfit = this.testStartingMoney.multiply(new BigDecimal(0.2));
+    BigDecimal investorProfit = this.testStartingMoney.multiply(new BigDecimal("0.2"));
     testPlayer.addMoney(investorProfit);
     assertEquals(expectedStatus, expectedStatus);
     testPlayer.withdrawMoney(investorProfit);
 
     for (int i = 0; i < 10; i++) {
       new Purchase(
-        new Share(
-          new Stock("A", "B", BigDecimal.ONE),
-          BigDecimal.ONE, BigDecimal.ONE
-        ),
-        i
-      ).commit(testPlayer);
-      BigDecimal cost
-          = testPlayer.getTransactionArchive().getPurchases(i).getFirst().getCalculator()
-              .calculateTotal();
+          new Share(
+              new Stock("A", "B", BigDecimal.ONE),
+              BigDecimal.ONE, BigDecimal.ONE),
+          i).commit(testPlayer);
+      BigDecimal cost = testPlayer.getTransactionArchive().getPurchases(i).getFirst().getCalculator()
+          .calculateTotal();
       testPlayer.addMoney(cost);
     }
 
@@ -249,29 +260,25 @@ public class PlayerTest {
     if (stockValue.compareTo(BigDecimal.ZERO) > 0) {
       testPlayer.withdrawMoney(stockValue);
     } else if (stockValue.compareTo(BigDecimal.ZERO) < 0) {
-      testPlayer.addMoney(stockValue.multiply(new BigDecimal(-1)));
+      testPlayer.addMoney(stockValue.multiply(new BigDecimal("-1")));
     }
 
     assertEquals(10, testPlayer.getTransactionArchive().countDistinctWeeks());
     assertEquals(-1,
-      testPlayer.getNetWorth().divide(
-        testStartingMoney,
-        1,
-        RoundingMode.FLOOR
-      ).compareTo(new BigDecimal(1.2))
-    );
+        testPlayer.getNetWorth().divide(
+            testStartingMoney,
+            1,
+            RoundingMode.FLOOR).compareTo(new BigDecimal("1.2")));
     assertEquals(expectedStatus, testPlayer.getStatus());
 
     expectedStatus = "Investor";
     testPlayer.addMoney(investorProfit);
     assertEquals(10, testPlayer.getTransactionArchive().countDistinctWeeks());
     assertTrue(
-      testPlayer.getNetWorth().divide(
-        testStartingMoney,
-        1,
-        RoundingMode.FLOOR
-      ).compareTo(new BigDecimal(1.2)) >= -1
-    );
+        testPlayer.getNetWorth().divide(
+            testStartingMoney,
+            1,
+            RoundingMode.FLOOR).compareTo(new BigDecimal("1.2")) >= -1);
     assertEquals(expectedStatus, testPlayer.getStatus());
 
     BigDecimal speculatorProfit = this.testStartingMoney;
@@ -279,27 +286,22 @@ public class PlayerTest {
     testPlayer.addMoney(speculatorProfit);
     assertEquals(10, testPlayer.getTransactionArchive().countDistinctWeeks());
     assertTrue(
-      testPlayer.getNetWorth().divide(
-        testStartingMoney,
-        1,
-        RoundingMode.FLOOR
-      ).compareTo(new BigDecimal(2.0)) >= -1
-    );
+        testPlayer.getNetWorth().divide(
+            testStartingMoney,
+            1,
+            RoundingMode.FLOOR).compareTo(new BigDecimal("2.0")) >= -1);
     assertEquals(expectedStatus, testPlayer.getStatus());
     testPlayer.withdrawMoney(speculatorProfit);
     testPlayer.addMoney(investorProfit);
 
     for (int i = 10; i < 20; i++) {
       new Purchase(
-        new Share(
-          new Stock("A", "B", BigDecimal.ONE),
-          BigDecimal.ONE, BigDecimal.ONE
-        ),
-        i
-      ).commit(testPlayer);
-      BigDecimal cost
-          = testPlayer.getTransactionArchive().getPurchases(i).getFirst().getCalculator()
-              .calculateTotal();
+          new Share(
+              new Stock("A", "B", BigDecimal.ONE),
+              BigDecimal.ONE, BigDecimal.ONE),
+          i).commit(testPlayer);
+      BigDecimal cost = testPlayer.getTransactionArchive().getPurchases(i).getFirst().getCalculator()
+          .calculateTotal();
       testPlayer.addMoney(cost);
     }
 
@@ -307,17 +309,15 @@ public class PlayerTest {
     if (stockValue.compareTo(BigDecimal.ZERO) > 0) {
       testPlayer.withdrawMoney(stockValue);
     } else if (stockValue.compareTo(BigDecimal.ZERO) < 0) {
-      testPlayer.addMoney(stockValue.multiply(new BigDecimal(-1)));
+      testPlayer.addMoney(stockValue.multiply(new BigDecimal("-1")));
     }
 
     assertEquals(20, testPlayer.getTransactionArchive().countDistinctWeeks());
     assertEquals(-1,
-      testPlayer.getNetWorth().divide(
-        testStartingMoney,
-        1,
-        RoundingMode.FLOOR
-      ).compareTo(new BigDecimal(2.0))
-    );
+        testPlayer.getNetWorth().divide(
+            testStartingMoney,
+            1,
+            RoundingMode.FLOOR).compareTo(new BigDecimal("2.0")));
     assertEquals(expectedStatus, testPlayer.getStatus());
 
     expectedStatus = "Speculator";
@@ -325,12 +325,10 @@ public class PlayerTest {
     testPlayer.addMoney(speculatorProfit);
     assertEquals(20, testPlayer.getTransactionArchive().countDistinctWeeks());
     assertTrue(
-      testPlayer.getNetWorth().divide(
-        testStartingMoney,
-        1,
-        RoundingMode.FLOOR
-      ).compareTo(new BigDecimal(2.0)) >= -1
-    );
+        testPlayer.getNetWorth().divide(
+            testStartingMoney,
+            1,
+            RoundingMode.FLOOR).compareTo(new BigDecimal("2.0")) >= -1);
     assertEquals(expectedStatus, testPlayer.getStatus());
 
   }
