@@ -48,7 +48,7 @@ The project uses the standard Maven directory structure, which ensures:
 ## Link to repository📚
 
 [//]: # (TODO: Include a link to your GitHub repository here.)
-[GitHub Repository - IDATT1003 Mappevurdering 2025](https://github.com/NTNU-IDI/mappe-2025-Marjoni-fj)
+[GitHub Repository - IDATT2003 Mappevurdering 2026](https://github.com/LucyCiara/IDATT2003v26-millions)
 
 ---
 ## How to run the project📝
