@@ -1,10 +1,9 @@
 package edu.ntnu.idi.idatt2003.group18v26.model;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /** A class for the player. */
 public class Player {
@@ -105,6 +104,11 @@ public class Player {
     return this.money.add(this.portfolio.getNetWorth());
   }
 
+  /**
+   * Gets the current status of the player, based on months of active trade and lifetime profit.
+   * 
+   * @return The name of the player's current status.
+   */
   public String getStatus() {
     int weeksOfTrade = this.getTransactionArchive().countDistinctWeeks();
     BigDecimal profit = this.getNetWorth().divide(this.startingMoney, 1, RoundingMode.FLOOR);
