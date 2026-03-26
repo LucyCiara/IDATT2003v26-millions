@@ -15,9 +15,9 @@ This Java-based application, developed using Maven...
 ## Project structure 📁
 ---
 The project follows a standard Maven layout and is organized into clearly separated packages according to responsibility-driven design (RDD). 
-All source files are stored under the `src/main/java/edu/ntnu` directory.
+All source files are stored under the `src` directory.
 
-### Main Package Structure (`src/main/java/edu/ntnu`)
+### Main Package Structure (`src/main`)
 <pre>
 
 </pre>
@@ -33,8 +33,8 @@ All source files are stored under the `src/main/java/edu/ntnu` directory.
 #### Utils
 
 
-### JUnit Tests (`src/test/java/edu/ntnu`)
-The JUnit tests are stored under `src/test` and mirror the main package structure. These tests cover both positive and negative test of all classes (except `App.java` and UI classes) and their methods ensuring program reliability according to the specification given in the portofolie project descriptions
+### JUnit Tests (`src/test`)
+The JUnit tests are stored under `src/test/java/edu/ntnu/idi/idatt2003/group18v26` and mirror the main package structure. These tests cover both positive and negative test of all classes (except `App.java` and UI classes) and their methods ensuring program reliability according to the specification given in the portofolie project descriptions
 <pre>
 </pre>
 
@@ -59,7 +59,7 @@ What is the input and output of the program? What is the expected behaviour of t
 **Requirements:**  
 - Java JDK 25  
 - Maven  
-- IDE (Ideally VS Code with Java Extension Pack)
+- IDE (Ideally IntelliJ or VSCode with Java Extension Pack)
 **Steps:**
 
 1. **Clone repository**
