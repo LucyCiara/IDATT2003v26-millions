@@ -48,8 +48,10 @@ public class Exchange {
    *
    * @param symbol The symbol of the Stock to check.
    * @return A boolean for whether the Exchange has the stock or not.
+   * @throws IllegalArgumentException if the symbol is null or blank.
    */
   public boolean hasStock(String symbol) {
+    ParameterValidator.stringChecker(symbol, "symbol");
     return this.stockMap.containsKey(symbol);
   }
 
@@ -58,8 +60,10 @@ public class Exchange {
    * 
    * @param symbol The symbol of the stock to get.
    * @return The Stock with the symbol.
+   * @throws IllegalArgumentException if the symbol is null or blank.
    */
   public Stock getStock(String symbol) {
+    ParameterValidator.stringChecker(symbol, "symbol");
     return this.stockMap.get(symbol);
   }
 
