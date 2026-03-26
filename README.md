@@ -1,4 +1,4 @@
-# IDATT2003v26-millions Portofolio Project Spring 2026 :octocat:
+# MILLIONS - IDATT2003 Portofolio Project Spring 2026 :octocat: 
 
 [//]: # (TODO: Fill inn your name and student ID)
 [//]: # (TODO: Mappe-2025-Marjoni-fj)
