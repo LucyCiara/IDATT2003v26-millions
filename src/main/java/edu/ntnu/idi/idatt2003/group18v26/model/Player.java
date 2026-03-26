@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt2003.group18v26.model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive;
@@ -102,5 +103,19 @@ public class Player {
 
   public BigDecimal getNetWorth() {
     return this.money.add(this.portfolio.getNetWorth());
+  }
+
+  public String getStatus() {
+    int weeksOfTrade = this.getTransactionArchive().countDistinctWeeks();
+    BigDecimal profit = this.getNetWorth().divide(this.startingMoney, 1, RoundingMode.FLOOR);
+    profit = profit.subtract(BigDecimal.ONE);
+    if (weeksOfTrade >= 20 && profit.compareTo(BigDecimal.ONE) >= 0) {
+      return "Speculator";
+    } else if (weeksOfTrade >= 10
+        && profit.compareTo(new BigDecimal("0.2")) >= 0) {
+      return "Investor";
+    } else {
+      return "Novice";
+    }
   }
 }
