@@ -105,6 +105,13 @@ public class Stock {
     return this.prices.stream().min(BigDecimal::compareTo).get();
   }
 
+  /**
+   * A method for getting the latest price change, AKA the change in price between the 2 latest
+   * sale prices.
+   * 
+   * @return An amount of money that's the difference between the second latest and latest sale
+   *      prices.
+   */
   public BigDecimal getLatestPriceChange() {
     if (prices.size() == 1) {
       return BigDecimal.ZERO;
