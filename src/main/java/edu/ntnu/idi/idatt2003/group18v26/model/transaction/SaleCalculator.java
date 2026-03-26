@@ -1,10 +1,13 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.transaction;
+
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
 import java.math.BigDecimal;
+
 /**
- * The SaleCalculator class calculates the gross amount, commission, tax, and total for a sale transaction.
- * It implements the TransactionCalculator interface and uses the purchase price, sales price, and quantity from
- * a Share object to perform the calculations. 
+ * The SaleCalculator class calculates the gross amount, commission, tax, and total for a sale
+ * transaction.
+ * It implements the TransactionCalculator interface and uses the purchase price, sales price, and
+ * quantity from a Share object to perform the calculations. 
  * 
  * <p>The gross amount is calculated as:
  * current sales price × quantity.
@@ -23,9 +26,14 @@ public class SaleCalculator implements TransactionCalculator {
   private BigDecimal salesPrice;
   private BigDecimal quantity;
 
+  /**
+   * Sets the purchasePrice and quantity based on information in the Share.
+   * 
+   * @param share The share to calculate the purchase of. Must be non-null.
+   */
   public SaleCalculator(Share share) {
     if (share == null) {
-    throw new IllegalArgumentException("Share cannot be null");
+      throw new IllegalArgumentException("Share cannot be null");
     }
     this.purchasePrice = share.purchasePrice();
     this.salesPrice = share.stock().getSalesPrice();
