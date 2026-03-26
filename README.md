@@ -79,16 +79,11 @@ What is the input and output of the program? What is the expected behaviour of t
    mvn javafx:run
    
 5. **Input and Output**
-  - Input: User interacts via terminal, selecting menu options, adding diary entries, choosing authors, and writing content.
-  - Output: Diary entries and statistics are displayed in a structured text format.
+  - Input:
+  - Output:
   
 6. **Excpected behavior:**
 The program allows the user to:
-  - Display all entries chronologically
-  - Add new diary entries with a selected or new author
-  - Delete an existing diary entry
-  - Search entries by date, range of dates, author, training type or keyword
-  - View statistics about authors and their contributions
 
 ---
 ## How to run the tests 🧪
