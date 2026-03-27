@@ -2,18 +2,38 @@ package edu.ntnu.idi.idatt2003.group18v26.model.transaction;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
+import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 
+/**
+ * A class to perform a purchase of a share using a player.
+ */
 public class Purchase extends Transaction {
+  /**
+   * The constructor sets up a calculator, and sets some information about the transaction and
+   * Share.
+   * 
+   * @param share The Share to buy.
+   * @param week The week of the Transaction.
+   */
   public Purchase(Share share, int week) {
     super(share, week, new PurchaseCalculator(share));
   }
 
+  /**
+   * Commits a purchase on a player, withdrawing the money from the Player, adding the Share to
+   * the Player's Portfolio, and adding the transaction to the Player's TransactionArchive.
+   * 
+   * @param player The player the purchase is performed on. Must be non-null.
+   * @throws UnsupportedOperationException Is thrown whenever there's an attempt to commit the same
+   *      Transaction more than once.
+   * @throws ArithmeticException Is thrown whenever the player has insufficient money to buy the
+   *      Share.
+   */
   @Override
-  public void commit(Player player) {
-    if (player == null) {
-      throw new IllegalArgumentException("player can't be null");
-    }
-    if (this.getCalculator().calculateTotal().compareTo(player.getMoney()) <= 0 && !this.committed) {
+  public void commit(Player player) throws UnsupportedOperationException {
+    ParameterValidator.objectChecker(player, "player");
+    if (this.getCalculator().calculateTotal().compareTo(player.getMoney()) <= 0
+        && !this.committed) {
       player.withdrawMoney(this.getCalculator().calculateTotal());
       player.getPortfolio().addShare(this.getShare());
       player.getTransactionArchive().add(this);

@@ -2,6 +2,8 @@ package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
 import java.math.BigDecimal;
 
+import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
+
 /**
  * Represents a purchased share in a given stock.
  * <p>
@@ -22,21 +24,9 @@ public record Share(Stock stock, BigDecimal quantity, BigDecimal purchasePrice) 
    * @throws IllegalArgumentException if {@code purchasePrice} is null
    */
   public Share {
-    if (stock == null) {
-      throw new IllegalArgumentException("Stock cannot be null");
-    }
-    if (quantity == null) {
-      throw new IllegalArgumentException("quantity cannot be null");
-    }
-    if (quantity.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("quantity must be a positive number");
-    }
-    if (purchasePrice == null) {
-      throw new IllegalArgumentException("purchasePrice cannot be null");
-    }
-    if (purchasePrice.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("purchasePrice must be a positive number");
-    }
+    ParameterValidator.objectChecker(stock, "stock");
+    ParameterValidator.bigDecimalChecker(quantity, "quantity");
+    ParameterValidator.bigDecimalChecker(purchasePrice, "purchasePrice");
   }
 
   /**

@@ -1,11 +1,12 @@
 package edu.ntnu.idi.idatt2003.group18v26.model;
 
-import java.math.BigDecimal;
-
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive;
+import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
-/**A class for the player.*/
+/** A class for the player. */
 public class Player {
   private String name;
   private BigDecimal startingMoney;
@@ -20,15 +21,8 @@ public class Player {
    * @param startingMoney The starting money for the player.
    */
   public Player(String name, BigDecimal startingMoney) {
-    if (name == null) {
-      throw new IllegalArgumentException("name can't be null");
-    } else if (name.isBlank()) {
-      throw new IllegalArgumentException("name can't be blank");
-    } else if (startingMoney == null) {
-      throw new IllegalArgumentException("startingMoney can't be null");
-    } else if (startingMoney.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("startingMoney must be a positive non-zero number");
-    }
+    ParameterValidator.stringChecker(name, "name");
+    ParameterValidator.bigDecimalChecker(startingMoney, "startingMoney");
     this.name = name;
     this.startingMoney = startingMoney;
     this.money = startingMoney;
@@ -60,11 +54,7 @@ public class Player {
    * @param moneyToAdd The amount of money to add.
    */
   public void addMoney(BigDecimal moneyToAdd) {
-    if (moneyToAdd == null) {
-      throw new IllegalArgumentException("moneyToAdd can't be null");
-    } else if (moneyToAdd.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("moneyToAdd must be a positive non-zero number");
-    }
+    ParameterValidator.bigDecimalChecker(moneyToAdd, "moneyToAdd");
     this.money = this.money.add(moneyToAdd);
   }
 
@@ -74,11 +64,7 @@ public class Player {
    * @param moneyToWithdraw The amount of money to withdraw.
    */
   public void withdrawMoney(BigDecimal moneyToWithdraw) {
-    if (moneyToWithdraw == null) {
-      throw new IllegalArgumentException("moneyToWithdraw can't be null");
-    } else if (moneyToWithdraw.compareTo(BigDecimal.ZERO) <= 0) {
-      throw new IllegalArgumentException("moneyToWithdraw must be a positive non-zero number");
-    }
+    ParameterValidator.bigDecimalChecker(moneyToWithdraw, "moneyToWithdraw");
     this.money = this.money.subtract(moneyToWithdraw);
   }
 
@@ -98,5 +84,28 @@ public class Player {
    */
   public TransactionArchive getTransactionArchive() {
     return this.transArchive;
+  }
+
+  public BigDecimal getNetWorth() {
+    return this.money.add(this.portfolio.getNetWorth());
+  }
+
+  /**
+   * Gets the current status of the player, based on months of active trade and lifetime profit.
+   * 
+   * @return The name of the player's current status.
+   */
+  public String getStatus() {
+    int weeksOfTrade = this.getTransactionArchive().countDistinctWeeks();
+    BigDecimal profit = this.getNetWorth().divide(this.startingMoney, 1, RoundingMode.FLOOR);
+    profit = profit.subtract(BigDecimal.ONE);
+    if (weeksOfTrade >= 20 && profit.compareTo(BigDecimal.ONE) >= 0) {
+      return "Speculator";
+    } else if (weeksOfTrade >= 10
+        && profit.compareTo(new BigDecimal("0.2")) >= 0) {
+      return "Investor";
+    } else {
+      return "Novice";
+    }
   }
 }

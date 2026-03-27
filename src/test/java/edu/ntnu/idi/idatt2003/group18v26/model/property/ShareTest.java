@@ -39,37 +39,37 @@ public class ShareTest {
 
   @Test
   void constructorWithNullStockThrowsException() {
-    constructorTest(null, testQuantity, testPurchasePrice, "Stock cannot be null");
+    constructorTest(null, testQuantity, testPurchasePrice, "stock can't be null");
   }
 
   @Test
   void constructorWithNullQuantityThrowsException() {
-      constructorTest(testStock, null, testPurchasePrice, "quantity cannot be null");
+      constructorTest(testStock, null, testPurchasePrice, "quantity can't be null");
   }
 
   @Test
   void constructorWithZeroQuantityThrowsException() {
-    constructorTest(testStock, BigDecimal.ZERO, testPurchasePrice, "quantity must be a positive number");
+    constructorTest(testStock, BigDecimal.ZERO, testPurchasePrice, "quantity must be larger than 0");
   }
 
   @Test
   void constructorWithNegativeQuantityThrowsException() {
-    constructorTest(testStock, new BigDecimal("-1"), testPurchasePrice, "quantity must be a positive number");
+    constructorTest(testStock, new BigDecimal("-1"), testPurchasePrice, "quantity must be larger than 0");
   }
 
   @Test
   void constructorWithNullPurchasePriceThrowsException() {
-    constructorTest(testStock, testQuantity, null, "purchasePrice cannot be null");
+    constructorTest(testStock, testQuantity, null, "purchasePrice can't be null");
     }
 
   @Test
   void constructorWithZeroPurchasePriceThrowsException() {
-    constructorTest(testStock, testQuantity, BigDecimal.ZERO, "purchasePrice must be a positive number");
+    constructorTest(testStock, testQuantity, BigDecimal.ZERO, "purchasePrice must be larger than 0");
   }
 
   @Test
   void constructorWithNegativePurchasePriceThrowsException() {
-    constructorTest(testStock, testQuantity, new BigDecimal("-1"), "purchasePrice must be a positive number");
+    constructorTest(testStock, testQuantity, new BigDecimal("-1"), "purchasePrice must be larger than 0");
     }
 
 

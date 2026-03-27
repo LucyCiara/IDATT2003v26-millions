@@ -45,7 +45,7 @@ public class TransactionArchiveTest {
   void testAddNullTransactionThrowsException() {
     IllegalArgumentException exception = 
     assertThrows(IllegalArgumentException.class, () -> transArchive.add(null));
-    assertEquals("The transaction cannot be null", exception.getMessage());
+    assertEquals("transaction can't be null", exception.getMessage());
   }
 
   @Test
