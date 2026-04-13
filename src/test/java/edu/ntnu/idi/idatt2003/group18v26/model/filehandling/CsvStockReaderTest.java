@@ -1,4 +1,5 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.filehandling;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -21,7 +22,7 @@ public class CsvStockReaderTest {
   void setUp() {
     reader = new CsvStockReader();
   }
-  
+
   @Test
   void testReadStocksWithValidPath() throws IOException {
     Path path = Path.of("src/test/resources/sp500Test.csv");
@@ -38,9 +39,8 @@ public class CsvStockReaderTest {
   @Test
   void testReadStockWithInvalidPathThrowsIOException() throws IOException {
     Path invalidPath = Path.of("src/test/resources/nonexistent.csv");
-    
-    IOException exception = 
-        assertThrows(IOException.class, () -> reader.readStocks(invalidPath));
+
+    IOException exception = assertThrows(IOException.class, () -> reader.readStocks(invalidPath));
     String os = System.getProperty("os.name");
     if (os.contains("Windows")) {
       assertEquals("src\\test\\resources\\nonexistent.csv", exception.getMessage());
@@ -54,13 +54,27 @@ public class CsvStockReaderTest {
     Path tempFile = Files.createTempFile("invalid", ".csv");
     try {
       Files.writeString(tempFile, "Invalid,Stock\n");
-      
-      IllegalArgumentException exception = 
-          assertThrows(IllegalArgumentException.class, () -> reader.readStocks(tempFile));
+
+      IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+          () -> reader.readStocks(tempFile));
       assertEquals("Invalid stock data: Invalid,Stock", exception.getMessage());
     } finally {
       Files.deleteIfExists(tempFile);
     }
   }
-}
 
+  @Test
+  void testParseLineThrowsIllegalArgumentExceptionForInvalidFormat2() throws IOException {
+    Path tempFile = Files.createTempFile("invalid", ".csv");
+    try {
+      Files.writeString(tempFile, "Invalid,Stock,NaBD\n");
+
+      IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+          () -> reader.readStocks(tempFile));
+      assertEquals("Invalid stock data: Invalid,Stock,NaBD Third column must be castable as BigDecimal",
+          exception.getMessage());
+    } finally {
+      Files.deleteIfExists(tempFile);
+    }
+  }
+}
