@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
+import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Sale;
@@ -19,6 +20,8 @@ public class Exchange {
   private int week = 0; // The week number.
   private HashMap<String, Stock> stockMap; // A HashMap of symbol keys connecting to Stock values.
   private Random random; // A random generator.
+  private List<GameObserver> observers = new ArrayList<>();
+
 
   /**
    * Constructs an exchange with an exchange name and a list of Stocks.
@@ -104,6 +107,7 @@ public class Exchange {
         this.week
     );
     purchase.commit(player);
+    notifyPurchaseCompleted(symbol, quantity);
     return purchase;
   }
 
@@ -121,6 +125,8 @@ public class Exchange {
         share,
         this.week);
     sale.commit(player);
+    notifySaleCompleted(share.stock().getSymbol(), share.quantity());
+
     return sale;
   }
 
@@ -135,8 +141,11 @@ public class Exchange {
             new BigDecimal(this.random.nextDouble() + 0.5)
           )
       );
+      notifyStockPriceChanged(stock.getSymbol());
     }
     this.week++;
+
+    notifyWeekAdvanced();
   }
 
   /**
@@ -173,5 +182,54 @@ public class Exchange {
     return this.stockMap.values().stream().sorted(
       (s1, s2) -> s1.getLatestPriceChange().compareTo(s2.getLatestPriceChange())
     ).toList().subList(0, limit);
+  }
+
+  public void addObserver(GameObserver observer) {
+    this.observers.add(observer);
+  }
+
+  public void removeObserver(GameObserver observer) {
+    this.observers.remove(observer);
+  }
+
+  /**
+   * Notify all observers that the week has advanced.
+   */
+  private void notifyWeekAdvanced() {
+    for (GameObserver observer : observers) {
+      observer.onWeekAdvanced(this.week);
+    }
+  }
+
+  /**
+   * Notify all observers that a stock price changed.
+   * @param symbol The symbol of the stock that changed price
+   */
+  private void notifyStockPriceChanged(String symbol) {
+      for (GameObserver observer : observers) {
+          observer.onStockPriceChanged(symbol);
+      }
+  }
+
+  /**
+   * Notify all observers that a purchase has been completed.
+   * @param symbol The symbol of the stock that was purchased
+   * @param quantity The quantity of the stock that was purchased
+   */
+  private void notifyPurchaseCompleted(String symbol, BigDecimal quantity) {
+    for (GameObserver observer : observers) {
+        observer.onPurchaseCompleted(symbol, quantity.toString());
+    }
+  }
+
+  /**
+   * Notify all observers that a sale has been completed.
+   * @param symbol The symbol of the stock that was sold
+   * @param quantity The quantity of the stock that was sold
+   */
+  private void notifySaleCompleted(String symbol, BigDecimal quantity) {
+    for (GameObserver observer : observers) {
+        observer.onSaleCompleted(symbol, quantity.toString());
+    }
   }
 }
