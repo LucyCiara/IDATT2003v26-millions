@@ -25,7 +25,7 @@ public class Exchange {
 
   /**
    * Constructs an exchange with an exchange name and a list of Stocks.
-   * 
+   *
    * @param name The name of the exchange.
    * @param stocks A list of stocks that can be traded on the Exchange.
    */
@@ -38,10 +38,18 @@ public class Exchange {
     this.random = new Random();
   }
 
+  /**
+   * A method for getting the name of the Exchange.
+   * @return The name of the Exchange.
+   */
   public String getName() {
     return this.name;
   }
 
+  /**
+   * A method for getting the current week number of the Exchange.
+   * @return The current week number of the Exchange.
+   */
   public int getWeek() {
     return this.week;
   }
@@ -72,7 +80,7 @@ public class Exchange {
 
   /**
    * A method for finding stocks based on a search term.
-   * 
+   *
    * @param searchTerm A term that's a part of either the symbol or name of the stock.
    * @return A list of the stocks that meet the search term requirements.
    */
@@ -90,7 +98,7 @@ public class Exchange {
 
   /**
    * A method for buying a Stock.
-   * 
+   *
    * @param symbol The symbol of the Stock to buy.
    * @param quantity The quantity of Stock to buy.
    * @param player The player to buy the Stock.
@@ -113,7 +121,7 @@ public class Exchange {
 
   /**
    * A method for selling a Stock.
-   * 
+   *
    * @param share The symbol of the Stock to sell.
    * @param player The quantity of the Stock to sell.
    * @return The performed Transaction.
@@ -150,7 +158,7 @@ public class Exchange {
 
   /**
    * A method for getting a sorted list of stocks in descending order of profitability.
-   * 
+   *
    * @param limit The length of the list to return. Limit 3 will show the 3 most profitable stocks.
    * @return A list of stocks in descending order of profitability.
    */
@@ -184,10 +192,20 @@ public class Exchange {
     ).toList().subList(0, limit);
   }
 
+  /**
+   * Adds an observer to be notified of exchange changes.
+   *
+   * @param observer The observer to add
+   */
   public void addObserver(GameObserver observer) {
     this.observers.add(observer);
   }
 
+  /**
+   * Removes an observer from being notified of exhange changes.
+   *
+   * @param observer The observer to remove
+   */
   public void removeObserver(GameObserver observer) {
     this.observers.remove(observer);
   }
