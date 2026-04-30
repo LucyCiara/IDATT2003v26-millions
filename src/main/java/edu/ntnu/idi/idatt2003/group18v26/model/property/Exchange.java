@@ -26,7 +26,7 @@ public class Exchange {
   /**
    * Constructs an exchange with an exchange name and a list of Stocks.
    *
-   * @param name The name of the exchange.
+   * @param name The name of the Exchange.
    * @param stocks A list of stocks that can be traded on the Exchange.
    */
   public Exchange(String name, List<Stock> stocks) {
@@ -68,7 +68,7 @@ public class Exchange {
 
   /**
    * A method for getting the Stock of the given symbol.
-   * 
+   *
    * @param symbol The symbol of the stock to get.
    * @return The Stock with the symbol.
    * @throws IllegalArgumentException if the symbol is null or blank.
@@ -103,6 +103,7 @@ public class Exchange {
    * @param quantity The quantity of Stock to buy.
    * @param player The player to buy the Stock.
    * @return The performed Transaction.
+   * @throws IllegalArgumentException if the symbol is null or blank, quantity is null, or player is null.
    */
   public Transaction buy(String symbol, BigDecimal quantity, Player player) {
     ParameterValidator.stringChecker(symbol, "symbol");
@@ -125,6 +126,7 @@ public class Exchange {
    * @param share The symbol of the Stock to sell.
    * @param player The quantity of the Stock to sell.
    * @return The performed Transaction.
+   * @throws IllegalArgumentException if the share or player is null.
    */
   public Transaction sell(Share share, Player player) {
     ParameterValidator.objectChecker(share, "share");
@@ -161,6 +163,7 @@ public class Exchange {
    *
    * @param limit The length of the list to return. Limit 3 will show the 3 most profitable stocks.
    * @return A list of stocks in descending order of profitability.
+   * @throws IllegalArgumentException if the limit is less than 1 or greater than the number of stocks in the exchange.
    */
   public List<Stock> getGainers(int limit) {
     ParameterValidator.limitChecker(
@@ -176,9 +179,10 @@ public class Exchange {
 
   /**
    * A method for getting a sorted list of stocks in ascending order of profitability.
-   * 
+   *
    * @param limit The length of the list to return. Limit 3 will show the 3 least profitable stocks.
    * @return A list of stocks in ascending order of profitability.
+   * @throws IllegalArgumentException if the limit is less than 1 or greater than the number of stocks in the exchange.
    */
   public List<Stock> getLosers(int limit) {
     ParameterValidator.limitChecker(
@@ -221,6 +225,7 @@ public class Exchange {
 
   /**
    * Notify all observers that a stock price changed.
+   *
    * @param symbol The symbol of the stock that changed price
    */
   private void notifyStockPriceChanged(String symbol) {
@@ -231,6 +236,7 @@ public class Exchange {
 
   /**
    * Notify all observers that a purchase has been completed.
+   *
    * @param symbol The symbol of the stock that was purchased
    * @param quantity The quantity of the stock that was purchased
    */
@@ -242,6 +248,7 @@ public class Exchange {
 
   /**
    * Notify all observers that a sale has been completed.
+   *
    * @param symbol The symbol of the stock that was sold
    * @param quantity The quantity of the stock that was sold
    */
