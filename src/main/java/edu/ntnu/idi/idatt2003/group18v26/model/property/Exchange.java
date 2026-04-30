@@ -40,6 +40,7 @@ public class Exchange {
 
   /**
    * A method for getting the name of the Exchange.
+   *
    * @return The name of the Exchange.
    */
   public String getName() {
@@ -48,6 +49,7 @@ public class Exchange {
 
   /**
    * A method for getting the current week number of the Exchange.
+   *
    * @return The current week number of the Exchange.
    */
   public int getWeek() {
@@ -103,7 +105,7 @@ public class Exchange {
    * @param quantity The quantity of Stock to buy.
    * @param player The player to buy the Stock.
    * @return The performed Transaction.
-   * @throws IllegalArgumentException if the symbol is null or blank, quantity is null, or player is null.
+   * @throws IllegalArgumentException if the symbol, quantity is null, or player is invalid.
    */
   public Transaction buy(String symbol, BigDecimal quantity, Player player) {
     ParameterValidator.stringChecker(symbol, "symbol");
@@ -163,7 +165,7 @@ public class Exchange {
    *
    * @param limit The length of the list to return. Limit 3 will show the 3 most profitable stocks.
    * @return A list of stocks in descending order of profitability.
-   * @throws IllegalArgumentException if the limit is less than 1 or greater than the number of stocks in the exchange.
+   * @throws IllegalArgumentException if the limit < 1 or exceeds stocks in the exchange.
    */
   public List<Stock> getGainers(int limit) {
     ParameterValidator.limitChecker(
@@ -182,7 +184,7 @@ public class Exchange {
    *
    * @param limit The length of the list to return. Limit 3 will show the 3 least profitable stocks.
    * @return A list of stocks in ascending order of profitability.
-   * @throws IllegalArgumentException if the limit is less than 1 or greater than the number of stocks in the exchange.
+   * @throws IllegalArgumentException if the limit < 1 or exceeds stocks in the exchange.
    */
   public List<Stock> getLosers(int limit) {
     ParameterValidator.limitChecker(
@@ -229,9 +231,9 @@ public class Exchange {
    * @param symbol The symbol of the stock that changed price
    */
   private void notifyStockPriceChanged(String symbol) {
-      for (GameObserver observer : observers) {
-          observer.onStockPriceChanged(symbol);
-      }
+    for (GameObserver observer : observers) {
+      observer.onStockPriceChanged(symbol);
+    }
   }
 
   /**
@@ -242,7 +244,7 @@ public class Exchange {
    */
   private void notifyPurchaseCompleted(String symbol, BigDecimal quantity) {
     for (GameObserver observer : observers) {
-        observer.onPurchaseCompleted(symbol, quantity.toString());
+      observer.onPurchaseCompleted(symbol, quantity.toString());
     }
   }
 
@@ -254,7 +256,7 @@ public class Exchange {
    */
   private void notifySaleCompleted(String symbol, BigDecimal quantity) {
     for (GameObserver observer : observers) {
-        observer.onSaleCompleted(symbol, quantity.toString());
+      observer.onSaleCompleted(symbol, quantity.toString());
     }
   }
 }
