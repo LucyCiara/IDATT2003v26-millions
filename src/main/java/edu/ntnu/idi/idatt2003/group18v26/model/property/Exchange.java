@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
+import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Sale;
@@ -19,11 +20,13 @@ public class Exchange {
   private int week = 0; // The week number.
   private HashMap<String, Stock> stockMap; // A HashMap of symbol keys connecting to Stock values.
   private Random random; // A random generator.
+  private List<GameObserver> observers = new ArrayList<>();
+
 
   /**
    * Constructs an exchange with an exchange name and a list of Stocks.
-   * 
-   * @param name The name of the exchange.
+   *
+   * @param name The name of the Exchange.
    * @param stocks A list of stocks that can be traded on the Exchange.
    */
   public Exchange(String name, List<Stock> stocks) {
@@ -35,10 +38,20 @@ public class Exchange {
     this.random = new Random();
   }
 
+  /**
+   * A method for getting the name of the Exchange.
+   *
+   * @return The name of the Exchange.
+   */
   public String getName() {
     return this.name;
   }
 
+  /**
+   * A method for getting the current week number of the Exchange.
+   *
+   * @return The current week number of the Exchange.
+   */
   public int getWeek() {
     return this.week;
   }
@@ -57,7 +70,7 @@ public class Exchange {
 
   /**
    * A method for getting the Stock of the given symbol.
-   * 
+   *
    * @param symbol The symbol of the stock to get.
    * @return The Stock with the symbol.
    * @throws IllegalArgumentException if the symbol is null or blank.
@@ -69,7 +82,7 @@ public class Exchange {
 
   /**
    * A method for finding stocks based on a search term.
-   * 
+   *
    * @param searchTerm A term that's a part of either the symbol or name of the stock.
    * @return A list of the stocks that meet the search term requirements.
    */
@@ -87,11 +100,12 @@ public class Exchange {
 
   /**
    * A method for buying a Stock.
-   * 
+   *
    * @param symbol The symbol of the Stock to buy.
    * @param quantity The quantity of Stock to buy.
    * @param player The player to buy the Stock.
    * @return The performed Transaction.
+   * @throws IllegalArgumentException if the symbol, quantity is null, or player is invalid.
    */
   public Transaction buy(String symbol, BigDecimal quantity, Player player) {
     ParameterValidator.stringChecker(symbol, "symbol");
@@ -104,15 +118,17 @@ public class Exchange {
         this.week
     );
     purchase.commit(player);
+    notifyPurchaseCompleted(symbol, quantity);
     return purchase;
   }
 
   /**
    * A method for selling a Stock.
-   * 
+   *
    * @param share The symbol of the Stock to sell.
    * @param player The quantity of the Stock to sell.
    * @return The performed Transaction.
+   * @throws IllegalArgumentException if the share or player is null.
    */
   public Transaction sell(Share share, Player player) {
     ParameterValidator.objectChecker(share, "share");
@@ -121,6 +137,8 @@ public class Exchange {
         share,
         this.week);
     sale.commit(player);
+    notifySaleCompleted(share.stock().getSymbol(), share.quantity());
+
     return sale;
   }
 
@@ -135,15 +153,19 @@ public class Exchange {
             new BigDecimal(this.random.nextDouble() + 0.5)
           )
       );
+      notifyStockPriceChanged(stock.getSymbol());
     }
     this.week++;
+
+    notifyWeekAdvanced();
   }
 
   /**
    * A method for getting a sorted list of stocks in descending order of profitability.
-   * 
+   *
    * @param limit The length of the list to return. Limit 3 will show the 3 most profitable stocks.
    * @return A list of stocks in descending order of profitability.
+   * @throws IllegalArgumentException if the limit < 1 or exceeds stocks in the exchange.
    */
   public List<Stock> getGainers(int limit) {
     ParameterValidator.limitChecker(
@@ -159,9 +181,10 @@ public class Exchange {
 
   /**
    * A method for getting a sorted list of stocks in ascending order of profitability.
-   * 
+   *
    * @param limit The length of the list to return. Limit 3 will show the 3 least profitable stocks.
    * @return A list of stocks in ascending order of profitability.
+   * @throws IllegalArgumentException if the limit < 1 or exceeds stocks in the exchange.
    */
   public List<Stock> getLosers(int limit) {
     ParameterValidator.limitChecker(
@@ -173,5 +196,67 @@ public class Exchange {
     return this.stockMap.values().stream().sorted(
       (s1, s2) -> s1.getLatestPriceChange().compareTo(s2.getLatestPriceChange())
     ).toList().subList(0, limit);
+  }
+
+  /**
+   * Adds an observer to be notified of exchange changes.
+   *
+   * @param observer The observer to add
+   */
+  public void addObserver(GameObserver observer) {
+    this.observers.add(observer);
+  }
+
+  /**
+   * Removes an observer from being notified of exhange changes.
+   *
+   * @param observer The observer to remove
+   */
+  public void removeObserver(GameObserver observer) {
+    this.observers.remove(observer);
+  }
+
+  /**
+   * Notify all observers that the week has advanced.
+   */
+  private void notifyWeekAdvanced() {
+    for (GameObserver observer : observers) {
+      observer.onWeekAdvanced(this.week);
+    }
+  }
+
+  /**
+   * Notify all observers that a stock price changed.
+   *
+   * @param symbol The symbol of the stock that changed price
+   */
+  private void notifyStockPriceChanged(String symbol) {
+    for (GameObserver observer : observers) {
+      observer.onStockPriceChanged(symbol);
+    }
+  }
+
+  /**
+   * Notify all observers that a purchase has been completed.
+   *
+   * @param symbol The symbol of the stock that was purchased
+   * @param quantity The quantity of the stock that was purchased
+   */
+  private void notifyPurchaseCompleted(String symbol, BigDecimal quantity) {
+    for (GameObserver observer : observers) {
+      observer.onPurchaseCompleted(symbol, quantity.toString());
+    }
+  }
+
+  /**
+   * Notify all observers that a sale has been completed.
+   *
+   * @param symbol The symbol of the stock that was sold
+   * @param quantity The quantity of the stock that was sold
+   */
+  private void notifySaleCompleted(String symbol, BigDecimal quantity) {
+    for (GameObserver observer : observers) {
+      observer.onSaleCompleted(symbol, quantity.toString());
+    }
   }
 }
