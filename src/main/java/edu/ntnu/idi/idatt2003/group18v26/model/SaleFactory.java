@@ -16,6 +16,11 @@ public class SaleFactory extends TransactionFactory {
     this.week = week;
   }
 
+  /**
+   * Creates a Sale transaction using the provided Share and week information.
+   *
+   * @return A Sale transaction object initialized with the specified Share and week.
+   */
   @Override
   public Transaction createTransaction() {
     return new Sale(share, week);

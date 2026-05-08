@@ -16,6 +16,11 @@ public class PurchaseFactory extends TransactionFactory {
     this.week = week;
   }
 
+  /**
+   * Creates a Purchase transaction using the provided Share and week information.
+   *
+   * @return A Purchase transaction object initialized with the specified Share and week.
+   */
   @Override
   public Transaction createTransaction() {
     return new Purchase(share, week);
