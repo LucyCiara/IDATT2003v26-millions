@@ -11,7 +11,7 @@ public class Purchase extends Transaction {
   /**
    * The constructor sets up a calculator, and sets some information about the transaction and
    * Share.
-   * 
+   *
    * @param share The Share to buy.
    * @param week The week of the Transaction.
    */
@@ -22,7 +22,7 @@ public class Purchase extends Transaction {
   /**
    * Commits a purchase on a player, withdrawing the money from the Player, adding the Share to
    * the Player's Portfolio, and adding the transaction to the Player's TransactionArchive.
-   * 
+   *
    * @param player The player the purchase is performed on. Must be non-null.
    * @throws UnsupportedOperationException Is thrown whenever there's an attempt to commit the same
    *      Transaction more than once.

@@ -82,7 +82,7 @@ public class Portfolio {
 
   /**
    * A method for getting the net worth of a Portfolio, or how much it is worth.
-   * 
+   *
    * @return The amount of money the Portfolio is worth.
    */
   public BigDecimal getNetWorth() {
