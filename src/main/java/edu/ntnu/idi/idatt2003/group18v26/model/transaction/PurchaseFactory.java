@@ -1,8 +1,7 @@
-package edu.ntnu.idi.idatt2003.group18v26.model;
+package edu.ntnu.idi.idatt2003.group18v26.model.transaction;
 
+import edu.ntnu.idi.idatt2003.group18v26.model.TransactionFactory;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
-import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase;
-import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Transaction;
 
 /**
  * Concrete factory for creating a Purchase transaction.

@@ -2,9 +2,9 @@ package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
-import edu.ntnu.idi.idatt2003.group18v26.model.PurchaseFactory;
-import edu.ntnu.idi.idatt2003.group18v26.model.SaleFactory;
 import edu.ntnu.idi.idatt2003.group18v26.model.TransactionFactory;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.PurchaseFactory;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleFactory;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Transaction;
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import java.math.BigDecimal;
