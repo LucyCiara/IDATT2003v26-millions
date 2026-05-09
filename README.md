@@ -1,11 +1,14 @@
-# MILLIONS - IDATT2003 Portofolio Project Spring 2026 :octocat: 
+# MILLIONS - IDATT2003 Portfolio Project Spring 2026 :octocat: 
 
 [//]: # (TODO: Fill inn your name and student ID)
 [//]: # (TODO: Mappe-2025-Marjoni-fj)
 
-**STUDENT NAME =**
+**TEAM 18 STUDENT NAMES**
 <br>
-**STUDENT ID =**
+**Fredrik Jonathan Marjoni**
+<br>
+**Lucy Ciara Herud-Thomassen**
+
 
 ## Project description💻
 
@@ -68,27 +71,34 @@ What is the input and output of the program? What is the expected behaviour of t
 * Java JDK 25  
 * Maven  
 * IDE (Ideally IntelliJ or VSCode with Java Extension Pack)
+* JavaFX SDK 25.0.1
+
 **Steps:**
 
 1. **Clone repository**
    Clone the Repository from GitHub
 
 2. **Open the Project:**  
-   Open VS Code and select **File > Open Folder**, navigating to the root folder of the project (containing `pom.xml`).
+   Navigate to project folder in the terminal (containing `pom.xml`).
 
-3. **Build the Project:**  
-   Open the terminal in VS Code (`Ctrl + ~`) and run:  
+   ```bash
+    cd path/to/project/     (linux + mac)
+    cd path\to\project\     (windows)
+    ```
+
+4. **Build the Project:**  
+   Build the project by running:  
 
    ```bash
    mvn clean compile
    
-4. **Run the Application:**
+5. **Run the Application:**
   Start the program by running the main class:
 
     ```bash
    mvn javafx:run
    
-5. **Input and Output**
+6. **Input and Output**
 
 * Input:
 * Output:
@@ -103,16 +113,16 @@ The program allows the user to:
 This project uses JUnit 5 for unit testing.
 All test classes mirror the main package structure and are stored in `src/test`
 
-* ### Open the Project
+### Open the Project
+   Navigate to project folder in the terminal (containing `pom.xml`).
 
-   Open VS Code and select **File > Open Folder**, navigating to the root folder of the project (containing `pom.xml`).
-
-* ### Run all tests
+### Run all tests
 
    To execute the full test suite, run:
 
    ```bash
    mvn clean test
+   ```
 
 This command:
 
