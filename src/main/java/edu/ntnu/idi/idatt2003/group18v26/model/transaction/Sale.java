@@ -11,7 +11,7 @@ public class Sale extends Transaction {
   /**
    * The constructor sets up a calculator, and sets some information about the transaction and
    * Share.
-   * 
+   *
    * @param share The Share to sell.
    * @param week The week of the Transaction.
    */
@@ -22,7 +22,7 @@ public class Sale extends Transaction {
   /**
    * Commits a sale on a player, adding the money from the Player, removing the Share to
    * the Player's Portfolio, and adding the transaction to the Player's TransactionArchive.
-   * 
+   *
    * @param player The player the sale is performed on. Must be non-null.
    * @throws UnsupportedOperationException Is thrown whenever there's an attempt to commit the same
    *      Transaction more than once, or if an attempt to sell a Share the Player doesn't own is

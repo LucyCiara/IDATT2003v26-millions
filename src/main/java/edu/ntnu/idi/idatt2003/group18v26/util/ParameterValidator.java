@@ -9,7 +9,7 @@ public final class ParameterValidator {
   /**
    * [PRIVATE]
    * An internal method for checking if a variable is null.
-   * 
+   *
    * @param variable The variable to check if is null.
    * @param variableName The name of the variable.
    * @throws IllegalArgumentException The exception thrown if the validation fails.
@@ -24,7 +24,7 @@ public final class ParameterValidator {
 
   /**
    * A method for checking the validity of a String.
-   * 
+   *
    * @param stringArg The String variable to check the validity of.
    * @param variableName The name of the String variable to check.
    * @throws IllegalArgumentException The exception thrown if the validation fails.
@@ -40,7 +40,7 @@ public final class ParameterValidator {
 
   /**
    * A method for checking the validity of an Object.
-   * 
+   *
    * @param objectArg The Object variable to check the validity of
    * @param variableName The name of the Object variable to check.
    * @throws IllegalArgumentException The exception thrown if the validation fails.
@@ -53,7 +53,7 @@ public final class ParameterValidator {
 
   /**
    * A method for checking the validity of a BigDecimal.
-   * 
+   *
    * @param bigDecimalArg The BigDecimal variable to check the validity of.
    * @param variableName The name of the BigDecimal variable to check.
    * @throws IllegalArgumentException The exception thrown if the validation fails.
@@ -67,8 +67,8 @@ public final class ParameterValidator {
   }
 
   /**
-   *  A method for checking the validity of an int variable.
-   * 
+   * A method for checking the validity of an int variable.
+   *
    * @param intArg The int variable to check the validity of.
    * @param variableName The name of the int variable to check.
    * @throws IllegalArgumentException The exception thrown if the validation fails.
@@ -83,7 +83,7 @@ public final class ParameterValidator {
 
   /**
    * A method for checking the validity of a limit variable.
-   * 
+   *
    * @param limit The limit variable to check the validity of.
    * @param variableName The name of the limit variable to check.
    * @param max The maximum value of the limit variable, past which problems will occur.

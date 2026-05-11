@@ -2,8 +2,9 @@ package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
-import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase;
-import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Sale;
+import edu.ntnu.idi.idatt2003.group18v26.model.TransactionFactory;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.PurchaseFactory;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleFactory;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Transaction;
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import java.math.BigDecimal;
@@ -111,12 +112,11 @@ public class Exchange {
     ParameterValidator.stringChecker(symbol, "symbol");
     ParameterValidator.bigDecimalChecker(quantity, "quantity");
     ParameterValidator.objectChecker(player, "player");
-    Transaction purchase = new Purchase(
-        new Share(
-          this.stockMap.get(symbol), quantity, this.stockMap.get(symbol).getSalesPrice()
-        ),
-        this.week
-    );
+    Stock stock = this.stockMap.get(symbol);
+    Share share = new Share(stock, quantity, stock.getSalesPrice());
+    
+    TransactionFactory factory = new PurchaseFactory(share, this.week);
+    Transaction purchase = factory.createTransaction();
     purchase.commit(player);
     notifyPurchaseCompleted(symbol, quantity);
     return purchase;
@@ -133,12 +133,12 @@ public class Exchange {
   public Transaction sell(Share share, Player player) {
     ParameterValidator.objectChecker(share, "share");
     ParameterValidator.objectChecker(player, "player");
-    Transaction sale = new Sale(
-        share,
-        this.week);
+    
+    TransactionFactory factory = new SaleFactory(share, this.week);
+    Transaction sale = factory.createTransaction();
+
     sale.commit(player);
     notifySaleCompleted(share.stock().getSymbol(), share.quantity());
-
     return sale;
   }
 

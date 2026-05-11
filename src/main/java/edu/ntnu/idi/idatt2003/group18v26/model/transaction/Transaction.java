@@ -16,7 +16,7 @@ public abstract class Transaction {
   /**
    * The constructor sets information like the share to perform the Transaction on, the week it is
    * done, and the TransactionCalculator used.
-   * 
+   *
    * @param share The share to perform the Transaction on.
    * @param week The week the Transaction is done.
    * @param calculator The TransactionCalculator for calculating purchase/sale cost.
@@ -49,8 +49,9 @@ public abstract class Transaction {
 
   /**
    * Commits the Transaction on a given player.
-   * 
+   *
    * @param player The player to perform the Transaction on.
+   *
    */
   public abstract void commit(Player player);
 
