@@ -30,13 +30,13 @@ All source files are stored under the `src` directory.
 
 ### 📦 Package Responsibilities
 
-#### Models
+#### Models: Business logic and data entities
 
-#### Controller
+#### Controller:  Bridge between UI and business logic
 
-#### View
+#### View: JavaFX UI components
 
-#### Utils
+#### Utils:  Helper functions
 
 ### JUnit Tests (`src/test`)
 
