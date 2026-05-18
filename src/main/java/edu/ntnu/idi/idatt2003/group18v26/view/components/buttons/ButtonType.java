@@ -6,7 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
 public abstract class ButtonType extends Button {
-  public ButtonType() {
+  protected ButtonType() {
     setId("button1");
     getStyleClass().add("button");
   }
