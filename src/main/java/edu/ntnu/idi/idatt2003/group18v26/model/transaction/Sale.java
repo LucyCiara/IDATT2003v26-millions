@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
  */
 public class Sale extends Transaction {
   private static final Logger logger
-      = LoggerFactory.getLogger(Player.class);
+      = LoggerFactory.getLogger(Sale.class);
 
   /**
    * The constructor sets up a calculator, and sets some information about the transaction and
