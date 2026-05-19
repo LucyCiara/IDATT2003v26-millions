@@ -25,7 +25,7 @@ public class Exchange {
   private Random random; // A random generator.
   private List<GameObserver> observers = new ArrayList<>();
   private static final Logger logger
-      = LoggerFactory.getLogger(Player.class);
+      = LoggerFactory.getLogger(Exchange.class);
 
   /**
    * Constructs an exchange with an exchange name and a list of Stocks.

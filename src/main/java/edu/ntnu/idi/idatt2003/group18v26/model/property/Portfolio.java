@@ -5,12 +5,15 @@ import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Represents a player's portfolio, storing all purchased shares.
  */
 public class Portfolio {
   private final List<Share> shares;
+  private static final Logger logger = LoggerFactory.getLogger(Portfolio.class);
 
   /**
    * Constructs the portfolio that contains the list of shares the user has.
@@ -53,6 +56,8 @@ public class Portfolio {
    */
   public boolean addShare(Share share) {
     ParameterValidator.objectChecker(share, "share");
+    logger.debug("Adding share to portfolio: {} x{}", 
+        share.stock().getSymbol(), share.quantity());
     return this.shares.add(share);
   }
 
@@ -65,6 +70,8 @@ public class Portfolio {
    */
   public boolean removeShare(Share share) {
     ParameterValidator.objectChecker(share, "share");
+    logger.debug("Removing share from portfolio: {} x{}", 
+        share.stock().getSymbol(), share.quantity());
     return this.shares.remove(share);
   }
 
