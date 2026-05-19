@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A class for exchanging shares/stocks.
@@ -22,7 +24,8 @@ public class Exchange {
   private HashMap<String, Stock> stockMap; // A HashMap of symbol keys connecting to Stock values.
   private Random random; // A random generator.
   private List<GameObserver> observers = new ArrayList<>();
-
+  private static final Logger logger
+      = LoggerFactory.getLogger(Player.class);
 
   /**
    * Constructs an exchange with an exchange name and a list of Stocks.
@@ -112,12 +115,14 @@ public class Exchange {
     ParameterValidator.stringChecker(symbol, "symbol");
     ParameterValidator.bigDecimalChecker(quantity, "quantity");
     ParameterValidator.objectChecker(player, "player");
+    logger.info("Buy order: {} x{} at week {}", symbol, quantity, this.week);
     Stock stock = this.stockMap.get(symbol);
     Share share = new Share(stock, quantity, stock.getSalesPrice());
     
     TransactionFactory factory = new PurchaseFactory(share, this.week);
     Transaction purchase = factory.createTransaction();
     purchase.commit(player);
+    logger.info("Purchase completed: {} x{}", symbol, quantity);
     notifyPurchaseCompleted(symbol, quantity);
     return purchase;
   }
@@ -133,11 +138,14 @@ public class Exchange {
   public Transaction sell(Share share, Player player) {
     ParameterValidator.objectChecker(share, "share");
     ParameterValidator.objectChecker(player, "player");
+    logger.info("Sell order: {} x{} at week {}", 
+        share.stock().getSymbol(), share.quantity(), this.week);
     
     TransactionFactory factory = new SaleFactory(share, this.week);
     Transaction sale = factory.createTransaction();
 
     sale.commit(player);
+    logger.info("Sale completed: {} x{}", share.stock().getSymbol(), share.quantity());
     notifySaleCompleted(share.stock().getSymbol(), share.quantity());
     return sale;
   }
@@ -147,6 +155,7 @@ public class Exchange {
    * Will add new prices to the stocks in the Exchange.
    */
   public void advance() {
+    logger.info("Advancing week: {} → {}", this.week, this.week + 1);
     for (Stock stock : this.stockMap.values()) {
       stock.addNewSalesPrice(
           stock.getSalesPrice().multiply(
@@ -156,7 +165,7 @@ public class Exchange {
       notifyStockPriceChanged(stock.getSymbol());
     }
     this.week++;
-
+    logger.info("Week advanced successfully to: {}", this.week);
     notifyWeekAdvanced();
   }
 
@@ -204,6 +213,7 @@ public class Exchange {
    * @param observer The observer to add
    */
   public void addObserver(GameObserver observer) {
+    logger.debug("Observer added: {}", observer.getClass().getSimpleName());
     this.observers.add(observer);
   }
 
@@ -213,6 +223,7 @@ public class Exchange {
    * @param observer The observer to remove
    */
   public void removeObserver(GameObserver observer) {
+    logger.debug("Observer removed: {}", observer.getClass().getSimpleName());
     this.observers.remove(observer);
   }
 
@@ -220,9 +231,8 @@ public class Exchange {
    * Notify all observers that the week has advanced.
    */
   private void notifyWeekAdvanced() {
-    for (GameObserver observer : observers) {
-      observer.onWeekAdvanced(this.week);
-    }
+    logger.debug("Notifying observers: week advanced to {}", this.week);
+    observers.forEach(observer -> observer.onWeekAdvanced(this.week));
   }
 
   /**
@@ -231,9 +241,8 @@ public class Exchange {
    * @param symbol The symbol of the stock that changed price
    */
   private void notifyStockPriceChanged(String symbol) {
-    for (GameObserver observer : observers) {
-      observer.onStockPriceChanged(symbol);
-    }
+    logger.debug("Notifying observers: stock price changed - {}", symbol);
+    observers.forEach(observer -> observer.onStockPriceChanged(symbol));
   }
 
   /**
@@ -243,9 +252,8 @@ public class Exchange {
    * @param quantity The quantity of the stock that was purchased
    */
   private void notifyPurchaseCompleted(String symbol, BigDecimal quantity) {
-    for (GameObserver observer : observers) {
-      observer.onPurchaseCompleted(symbol, quantity.toString());
-    }
+    logger.debug("Notifying observers: purchase completed - {} x{}", symbol, quantity);
+    observers.forEach(observer -> observer.onPurchaseCompleted(symbol, quantity.toString()));
   }
 
   /**
@@ -255,8 +263,8 @@ public class Exchange {
    * @param quantity The quantity of the stock that was sold
    */
   private void notifySaleCompleted(String symbol, BigDecimal quantity) {
-    for (GameObserver observer : observers) {
-      observer.onSaleCompleted(symbol, quantity.toString());
-    }
+    logger.debug("Notifying observers: sale completed - {} x{}", symbol, quantity);
+    observers.forEach(observer -> observer.onSaleCompleted(symbol, quantity.toString()));
   }
+
 }
