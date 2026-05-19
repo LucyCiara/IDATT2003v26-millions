@@ -51,6 +51,7 @@ public class CsvStockReader implements StockReader {
           lineCount++;
         } catch (IllegalArgumentException e) {
           logger.error("Failed to parse CSV line: {}", line, e);
+          throw e;
         }
       }
       ParameterValidator.objectChecker(stocks, "stocks");
