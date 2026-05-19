@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /** A class for the player. */
 public class Player {
@@ -16,6 +18,8 @@ public class Player {
   private Portfolio portfolio;
   private TransactionArchive transArchive;
   private List<GameObserver> observers = new ArrayList<>();
+  private static final Logger logger
+      = LoggerFactory.getLogger(Player.class);
 
   /**
    * The constructor, which takes a name and the starting money.
@@ -59,6 +63,7 @@ public class Player {
   public void addMoney(BigDecimal moneyToAdd) {
     ParameterValidator.bigDecimalChecker(moneyToAdd, "moneyToAdd");
     this.money = this.money.add(moneyToAdd);
+    logger.debug("Player {} gained {}, new balance: {}", this.name, moneyToAdd, this.money);
     notifyMoneyChanged();
   }
 
@@ -70,6 +75,7 @@ public class Player {
   public void withdrawMoney(BigDecimal moneyToWithdraw) {
     ParameterValidator.bigDecimalChecker(moneyToWithdraw, "moneyToWithdraw");
     this.money = this.money.subtract(moneyToWithdraw);
+    logger.debug("Player {} withdrew {}, new balance: {}", this.name, moneyToWithdraw, this.money);
     notifyMoneyChanged();
   }
 
@@ -125,6 +131,7 @@ public class Player {
    * @param observer The observer to add
    */
   public void addObserver(GameObserver observer) {
+    logger.debug("Observer added: {}", observer.getClass().getSimpleName());
     this.observers.add(observer);
   }
 
@@ -134,6 +141,7 @@ public class Player {
    * @param observer The observer to remove
    */
   public void removeObserver(GameObserver observer) {
+    logger.debug("Observer removed: {}", observer.getClass().getSimpleName());
     this.observers.remove(observer);
   }
 
@@ -141,8 +149,7 @@ public class Player {
    * Notify all observers that the Money has changed.
    */
   private void notifyMoneyChanged() {
-    for (GameObserver observer : observers) {
-      observer.onMoneyChanged(this.money.toString());
-    }
+    logger.debug("Notifying observers: money changed to {}", this.money);
+    observers.forEach(observer -> observer.onMoneyChanged(this.money.toString()));
   }
 }
