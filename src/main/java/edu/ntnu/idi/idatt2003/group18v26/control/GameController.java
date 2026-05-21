@@ -1,0 +1,111 @@
+package edu.ntnu.idi.idatt2003.group18v26.control;
+
+import java.io.File;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
+import edu.ntnu.idi.idatt2003.group18v26.model.Player;
+import edu.ntnu.idi.idatt2003.group18v26.model.filehandling.CsvStockReader;
+import edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange;
+import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ButtonType;
+import javafx.scene.control.Button;
+
+public class GameController implements GameObserver {
+  private static GameController instance;
+
+  private static NavigationController nav;
+  
+  private CsvStockReader reader;
+  private Exchange exchange;
+  private Player player;
+
+  private GameController() {
+    this.reader = new CsvStockReader();
+  }
+
+  public static GameController getInstance() {
+    if (instance == null) {
+      instance = new GameController();
+      nav = NavigationController.getInstance();
+    }
+    return instance;
+  }
+
+  public void setExchangeFromFile() {
+    File file = nav.getFileDialogue();
+    nav.changeOpenFileButton(file.getName());
+    if (file != null) {
+      try {
+        this.exchange = new Exchange(
+          file.getName(),
+          this.reader.readStocks(file.toPath())
+        );
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    } else {
+      this.exchange = null;
+    }
+  }
+
+  public void createPlayer() {
+    String playerName = nav.getPlayerName();
+    String playerStartMoney = nav.getPlayerStartMoney();
+    if (playerName == null || playerStartMoney == null) {
+      nav.createWarningPopup("Enter player name and starting money in fields to proceed.");
+    } else {
+      BigDecimal playerStartMoneyBigDec;
+      try {
+        playerStartMoneyBigDec = new BigDecimal(playerStartMoney);
+        if (playerStartMoneyBigDec.compareTo(BigDecimal.ZERO) <= 0) {
+          nav.createWarningPopup("Starting money must be more than 0.");
+        } else {
+          this.player = new Player(playerName, playerStartMoneyBigDec);
+          System.out.println(String.format("%s, %5f", player.getName(), player.getMoney()));
+        }
+      } catch (Exception e) {
+        nav.createWarningPopup("Starting money must be a valid decimal number.");
+      }
+    }
+  }
+
+  @Override
+  public void onWeekAdvanced(int newWeek) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'onWeekAdvanced'");
+  }
+
+  @Override
+  public void onStockPriceChanged(String symbol) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'onStockPriceChanged'");
+  }
+
+  @Override
+  public void onPurchaseCompleted(String symbol, String quantity) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'onPurchaseCompleted'");
+  }
+
+  @Override
+  public void onSaleCompleted(String symbol, String quantity) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'onSaleCompleted'");
+  }
+
+  @Override
+  public void onMoneyChanged(String newBalance) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'onMoneyChanged'");
+  }
+
+  @Override
+  public void onPortfolioChanged() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'onPortfolioChanged'");
+  }
+}

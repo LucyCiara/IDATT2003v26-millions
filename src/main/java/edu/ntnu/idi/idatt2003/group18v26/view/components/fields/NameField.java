@@ -5,8 +5,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class NameField extends FieldTypes {
-  private TextField nameInput;
   public NameField() {
     super("Name:", "Satoru Gojo");
+  }
+
+  public String getNameInput() {
+    return super.getInput();
   }
 }

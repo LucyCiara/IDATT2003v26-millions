@@ -9,4 +9,7 @@ public class StartingMoneyField extends FieldTypes {
     super("Starting money:", "9000.00");
   }
 
+  public String getStartingMoney() {
+    return super.getInput();
+  }
 }

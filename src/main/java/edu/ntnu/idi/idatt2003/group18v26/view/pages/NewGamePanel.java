@@ -6,12 +6,28 @@ import edu.ntnu.idi.idatt2003.group18v26.view.components.NewGameHeader;
 import javafx.scene.layout.BorderPane;
 
 public class NewGamePanel extends BorderPane {
+  private NewGameFields newGameFields;
+
   public NewGamePanel() {
+    this.newGameFields = new NewGameFields();
+
     getStyleClass().add("page");
     toFront();
     setMaxSize(200, 300);
     setTop(new NewGameHeader());
-    setCenter(new NewGameFields());
+    setCenter(this.newGameFields);
     setBottom(new NewGameButtons());
+  }
+
+  public void changeOpenFileButton(String fileName) {
+    this.newGameFields.changeOpenFileButton(fileName);
+  }
+
+  public String getPlayerName() {
+    return this.newGameFields.getPlayerName();
+  }
+
+  public String getPlayerStartMoney() {
+    return this.newGameFields.getPlayerStartMoney();
   }
 }

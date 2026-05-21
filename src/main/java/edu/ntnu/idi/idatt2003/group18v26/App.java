@@ -22,6 +22,7 @@ public class App extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     NavigationController nav = NavigationController.getInstance();
+    nav.setStage(stage);
     nav.showTitlePage();
 
     Scene scene = new Scene(nav.getRoot(), 1280, 720);
