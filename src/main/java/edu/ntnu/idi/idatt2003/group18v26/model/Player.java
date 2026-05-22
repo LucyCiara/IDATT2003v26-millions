@@ -47,6 +47,15 @@ public class Player {
   }
 
   /**
+   * A method to get the starting money of the player.
+   *
+   * @return Returns the starting money of the player.
+   */
+  public BigDecimal getStartingMoney() {
+    return this.startingMoney;
+  }
+
+  /**
    * A method to get the money of the player.
    *
    * @return Returns the money of the player.

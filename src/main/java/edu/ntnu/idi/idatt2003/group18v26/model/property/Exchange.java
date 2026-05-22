@@ -61,6 +61,15 @@ public class Exchange {
   }
 
   /**
+   * A method for getting a list of all the stocks in the Exchange.
+   *
+   * @return A list of all the stocks in the Exchange.
+   */
+  public List<Stock> getStocks() {
+    return new ArrayList<>(this.stockMap.values());
+  }
+
+  /**
    * A method for checking if the Exchange has the given stock.
    *
    * @param symbol The symbol of the Stock to check.
