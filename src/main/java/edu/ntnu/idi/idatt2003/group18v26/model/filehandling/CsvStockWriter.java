@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implementation of the StockWriter interface that writes stock data to a CSV file.
@@ -17,6 +19,8 @@ import java.util.List;
  * operations.
  */
 public class CsvStockWriter implements StockWriter {
+  private static final Logger logger
+      = LoggerFactory.getLogger(CsvStockWriter.class);
 
   /**
    * {@inheritDoc} 
@@ -26,6 +30,7 @@ public class CsvStockWriter implements StockWriter {
   public void writeStocks(List<Stock> stocks, Path path) throws IOException {
     ParameterValidator.objectChecker(stocks, "stocks");
     ParameterValidator.objectChecker(path, "path");
+    logger.info("Writing {} stocks to file: {}", stocks.size(), path);
     try (BufferedWriter writer = Files.newBufferedWriter(path)) {
       writer.write("# Stock data");
       writer.newLine();
@@ -36,8 +41,13 @@ public class CsvStockWriter implements StockWriter {
         writer.write(formatStock(stock));
         writer.newLine();
       }
+      logger.info("Successfully wrote {} stocks to file", stocks.size());
+    } catch (IOException e) {
+      logger.error("IO error writing to file: {}", path, e);
+      throw e;
     }
   }
+
 
   /**
    * Formats a Stock object into a CSV line.

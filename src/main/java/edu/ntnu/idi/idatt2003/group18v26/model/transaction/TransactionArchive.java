@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The TransactionArchive class manages a collection of transactions, 
@@ -26,6 +28,7 @@ import java.util.stream.Collectors;
  */
 public class TransactionArchive {
   private final List<Transaction> transactions;
+  private static final Logger logger = LoggerFactory.getLogger(TransactionArchive.class);
 
   /**
    * Constructs a new TransactionArchive with an empty list of transactions.
@@ -45,6 +48,8 @@ public class TransactionArchive {
    */
   public boolean add(Transaction transaction) {
     ParameterValidator.objectChecker(transaction, "transaction");
+    logger.debug("Adding transaction to archive: {} week {}", 
+        transaction.getClass().getSimpleName(), transaction.getWeek());
     transactions.add(transaction);
     return true;
   }
