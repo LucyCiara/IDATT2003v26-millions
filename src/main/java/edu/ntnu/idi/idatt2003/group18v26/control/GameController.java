@@ -3,8 +3,15 @@ package edu.ntnu.idi.idatt2003.group18v26.control;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.slf4j.Logger;
+
+
+import org.slf4j.LoggerFactory;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
@@ -18,7 +25,10 @@ public class GameController implements GameObserver {
   private static GameController instance;
 
   private static NavigationController nav;
-  
+ 
+  private static final Logger logger
+      = LoggerFactory.getLogger(GameController.class);
+
   private CsvStockReader reader;
   private Exchange exchange;
   private Player player;
@@ -35,24 +45,30 @@ public class GameController implements GameObserver {
     return instance;
   }
 
-  public void setExchangeFromFile() {
-    File file = nav.getFileDialogue();
-    nav.changeOpenFileButton(file.getName());
+  private void setExchange(File file) {
     if (file != null) {
+      nav.changeOpenFileButton(file.getName());
       try {
         this.exchange = new Exchange(
           file.getName(),
           this.reader.readStocks(file.toPath())
         );
       } catch (IOException e) {
-        e.printStackTrace();
+        nav.createErrorPopup("File must be a readable CSV.");
+        this.setExchange(null);
       }
     } else {
+      nav.changeOpenFileButton(null);
       this.exchange = null;
     }
   }
 
-  public void createPlayer() {
+  public void setExchangeFromFile() {
+    File file = nav.getFileDialogue();
+    setExchange(file);
+  }
+
+  private void createPlayer() {
     String playerName = nav.getPlayerName();
     String playerStartMoney = nav.getPlayerStartMoney();
     if (playerName == null || playerStartMoney == null) {
@@ -72,6 +88,32 @@ public class GameController implements GameObserver {
       }
     }
   }
+
+  public void onGameStart() {
+    this.createPlayer();
+    if (this.exchange == null) {
+      URL url = GameController.class.getResource("/sp500.csv");
+      File file;
+      try {
+        file = new File(url.toURI());
+        this.setExchange(file);
+      } catch (URISyntaxException e) {
+        logger.error("Unexpected URI exception. Might be caused by sp500.csv missing.", e);
+      }
+    }
+  }
+
+  public void onNewGame() {
+    this.player = null;
+    this.setExchange(null);
+    nav.clearNewGameFields();
+    nav.showNewGamePanel();
+  }
+
+  public void onClearFile() {
+    this.setExchange(null);
+  }
+
 
   @Override
   public void onWeekAdvanced(int newWeek) {

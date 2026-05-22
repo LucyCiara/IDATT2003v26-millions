@@ -30,4 +30,8 @@ public class NewGamePanel extends BorderPane {
   public String getPlayerStartMoney() {
     return this.newGameFields.getPlayerStartMoney();
   }
+
+  public void clearFields() {
+    this.newGameFields.clearFields();
+  }
 }

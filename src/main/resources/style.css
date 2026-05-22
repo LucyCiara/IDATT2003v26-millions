@@ -26,10 +26,6 @@
   -fx-background-repeat: no-repeat;
 }
 
-#transparent {
-  -fx-opacity: 1.0;
-}
-
 .header {
   -fx-border-color: black;
   -fx-border-width: 75%;

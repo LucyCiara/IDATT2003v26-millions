@@ -4,7 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public class NameField extends FieldTypes {
+public class NameField extends FieldType {
   public NameField() {
     super("Name:", "Satoru Gojo");
   }

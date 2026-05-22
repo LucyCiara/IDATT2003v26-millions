@@ -2,6 +2,7 @@ package edu.ntnu.idi.idatt2003.group18v26.view.components;
 
 import java.util.HashMap;
 
+import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ClearFileButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.OpenFileButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.NameField;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.StartingMoneyField;
@@ -11,12 +12,14 @@ public class NewGameFields extends VBox {
   private NameField nameField;
   private StartingMoneyField startMoneyField;
   private OpenFileButton openFileBtn;
+  private ClearFileButton clearFileBtn;
 
   public NewGameFields() {
     this.nameField = new NameField();
     this.startMoneyField = new StartingMoneyField();
     this.openFileBtn = new OpenFileButton();
-    getChildren().addAll(this.nameField, this.startMoneyField, this.openFileBtn);
+    this.clearFileBtn = new ClearFileButton();
+    getChildren().addAll(this.nameField, this.startMoneyField, this.openFileBtn, this.clearFileBtn);
   }
 
   public void changeOpenFileButton(String fileName) {
@@ -29,5 +32,10 @@ public class NewGameFields extends VBox {
 
   public String getPlayerStartMoney() {
     return this.startMoneyField.getStartingMoney();
+  }
+
+  public void clearFields() {
+    this.nameField.clearField();
+    this.startMoneyField.clearField();
   }
 }

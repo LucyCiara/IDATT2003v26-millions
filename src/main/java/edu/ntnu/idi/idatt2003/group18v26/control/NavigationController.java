@@ -80,4 +80,14 @@ public class NavigationController {
     warning.setContentText(text);
     warning.show();
   }
+
+  public void createErrorPopup(String text) {
+    Alert error = new Alert(AlertType.ERROR);
+    error.setContentText(text);
+    error.show();
+  }
+
+  public void clearNewGameFields() {
+    this.newGamePanel.clearFields();
+  }
 }

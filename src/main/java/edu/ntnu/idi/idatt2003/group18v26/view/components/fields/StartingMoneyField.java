@@ -4,7 +4,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public class StartingMoneyField extends FieldTypes {
+public class StartingMoneyField extends FieldType {
   public StartingMoneyField() {
     super("Starting money:", "9000.00");
   }

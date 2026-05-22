@@ -6,6 +6,6 @@ public class StartButton extends ButtonType {
   public StartButton() {
     super();
     super.setText("Done");
-    super.setOnAction(e -> GameController.getInstance().createPlayer());
+    super.setOnAction(e -> GameController.getInstance().onGameStart());
   }
 }

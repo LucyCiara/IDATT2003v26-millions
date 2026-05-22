@@ -4,10 +4,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
-public abstract class FieldTypes extends VBox {
+public abstract class FieldType extends VBox {
   private TextField inputText;
 
-  protected FieldTypes(String labelText, String promptText) {
+  protected FieldType(String labelText, String promptText) {
     this.inputText = new TextField();
     this.inputText.setPromptText(promptText);
     this.getChildren().addAll(new Label(labelText), this.inputText);
@@ -15,5 +15,9 @@ public abstract class FieldTypes extends VBox {
 
   public String getInput() {
     return this.inputText.getText();
+  }
+
+  public void clearField() {
+    this.inputText.clear();
   }
 }
