@@ -1,7 +1,9 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.filehandling;
 
 import com.google.gson.Gson;
-import edu.ntnu.idi.idatt2003.group18v26.model.percistence.GameSnapshot;
+
+import edu.ntnu.idi.idatt2003.group18v26.model.persistence.GameSnapshot;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

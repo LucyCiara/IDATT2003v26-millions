@@ -1,25 +1,20 @@
-package edu.ntnu.idi.idatt2003.group18v26.model.percistence;
+package edu.ntnu.idi.idatt2003.group18v26.model.persistence;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Transaction;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigDecimal;
-import java.util.*;
-
 /**
  * Translator between complex Model objects and simple Snapshots.
- * 
- * Responsibility: Extract data from Player/Exchange domain objects
- * into simple DTOs suitable for JSON serialization.
- * 
- * SRP: Only serialization logic (extraction).
- * DRY: All extraction centralized here, not duplicated in Reader/Writer.
- * Separation of Concerns: Model stays pure, unaware of JSON.
  */
 public class GameSerializer {
   private static final Logger logger = LoggerFactory.getLogger(GameSerializer.class);

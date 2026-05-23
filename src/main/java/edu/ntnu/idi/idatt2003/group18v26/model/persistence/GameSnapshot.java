@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt2003.group18v26.model.percistence;
+package edu.ntnu.idi.idatt2003.group18v26.model.persistence;
 
 import java.math.BigDecimal;
 import java.util.List;

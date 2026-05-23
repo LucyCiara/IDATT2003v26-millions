@@ -1,8 +1,9 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.filehandling;
 
-import edu.ntnu.idi.idatt2003.group18v26.model.percistence.GameSnapshot;
 import java.io.IOException;
 import java.nio.file.Path;
+
+import edu.ntnu.idi.idatt2003.group18v26.model.persistence.GameSnapshot;
 
 /**
  * Interface for writing game state to files.
