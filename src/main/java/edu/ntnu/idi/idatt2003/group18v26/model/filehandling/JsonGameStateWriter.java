@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.persistence.GameSnapshot;
+import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,8 @@ public class JsonGameStateWriter implements GameStateWriter {
    */
   @Override
   public void writeGameState(GameSnapshot snapshot, Path filepath) throws IOException {
+    ParameterValidator.objectChecker(snapshot, "snapshot");
+    ParameterValidator.objectChecker(filepath, "filepath");
     logger.info("Writing JSON save file for player: {}", snapshot.playerName);
 
     try {

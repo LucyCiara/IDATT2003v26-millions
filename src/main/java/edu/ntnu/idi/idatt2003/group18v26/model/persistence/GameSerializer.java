@@ -35,7 +35,6 @@ public class GameSerializer {
     snapshot.startingMoney = player.getStartingMoney();
     snapshot.playerPortfolio = extractPortfolio(player.getPortfolio());
     snapshot.week = exchange.getWeek();
-    snapshot.currentStockPrices = extractCurrentStockPrices(exchange);
     snapshot.stockPriceHistory = extractStockPriceHistory(exchange);
     snapshot.transactions = extractTransactions(player);
 
@@ -67,22 +66,6 @@ public class GameSerializer {
   }
 
   /**
-   * Extract current stock prices from exchange.
-   *
-   * @param exchange The exchange with stock data
-   * @return Map of symbol → current price
-   */
-  private Map<String, BigDecimal> extractCurrentStockPrices(Exchange exchange) {
-    Map<String, BigDecimal> prices = new HashMap<>();
-    
-    exchange.getStocks().forEach(stock -> 
-        prices.put(stock.getSymbol(), stock.getSalesPrice())
-    );
-    
-    return prices;
-  }
-
-  /**
    * Extract stock price history from exchange.
    * Maps each stock symbol to list of its historical prices.
    *
@@ -93,7 +76,7 @@ public class GameSerializer {
     Map<String, List<BigDecimal>> history = new HashMap<>();
     
     exchange.getStocks().forEach(stock -> {
-      history.put(stock.getSymbol(), stock.getHistoricalPrices());
+      history.put(stock.getSymbol(), new ArrayList<>(stock.getHistoricalPrices()));
     });
     return history;
   }
