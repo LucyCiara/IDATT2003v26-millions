@@ -23,6 +23,8 @@ public class JsonGameStateReader implements GameStateReader {
   /**
    * {@inheritDoc}
    * Read JSON file and deserialize to GameSnapshot.
+   *
+   * @throws JsonSyntaxException if JSON is invalid, IOException for file issues
    */
   @Override
   public GameSnapshot readGameState(Path filepath) throws IOException {
