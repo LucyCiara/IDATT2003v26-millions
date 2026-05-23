@@ -64,6 +64,10 @@ public class TransactionArchive {
     return transactions.stream().noneMatch(Objects::nonNull);
   }
 
+  public List<Transaction> getAllTransactions() {
+    return new ArrayList<>(this.transactions);
+  }
+
   /**
    * Retrieves a list of all transactions in the archive.
    * This method returns a new list containing all transactions currently stored in the archive.

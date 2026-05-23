@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  */
 public class ShareSnapshot {
   public String symbol;
-  public int quantity;
+  public BigDecimal quantity;
   public BigDecimal purchasePrice;
 
   /**
@@ -20,7 +20,7 @@ public class ShareSnapshot {
   /**
    * Constructor for creating share snapshots.
    */
-  public ShareSnapshot(String symbol, int quantity, BigDecimal purchasePrice) {
+  public ShareSnapshot(String symbol, BigDecimal quantity, BigDecimal purchasePrice) {
     this.symbol = symbol;
     this.quantity = quantity;
     this.purchasePrice = purchasePrice;

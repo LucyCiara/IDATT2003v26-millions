@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class TransactionSnapshot {
   public String type;  // "PURCHASE" or "SALE"
   public String symbol;
-  public int quantity;
+  public BigDecimal quantity;
   public BigDecimal totalPrice;
 
   /**
@@ -21,7 +21,7 @@ public class TransactionSnapshot {
   /**
    * Constructor for creating transaction snapshots.
    */
-  public TransactionSnapshot(String type, String symbol, int quantity, BigDecimal totalPrice) {
+  public TransactionSnapshot(String type, String symbol, BigDecimal quantity, BigDecimal totalPrice) {
     this.type = type;
     this.symbol = symbol;
     this.quantity = quantity;
