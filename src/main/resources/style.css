@@ -10,6 +10,25 @@
   -fx-background-color: #B9B9B9;
 }
 
+.field {
+  -fx-background-color: white;
+  -fx-border-color: black;
+  -fx-border-width: 150%;
+  -fx-cursor: text;
+  -fx-border-radius: 0px;
+}
+
+.field:hover {
+  -fx-background-color: #DfDfDf;
+}
+
+.nonInteractive {
+  -fx-background-color:#C9C9C9;
+  -fx-border-color: black;
+  -fx-border-width: 150%;
+  -fx-border-radius: 0px;
+}
+
 #main-menu-buttons {
 }
 

@@ -89,6 +89,10 @@ public class GameController implements GameObserver {
     }
   }
 
+  public String getPlayerName() {
+    return this.player.getName();
+  }
+
   public void onGameStart() {
     this.createPlayer();
     if (this.exchange == null) {

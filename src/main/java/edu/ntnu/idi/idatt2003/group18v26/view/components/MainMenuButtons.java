@@ -8,7 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
-public class MainMenuButtons extends VBox{
+public class MainMenuButtons extends VBox {
   private static final double BUTTON_WIDTH = 200;
   private static final double BUTTON_HEIGHT = 50;
 

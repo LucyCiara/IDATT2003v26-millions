@@ -11,19 +11,18 @@ import javafx.scene.layout.VBox;
 public class NewGameFields extends VBox {
   private NameField nameField;
   private StartingMoneyField startMoneyField;
-  private OpenFileButton openFileBtn;
-  private ClearFileButton clearFileBtn;
+  private OpenFile openFile;
 
   public NewGameFields() {
     this.nameField = new NameField();
     this.startMoneyField = new StartingMoneyField();
-    this.openFileBtn = new OpenFileButton();
-    this.clearFileBtn = new ClearFileButton();
-    getChildren().addAll(this.nameField, this.startMoneyField, this.openFileBtn, this.clearFileBtn);
+    this.openFile = new OpenFile();
+    getChildren().addAll(this.nameField, this.startMoneyField, this.openFile);
+    this.setSpacing(10);
   }
 
   public void changeOpenFileButton(String fileName) {
-    this.openFileBtn.changeTextToFile(fileName);
+    this.openFile.changeOpenFileButton(fileName);
   }
 
   public String getPlayerName() {

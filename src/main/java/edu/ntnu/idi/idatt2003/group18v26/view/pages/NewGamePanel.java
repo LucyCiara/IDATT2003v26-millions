@@ -13,7 +13,7 @@ public class NewGamePanel extends BorderPane {
 
     getStyleClass().add("page");
     toFront();
-    setMaxSize(200, 300);
+    setMaxSize(250, 350);
     setTop(new NewGameHeader());
     setCenter(this.newGameFields);
     setBottom(new NewGameButtons());
