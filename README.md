@@ -112,6 +112,7 @@ The project uses the standard Maven directory structure, which ensures:
 ### Expected behavior:
 <br>
 The program allows the user to:
+
 - Starting a new game with player name, starting capital, and CSV stock data input
 - Search/filter stocks and display historical statistics and weekly gainers/losers
 - Buy and sell shares through a GUI showing holdings and transaction costs
@@ -162,10 +163,7 @@ Each report includes:
 [//]: # (TODO: Describe how to run the tests here.)
 
 ## References 🔗
-
-[//]: # (TODO: Include references here, if any. For example, if you have used code from the course book, include a reference to the chapter.
-Or if you have used code from a website or other source, include a link to the source.)
-References are included in the project report.
+For more references and project details, kindly refer yourself to the project report and project description
 
 ---
 """
