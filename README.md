@@ -1,4 +1,5 @@
 # MILLIONS - IDATT2003 Portfolio Project Spring 2026 :octocat: 
+---
 
 [//]: # (TODO: Fill inn your name and student ID)
 [//]: # (TODO: Mappe-2025-Marjoni-fj)
@@ -150,7 +151,7 @@ Each report includes:
 [//]: # (TODO: Describe how to run the tests here.)
 
 ## References 🔗
+---
 For more references and project details, kindly refer yourself to the project report and project description
 
----
-"""
+
