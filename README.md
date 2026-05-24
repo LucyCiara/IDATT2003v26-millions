@@ -95,19 +95,6 @@ The project uses the standard Maven directory structure, which ensures:
     ```bash
     mvn javafx:run
     ```
-**Run From JAR:     (Windows)**
-
-1. Download Project JAR:
-    Go to repository and download the JAR from the jar release.
-
-2. Run the JAR in Terminal:
-
-    ```bash
-    java --module-path "path\to\javafx\sdk" --add-modules javafx.controls -jar path\to\jar.jar
-
-
-- Input: User interactions (login, Portfolio management)
-- Output: JavaFX UI displaying stocks, user profiles, previous transactions
 
 ### Expected behavior:
 <br>
