@@ -13,7 +13,7 @@
 ## Project description💻
 
 [//]: # (TODO: Write a short description of your project/product here.)
-This Java-based application, developed using Maven... allows players to play a stock market game where players have the ability to trade shares, manage a portfolio, and track transactions in a simplified, dynamic exchange.
+This Java-based application, developed using Maven allows players to play a stock market game where players have the ability to trade shares, manage a portfolio, and track transactions in a simplified, dynamic exchange.
 Key features include:
 * Starting a new game with player name, starting capital, and CSV stock data input
 * Search/filter stocks and display historical statistics and weekly gainers/losers
@@ -24,7 +24,6 @@ Key features include:
 * Allow players to liquidate portfolios and exit the application
 
 ## Project structure 📁
-
 ---
 The project follows a standard Maven layout and is organized into clearly separated packages according to responsibility-driven design (RDD).
 All source files are stored under the `src` directory.
