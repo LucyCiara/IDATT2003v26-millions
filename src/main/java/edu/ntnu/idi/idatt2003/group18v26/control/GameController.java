@@ -57,6 +57,7 @@ public class GameController implements GameObserver {
           file.getName(),
           this.reader.readStocks(file.toPath())
         );
+        this.exchange.addObserver(this);
       } catch (IOException e) {
         nav.createErrorPopup("File must be a readable CSV.");
         this.setExchange(null);
@@ -85,6 +86,7 @@ public class GameController implements GameObserver {
           nav.createWarningPopup("Starting money must be more than 0.");
         } else {
           this.player = new Player(playerName, playerStartMoneyBigDec);
+          this.player.addObserver(this);
           System.out.println(String.format("%s, %5f", player.getName(), player.getMoney()));
         }
       } catch (Exception e) {
@@ -105,7 +107,10 @@ public class GameController implements GameObserver {
       try {
         file = new File(url.toURI());
         this.setExchange(file);
+        nav.updateGamePage();
+        nav.showGamePage();
       } catch (URISyntaxException e) {
+        nav.createWarningPopup("Unexpected exception. Might be caused by sp500.csv missing.");
         logger.error("Unexpected URI exception. Might be caused by sp500.csv missing.", e);
       }
     }
@@ -151,18 +156,18 @@ public class GameController implements GameObserver {
     for (Share share : this.player.getPortfolio().getShares()) {
       outputShares.add(share.stock().getSymbol() + " " + share.stock().getCompany());
     }
+    return outputShares;
   }
 
   @Override
   public void onWeekAdvanced(int newWeek) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'onWeekAdvanced'");
+    System.out.println("test");
+    nav.updateGamePage();
   }
 
   @Override
   public void onStockPriceChanged(String symbol) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'onStockPriceChanged'");
+    nav.updateGamePage();
   }
 
   @Override

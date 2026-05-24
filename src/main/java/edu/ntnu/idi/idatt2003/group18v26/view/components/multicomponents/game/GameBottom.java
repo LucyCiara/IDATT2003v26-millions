@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt2003.group18v26.view.components;
+package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game;
 
 import edu.ntnu.idi.idatt2003.group18v26.view.components.displays.NetWorthDisplay;
 import javafx.scene.layout.BorderPane;
@@ -12,5 +12,10 @@ public class GameBottom extends BorderPane {
     this.weekWidget = new WeekWidget();
     setCenter(netWorthDisp);
     setRight(weekWidget);
+  }
+
+  public void updateInfo() {
+    this.weekWidget.updateWeek();
+    this.netWorthDisp.update();
   }
 }

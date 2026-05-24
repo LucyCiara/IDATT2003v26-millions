@@ -5,10 +5,9 @@ import edu.ntnu.idi.idatt2003.group18v26.control.GameController;
 public class MoneyDisplay extends DisplayType {
   public MoneyDisplay() {
     super();
-    this.update();
   }
 
   public void update() {
-    this.setText("$" + GameController.getInstance().getMoney());
+    setDisplayText("$" + GameController.getInstance().getMoney());
   }
 }

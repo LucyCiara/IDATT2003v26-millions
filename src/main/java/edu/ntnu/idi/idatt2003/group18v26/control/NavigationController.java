@@ -3,8 +3,10 @@ package edu.ntnu.idi.idatt2003.group18v26.control;
 import java.io.File;
 
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
+import edu.ntnu.idi.idatt2003.group18v26.view.pages.GamePage;
 import edu.ntnu.idi.idatt2003.group18v26.view.pages.NewGamePanel;
 import edu.ntnu.idi.idatt2003.group18v26.view.pages.TitlePage;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Border;
@@ -18,9 +20,11 @@ public class NavigationController {
   
   private Stage stage;
   private StackPane root;
+  private Scene scene;
   private TitlePage titlePage;
   private NewGamePanel newGamePanel;
   private FileChooser fileChooser;
+  private GamePage gamePage;
 
   private NavigationController() {
     this.root = new StackPane();
@@ -28,6 +32,9 @@ public class NavigationController {
     this.titlePage = new TitlePage();
     this.newGamePanel = new NewGamePanel();
     this.fileChooser = new FileChooser();
+    this.gamePage = new GamePage();
+
+    this.scene = new Scene(this.root, 1280, 720);
   }
 
   public static NavigationController getInstance() {
@@ -38,7 +45,8 @@ public class NavigationController {
   }
   
   public void showTitlePage() {
-    this.root.getChildren().add(titlePage);
+    this.root.getChildren().clear();
+    this.root.getChildren().add(this.titlePage);
   }
 
   public void showNewGamePanel() {
@@ -61,6 +69,9 @@ public class NavigationController {
   public void setStage(Stage stage) {
     ParameterValidator.objectChecker(stage, "stage");
     this.stage = stage;
+    this.stage.setTitle("Millions");
+    this.stage.setScene(this.scene);
+    this.stage.show();
   }
 
   public void changeOpenFileButton(String fileName) {
@@ -89,5 +100,26 @@ public class NavigationController {
 
   public void clearNewGameFields() {
     this.newGamePanel.clearFields();
+  }
+
+  public void showGamePage() {
+    this.root.getChildren().clear();
+    this.root.getChildren().add(this.gamePage);
+  }
+
+  public void updateGamePage() {
+    this.gamePage.updateInfo();
+  }
+
+  public void selectPortfolio() {
+    this.gamePage.selectPortfolio();
+  }
+
+  public void selectStockMarket() {
+    this.gamePage.selectStockMarket();
+  }
+
+  public void selectTransactionHistory() {
+    this.gamePage.selectTransactionHistory();
   }
 }

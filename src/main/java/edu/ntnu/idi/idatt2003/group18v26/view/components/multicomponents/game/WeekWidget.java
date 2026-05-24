@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt2003.group18v26.view.components;
+package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game;
 
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.AdvanceWeekButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.displays.WeekDisplay;
@@ -9,11 +9,11 @@ public class WeekWidget extends VBox {
   private AdvanceWeekButton advWeekBtn;
 
   public WeekWidget() {
-    double width = this.getWidth();
+    setMaxWidth(200);
     this.weekDisp = new WeekDisplay();
-    this.weekDisp.setWidthRestriction(width);
     this.advWeekBtn = new AdvanceWeekButton();
-    this.advWeekBtn.setWidthRestriction(width); 
+    this.advWeekBtn.setMaxWidth(Double.MAX_VALUE);
+    getChildren().addAll(this.weekDisp, this.advWeekBtn);
   }
 
   public void updateWeek() {

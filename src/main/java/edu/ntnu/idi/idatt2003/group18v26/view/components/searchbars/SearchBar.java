@@ -11,11 +11,15 @@ public abstract class SearchBar extends VBox {
   private TextField inputBar;
   private ListView<String> results;
 
-  protected SearchBar(List<String> items) {
-    this.results = new ListView<>();
-    this.results.getItems().addAll(items);
+  protected SearchBar() {
     this.inputBar = new TextField();
     this.inputBar.setPromptText("Search...");
+  }
+
+  public void setItems(List<String> items) {
+    this.results = new ListView<>();
+    this.results.getItems().addAll(items);
+
     this.inputBar.textProperty().addListener((observable, oldValue, newValue) -> {
       this.results.getItems().clear();
       this.results.getItems().addAll(

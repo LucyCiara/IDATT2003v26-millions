@@ -1,9 +1,12 @@
-package edu.ntnu.idi.idatt2003.group18v26.view.components;
+package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game;
 
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.StockMarketButton;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ButtonType;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.PortfolioButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.TransactionHistoryButton;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.text.Font;
 
 public class GameHeaderNavigator extends HBox {
   private PortfolioButton portfolioBtn;
@@ -15,6 +18,9 @@ public class GameHeaderNavigator extends HBox {
     this.marketBtn = new StockMarketButton();
     this.transHistBtn = new TransactionHistoryButton();
     getChildren().addAll(portfolioBtn, marketBtn, transHistBtn);
+    getChildren().forEach(btn -> setHgrow(btn, Priority.ALWAYS));
+    getChildren().forEach(btn -> ((ButtonType) btn).setMaxWidth(Double.MAX_VALUE));
+    getChildren().forEach(btn -> ((ButtonType) btn).setFont(new Font(30)));
   }
 
   private void unselect() {

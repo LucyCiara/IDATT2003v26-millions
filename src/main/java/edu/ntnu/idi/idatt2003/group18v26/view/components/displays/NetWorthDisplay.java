@@ -5,10 +5,9 @@ import edu.ntnu.idi.idatt2003.group18v26.control.GameController;
 public class NetWorthDisplay extends DisplayType {
   public NetWorthDisplay() {
     super();
-    this.update();
   }
 
   public void update() {
-    this.setText(GameController.getInstance().getNetWorth());
+    this.setDisplayText("Your net worth: $" + GameController.getInstance().getNetWorth());
   }
 }

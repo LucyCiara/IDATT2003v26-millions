@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt2003.group18v26.view.components;
+package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;

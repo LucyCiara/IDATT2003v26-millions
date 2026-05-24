@@ -21,5 +21,4 @@ public abstract class ButtonType extends Button {
     setMinHeight(height);
     setMaxHeight(height);
   }
-  
 }
