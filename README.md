@@ -108,9 +108,9 @@ What is the input and output of the program? What is the expected behaviour of t
    
 6. **Input and Output**
 
-* Input:
-* Output:
-  
+* Input: User interacts with the GUI application... 
+* Output: Information about Players portfolio...
+
 1. **Excpected behavior:**
 The program allows the user to:
 
