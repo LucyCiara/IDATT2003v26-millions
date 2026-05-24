@@ -11,17 +11,16 @@
 
 
 ## Project description💻
-
 [//]: # (TODO: Write a short description of your project/product here.)
 This Java-based application, developed using Maven allows players to play a stock market game where players have the ability to trade shares, manage a portfolio, and track transactions in a simplified, dynamic exchange.
-Key features include:
-* Starting a new game with player name, starting capital, and CSV stock data input
-* Search/filter stocks and display historical statistics and weekly gainers/losers
-* Buy and sell shares through a GUI showing holdings and transaction costs
-* Maintain a searchable transaction history
-* Advance trading weeks with updated stock prices
-* Continuously display player net worth and status
-* Allow players to liquidate portfolios and exit the application
+### Key Features
+- Starting a new game with player name, starting capital, and CSV stock data input
+- Search/filter stocks and display historical statistics and weekly gainers/losers
+- Buy and sell shares through a GUI showing holdings and transaction costs
+- Maintain a searchable transaction history
+- Advance trading weeks with updated stock prices
+- Continuously display player net worth and status
+- Allow players to liquidate portfolios and exit the application
 
 ## Project structure 📁
 ---
@@ -70,9 +69,6 @@ The project uses the standard Maven directory structure, which ensures:
 
 ## How to run the project📝
 
-[//]: # (TODO: Describe how to run your project here. What is the main class? What is the main method?
-What is the input and output of the program? What is the expected behaviour of the program?)
-
 **Requirements:**  
 
 * Java JDK 25  
@@ -80,38 +76,49 @@ What is the input and output of the program? What is the expected behaviour of t
 * IDE (Ideally IntelliJ or VSCode with Java Extension Pack)
 * JavaFX SDK 25.0.1
 
-**Steps:**
+**Run With Maven:**      (Windows + Mac + Linux)
 
-1. **Clone repository**
-   Clone the Repository from GitHub
+1. **Download and Unzip Project:**
+    Download project zip from the repository.
 
-2. **Open the Project:**  
-   Navigate to project folder in the terminal (containing `pom.xml`).
+2. **Navigate to Project Folder:**
+    Navigate to project folder in the terminal.
 
-   ```bash
+    ```bash
     cd path/to/project/     (linux + mac)
     cd path\to\project\     (windows)
     ```
 
-4. **Build the Project:**  
-   Build the project by running:  
-
-   ```bash
-   mvn clean compile
-   
-5. **Run the Application:**
-  Start the program by running the main class:
+3. **Run the Application:**
+    Start the program by running the main class:
 
     ```bash
-   mvn javafx:run
-   
-6. **Input and Output**
+    mvn javafx:run
+    ```
+**Run From JAR:     (Windows)**
 
-* Input: User interacts with the GUI application... 
-* Output: Information about Players portfolio...
+1. Download Project JAR:
+    Go to repository and download the JAR from the jar release.
 
-1. **Excpected behavior:**
+2. Run the JAR in Terminal:
+
+    ```bash
+    java --module-path "path\to\javafx\sdk" --add-modules javafx.controls -jar path\to\jar.jar
+
+
+- Input: User interactions (login, Portfolio management)
+- Output: JavaFX UI displaying stocks, user profiles, previous transactions
+
+### Expected behavior:
+<br>
 The program allows the user to:
+- Starting a new game with player name, starting capital, and CSV stock data input
+- Search/filter stocks and display historical statistics and weekly gainers/losers
+- Buy and sell shares through a GUI showing holdings and transaction costs
+- Maintain a searchable transaction history
+- Advance trading weeks with updated stock prices
+- Continuously display player net worth and status
+- Allow players to liquidate portfolios and exit the application
 
 ---
 
