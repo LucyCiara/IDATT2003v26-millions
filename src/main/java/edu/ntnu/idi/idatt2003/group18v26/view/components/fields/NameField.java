@@ -10,6 +10,6 @@ public class NameField extends FieldType {
   }
 
   public String getNameInput() {
-    return super.getInput();
+    return getInput();
   }
 }

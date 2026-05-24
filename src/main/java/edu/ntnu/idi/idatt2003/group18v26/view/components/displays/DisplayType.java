@@ -4,15 +4,19 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 
-public class DisplayType extends ScrollPane {
+public abstract class DisplayType extends ScrollPane {
   private Text text;
-  protected DisplayType(String text) {
+  protected DisplayType() {
     this.text = new Text();
-    this.text.setText(text);
     this.text.setTextAlignment(TextAlignment.CENTER);
   }
 
   public void setText(String text) {
     this.text.setText(text);
+  }
+
+  public void setWidthRestriction(double width) {
+    setMinWidth(width);
+    setMaxWidth(width);
   }
 }

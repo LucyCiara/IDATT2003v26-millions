@@ -7,6 +7,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import org.slf4j.Logger;
 
@@ -17,6 +20,7 @@ import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.filehandling.CsvStockReader;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange;
+import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ButtonType;
 import javafx.scene.control.Button;
@@ -118,6 +122,36 @@ public class GameController implements GameObserver {
     this.setExchange(null);
   }
 
+  public String getMoney() {
+    return this.player.getMoney().toString();
+  }
+
+  public String getPlayerStatus() {
+    return this.player.getStatus();
+  }
+
+  public void advanceWeek() {
+    this.exchange.advance();
+  }
+
+  public String getNetWorth() {
+    return this.player.getNetWorth().toString();
+  }
+
+  public String getPortfolioWorth() {
+    return this.player.getPortfolio().getNetWorth().toString();
+  }
+
+  public String getWeek() {
+    return Integer.toString(this.exchange.getWeek());
+  }
+
+  public List<String> getPortfolioShareNames() {
+    List<String> outputShares = new ArrayList<>();
+    for (Share share : this.player.getPortfolio().getShares()) {
+      outputShares.add(share.stock().getSymbol() + " " + share.stock().getCompany());
+    }
+  }
 
   @Override
   public void onWeekAdvanced(int newWeek) {

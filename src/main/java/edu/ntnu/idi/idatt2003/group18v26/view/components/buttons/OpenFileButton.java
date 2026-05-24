@@ -7,15 +7,15 @@ public class OpenFileButton extends ButtonType {
 
   public OpenFileButton() {
     super();
-    super.setText(defaultText);
-    super.setOnAction(e -> GameController.getInstance().setExchangeFromFile());
+    setText(defaultText);
+    setOnAction(e -> GameController.getInstance().setExchangeFromFile());
   }
 
   public void changeTextToFile(String fileName) {
     if (fileName != null) {
-      super.setText(fileName);
+      setText(fileName);
     } else {
-      super.setText(defaultText);
+      setText(defaultText);
     }
   }
 }

@@ -14,11 +14,17 @@ public abstract class FieldType extends VBox {
     this.inputText.getStyleClass().add("field");
   }
 
-  public String getInput() {
+  protected String getInput() {
     return this.inputText.getText();
   }
 
   public void clearField() {
     this.inputText.clear();
+  }
+
+  public void setWidthRestriction(double width) {
+    setMinWidth(width);
+    setMaxWidth(width);
+    
   }
 }

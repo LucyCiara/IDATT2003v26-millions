@@ -5,7 +5,7 @@ import javafx.application.Platform;
 public class QuitButton extends ButtonType {
   public QuitButton() {
     super();
-    super.setText("Quit");
-    super.setOnAction(e -> Platform.exit());
+    setText("Quit");
+    setOnAction(e -> Platform.exit());
   }
 }

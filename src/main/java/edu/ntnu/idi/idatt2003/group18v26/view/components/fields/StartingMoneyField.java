@@ -10,6 +10,6 @@ public class StartingMoneyField extends FieldType {
   }
 
   public String getStartingMoney() {
-    return super.getInput();
+    return getInput();
   }
 }

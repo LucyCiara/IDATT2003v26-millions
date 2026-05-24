@@ -10,6 +10,11 @@
   -fx-background-color: #B9B9B9;
 }
 
+.selected {
+  -fx-cursor: pointer;
+  -fx-background-color: #B9B9B9;
+}
+
 .field {
   -fx-background-color: white;
   -fx-border-color: black;

@@ -14,7 +14,6 @@ public class MainMenuButtons extends VBox {
 
   public MainMenuButtons() {
     
-    setId("main-menu-buttons");
     setAlignment(Pos.CENTER);
     setSpacing(10);
 
