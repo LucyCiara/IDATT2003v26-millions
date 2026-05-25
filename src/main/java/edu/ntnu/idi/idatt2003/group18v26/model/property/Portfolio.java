@@ -1,5 +1,6 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
+import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import java.math.BigDecimal;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 public class Portfolio {
   private final List<Share> shares;
   private static final Logger logger = LoggerFactory.getLogger(Portfolio.class);
+  private List<GameObserver> observers = new ArrayList<>();
 
   /**
    * Constructs the portfolio that contains the list of shares the user has.
@@ -100,5 +102,25 @@ public class Portfolio {
       netWorth = netWorth.add(price);
     }
     return netWorth;
+  }
+
+  /**
+   * Adds an observer to be notified of Player changes.
+   *
+   * @param observer The observer to add
+   */
+  public void addObserver(GameObserver observer) {
+    logger.debug("Observer added: {}", observer.getClass().getSimpleName());
+    this.observers.add(observer);
+  }
+
+  /**
+   * Removes an observer from being notified of Player changes.
+   *
+   * @param observer The observer to remove
+   */
+  public void removeObserver(GameObserver observer) {
+    logger.debug("Observer removed: {}", observer.getClass().getSimpleName());
+    this.observers.remove(observer);
   }
 }
