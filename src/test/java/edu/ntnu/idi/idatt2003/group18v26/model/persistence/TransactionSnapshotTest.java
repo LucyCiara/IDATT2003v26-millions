@@ -15,6 +15,7 @@ class TransactionSnapshotTest {
     assertNull(snapshot.symbol);
     assertNull(snapshot.quantity);
     assertNull(snapshot.totalPrice);
+    assertEquals(-1, snapshot.week);
   }
 
   @Test
@@ -23,11 +24,12 @@ class TransactionSnapshotTest {
         "PURCHASE",
         "AAPL",
         new BigDecimal("2"),
-        new BigDecimal("300.00"));
+        new BigDecimal("300.00"), 2);
 
     assertEquals("PURCHASE", snapshot.type);
     assertEquals("AAPL", snapshot.symbol);
     assertEquals(0, snapshot.quantity.compareTo(new BigDecimal("2")));
     assertEquals(0, snapshot.totalPrice.compareTo(new BigDecimal("300.00")));
+    assertEquals(2, snapshot.week);
   }
 }

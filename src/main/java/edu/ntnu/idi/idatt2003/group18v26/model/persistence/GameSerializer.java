@@ -98,7 +98,8 @@ public class GameSerializer {
           type,
           transaction.getShare().stock().getSymbol(),
           transaction.getShare().quantity(),
-          transaction.getCalculator().calculateTotal()
+          transaction.getCalculator().calculateTotal(),
+          transaction.getWeek()
       );
       transactions.add(snap);
     }

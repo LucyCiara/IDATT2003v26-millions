@@ -11,6 +11,7 @@ public class TransactionSnapshot {
   public String symbol;
   public BigDecimal quantity;
   public BigDecimal totalPrice;
+  public int week;
 
   /**
    * Default constructor for Gson deserialization.
@@ -22,10 +23,11 @@ public class TransactionSnapshot {
    * Constructor for creating transaction snapshots.
    */
   public TransactionSnapshot(String type, String symbol, 
-      BigDecimal quantity, BigDecimal totalPrice) {
+      BigDecimal quantity, BigDecimal totalPrice, int week) {
     this.type = type;
     this.symbol = symbol;
     this.quantity = quantity;
     this.totalPrice = totalPrice;
+    this.week = week;
   }
 }
