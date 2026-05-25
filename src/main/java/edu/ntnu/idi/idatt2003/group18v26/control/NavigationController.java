@@ -2,6 +2,9 @@ package edu.ntnu.idi.idatt2003.group18v26.control;
 
 import java.io.File;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import edu.ntnu.idi.idatt2003.group18v26.view.pages.GamePage;
 import edu.ntnu.idi.idatt2003.group18v26.view.pages.NewGamePanel;
@@ -25,6 +28,9 @@ public class NavigationController {
   private NewGamePanel newGamePanel;
   private FileChooser fileChooser;
   private GamePage gamePage;
+
+  private static final Logger logger
+      = LoggerFactory.getLogger(GameController.class);
 
   private NavigationController() {
     this.root = new StackPane();
@@ -121,5 +127,14 @@ public class NavigationController {
 
   public void selectTransactionHistory() {
     this.gamePage.selectTransactionHistory();
+  }
+
+  public void addShareToPortfolio(String shareSymbol, String shareName, String shareQty, String purchasePrice, String currentValue) {
+    this.gamePage.addShare(shareSymbol, shareName, shareQty, purchasePrice, currentValue);
+  }
+
+  public void clearPortfolioShares() {
+    logger.debug("Clearing shares");
+    this.gamePage.clearShares();
   }
 }

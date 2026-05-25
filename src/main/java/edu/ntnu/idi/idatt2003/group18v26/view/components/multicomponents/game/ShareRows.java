@@ -9,6 +9,12 @@ public class ShareRows extends ScrollPane {
   private VBox contents;
   public ShareRows() {
     this.contents = new VBox();
+    this.contents.getStyleClass().add("page");
+    this.contents.setFillWidth(true);
+    getStyleClass().add("page");
+    setContent(this.contents);
+    setHbarPolicy(ScrollBarPolicy.NEVER);
+    setFitToWidth(true);
   }
 
   public void clear() {
@@ -16,8 +22,12 @@ public class ShareRows extends ScrollPane {
   }
 
   public void addItem(String shareSymbol, String shareName, String shareQty, String purchasePrice, String currentValue) {
-    this.getChildren().add(
+    this.contents.getChildren().add(
         new ShareItem(shareSymbol, shareName, shareQty, purchasePrice, currentValue)
     );
+  }
+
+  public VBox getContents() {
+    return this.contents;
   }
 }

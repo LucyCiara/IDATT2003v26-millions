@@ -21,10 +21,4 @@ public abstract class FieldType extends VBox {
   public void clearField() {
     this.inputText.clear();
   }
-
-  public void setWidthRestriction(double width) {
-    setMinWidth(width);
-    setMaxWidth(width);
-    
-  }
 }

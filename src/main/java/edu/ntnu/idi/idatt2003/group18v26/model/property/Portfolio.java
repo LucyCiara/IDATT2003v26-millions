@@ -1,6 +1,8 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.PurchaseCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import java.math.BigDecimal;
@@ -48,6 +50,21 @@ public class Portfolio {
       }
     }
     return null;
+  }
+
+  public List<Share> search(String query) {
+    try {
+      ParameterValidator.stringChecker(query, "query");
+      return this.shares.stream()
+          .filter(s -> s.stock().getSymbol().toLowerCase().contains(query.toLowerCase())
+            || s.stock().getCompany().toLowerCase().contains(query.toLowerCase())
+            || s.quantity().toString().contains(query.toLowerCase())
+            || s.purchasePrice().toString().contains(query)
+            || new PurchaseCalculator(s).calculateTotal().toString().contains(query))
+          .toList();
+    } catch (Exception e) {
+      return this.shares;
+    }
   }
 
   /**

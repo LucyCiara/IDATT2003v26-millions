@@ -37,4 +37,12 @@ public class GamePage extends BorderPane {
   public void selectTransactionHistory() {
     this.header.selectTransactionHistory();
   }
+
+  public void addShare(String shareSymbol, String shareName, String shareQty, String purchasePrice, String currentValue) {
+    this.portfolioContent.addShare(shareSymbol, shareName, shareQty, purchasePrice, currentValue);
+  }
+
+  public void clearShares() {
+    this.portfolioContent.clearShares();
+  }
 }

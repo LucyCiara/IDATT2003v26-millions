@@ -11,14 +11,4 @@ public abstract class ButtonType extends Button {
     getStyleClass().add("button");
   }
 
-  public void setWidthRestriction(double width) {
-    setMinWidth(width);
-    setMaxWidth(width);
-    setWrapText(true);
-  }
-
-  public void setHeightRestriction(double height) {
-    setMinHeight(height);
-    setMaxHeight(height);
-  }
 }

@@ -15,14 +15,11 @@ public class DisplayType extends BorderPane {
     getStyleClass().add("nonInteractive");
     this.text = new Label();
     setCenter(this.text);
+    setMaxWidth(Double.MAX_VALUE);
   }
 
   public void setDisplayText(String text) {
     this.text.setText(text);
   }
 
-  public void setWidthRestriction(double width) {
-    setMinWidth(width);
-    setMaxWidth(width);
-  }
 }
