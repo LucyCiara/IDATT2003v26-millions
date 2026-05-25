@@ -15,7 +15,7 @@ class TransactionSnapshotTest {
     assertNull(snapshot.symbol);
     assertNull(snapshot.quantity);
     assertNull(snapshot.totalPrice);
-    assertEquals(-1, snapshot.week);
+    assertEquals(0, snapshot.week);
   }
 
   @Test

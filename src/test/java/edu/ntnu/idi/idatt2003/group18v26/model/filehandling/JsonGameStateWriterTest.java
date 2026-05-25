@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +31,7 @@ class JsonGameStateWriterTest {
     snapshot.playerName = "TestPlayer";
     snapshot.playerMoney = new BigDecimal("1234.56");
     snapshot.startingMoney = new BigDecimal("5000.00");
-    snapshot.playerPortfolio = 
-    List.of(new ShareSnapshot("AAPL", new BigDecimal("1"), new BigDecimal("150.00")));
+    snapshot.playerPortfolio = List.of(new ShareSnapshot("AAPL", new BigDecimal("1"), new BigDecimal("150.00")));
     snapshot.week = 2;
     snapshot.stockPriceHistory = Map.of("AAPL", List.of(new BigDecimal("150.00")));
     snapshot.transactions = List.of();
@@ -54,7 +54,7 @@ class JsonGameStateWriterTest {
   }
 
   @Test
-  void writeThenRead_roundTripMatches(@TempDir Path tmp) throws IOException {
+  void writeThenReadRoundTripMatches(@TempDir Path tmp) throws IOException {
     GameSnapshot snapshot = createSnapshot();
     snapshot.playerName = "RoundTrip";
 
@@ -69,5 +69,47 @@ class JsonGameStateWriterTest {
     assertEquals(snapshot.week, read.week);
     assertEquals(snapshot.playerPortfolio.size(), read.playerPortfolio.size());
     assertEquals(snapshot.stockPriceHistory.keySet(), read.stockPriceHistory.keySet());
+  }
+
+  @Test
+  void writeHandlesEmptyPortfolio(@TempDir Path tmp) throws IOException {
+    GameSnapshot snapshot = createSnapshot();
+    snapshot.playerPortfolio = List.of();
+
+    Path file = tmp.resolve("saves/empty/save.json");
+    writer.writeGameState(snapshot, file);
+    GameSnapshot read = new JsonGameStateReader().readGameState(file);
+    assertTrue(read.playerPortfolio.isEmpty());
+  }
+
+  @Test
+  void writeHandlesLargePortfolio(@TempDir Path tmp) throws IOException {
+    GameSnapshot snapshot = createSnapshot();
+    List<ShareSnapshot> largePortfolio = new ArrayList<>();
+    for (int i = 0; i < 100; i++) {
+      largePortfolio.add(new ShareSnapshot(
+          "STOCK" + i,
+          new BigDecimal(i + 1),
+          new BigDecimal("100.00")));
+    }
+    snapshot.playerPortfolio = largePortfolio;
+
+    Path file = tmp.resolve("saves/large/save.json");
+    writer.writeGameState(snapshot, file);
+
+    GameSnapshot read = new JsonGameStateReader().readGameState(file);
+    assertEquals(100, read.playerPortfolio.size());
+  }
+
+  @Test
+  void writePreservesBigDecimalPrecision(@TempDir Path tmp) throws IOException {
+    GameSnapshot snapshot = createSnapshot();
+    snapshot.playerMoney = new BigDecimal("1234.56789123");
+
+    Path file = tmp.resolve("saves/precision/save.json");
+    writer.writeGameState(snapshot, file);
+
+    GameSnapshot read = new JsonGameStateReader().readGameState(file);
+    assertEquals(0, snapshot.playerMoney.compareTo(read.playerMoney));
   }
 }
