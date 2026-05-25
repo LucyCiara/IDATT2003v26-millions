@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 public class NavigationController {
   private static NavigationController instance;
-  
+
   private Stage stage;
   private StackPane root;
   private Scene scene;
@@ -27,8 +27,7 @@ public class NavigationController {
   private FileChooser fileChooser;
   private GamePage gamePage;
 
-  private static final Logger logger
-      = LoggerFactory.getLogger(GameController.class);
+  private static final Logger logger = LoggerFactory.getLogger(GameController.class);
 
   private NavigationController() {
     this.root = new StackPane();
@@ -47,7 +46,7 @@ public class NavigationController {
     }
     return instance;
   }
-  
+
   public void showTitlePage() {
     this.root.getChildren().clear();
     this.root.getChildren().add(this.titlePage);
@@ -127,7 +126,8 @@ public class NavigationController {
     this.gamePage.selectTransactionHistory();
   }
 
-  public void addShareToPortfolio(String shareSymbol, String shareName, String shareQty, String purchasePrice, String currentValue) {
+  public void addShareToPortfolio(String shareSymbol, String shareName,
+      String shareQty, String purchasePrice, String currentValue) {
     this.gamePage.addShare(shareSymbol, shareName, shareQty, purchasePrice, currentValue);
   }
 
