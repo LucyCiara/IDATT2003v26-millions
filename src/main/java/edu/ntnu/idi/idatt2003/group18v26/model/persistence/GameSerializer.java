@@ -5,6 +5,7 @@ import edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Transaction;
+import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +28,8 @@ public class GameSerializer {
    * @return GameSnapshot containing extracted data
    */
   public GameSnapshot toSnapshot(Player player, Exchange exchange) {
+    ParameterValidator.objectChecker(player, "player");
+    ParameterValidator.objectChecker(exchange, "exchange");
     logger.info("Serializing game state for player: {}", player.getName());
     
     GameSnapshot snapshot = new GameSnapshot();
