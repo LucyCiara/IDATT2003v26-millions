@@ -27,7 +27,7 @@ public class PurchaseCalculator implements TransactionCalculator{
 
   /**
    * Sets the purchasePrice and quantity based on information in the Share.
-   * 
+   *
    * @param share The share to calculate the purchase of. Must be non-null.
    */
   public PurchaseCalculator(Share share) {
