@@ -21,6 +21,7 @@ import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.filehandling.CsvStockReader;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
+import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Sale;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
@@ -37,7 +38,8 @@ public class GameController implements GameObserver {
   private boolean quantityToggle = false;
   private boolean purchasePriceToggle = false;
   private boolean currentValueToggle = false;
-  private String lastSort = "None";
+  private String lastShareSort = "None";
+  private String lastStockSort = "None";
   
   private static final Logger logger
       = LoggerFactory.getLogger(GameController.class);
@@ -117,15 +119,16 @@ public class GameController implements GameObserver {
       try {
         file = new File(url.toURI());
         this.setExchange(file);
-        nav.updateGamePage();
-        nav.showGamePage();
-        for (int i = 0; i < 20; i++) {
-          this.exchange.buy(this.exchange.getGainers(20).get(i).getSymbol(), new BigDecimal("1"), this.player); // TODO: remove these lines
-        }
+        
       } catch (URISyntaxException e) {
         nav.createWarningPopup("Unexpected exception. Might be caused by sp500.csv missing.");
         logger.error("Unexpected URI exception. Might be caused by sp500.csv missing.", e);
       }
+    }
+    nav.updateGamePage();
+    nav.showGamePage();
+    for (int i = 0; i < 20; i++) {
+      this.exchange.buy(this.exchange.getGainers(20).get(i).getSymbol(), new BigDecimal("1"), this.player); // TODO: remove these lines
     }
   }
 
@@ -184,16 +187,33 @@ public class GameController implements GameObserver {
     }
   }
 
+  private void fillStocks(List<Stock> stocks) {
+    for (Stock stock : stocks) {
+      nav.addStockToStockMarket(
+        stock.getSymbol(),
+        stock.getCompany(),
+        stock.getSalesPrice().toString()
+      );
+    }
+  }
+
   public void fetchPortfolio() {
-    this.lastSort = "None";
+    this.lastShareSort = "None";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getShares();
     this.fillShares(shares);
     logger.debug("Portfolio refreshed");
   }
 
+  // public void fetchStockMarket() {
+  //   this.lastStockSort = "None";
+  //   nav.clearStockMarketStocks();
+  //   List<Stock> stocks = this.exchange.getAllStock();
+  //   this.fillStock
+  // }
+
   public void fetchSymbolSortedPortfolio(boolean toggle) {
-    this.lastSort = "Symbol";
+    this.lastShareSort = "Symbol";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesBySymbol();
     if (this.symbolToggle) {
@@ -206,7 +226,7 @@ public class GameController implements GameObserver {
   }
 
   public void fetchCompanySortedPortfolio(boolean toggle) {
-    this.lastSort = "Company";
+    this.lastShareSort = "Company";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByCompany();
     if (this.companyNameToggle) {
@@ -219,7 +239,7 @@ public class GameController implements GameObserver {
   }
 
   public void fetchQuantitySortedPortfolio(boolean toggle) {
-    this.lastSort = "Quantity";
+    this.lastShareSort = "Quantity";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByQuantity();
     if (this.quantityToggle) {
@@ -232,7 +252,7 @@ public class GameController implements GameObserver {
   }
 
   public void fetchPurchasePriceSortedPortfolio(boolean toggle) {
-    this.lastSort = "Purchase Price";
+    this.lastShareSort = "Purchase Price";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByPurchasePrice();
     if (this.purchasePriceToggle) {
@@ -245,7 +265,7 @@ public class GameController implements GameObserver {
   }
 
   public void fetchCurrentValueSortedPortfolio(boolean toggle) {
-    this.lastSort = "Current Value";
+    this.lastShareSort = "Current Value";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByCurrentValue();
     if (this.currentValueToggle) {
@@ -259,15 +279,15 @@ public class GameController implements GameObserver {
 
   private void fetchRefreshPortfolio() {
     logger.debug("Refreshing portfolio");
-    if (this.lastSort.equals("None")) {
+    if (this.lastShareSort.equals("None")) {
       this.fetchPortfolio();
-    } else if (this.lastSort.equals("Company")) {
+    } else if (this.lastShareSort.equals("Company")) {
       this.fetchCompanySortedPortfolio(false);
-    } else if (this.lastSort.equals("Quantity")) {
+    } else if (this.lastShareSort.equals("Quantity")) {
       this.fetchQuantitySortedPortfolio(false);
-    } else if (this.lastSort.equals("Purchase Price")) {
+    } else if (this.lastShareSort.equals("Purchase Price")) {
       this.fetchPurchasePriceSortedPortfolio(false);
-    } else if (this.lastSort.equals("Current Value")) {
+    } else if (this.lastShareSort.equals("Current Value")) {
       this.fetchCurrentValueSortedPortfolio(false);
     } else {
       logger.warn("Impossible state achieved");
@@ -286,11 +306,13 @@ public class GameController implements GameObserver {
     }
   }
 
-  public void search(String query) {
+  public void searchShare(String query) {
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().search(query);
     this.fillShares(shares);
   }
+
+
 
   @Override
   public void onWeekAdvanced(int newWeek) {
