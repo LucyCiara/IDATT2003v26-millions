@@ -60,8 +60,9 @@ public class Portfolio {
     ParameterValidator.objectChecker(share, "share");
     logger.debug("Adding share to portfolio: {} x{}", 
         share.stock().getSymbol(), share.quantity());
+    boolean result = this.shares.add(share);
     this.notifyPortfolioChanged();
-    return this.shares.add(share);
+    return result;
   }
 
   /**
@@ -75,8 +76,9 @@ public class Portfolio {
     ParameterValidator.objectChecker(share, "share");
     logger.debug("Removing share from portfolio: {} x{}", 
         share.stock().getSymbol(), share.quantity());
+    boolean result = this.shares.remove(share);
     this.notifyPortfolioChanged();
-    return this.shares.remove(share);
+    return result;
   }
 
   /**
