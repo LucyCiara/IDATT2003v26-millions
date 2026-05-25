@@ -39,8 +39,8 @@ public class ShareItem extends GridPane {
     this.currentValueDisp = new DisplayType();
     this.currentValueDisp.setDisplayText(currentValue);
     this.sellBtn = new SellButton(shareSymbol);
-    this.sellBtn.maxWidth(Double.MAX_VALUE);
-    this.sellBtn.maxHeight(Double.MAX_VALUE);
+    this.sellBtn.setMaxWidth(Double.MAX_VALUE);
+    this.sellBtn.setMaxHeight(Double.MAX_VALUE);
     this.sellBtn.setMinWidth(Region.USE_COMPUTED_SIZE);
     this.sellWrapper = new BorderPane();
     this.sellWrapper.setCenter(this.sellBtn);

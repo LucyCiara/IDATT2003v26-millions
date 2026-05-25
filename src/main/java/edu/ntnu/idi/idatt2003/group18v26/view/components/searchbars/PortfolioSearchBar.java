@@ -8,6 +8,11 @@ import javafx.scene.input.KeyEvent;
 public class PortfolioSearchBar extends SearchBar {
   public PortfolioSearchBar() {
     super();
+
+    this.textProperty().addListener((observable, oldValue, newValue) -> {
+      GameController.getInstance().search(newValue);
+    });
+
     setEvent(new EventHandler<KeyEvent>() {
       @Override
       public void handle(KeyEvent ke) {
