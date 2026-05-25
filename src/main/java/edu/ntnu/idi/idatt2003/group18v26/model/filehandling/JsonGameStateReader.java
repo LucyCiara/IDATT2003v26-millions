@@ -2,16 +2,13 @@ package edu.ntnu.idi.idatt2003.group18v26.model.filehandling;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-
 import edu.ntnu.idi.idatt2003.group18v26.model.persistence.GameSnapshot;
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Concrete implementation: Read JSON save files.

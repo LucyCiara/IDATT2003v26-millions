@@ -14,7 +14,7 @@ import java.util.List;
 public interface StockReader {
   /**
    * Reads a list of Stock objects from a file at the specified path.
-   * 
+   *
    * @param path the file path from which the stock data should be read.
    * @return a list of Stock objects read from the file.
    * @throws IOException if an I/O error occurs while reading from the file.

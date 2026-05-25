@@ -1,12 +1,10 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
-import java.math.BigDecimal;
-
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
+import java.math.BigDecimal;
 
 /**
  * Represents a purchased share in a given stock.
- * <p>
  * A share stores the stock that was bought, the quantity purchased, and
  * the purchase price per unit at the time of the transaction.
  */

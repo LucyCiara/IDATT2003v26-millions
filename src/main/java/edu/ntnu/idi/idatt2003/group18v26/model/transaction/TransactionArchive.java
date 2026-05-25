@@ -41,7 +41,7 @@ public class TransactionArchive {
 
   /**
    * Adds a transaction to the archive.
-   * 
+   *
    * @param transaction The transaction to be added to the archive. Must not be {@code null}.
    * @return true if the transaction was successfully added to the archive.
    * @throws IllegalArgumentException if the transaction is null.
@@ -57,7 +57,7 @@ public class TransactionArchive {
   /**
    * Checks if the transaction archive is {@code empty}.
    * This method returns true if there are no transactions in the archive, and false otherwise.
-   * 
+   *
    * @return true if the archive is empty, false otherwise.
    */
   public boolean isEmpty() {
@@ -71,7 +71,7 @@ public class TransactionArchive {
   /**
    * Retrieves a list of all transactions in the archive.
    * This method returns a new list containing all transactions currently stored in the archive.
-   * 
+   *
    * @return a list of all transactions in the archive.
    * @throws IllegalArgumentException if the provided week is negative.
    */
@@ -86,7 +86,7 @@ public class TransactionArchive {
    * Retrieves a list of all purchase transactions in the archive.
    * This method filters the transactions in the archive to return only those that are instances of
    * the Purchase class.
-   * 
+   *
    * @return a list of all purchase transactions in the archive.
    * @throws IllegalArgumentException if the provided week is negative.
    */
@@ -101,7 +101,7 @@ public class TransactionArchive {
    * Retrieves a list of all sale transactions in the archive.
    * This method filters the transactions in the archive to return only those that are instances of 
    * the Sale class.
-   * 
+   *
    * @return a list of all sale transactions in the archive.
    * @throws IllegalArgumentException if the provided week is negative.
    */
@@ -114,7 +114,7 @@ public class TransactionArchive {
 
   /**
    * Counts the number of distinct weeks in which transactions occurred.
-   * 
+   *
    * @return the number of distinct weeks in which transactions occurred.
    */
   public int countDistinctWeeks() {
