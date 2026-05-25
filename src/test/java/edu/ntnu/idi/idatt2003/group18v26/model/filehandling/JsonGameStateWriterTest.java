@@ -112,4 +112,28 @@ class JsonGameStateWriterTest {
     GameSnapshot read = new JsonGameStateReader().readGameState(file);
     assertEquals(0, snapshot.playerMoney.compareTo(read.playerMoney));
   }
+
+  @Test
+  void writeNullSnapshotThrowsException(@TempDir Path tmp) {
+    Path file = tmp.resolve("test.json");
+
+    assertThrows(IllegalArgumentException.class, () -> writer.writeGameState(null, file));
+  }
+
+  @Test
+  void writeNullPathThrowsException() {
+    GameSnapshot snapshot = createSnapshot();
+    assertThrows(IllegalArgumentException.class, () -> writer.writeGameState(snapshot, null));
+  }
+
+  @Test
+  void writeCreatesNestedDirectories(@TempDir Path tmp) throws IOException {
+    GameSnapshot snapshot = createSnapshot();
+    Path file = tmp.resolve("saves/player/save/1.json");
+
+    writer.writeGameState(snapshot, file);
+
+    assertTrue(Files.exists(file));
+    assertTrue(Files.isRegularFile(file));
+  }
 }
