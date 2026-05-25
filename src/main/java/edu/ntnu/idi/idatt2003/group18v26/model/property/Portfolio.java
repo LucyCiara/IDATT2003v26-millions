@@ -60,6 +60,7 @@ public class Portfolio {
     ParameterValidator.objectChecker(share, "share");
     logger.debug("Adding share to portfolio: {} x{}", 
         share.stock().getSymbol(), share.quantity());
+    this.notifyPortfolioChanged();
     return this.shares.add(share);
   }
 
@@ -74,6 +75,7 @@ public class Portfolio {
     ParameterValidator.objectChecker(share, "share");
     logger.debug("Removing share from portfolio: {} x{}", 
         share.stock().getSymbol(), share.quantity());
+    this.notifyPortfolioChanged();
     return this.shares.remove(share);
   }
 
@@ -122,5 +124,10 @@ public class Portfolio {
   public void removeObserver(GameObserver observer) {
     logger.debug("Observer removed: {}", observer.getClass().getSimpleName());
     this.observers.remove(observer);
+  }
+
+  private void notifyPortfolioChanged() {
+    logger.debug("Notifying observers: Portfolio changed");
+    observers.forEach(observer -> observer.onPortfolioChanged());
   }
 }
