@@ -88,5 +88,5 @@ public class SaleCalculator implements TransactionCalculator {
     return calculateGross()
           .subtract(calculateCommission())
           .subtract(calculateTax());
-    }
+  }
 }

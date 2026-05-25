@@ -21,7 +21,7 @@ import java.math.BigDecimal;
  * <p>The total amount is calculated as:
  * gross + commission.
  */
-public class PurchaseCalculator implements TransactionCalculator{
+public class PurchaseCalculator implements TransactionCalculator {
   private BigDecimal purchasePrice;
   private BigDecimal quantity;
 
