@@ -1,15 +1,12 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
-import static org.junit.jupiter.api.Assertions.*;
 
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
 import java.math.BigDecimal;
 import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
-import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PortfolioTest {
 
@@ -151,12 +148,12 @@ public class PortfolioTest {
 
   @Test
   void getSharesBySymbolReturnsSortedAlphabetically() {
-    Share shareZ = new Share(new Stock("ZEBRA", "Z Corp", new BigDecimal("100")), new BigDecimal("1"),
-        new BigDecimal("100"));
-    Share shareA = new Share(new Stock("APPLE", "A Corp", new BigDecimal("100")), new BigDecimal("1"),
-        new BigDecimal("100"));
-    Share shareM = new Share(new Stock("MANGO", "M Corp", new BigDecimal("100")), new BigDecimal("1"),
-        new BigDecimal("100"));
+    Share shareZ = new Share(new Stock("ZEBRA", "Z Corp", new BigDecimal("100")), 
+        new BigDecimal("1"), new BigDecimal("100"));
+    Share shareA = new Share(new Stock("APPLE", "A Corp", new BigDecimal("100")), 
+        new BigDecimal("1"), new BigDecimal("100"));
+    Share shareM = new Share(new Stock("MANGO", "M Corp", new BigDecimal("100")), 
+        new BigDecimal("1"), new BigDecimal("100"));
 
     portfolio.addShare(shareZ);
     portfolio.addShare(shareA);
@@ -172,12 +169,12 @@ public class PortfolioTest {
 
   @Test
   void getSharesByCompanyReturnsSortedAlphabetically() {
-    Share shareZ = new Share(new Stock("Z", "Zebra Corp", new BigDecimal("100")), new BigDecimal("1"),
-        new BigDecimal("100"));
-    Share shareA = new Share(new Stock("A", "Apple Inc", new BigDecimal("100")), new BigDecimal("1"),
-        new BigDecimal("100"));
-    Share shareM = new Share(new Stock("M", "Mango Ltd", new BigDecimal("100")), new BigDecimal("1"),
-        new BigDecimal("100"));
+    Share shareZ = new Share(new Stock("Z", "Zebra Corp", new BigDecimal("100")), 
+        new BigDecimal("1"), new BigDecimal("100"));
+    Share shareA = new Share(new Stock("A", "Apple Inc", new BigDecimal("100")), 
+        new BigDecimal("1"), new BigDecimal("100"));
+    Share shareM = new Share(new Stock("M", "Mango Ltd", new BigDecimal("100")), 
+        new BigDecimal("1"), new BigDecimal("100"));
 
     portfolio.addShare(shareZ);
     portfolio.addShare(shareA);
