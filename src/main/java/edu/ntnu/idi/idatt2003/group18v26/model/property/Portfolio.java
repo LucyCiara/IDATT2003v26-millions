@@ -35,6 +35,26 @@ public class Portfolio {
     return this.shares;
   }
 
+  public List<Share> getSharesBySymbol() {
+    return this.shares.stream().sorted((s1,s2) -> s1.stock().getSymbol().compareTo(s2.stock().getSymbol())).toList();
+  }
+
+  public List<Share> getSharesByCompany() {
+    return this.shares.stream().sorted((s1,s2) -> s1.stock().getCompany().compareTo(s2.stock().getCompany())).toList();
+  }
+
+  public List<Share> getSharesByQuantity() {
+    return this.shares.stream().sorted((s1,s2) -> s1.quantity().compareTo(s2.quantity())).toList();
+  }
+
+  public List<Share> getSharesByPurchasePrice() {
+    return this.shares.stream().sorted((s1,s2) -> s1.purchasePrice().compareTo(s2.purchasePrice())).toList();
+  }
+
+  public List<Share> getSharesByCurrentValue() {
+    return this.shares.stream().sorted((s1,s2) -> new SaleCalculator(s1).calculateTotal().compareTo(new SaleCalculator(s2).calculateTotal())).toList();
+  }
+
   /**
    * Returns the first share matching the given stock symbol, or null if not
    * found.

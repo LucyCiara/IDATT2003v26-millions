@@ -192,30 +192,10 @@ public class GameController implements GameObserver {
     logger.debug("Portfolio refreshed");
   }
 
-  private List<Share> getSharesBySymbol() {
-    return this.player.getPortfolio().getShares().stream().sorted((s1,s2) -> s1.stock().getSymbol().compareTo(s2.stock().getSymbol())).toList();
-  }
-
-  private List<Share> getSharesByCompany() {
-    return this.player.getPortfolio().getShares().stream().sorted((s1,s2) -> s1.stock().getCompany().compareTo(s2.stock().getCompany())).toList();
-  }
-
-  private List<Share> getSharesByQuantity() {
-    return this.player.getPortfolio().getShares().stream().sorted((s1,s2) -> s1.quantity().compareTo(s2.quantity())).toList();
-  }
-
-  private List<Share> getSharesByPurchasePrice() {
-    return this.player.getPortfolio().getShares().stream().sorted((s1,s2) -> s1.purchasePrice().compareTo(s2.purchasePrice())).toList();
-  }
-
-  private List<Share> getSharesByCurrentValue() {
-    return this.player.getPortfolio().getShares().stream().sorted((s1,s2) -> new SaleCalculator(s1).calculateTotal().compareTo(new SaleCalculator(s2).calculateTotal())).toList();
-  }
-
   public void fetchSymbolSortedPortfolio(boolean toggle) {
     this.lastSort = "Symbol";
     nav.clearPortfolioShares();
-    List<Share> shares = this.getSharesBySymbol();
+    List<Share> shares = this.player.getPortfolio().getSharesBySymbol();
     if (this.symbolToggle) {
       shares = shares.reversed();
     }
@@ -228,7 +208,7 @@ public class GameController implements GameObserver {
   public void fetchCompanySortedPortfolio(boolean toggle) {
     this.lastSort = "Company";
     nav.clearPortfolioShares();
-    List<Share> shares = this.getSharesByCompany();
+    List<Share> shares = this.player.getPortfolio().getSharesByCompany();
     if (this.companyNameToggle) {
       shares = shares.reversed();
     }
@@ -241,7 +221,7 @@ public class GameController implements GameObserver {
   public void fetchQuantitySortedPortfolio(boolean toggle) {
     this.lastSort = "Quantity";
     nav.clearPortfolioShares();
-    List<Share> shares = this.getSharesByQuantity();
+    List<Share> shares = this.player.getPortfolio().getSharesByQuantity();
     if (this.quantityToggle) {
       shares = shares.reversed();
     }
@@ -254,7 +234,7 @@ public class GameController implements GameObserver {
   public void fetchPurchasePriceSortedPortfolio(boolean toggle) {
     this.lastSort = "Purchase Price";
     nav.clearPortfolioShares();
-    List<Share> shares = this.getSharesByPurchasePrice();
+    List<Share> shares = this.player.getPortfolio().getSharesByPurchasePrice();
     if (this.purchasePriceToggle) {
       shares = shares.reversed();
     }
@@ -267,7 +247,7 @@ public class GameController implements GameObserver {
   public void fetchCurrentValueSortedPortfolio(boolean toggle) {
     this.lastSort = "Current Value";
     nav.clearPortfolioShares();
-    List<Share> shares = this.getSharesByCurrentValue();
+    List<Share> shares = this.player.getPortfolio().getSharesByCurrentValue();
     if (this.currentValueToggle) {
       shares = shares.reversed();
     }
