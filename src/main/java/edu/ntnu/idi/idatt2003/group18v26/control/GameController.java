@@ -1,5 +1,14 @@
 package edu.ntnu.idi.idatt2003.group18v26.control;
 
+import edu.ntnu.idi.idatt2003.group18v26.model.filehandling.CsvStockReader;
+import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
+import edu.ntnu.idi.idatt2003.group18v26.model.Player;
+import edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange;
+import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Sale;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
+import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ButtonType;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -10,10 +19,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+import javafx.scene.control.Button;
 import org.slf4j.Logger;
-
-
 import org.slf4j.LoggerFactory;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;

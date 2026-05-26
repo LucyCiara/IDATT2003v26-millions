@@ -1,15 +1,11 @@
 package edu.ntnu.idi.idatt2003.group18v26.control;
 
-import java.io.File;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.StockQuantityField;
 import edu.ntnu.idi.idatt2003.group18v26.view.pages.GamePage;
 import edu.ntnu.idi.idatt2003.group18v26.view.pages.NewGamePanel;
 import edu.ntnu.idi.idatt2003.group18v26.view.pages.TitlePage;
+import java.io.File;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -18,10 +14,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NavigationController {
   private static NavigationController instance;
-  
+
   private Stage stage;
   private StackPane root;
   private Scene scene;
@@ -30,8 +28,7 @@ public class NavigationController {
   private FileChooser fileChooser;
   private GamePage gamePage;
 
-  private static final Logger logger
-      = LoggerFactory.getLogger(GameController.class);
+  private static final Logger logger = LoggerFactory.getLogger(GameController.class);
 
   private NavigationController() {
     this.root = new StackPane();
@@ -50,7 +47,7 @@ public class NavigationController {
     }
     return instance;
   }
-  
+
   public void showTitlePage() {
     this.root.getChildren().clear();
     this.root.getChildren().add(this.titlePage);
@@ -130,7 +127,8 @@ public class NavigationController {
     this.gamePage.selectTransactionHistory();
   }
 
-  public void addShareToPortfolio(String shareSymbol, String shareName, String shareQty, String purchasePrice, String currentValue) {
+  public void addShareToPortfolio(String shareSymbol, String shareName,
+      String shareQty, String purchasePrice, String currentValue) {
     this.gamePage.addShare(shareSymbol, shareName, shareQty, purchasePrice, currentValue);
   }
 

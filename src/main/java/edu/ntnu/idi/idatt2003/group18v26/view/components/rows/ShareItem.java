@@ -24,7 +24,7 @@ public class ShareItem extends GridPane {
   private DisplayType currentValueDisp;
   private SellButton sellBtn;
   private BorderPane sellWrapper;
-  
+
   public ShareItem(String shareSymbol, String shareName, String shareQty, String purchasePrice, String currentValue) {
     super();
     getStyleClass().add("page");
@@ -39,24 +39,32 @@ public class ShareItem extends GridPane {
     this.currentValueDisp = new DisplayType();
     this.currentValueDisp.setDisplayText(currentValue);
     this.sellBtn = new SellButton(shareSymbol);
-    this.sellBtn.maxWidth(Double.MAX_VALUE);
-    this.sellBtn.maxHeight(Double.MAX_VALUE);
+    this.sellBtn.setMaxWidth(Double.MAX_VALUE);
+    this.sellBtn.setMaxHeight(Double.MAX_VALUE);
     this.sellBtn.setMinWidth(Region.USE_COMPUTED_SIZE);
     this.sellWrapper = new BorderPane();
     this.sellWrapper.setCenter(this.sellBtn);
 
-    DisplayType[] displays = new DisplayType[] {this.symDisp, this.nameDisp, this.qtyDisp, this.purchasePriceDisp, this.currentValueDisp};
-    ColumnConstraints columnConstraint = new ColumnConstraints();
-    columnConstraint.setPercentWidth(100);
+    DisplayType[] displays = new DisplayType[] { this.symDisp, 
+      this.nameDisp, this.qtyDisp, this.purchasePriceDisp,
+      this.currentValueDisp };
+    double percentWidth = 100.0 / 6;
+
     for (int i = 0; i < displays.length; i++) {
+      ColumnConstraints cc = new ColumnConstraints();
+      cc.setPercentWidth(percentWidth);
+      cc.setFillWidth(true);
       add(displays[i], i, 0, 1, 1);
-      getColumnConstraints().add(columnConstraint);
+      getColumnConstraints().add(cc);
     }
+
+    ColumnConstraints sellColConstraint = new ColumnConstraints();
+    sellColConstraint.setPercentWidth(percentWidth);
+    sellColConstraint.setFillWidth(true);
     add(this.sellWrapper, displays.length, 0, 1, 1);
-    getColumnConstraints().add(columnConstraint);
+    getColumnConstraints().add(sellColConstraint);
     RowConstraints rowConstraint = new RowConstraints();
     rowConstraint.setPercentHeight(100);
     getRowConstraints().add(rowConstraint);
-    
   }
 }
