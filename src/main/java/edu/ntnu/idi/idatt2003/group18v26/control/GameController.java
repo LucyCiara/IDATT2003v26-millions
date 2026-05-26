@@ -726,7 +726,10 @@ public class GameController implements GameObserver {
    */
   public void sellShare(String symbol) {
     try {
-      this.exchange.sell(this.player.getPortfolio().getShare(symbol), this.player);
+      this.exchange.sell(
+          this.player.getPortfolio().getShare(symbol),
+          this.player
+      );
     } catch (Exception e) {
       // Do nothing.
     }
@@ -827,7 +830,7 @@ public class GameController implements GameObserver {
    * @return the gain of the gainer
    */
   public String getGainerGain(int i) {
-    return this.exchange.getGainers(i + 1).get(i)
+    return "$ " + this.exchange.getGainers(i + 1).get(i)
     .getLatestPriceChange().setScale(roundingNum, roundingMode).toString();
   }
 
@@ -848,7 +851,7 @@ public class GameController implements GameObserver {
    * @return the gain of the loser
    */
   public String getLoserGain(int i) {
-    return this.exchange.getLosers(i + 1).get(i)
+    return "$ " + this.exchange.getLosers(i + 1).get(i)
     .getLatestPriceChange().setScale(roundingNum, roundingMode).toString();
   }
 
