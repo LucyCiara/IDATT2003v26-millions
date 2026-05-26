@@ -36,6 +36,8 @@ public class GameController implements GameObserver {
   private static final int roundingNum = 2;
   private static final RoundingMode roundingMode = RoundingMode.HALF_UP;
 
+  private static final int stockLimit = 20;
+
   private boolean symbolToggleShare = false;
   private boolean companyNameToggleShare = false;
   private boolean quantityToggleShare = false;
@@ -345,7 +347,7 @@ public class GameController implements GameObserver {
     this.lastStockSort = "None";
     nav.clearStockMarketStocks();
     List<Stock> stocks = this.exchange.getAllStock();
-    this.fillStocks(stocks, 10);
+    this.fillStocks(stocks, stockLimit);
   }
 
   private List<Transaction> getTransactions() {
@@ -446,7 +448,7 @@ public class GameController implements GameObserver {
     if (toggle) {
       this.symbolToggleStock = !this.symbolToggleStock;
     }
-    this.fillStocks(stocks);
+    this.fillStocks(stocks, stockLimit);
   }
 
   /**
@@ -506,7 +508,7 @@ public class GameController implements GameObserver {
     if (toggle) {
       this.companyNameToggleStock = !this.companyNameToggleStock;
     }
-    this.fillStocks(stocks);
+    this.fillStocks(stocks, stockLimit);
   }
 
   /**
@@ -584,7 +586,7 @@ public class GameController implements GameObserver {
     if (toggle) {
       this.purchasePriceToggleStock = !this.purchasePriceToggleStock;
     }
-    this.fillStocks(stocks);
+    this.fillStocks(stocks, stockLimit);
   }
 
   /**
@@ -722,7 +724,11 @@ public class GameController implements GameObserver {
    * @param symbol the stock symbol of the share to sell
    */
   public void sellShare(String symbol) {
-    this.exchange.sell(this.player.getPortfolio().getShare(symbol), this.player);
+    try {
+      this.exchange.sell(this.player.getPortfolio().getShare(symbol), this.player);
+    } catch (Exception e) {
+      // Do nothing.
+    }
   }
 
   /**
@@ -735,7 +741,9 @@ public class GameController implements GameObserver {
   public void buyShare(String symbol, String quantity) {
     try {
       this.exchange.buy(symbol, new BigDecimal(quantity), this.player);
-    } catch (Exception e) {
+    } catch (ArithmeticException e) {
+      nav.createErrorPopup("Insufficient funds.");
+    } catch (IllegalArgumentException e) {
       nav.createErrorPopup("Quantity must be a valid number.");
     }
   }
@@ -886,7 +894,9 @@ public class GameController implements GameObserver {
   }
 
   public String getHighestPriceString(String symbol) {
-    return dispDF.format(this.getHighestPrice(symbol).setScale(roundingNum, roundingMode));
+    return dispDF.format(
+      this.getHighestPrice(symbol).setScale(roundingNum, roundingMode)
+    );
   }
 
   public BigDecimal getLowestPrice(String symbol) {
@@ -894,7 +904,9 @@ public class GameController implements GameObserver {
   }
 
   public String getLowestPriceString(String symbol) {
-    return dispDF.format(this.getLowestPrice(symbol).setScale(roundingNum, roundingMode));
+    return dispDF.format(
+      this.getLowestPrice(symbol).setScale(roundingNum, roundingMode)
+    );
   }
 
   @Override
