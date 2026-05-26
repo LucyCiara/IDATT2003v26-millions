@@ -4,6 +4,7 @@ import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.Ga
 import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.GameHeader;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.PortFolioContent;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.StockMarketContent;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.TransactionHistoryContent;
 import javafx.scene.layout.BorderPane;
 
 public class GamePage extends BorderPane {
@@ -11,6 +12,7 @@ public class GamePage extends BorderPane {
   private GameBottom bottom;
   private PortFolioContent portfolioContent;
   private StockMarketContent stockMarketContent;
+  private TransactionHistoryContent transHistContent;
 
   public GamePage() {
     getStyleClass().add("page");
@@ -18,6 +20,7 @@ public class GamePage extends BorderPane {
     this.bottom = new GameBottom();
     this.portfolioContent = new PortFolioContent();
     this.stockMarketContent = new StockMarketContent();
+    this.transHistContent = new TransactionHistoryContent();
     setTop(this.header);
     setBottom(this.bottom);
     this.selectPortfolio();
@@ -40,6 +43,7 @@ public class GamePage extends BorderPane {
 
   public void selectTransactionHistory() {
     this.header.selectTransactionHistory();
+    setCenter(this.transHistContent);
   }
 
   public void addShare(String shareSymbol, String shareName, String shareQty, String purchasePrice, String currentValue) {
@@ -60,5 +64,13 @@ public class GamePage extends BorderPane {
 
   public void updateGainersAndLosers() {
     this.stockMarketContent.updateGainersAndLosers();
+  }
+
+  public void addTransaction(String week, String transactionType, String stock, String quantity, String price, String costReward) {
+    this.transHistContent.addTransaction(week, transactionType, stock, quantity, price, costReward);
+  }
+
+  public void clearTransactions() {
+    this.transHistContent.clearTransactions();
   }
 }

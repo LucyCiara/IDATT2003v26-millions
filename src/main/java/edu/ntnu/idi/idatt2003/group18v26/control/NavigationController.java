@@ -153,4 +153,12 @@ public class NavigationController {
   public void updateGainersAndLosers() {
     this.gamePage.updateGainersAndLosers();
   }
+
+  public void addTransactionToTransactionHistory(String week, String transactionType, String stock, String quantity, String price, String costReward) {
+    this.gamePage.addTransaction(week, transactionType, stock, quantity, price, costReward);
+  }
+
+  public void clearTransactionHistoryTransactions() {
+    this.gamePage.clearTransactions();
+  }
 }
