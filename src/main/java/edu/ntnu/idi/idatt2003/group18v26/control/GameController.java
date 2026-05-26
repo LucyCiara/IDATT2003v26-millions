@@ -873,6 +873,30 @@ public class GameController implements GameObserver {
     Platform.exit();
   }
 
+  public String getCompanyFromSymbol(String symbol) {
+    return this.exchange.getStock(symbol).getCompany();
+  }
+
+  public List<BigDecimal> getPriceHistory(String symbol) {
+    return this.exchange.getStock(symbol).getHistoricalPrices();
+  }
+
+  public BigDecimal getHighestPrice(String symbol) {
+    return this.exchange.getStock(symbol).getHighestPrice();
+  }
+
+  public String getHighestPriceString(String symbol) {
+    return dispDF.format(this.getHighestPrice(symbol).setScale(roundingNum, roundingMode));
+  }
+
+  public BigDecimal getLowestPrice(String symbol) {
+    return this.exchange.getStock(symbol).getLowestPrice();
+  }
+
+  public String getLowestPriceString(String symbol) {
+    return dispDF.format(this.getLowestPrice(symbol).setScale(roundingNum, roundingMode));
+  }
+
   @Override
   public void onWeekAdvanced(int newWeek) {
     System.out.println("test");
@@ -880,6 +904,7 @@ public class GameController implements GameObserver {
     this.fetchRefreshPortfolio();
     this.fetchRefreshStockMarket();
     nav.updateGainersAndLosers();
+    nav.updateStockContent();
   }
 
   @Override

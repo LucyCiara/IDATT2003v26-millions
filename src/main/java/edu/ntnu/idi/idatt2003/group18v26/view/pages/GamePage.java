@@ -3,6 +3,7 @@ package edu.ntnu.idi.idatt2003.group18v26.view.pages;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.GameBottom;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.GameHeader;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.PortFolioContent;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.StockContent;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.StockMarketContent;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.TransactionHistoryContent;
 import javafx.scene.layout.BorderPane;
@@ -13,6 +14,7 @@ public class GamePage extends BorderPane {
   private PortFolioContent portfolioContent;
   private StockMarketContent stockMarketContent;
   private TransactionHistoryContent transHistContent;
+  private StockContent stockContent;
 
   public GamePage() {
     getStyleClass().add("page");
@@ -72,5 +74,14 @@ public class GamePage extends BorderPane {
 
   public void clearTransactions() {
     this.transHistContent.clearTransactions();
+  }
+
+  public void selectStock(String symbol) {
+    this.stockContent = new StockContent(symbol);
+    setCenter(this.stockContent);
+  }
+
+  public void updateStockContent() {
+    this.stockContent.update();
   }
 }

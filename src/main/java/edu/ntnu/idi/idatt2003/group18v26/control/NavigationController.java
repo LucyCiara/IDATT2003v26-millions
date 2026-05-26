@@ -169,4 +169,12 @@ public class NavigationController {
   public void showMenu() {
     this.root.getChildren().add(this.menu);
   }
+
+  public void selectStock(String symbol) {
+    this.gamePage.selectStock(symbol);
+  }
+
+  public void updateStockContent() {
+    this.gamePage.updateStockContent();
+  }
 }
