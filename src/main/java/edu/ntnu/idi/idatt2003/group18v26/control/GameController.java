@@ -566,6 +566,19 @@ public class GameController implements GameObserver {
     this.fillStocks(stocks);
   }
 
+  public void searchTransaction(String query) {
+    nav.clearTransactionHistoryTransactions();
+    List<Transaction> results = this.getTransactions().stream()
+      .filter(t -> Integer.toString(t.getWeek()).contains(query)
+          || t.getClass().getSimpleName().toLowerCase().contains(query.toLowerCase())
+          || t.getShare().stock().getSymbol().toLowerCase().contains(query.toLowerCase())
+          || t.getShare().quantity().toString().contains(query)
+          || t.getShare().purchasePrice().toString().contains(query)
+          || t.getCalculator().calculateTotal().toString().contains(query)
+      ).toList();
+    this.fillTransaction(results);
+  }
+
   public String getGainerSymbol(int i) {
     return this.exchange.getGainers(i+1).get(i).getSymbol();
   }

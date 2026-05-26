@@ -10,14 +10,14 @@ public class TransactionSearchBar extends SearchBar {
     super();
 
     this.textProperty().addListener((observable, oldValue, newValue) -> {
-      GameController.getInstance().searchShare(newValue);
+      GameController.getInstance().searchTransaction(newValue);
     });
 
     setEvent(new EventHandler<KeyEvent>() {
       @Override
       public void handle(KeyEvent ke) {
         if (ke.getCode().equals(KeyCode.ENTER)) {
-          GameController.getInstance().searchShare(getText()); // TODO: change to another method.
+          GameController.getInstance().searchTransaction(getText());
         }
       }
     });
