@@ -1,8 +1,8 @@
 package edu.ntnu.idi.idatt2003.group18v26.view.pages;
 
-import edu.ntnu.idi.idatt2003.group18v26.view.components.NewGameButtons;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.NewGameFields;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.NewGameHeader;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.newgame.NewGameButtons;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.newgame.NewGameFields;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.newgame.NewGameHeader;
 import javafx.scene.layout.BorderPane;
 
 public class NewGamePanel extends BorderPane {
@@ -12,8 +12,7 @@ public class NewGamePanel extends BorderPane {
     this.newGameFields = new NewGameFields();
 
     getStyleClass().add("page");
-    toFront();
-    setMaxSize(200, 300);
+    setMaxSize(350, 350);
     setTop(new NewGameHeader());
     setCenter(this.newGameFields);
     setBottom(new NewGameButtons());

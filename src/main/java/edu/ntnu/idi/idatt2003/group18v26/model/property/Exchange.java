@@ -22,6 +22,7 @@ public class Exchange {
   private String name; // The name of the exchange.
   private int week = 0; // The week number.
   private HashMap<String, Stock> stockMap; // A HashMap of symbol keys connecting to Stock values.
+  private List<Stock> stockList;
   private Random random; // A random generator.
   private List<GameObserver> observers = new ArrayList<>();
   private static final Logger logger
@@ -40,6 +41,7 @@ public class Exchange {
     this.stockMap = new HashMap<String, Stock>();
     stocks.forEach(stock -> this.stockMap.put(stock.getSymbol(), stock));
     this.random = new Random();
+    this.stockList = stocks;
   }
 
   /**
@@ -207,6 +209,22 @@ public class Exchange {
     ).toList().subList(0, limit);
   }
 
+  public List<Stock> getAllStock() {
+    return this.stockList;
+  }
+
+  public List<Stock> getAllStockBySymbol() {
+    return this.stockList.stream().sorted((s1,s2) -> s1.getSymbol().compareTo(s2.getSymbol())).toList();
+  }
+
+  public List<Stock> getAllStockByCompany() {
+    return this.stockList.stream().sorted((s1,s2) -> s1.getCompany().compareTo(s2.getCompany())).toList();
+  }
+
+  public List<Stock> getAllStockByPrice() {
+    return this.stockList.stream().sorted((s1,s2) -> s1.getSalesPrice().compareTo(s2.getSalesPrice())).toList();
+  }
+
   /**
    * Adds an observer to be notified of exchange changes.
    *
@@ -266,5 +284,4 @@ public class Exchange {
     logger.debug("Notifying observers: sale completed - {} x{}", symbol, quantity);
     observers.forEach(observer -> observer.onSaleCompleted(symbol, quantity.toString()));
   }
-
 }

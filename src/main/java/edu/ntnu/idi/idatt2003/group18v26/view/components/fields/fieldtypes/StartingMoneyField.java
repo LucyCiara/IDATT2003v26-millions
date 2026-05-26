@@ -1,6 +1,6 @@
-package edu.ntnu.idi.idatt2003.group18v26.view.components.fields;
+package edu.ntnu.idi.idatt2003.group18v26.view.components.fields.fieldtypes;
 
-import javafx.scene.control.Label;
+
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
@@ -10,6 +10,6 @@ public class StartingMoneyField extends FieldType {
   }
 
   public String getStartingMoney() {
-    return super.getInput();
+    return getInput();
   }
 }

@@ -1,5 +1,8 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
+import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.PurchaseCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import java.math.BigDecimal;
@@ -14,6 +17,7 @@ import org.slf4j.LoggerFactory;
 public class Portfolio {
   private final List<Share> shares;
   private static final Logger logger = LoggerFactory.getLogger(Portfolio.class);
+  private List<GameObserver> observers = new ArrayList<>();
 
   /**
    * Constructs the portfolio that contains the list of shares the user has.
@@ -29,6 +33,26 @@ public class Portfolio {
    */
   public List<Share> getShares() {
     return this.shares;
+  }
+
+  public List<Share> getSharesBySymbol() {
+    return this.shares.stream().sorted((s1,s2) -> s1.stock().getSymbol().compareTo(s2.stock().getSymbol())).toList();
+  }
+
+  public List<Share> getSharesByCompany() {
+    return this.shares.stream().sorted((s1,s2) -> s1.stock().getCompany().compareTo(s2.stock().getCompany())).toList();
+  }
+
+  public List<Share> getSharesByQuantity() {
+    return this.shares.stream().sorted((s1,s2) -> s1.quantity().compareTo(s2.quantity())).toList();
+  }
+
+  public List<Share> getSharesByPurchasePrice() {
+    return this.shares.stream().sorted((s1,s2) -> s1.purchasePrice().compareTo(s2.purchasePrice())).toList();
+  }
+
+  public List<Share> getSharesByCurrentValue() {
+    return this.shares.stream().sorted((s1,s2) -> new SaleCalculator(s1).calculateTotal().compareTo(new SaleCalculator(s2).calculateTotal())).toList();
   }
 
   /**
@@ -48,6 +72,21 @@ public class Portfolio {
     return null;
   }
 
+  public List<Share> search(String query) {
+    try {
+      ParameterValidator.stringChecker(query, "query");
+      return this.shares.stream()
+          .filter(s -> s.stock().getSymbol().toLowerCase().contains(query.toLowerCase())
+            || s.stock().getCompany().toLowerCase().contains(query.toLowerCase())
+            || s.quantity().toString().contains(query.toLowerCase())
+            || s.purchasePrice().toString().contains(query)
+            || new PurchaseCalculator(s).calculateTotal().toString().contains(query))
+          .toList();
+    } catch (Exception e) {
+      return this.shares;
+    }
+  }
+
   /**
    * Adds a share to the portfolio.
    *
@@ -58,7 +97,9 @@ public class Portfolio {
     ParameterValidator.objectChecker(share, "share");
     logger.debug("Adding share to portfolio: {} x{}", 
         share.stock().getSymbol(), share.quantity());
-    return this.shares.add(share);
+    boolean result = this.shares.add(share);
+    this.notifyPortfolioChanged();
+    return result;
   }
 
   /**
@@ -72,7 +113,9 @@ public class Portfolio {
     ParameterValidator.objectChecker(share, "share");
     logger.debug("Removing share from portfolio: {} x{}", 
         share.stock().getSymbol(), share.quantity());
-    return this.shares.remove(share);
+    boolean result = this.shares.remove(share);
+    this.notifyPortfolioChanged();
+    return result;
   }
 
   /**
@@ -100,5 +143,30 @@ public class Portfolio {
       netWorth = netWorth.add(price);
     }
     return netWorth;
+  }
+
+  /**
+   * Adds an observer to be notified of Player changes.
+   *
+   * @param observer The observer to add
+   */
+  public void addObserver(GameObserver observer) {
+    logger.debug("Observer added: {}", observer.getClass().getSimpleName());
+    this.observers.add(observer);
+  }
+
+  /**
+   * Removes an observer from being notified of Player changes.
+   *
+   * @param observer The observer to remove
+   */
+  public void removeObserver(GameObserver observer) {
+    logger.debug("Observer removed: {}", observer.getClass().getSimpleName());
+    this.observers.remove(observer);
+  }
+
+  private void notifyPortfolioChanged() {
+    logger.debug("Notifying observers: Portfolio changed");
+    observers.forEach(observer -> observer.onPortfolioChanged());
   }
 }
