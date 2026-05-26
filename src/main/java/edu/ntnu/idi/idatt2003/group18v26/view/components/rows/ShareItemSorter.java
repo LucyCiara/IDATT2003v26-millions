@@ -1,6 +1,5 @@
 package edu.ntnu.idi.idatt2003.group18v26.view.components.rows;
 
-import java.util.Arrays;
 
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ButtonType;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ShareCurrentValueSortButton;
@@ -9,13 +8,14 @@ import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.SharePurchasePr
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ShareQuantitySortButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ShareSellAllButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ShareSymbolSortButton;
+import java.util.Arrays;
 import javafx.geometry.HPos;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 
+/**
+ * Class for the share item sorter component in the application.
+ */
 public class ShareItemSorter extends GridPane {
   private ShareSymbolSortButton symSortBtn;
   private ShareNameSortButton nameSortBtn;
@@ -24,6 +24,9 @@ public class ShareItemSorter extends GridPane {
   private ShareCurrentValueSortButton currentValSortBtn;
   private ShareSellAllButton sellAllBtn;
 
+  /**
+   * Constructs a new ShareItemSorter.
+   */
   public ShareItemSorter() {
     this.symSortBtn = new ShareSymbolSortButton();
     this.nameSortBtn = new ShareNameSortButton();
@@ -32,7 +35,8 @@ public class ShareItemSorter extends GridPane {
     this.currentValSortBtn = new ShareCurrentValueSortButton();
     this.sellAllBtn = new ShareSellAllButton(); 
 
-    ButtonType[] buttons = new ButtonType[] {this.symSortBtn, this.nameSortBtn, this.qtySortBtn, this.ppSortBtn, this.currentValSortBtn, this.sellAllBtn};
+    ButtonType[] buttons = new ButtonType[] {this.symSortBtn, this.nameSortBtn, 
+      this.qtySortBtn, this.ppSortBtn, this.currentValSortBtn, this.sellAllBtn};
     Arrays.asList(buttons).forEach(btn -> ((ButtonType) btn).setMaxWidth(Double.MAX_VALUE));
     ColumnConstraints columnConstraints = new ColumnConstraints();
     columnConstraints.setPercentWidth(100);

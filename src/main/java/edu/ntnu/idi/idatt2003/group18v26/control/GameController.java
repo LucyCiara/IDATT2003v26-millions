@@ -1,46 +1,32 @@
 package edu.ntnu.idi.idatt2003.group18v26.control;
 
-import edu.ntnu.idi.idatt2003.group18v26.model.filehandling.CsvStockReader;
-import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
-import edu.ntnu.idi.idatt2003.group18v26.model.Player;
-import edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange;
-import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
-import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Sale;
-import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
-import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Transaction;
-import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ButtonType;
-import java.io.File;
-import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import javafx.application.Platform;
-import javafx.scene.control.Button;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.filehandling.CsvStockReader;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
-import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Sale;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
-import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ButtonType;
-import javafx.scene.control.Button;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Transaction;
+import java.io.File;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import javafx.application.Platform;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ * The GameController class is responsible for managing the game logic
+ * and interactions between the model and view components.
+ * It implements the GameObserver interface 
+ * to receive updates from the model and update the view accordingly.
+ */
 public class GameController implements GameObserver {
   private static GameController instance;
 
@@ -48,7 +34,7 @@ public class GameController implements GameObserver {
 
   private static final DecimalFormat dispDF = new DecimalFormat("0.00");
   private static final int roundingNum = 2;
-  private static final RoundingMode roundingMode = RoundingMode.HALF_UP; 
+  private static final RoundingMode roundingMode = RoundingMode.HALF_UP;
 
   private boolean symbolToggleShare = false;
   private boolean companyNameToggleShare = false;
@@ -67,9 +53,8 @@ public class GameController implements GameObserver {
   private boolean priceToggleTransaction = false;
   private boolean costRewardToggleTransaction = false;
   private String lastTransactionSort = "Week";
-  
-  private static final Logger logger
-      = LoggerFactory.getLogger(GameController.class);
+
+  private static final Logger logger = LoggerFactory.getLogger(GameController.class);
 
   private CsvStockReader reader;
   private Exchange exchange;
@@ -79,6 +64,11 @@ public class GameController implements GameObserver {
     this.reader = new CsvStockReader();
   }
 
+  /**
+   * Returns the singleton instance of the GameController.
+   *
+   * @return the GameController instance
+   */
   public static GameController getInstance() {
     if (instance == null) {
       instance = new GameController();
@@ -87,14 +77,19 @@ public class GameController implements GameObserver {
     return instance;
   }
 
+  /**
+   * Sets the exchange by reading stock data from the given file and creating a new Exchange object.
+   *
+   * @param file the file to read stock data from,
+   *      if null, the exchange is set to null and the open file button is reset
+   */
   private void setExchange(File file) {
     if (file != null) {
       nav.changeOpenFileButton(file.getName());
       try {
         this.exchange = new Exchange(
-          file.getName(),
-          this.reader.readStocks(file.toPath())
-        );
+            file.getName(),
+            this.reader.readStocks(file.toPath()));
         this.exchange.addObserver(this);
       } catch (IOException e) {
         nav.createErrorPopup("File must be a readable CSV.");
@@ -106,11 +101,18 @@ public class GameController implements GameObserver {
     }
   }
 
+  /**
+   * Sets the exchange by prompting the user
+   * to select a file through the navigation controller's file dialogue.
+   */
   public void setExchangeFromFile() {
     File file = nav.getFileDialogue();
     setExchange(file);
   }
 
+  /**
+   * Creates a player using the name and starting money from the navigation controller.
+   */
   private void createPlayer() {
     String playerName = nav.getPlayerName();
     String playerStartMoney = nav.getPlayerStartMoney();
@@ -134,10 +136,20 @@ public class GameController implements GameObserver {
     }
   }
 
+  /** 
+   * Returns the name of the player.
+   *
+   * @return the player name
+   */
   public String getPlayerName() {
     return this.player.getName();
   }
 
+  /**
+   * Starts the game by creating a player,
+   * loading the exchange data from a file if not already loaded,
+   * updating the game page, gainers and losers, portfolio, stock market, and transaction.
+   */
   public void onGameStart() {
     this.createPlayer();
     if (this.exchange == null) {
@@ -146,7 +158,7 @@ public class GameController implements GameObserver {
       try {
         file = new File(url.toURI());
         this.setExchange(file);
-        
+
       } catch (URISyntaxException e) {
         nav.createWarningPopup("Unexpected exception. Might be caused by sp500.csv missing.");
         logger.error("Unexpected URI exception. Might be caused by sp500.csv missing.", e);
@@ -160,6 +172,10 @@ public class GameController implements GameObserver {
     nav.showGamePage();
   }
 
+  /**
+   * Starts a new game by resetting the player and exchange, clearing the new game fields,
+   * and showing the new game panel.
+   */
   public void onNewGame() {
     this.player = null;
     this.setExchange(null);
@@ -167,34 +183,71 @@ public class GameController implements GameObserver {
     nav.showNewGamePanel();
   }
 
+  /** 
+   * Clears the currently loaded file.
+   */
   public void onClearFile() {
     this.setExchange(null);
   }
 
+  /**
+   * Returns the money of the player.
+   *
+   * @return the player money
+   */
   public String getMoney() {
     return dispDF.format(this.player.getMoney().setScale(roundingNum, roundingMode));
   }
 
+
+  /** 
+   * Returns the status of the player.
+   *
+   * @return the player status
+   */
   public String getPlayerStatus() {
     return this.player.getStatus();
   }
 
+  /** 
+   * Advances the week in the exchange.
+   */
   public void advanceWeek() {
     this.exchange.advance();
   }
 
+  /**
+   * Returns the net worth of the player.
+   *
+   * @return the net worth
+   */
   public String getNetWorth() {
     return this.player.getNetWorth().setScale(roundingNum, roundingMode).toString();
   }
 
+  /** 
+   * Returns the worth of the portfolio.
+   *
+   * @return the portfolio worth
+   */
   public String getPortfolioWorth() {
     return this.player.getPortfolio().getNetWorth().setScale(roundingNum, roundingMode).toString();
   }
 
+  /**
+   * Returns the current week number.
+   *
+   * @return the week number
+   */
   public String getWeek() {
     return Integer.toString(this.exchange.getWeek());
   }
 
+  /**
+   * Returns the names of the shares in the portfolio.
+   *
+   * @return the list of share names
+   */
   public List<String> getPortfolioShareNames() {
     List<String> outputShares = new ArrayList<>();
     for (Share share : this.player.getPortfolio().getShares()) {
@@ -203,58 +256,80 @@ public class GameController implements GameObserver {
     return outputShares;
   }
 
+  /**
+   * Fills the portfolio with the given shares.
+   *
+   * @param shares the list of shares to display
+   */
   private void fillShares(List<Share> shares) {
     for (Share share : shares) {
       nav.addShareToPortfolio(
-        share.stock().getSymbol(),
-        share.stock().getCompany(),
-        share.quantity().setScale(roundingNum, roundingMode).toString(),
-        "$" + share.purchasePrice().setScale(roundingNum, roundingMode).toString(),
-        String.format(
-          "$%s ($%s)",
-          new SaleCalculator(share).calculateTotal().setScale(roundingNum, roundingMode).toString(),
-          share.stock().getSalesPrice().setScale(roundingNum, roundingMode)
-        )
-      );
+          share.stock().getSymbol(),
+          share.stock().getCompany(),
+          share.quantity().setScale(roundingNum, roundingMode).toString(),
+          "$" + share.purchasePrice().setScale(roundingNum, roundingMode).toString(),
+          String.format(
+              "$%s ($%s)",
+              new SaleCalculator(share).calculateTotal()
+              .setScale(roundingNum, roundingMode).toString(),
+              share.stock().getSalesPrice().setScale(roundingNum, roundingMode)));
     }
   }
 
+  /**
+   * Fills the stock market with the given stocks.
+   *
+   * @param stocks the list of stocks to display
+   */
   private void fillStocks(List<Stock> stocks) {
     for (Stock stock : stocks) {
       nav.addStockToStockMarket(
-        stock.getSymbol(),
-        stock.getCompany(),
-        "$" + stock.getSalesPrice().setScale(roundingNum, roundingMode).toString()
-      );
+          stock.getSymbol(),
+          stock.getCompany(),
+          "$" + stock.getSalesPrice().setScale(roundingNum, roundingMode).toString());
     }
   }
 
+  /**
+   * Fills the stock market with the given stocks, limited by the specified number.
+   *
+   * @param stocks the list of stocks to display
+   * @param limit the maximum number of stocks to display
+   */
   private void fillStocks(List<Stock> stocks, int limit) {
     for (int i = 0; i < limit && i < stocks.size(); i++) {
       Stock stock = stocks.get(i);
       nav.addStockToStockMarket(
-        stock.getSymbol(),
-        stock.getCompany(),
-        "$" + stock.getSalesPrice().setScale(roundingNum, roundingMode).toString()
-      );
+          stock.getSymbol(),
+          stock.getCompany(),
+          "$" + stock.getSalesPrice().setScale(roundingNum, roundingMode).toString());
     }
   }
 
+  /**
+   * Fills the transaction history with the given transactions.
+   *
+   * @param transactions the list of transactions to display
+   */
   private void fillTransaction(List<Transaction> transactions) {
     logger.debug("Filling rows with transactions");
     for (Transaction transaction : transactions) {
       logger.debug("Filling transaction of share {}", transaction.getShare().stock().getSymbol());
       nav.addTransactionToTransactionHistory(
-        Integer.toString(transaction.getWeek()),
-        transaction.getClass().getSimpleName(),
-        transaction.getShare().stock().getSymbol(),
-        transaction.getShare().quantity().setScale(roundingNum, roundingMode).toString(),
-        "$" + transaction.getShare().purchasePrice().setScale(roundingNum, roundingMode).toString(),
-        "$" + transaction.getCalculator().calculateTotal().setScale(roundingNum, roundingMode).toString()
-      );
+          Integer.toString(transaction.getWeek()),
+          transaction.getClass().getSimpleName(),
+          transaction.getShare().stock().getSymbol(),
+          transaction.getShare().quantity().setScale(roundingNum, roundingMode).toString(),
+          "$" + transaction.getShare().purchasePrice()
+          .setScale(roundingNum, roundingMode).toString(),
+          "$" + transaction.getCalculator().calculateTotal()
+          .setScale(roundingNum, roundingMode).toString());
     }
   }
 
+  /**
+   * fetches the portfolio and fills the portfolio with the shares.
+   */
   public void fetchPortfolio() {
     this.lastShareSort = "None";
     nav.clearPortfolioShares();
@@ -263,6 +338,9 @@ public class GameController implements GameObserver {
     logger.debug("Portfolio refreshed");
   }
 
+  /**
+   * fetches the stock market and fills the stock market with the stocks.
+   */
   public void fetchStockMarket() {
     this.lastStockSort = "None";
     nav.clearStockMarketStocks();
@@ -272,7 +350,8 @@ public class GameController implements GameObserver {
 
   private List<Transaction> getTransactions() {
     List<Transaction> transactions = new ArrayList<Transaction>();
-    for (int counter = this.player.getTransactionArchive().countDistinctWeeks(), i = 0; counter > 0; i++) {
+    for (int counter = this.player.getTransactionArchive()
+          .countDistinctWeeks(), i = 0; counter > 0; i++) {
       List<Transaction> batch = (this.player.getTransactionArchive().getTransactions(i));
       if (batch.size() > 0) {
         logger.debug("Found transactions {}", batch);
@@ -283,6 +362,13 @@ public class GameController implements GameObserver {
     return transactions;
   }
 
+  /**
+   * fetches transactions sorted by week
+   * and fills the transaction history with the sorted transactions.
+   *
+   * @param toggle if true, toggles the sorting order between ascending and descending.
+   *      If false, keeps the current sorting order.
+   */
   public void fetchWeekTransactionHistory(boolean toggle) {
     logger.debug("Fetching transactions by week");
     this.lastTransactionSort = "Week";
@@ -297,14 +383,22 @@ public class GameController implements GameObserver {
     this.fillTransaction(transactions);
   }
 
+  /**
+   * fetches transactions sorted by type, with purchases first and sales last,
+   * and fills the transaction history with the sorted transactions.
+   *
+   * @param toggle if true, toggles the sorting order between purchases first and sales first. 
+   *         If false, keeps the current sorting order.
+   */
   public void fetchTypeTransactionHistory(boolean toggle) {
     this.lastTransactionSort = "Type";
     nav.clearTransactionHistoryTransactions();
     List<Transaction> transactions = getTransactions();
-    List<Transaction> transactionsPurchases
-      = transactions.stream().filter(t -> t.getClass().getSimpleName().equals("Purchase")).toList();
-    List<Transaction> transactionsSales
-      = transactions.stream().filter(t -> t.getClass().getSimpleName().equals("Sale")).toList();
+    List<Transaction> transactionsPurchases = transactions.stream()
+        .filter(t -> t.getClass().getSimpleName().equals("Purchase")).toList();
+    List<Transaction> transactionsSales = transactions.stream()
+        .filter(t -> t.getClass().getSimpleName().equals("Sale"))
+        .toList();
     transactions.clear();
     transactions.addAll(transactionsPurchases);
     transactions.addAll(transactionsSales);
@@ -312,11 +406,17 @@ public class GameController implements GameObserver {
       transactions = transactions.reversed();
     }
     if (toggle) {
-      this.weekToggleTransaction = !this.weekToggleTransaction;
+      this.typeToggleTransaction = !this.typeToggleTransaction;
     }
     this.fillTransaction(transactions);
   }
 
+  /**
+   * fetches shares sorted by symbol and fills the portfolio with the sorted shares.
+   *
+   * @param toggle if true, toggles the sorting order between ascending and descending.
+   *      If false, keeps the current sorting order.
+   */
   public void fetchSymbolSortedPortfolio(boolean toggle) {
     this.lastShareSort = "Symbol";
     nav.clearPortfolioShares();
@@ -330,6 +430,12 @@ public class GameController implements GameObserver {
     this.fillShares(shares);
   }
 
+  /**
+   * fetches stocks sorted by symbol and fills the stock market with the sorted stocks.
+   *
+   * @param toggle if true, toggles the sorting order between ascending and descending.
+   *      If false, keeps the current sorting order.
+   */
   public void fetchSymbolSortedStockMarket(boolean toggle) {
     this.lastStockSort = "Symbol";
     nav.clearStockMarketStocks();
@@ -343,12 +449,19 @@ public class GameController implements GameObserver {
     this.fillStocks(stocks);
   }
 
+  /**
+   * fetches transactions sorted by stock
+   * and fills the transaction history with the sorted transactions.
+   *
+   * @param toggle if true, toggles the sorting order between ascending and descending.
+   *      If false, keeps the current sorting order.
+   */
   public void fetchStockSortedTransactionHistory(boolean toggle) {
     this.lastTransactionSort = "Stock";
     nav.clearTransactionHistoryTransactions();
     List<Transaction> transactions = this.getTransactions().stream().sorted(
-      (t1, t2) -> t1.getShare().stock().getSymbol().compareTo(t2.getShare().stock().getSymbol())
-    ).toList();
+        (t1, t2) -> t1.getShare().stock().getSymbol()
+        .compareTo(t2.getShare().stock().getSymbol())).toList();
     if (this.stockToggleTransaction) {
       transactions = transactions.reversed();
     }
@@ -358,6 +471,12 @@ public class GameController implements GameObserver {
     this.fillTransaction(transactions);
   }
 
+  /**
+   * fetches shares sorted by company name and fills the portfolio with the sorted shares.
+   *
+   * @param toggle if true, toggles the sorting order between ascending and descending.
+   *      If false, keeps the current sorting order.
+   */
   public void fetchCompanySortedPortfolio(boolean toggle) {
     this.lastShareSort = "Company";
     nav.clearPortfolioShares();
@@ -371,6 +490,12 @@ public class GameController implements GameObserver {
     this.fillShares(shares);
   }
 
+  /**
+   * fetches stocks sorted by company name and fills the stock market with the sorted stocks.
+   *
+   * @param toggle if true, toggles the sorting order between ascending and descending.
+    *      If false, keeps the current sorting order.
+   */
   public void fetchCompanySortedStockMarket(boolean toggle) {
     this.lastStockSort = "Company";
     nav.clearStockMarketStocks();
@@ -384,6 +509,12 @@ public class GameController implements GameObserver {
     this.fillStocks(stocks);
   }
 
+  /**
+   * fetches shares sorted by quantity and fills the portfolio with the sorted shares.
+   *
+   * @param toggle if true, toggles the sorting order between ascending and descending.
+   *     If false, keeps the current sorting order.
+   */
   public void fetchQuantitySortedPortfolio(boolean toggle) {
     this.lastShareSort = "Quantity";
     nav.clearPortfolioShares();
@@ -397,12 +528,18 @@ public class GameController implements GameObserver {
     this.fillShares(shares);
   }
 
+  /**
+   * fetches transactions sorted by quantity
+   * and fills the transaction history with the sorted transactions.
+   *
+   * @param toggle if true, toggles the sorting order between ascending and descending. 
+   *      If false, keeps the current sorting order.
+   */
   public void fetchQuantitySortedTransactionHistory(boolean toggle) {
     this.lastTransactionSort = "Quantity";
     nav.clearTransactionHistoryTransactions();
     List<Transaction> transactions = this.getTransactions().stream().sorted(
-      (t1,t2) -> t1.getShare().quantity().compareTo(t2.getShare().quantity())
-    ).toList();
+        (t1, t2) -> t1.getShare().quantity().compareTo(t2.getShare().quantity())).toList();
     if (this.quantityToggleTransaction) {
       transactions = transactions.reversed();
     }
@@ -412,6 +549,12 @@ public class GameController implements GameObserver {
     this.fillTransaction(transactions);
   }
 
+  /**
+   * fetches shares sorted by purchase price and fills the portfolio with the sorted shares.
+   *
+   * @param toggle if true, toggles the sorting order between ascending and descending. 
+   *      If false, keeps the current sorting order.
+   */
   public void fetchPurchasePriceSortedPortfolio(boolean toggle) {
     this.lastShareSort = "Purchase Price";
     nav.clearPortfolioShares();
@@ -425,6 +568,12 @@ public class GameController implements GameObserver {
     this.fillShares(shares);
   }
 
+  /**
+   * fetches stocks sorted by purchase price and fills the stock market with the sorted stocks.
+   *
+   * @param toggle if true, toggles the sorting order between ascending and descending. 
+   *      If false, keeps the current sorting order.
+   */
   public void fetchPurchasePriceSortedStockMarket(boolean toggle) {
     this.lastStockSort = "Purchase Price";
     nav.clearStockMarketStocks();
@@ -438,12 +587,19 @@ public class GameController implements GameObserver {
     this.fillStocks(stocks);
   }
 
+  /**
+   * fetches transactions sorted by purchase price
+   * and fills the transaction history with the sorted transactions.
+   *
+   * @param toggle if true, toggles the sorting order between ascending and descending. 
+   *          If false, keeps the current sorting order.
+   */
   public void fetchPriceSortedTransactionHistory(boolean toggle) {
     this.lastTransactionSort = "Price";
     nav.clearTransactionHistoryTransactions();
     List<Transaction> transactions = this.getTransactions().stream().sorted(
-      (t1,t2) -> t1.getShare().purchasePrice().compareTo(t2.getShare().purchasePrice())
-    ).toList();
+        (t1, t2) -> t1.getShare().purchasePrice()
+            .compareTo(t2.getShare().purchasePrice())).toList();
     if (this.priceToggleTransaction) {
       transactions = transactions.reversed();
     }
@@ -453,6 +609,12 @@ public class GameController implements GameObserver {
     this.fillTransaction(transactions);
   }
 
+  /**
+   * fetches shares sorted by current value, calculated by the SaleCalculator,
+   * and fills the portfolio with the sorted shares.
+   *
+   * @param toggle if true, toggles the sorting order between ascending and descending.
+   */
   public void fetchCurrentValueSortedPortfolio(boolean toggle) {
     this.lastShareSort = "Current Value";
     nav.clearPortfolioShares();
@@ -466,12 +628,19 @@ public class GameController implements GameObserver {
     this.fillShares(shares);
   }
 
+  /**
+   * fetches transactions sorted by total cost/reward, calculated by the SaleCalculator, 
+   * and fills the transaction history with the sorted transactions.
+   *
+   * @param toggle if true, toggles the sorting order between ascending and descending. 
+   *      If false, keeps the current sorting order.
+   */
   public void fetchCostRewardSortedTransactionHistory(boolean toggle) {
     this.lastTransactionSort = "CostReward";
     nav.clearTransactionHistoryTransactions();
     List<Transaction> transactions = this.getTransactions().stream().sorted(
-      (t1,t2) -> t1.getCalculator().calculateTotal().compareTo(t2.getCalculator().calculateTotal())
-    ).toList();
+        (t1, t2) -> t1.getCalculator().calculateTotal()
+            .compareTo(t2.getCalculator().calculateTotal())).toList();
     if (this.costRewardToggleTransaction) {
       transactions = transactions.reversed();
     }
@@ -481,6 +650,10 @@ public class GameController implements GameObserver {
     this.fillTransaction(transactions);
   }
 
+  /**
+   * fetches the portfolio and fills 
+   * the portfolio with the shares, keeping the current sorting order.
+   */
   private void fetchRefreshPortfolio() {
     logger.debug("Refreshing portfolio");
     if (this.lastShareSort.equals("None")) {
@@ -501,6 +674,9 @@ public class GameController implements GameObserver {
     }
   }
 
+  /**
+   * Refreshes the stock market based on the last sorting order.
+   */
   private void fetchRefreshStockMarket() {
     logger.debug("Refreshing stock market");
     if (this.lastStockSort.equals("None")) {
@@ -517,6 +693,9 @@ public class GameController implements GameObserver {
     }
   }
 
+  /**
+   * Refreshes the transaction history based on the last sorting order.
+   */
   private void fetchRefreshTransactionHistory() {
     logger.debug("Refreshing transaction history");
     if (this.lastTransactionSort.equals("Week")) {
@@ -537,10 +716,22 @@ public class GameController implements GameObserver {
     }
   }
 
+  /**
+   * Sells a share with the given stock symbol.
+   *
+   * @param symbol the stock symbol of the share to sell
+   */
   public void sellShare(String symbol) {
     this.exchange.sell(this.player.getPortfolio().getShare(symbol), this.player);
   }
 
+  /**
+   * Attempts to buy a share with the given stock symbol and quantity.
+   * If the quantity is not a valid number, an error popup is shown.
+   *
+   * @param symbol the stock symbol of the share to buy
+   * @param quantity the quantity of shares to buy, expected to be a valid number in string format
+   */
   public void buyShare(String symbol, String quantity) {
     try {
       this.exchange.buy(symbol, new BigDecimal(quantity), this.player);
@@ -549,6 +740,9 @@ public class GameController implements GameObserver {
     }
   }
 
+  /**
+   * Sells all shares in the player's portfolio.
+   */
   public void sellAllShares() {
     logger.debug("Selling all shares");
     for (Share share : new ArrayList<>(this.player.getPortfolio().getShares())) {
@@ -556,12 +750,25 @@ public class GameController implements GameObserver {
     }
   }
 
+  /**
+   * Searches shares in the player's portfolio by stock symbol 
+   * or company name depending on the query.
+   *
+   * @param query the search query input by the user, 
+   *        can be a part of the stock symbol or company name
+   */
   public void searchShare(String query) {
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().search(query);
     this.fillShares(shares);
   }
 
+  /**
+   * Searches stocks by symbol or company name depending on the query.
+   *
+   * @param query the search query input by the user, 
+   *        can be a part of the stock symbol or company name
+   */
   public void searchStock(String query) {
     nav.clearStockMarketStocks();
     if (query.isBlank()) {
@@ -572,52 +779,91 @@ public class GameController implements GameObserver {
     }
   }
 
+  /**
+   * Searches transactions by week, type, stock symbol, quantity, 
+   * purchase price or total cost/reward depending on the query.
+   * The search query, can be a part of the stock symbol,
+   * company name, or a number representing week, quantity, price or cost/reward
+   *
+   * @param query the search query input by the user, can be a part of the stock symbol,
+   *              company name, or a number representing week, quantity, price or cost/reward
+   */
   public void searchTransaction(String query) {
     nav.clearTransactionHistoryTransactions();
     List<Transaction> results = this.getTransactions().stream()
-      .filter(t -> Integer.toString(t.getWeek()).contains(query)
-          || t.getClass().getSimpleName().toLowerCase().contains(query.toLowerCase())
-          || t.getShare().stock().getSymbol().toLowerCase().contains(query.toLowerCase())
-          || t.getShare().quantity().toString().contains(query)
-          || t.getShare().purchasePrice().toString().contains(query)
-          || t.getCalculator().calculateTotal().toString().contains(query)
-      ).toList();
+        .filter(t -> Integer.toString(t.getWeek()).contains(query)
+            || t.getClass().getSimpleName().toLowerCase().contains(query.toLowerCase())
+            || t.getShare().stock().getSymbol().toLowerCase().contains(query.toLowerCase())
+            || t.getShare().quantity().toString().contains(query)
+            || t.getShare().purchasePrice().toString().contains(query)
+            || t.getCalculator().calculateTotal().toString().contains(query))
+        .toList();
     this.fillTransaction(results);
   }
 
+  /**
+   * Returns the symbol of the gainer at the specified index.
+   *
+   * @param i the index of the gainer
+   * @return the symbol of the gainer
+   */
   public String getGainerSymbol(int i) {
-    return this.exchange.getGainers(i+1).get(i).getSymbol();
+    return this.exchange.getGainers(i + 1).get(i).getSymbol();
   }
 
+  /**
+   * Returns the gain of the gainer at the specified index.
+   *
+   * @param i the index of the gainer
+   * @return the gain of the gainer
+   */
   public String getGainerGain(int i) {
-    return this.exchange.getGainers(i+1).get(i).getLatestPriceChange().setScale(roundingNum, roundingMode).toString();
+    return this.exchange.getGainers(i + 1).get(i)
+    .getLatestPriceChange().setScale(roundingNum, roundingMode).toString();
   }
 
+  /**
+   * Returns the symbol of the loser at the specified index.
+   *
+   * @param i the index of the loser
+   * @return the symbol of the loser
+   */
   public String getLoserSymbol(int i) {
-    return this.exchange.getLosers(i+1).get(i).getSymbol();
+    return this.exchange.getLosers(i + 1).get(i).getSymbol();
   }
 
+  /**
+   * Returns the gain of the loser at the specified index.
+   *
+   * @param i the index of the loser
+   * @return the gain of the loser
+   */
   public String getLoserGain(int i) {
-    return this.exchange.getLosers(i+1).get(i).getLatestPriceChange().setScale(roundingNum, roundingMode).toString();
+    return this.exchange.getLosers(i + 1).get(i)
+    .getLatestPriceChange().setScale(roundingNum, roundingMode).toString();
   }
 
+  /**
+   * Sells all shares and prints final stats to console before exiting the program.
+    * Used when player has lost or won the game.
+   */
   public void sellAllAndFinish() {
     this.sellAllShares();
     String[] lines = new String[] {
-      "Player:",
-      this.getPlayerName(),
-      "",
-      "Status:",
-      this.getPlayerStatus(),
-      "",
-      "Total Money:",
-      this.getMoney(),
-      "",
-      "Total Number of trades:",
-      Integer.toString(this.getTransactions().size()),
-      "",
-      "Number of Weeks:",
-      this.getWeek()
+        "Player:",
+        this.getPlayerName(),
+        "",
+        "Status:",
+        this.getPlayerStatus(),
+        "",
+        "Total Money:",
+        this.getMoney(),
+        "",
+        "Total Number of trades:",
+        Integer.toString(this.getTransactions().size()),
+        "",
+        "Number of Weeks:",
+        this.getWeek()
     };
     System.out.println("---------");
     for (String line : lines) {

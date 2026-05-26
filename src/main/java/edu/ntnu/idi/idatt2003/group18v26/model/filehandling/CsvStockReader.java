@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
  * on a new line with
  * the format:
  * symbol,company,price
- *
  * Lines starting with '#' are treated as comments and are ignored during
  * reading.
  * The reader ensures that the stock data is correctly parsed and handles any
@@ -65,7 +64,7 @@ public class CsvStockReader implements StockReader {
 
   /**
    * Parses a line of CSV data into a Stock object.
-   * 
+   *
    * @param line the line of CSV data to parse.
    * @return a Stock object created from the parsed data.
    * @throws IllegalArgumentException if the line is not in the expected format or

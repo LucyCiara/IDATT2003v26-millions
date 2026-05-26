@@ -6,14 +6,19 @@ import edu.ntnu.idi.idatt2003.group18v26.view.components.displays.NameDisplay;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.displays.StatusDisplay;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.text.Font;
 
+/**
+ * Class for the game header info panel component.
+ */
 public class GameHeaderInfoPanel extends HBox {
   private NameDisplay nameDisp;
   private MoneyDisplay moneyDisp;
   private StatusDisplay statusDisp;
   private MenuButton menuBtn;
 
+  /**
+   * Constructs a new GameHeaderInfoPanel.
+   */
   public GameHeaderInfoPanel() {
     this.nameDisp = new NameDisplay();
     this.moneyDisp = new MoneyDisplay();
@@ -24,6 +29,9 @@ public class GameHeaderInfoPanel extends HBox {
     this.getChildren().forEach(obj -> setHgrow(obj, Priority.ALWAYS));
   }
 
+  /**
+   * Updates all the displays in the info panel.
+   */
   public void updateDisplays() {
     this.nameDisp.update();
     this.moneyDisp.update();

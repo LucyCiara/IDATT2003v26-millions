@@ -4,17 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
-
+/**
+ * Test class for CsvStockReader.
+ */
 public class CsvStockReaderTest {
   private CsvStockReader reader;
 
@@ -37,7 +38,7 @@ public class CsvStockReaderTest {
   }
 
   @Test
-  void testReadStockWithInvalidPathThrowsIOException() throws IOException {
+  void testReadStockWithInvalidPathThrowsIoException() throws IOException {
     Path invalidPath = Path.of("src/test/resources/nonexistent.csv");
 
     IOException exception = assertThrows(IOException.class, () -> reader.readStocks(invalidPath));
@@ -71,7 +72,8 @@ public class CsvStockReaderTest {
 
       IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
           () -> reader.readStocks(tempFile));
-      assertEquals("Invalid stock data: Invalid,Stock,NaBD Third column must be castable as BigDecimal",
+      assertEquals("Invalid stock data: Invalid,Stock," 
+          + "NaBD Third column must be castable as BigDecimal",
           exception.getMessage());
     } finally {
       Files.deleteIfExists(tempFile);
