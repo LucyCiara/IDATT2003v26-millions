@@ -84,4 +84,8 @@ public class GamePage extends BorderPane {
   public void updateStockContent() {
     this.stockContent.update();
   }
+
+  public boolean stockContentIsInitialized() {
+    return this.stockContent != null ? true : false;
+  }
 }

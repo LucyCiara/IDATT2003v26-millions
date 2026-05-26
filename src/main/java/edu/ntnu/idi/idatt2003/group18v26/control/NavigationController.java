@@ -175,6 +175,8 @@ public class NavigationController {
   }
 
   public void updateStockContent() {
-    this.gamePage.updateStockContent();
+    if (this.gamePage.stockContentIsInitialized()) {
+      this.gamePage.updateStockContent();
+    }
   }
 }
