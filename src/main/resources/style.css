@@ -58,3 +58,8 @@
   -fx-border-color: black;
   -fx-border-width: 75%;
 }
+
+#pause {
+  -fx-background-color: black;
+  -fx-opacity: 0.5;
+}
