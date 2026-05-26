@@ -10,7 +10,7 @@ public class PortfolioSearchBar extends SearchBar {
     super();
 
     this.textProperty().addListener((observable, oldValue, newValue) -> {
-      GameController.getInstance().search(newValue);
+      GameController.getInstance().searchShare(newValue);
     });
 
     setEvent(new EventHandler<KeyEvent>() {
