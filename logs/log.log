@@ -3,263 +3,33 @@
 [JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.filehandling.CsvStockReader - Reading stocks from file: C:\Users\LucyCiara\Documents\Projects\IDATT2003v26-millions\target\classes\sp500.csv
 [JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.filehandling.CsvStockReader - Successfully loaded 503 stocks from file
 [JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Observer added: GameController
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: TEL x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: TEL x1 for 228.29580
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 228.29580, new balance: 899999999999999771.70420
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999999771.70420
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: TEL x1
+[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
+[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
+[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
+[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing stock market
+[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: NVDA x2 at week 0
+[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: NVDA x2 for 384.45270
+[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player tes withdrew 384.45270, new balance: 8999999615.54730
+[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 8999999615.54730
+[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: NVDA x2
 [JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
 [JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
 [JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
 [JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
 [JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
 [JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: TEL x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - TEL x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: BAX x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: BAX x1 for 22.41150
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 22.41150, new balance: 899999999999999749.29270
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999999749.29270
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: BAX x1
+[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: NVDA x2
+[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - NVDA x2
+[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: GOOG x3 at week 0
+[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: GOOG x3 for 939.53430
+[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player tes withdrew 939.53430, new balance: 8999998676.01300
+[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 8999998676.01300
+[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: GOOG x3
 [JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
 [JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
 [JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
 [JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
 [JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
 [JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: BAX x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - BAX x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: FIX x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: FIX x1 for 1352.34810
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 1352.34810, new balance: 899999999999998396.94460
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999998396.94460
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: FIX x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: FIX x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - FIX x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: FIS x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: FIS x1 for 48.97365
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 48.97365, new balance: 899999999999998347.97095
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999998347.97095
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: FIS x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: FIS x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - FIS x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: RVTY x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: RVTY x1 for 101.39445
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 101.39445, new balance: 899999999999998246.57650
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999998246.57650
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: RVTY x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: RVTY x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - RVTY x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: WDAY x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: WDAY x1 for 145.91595
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 145.91595, new balance: 899999999999998100.66055
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999998100.66055
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: WDAY x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: WDAY x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - WDAY x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: GRMN x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: GRMN x1 for 207.55260
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 207.55260, new balance: 899999999999997893.10795
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999997893.10795
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: GRMN x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: GRMN x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - GRMN x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: CCL x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: CCL x1 for 32.96400
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 32.96400, new balance: 899999999999997860.14395
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999997860.14395
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: CCL x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: CCL x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - CCL x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: LUV x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: LUV x1 for 51.91830
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 51.91830, new balance: 899999999999997808.22565
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999997808.22565
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: LUV x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: LUV x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - LUV x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: TDY x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: TDY x1 for 661.20960
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 661.20960, new balance: 899999999999997147.01605
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999997147.01605
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: TDY x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: TDY x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - TDY x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: CCI x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: CCI x1 for 86.08830
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 86.08830, new balance: 899999999999997060.92775
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999997060.92775
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: CCI x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: CCI x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - CCI x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: MNST x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: MNST x1 for 81.28440
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 81.28440, new balance: 899999999999996979.64335
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999996979.64335
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: MNST x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: MNST x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - MNST x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: BAC x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: BAC x1 for 54.33030
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 54.33030, new balance: 899999999999996925.31305
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999996925.31305
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: BAC x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: BAC x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - BAC x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: DXCM x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: DXCM x1 for 68.53095
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 68.53095, new balance: 899999999999996856.78210
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999996856.78210
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: DXCM x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: DXCM x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - DXCM x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: BKNG x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: BKNG x1 for 4344.46425
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 4344.46425, new balance: 899999999999992512.31785
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999992512.31785
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: BKNG x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: BKNG x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - BKNG x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: UBER x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: UBER x1 for 71.07360
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 71.07360, new balance: 899999999999992441.24425
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999992441.24425
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: UBER x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: UBER x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - UBER x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: SPGI x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: SPGI x1 for 398.63325
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 398.63325, new balance: 899999999999992042.61100
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999992042.61100
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: SPGI x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: SPGI x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - SPGI x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: EFX x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: EFX x1 for 198.27645
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 198.27645, new balance: 899999999999991844.33455
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999991844.33455
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: EFX x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: EFX x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - EFX x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: TDG x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: TDG x1 for 1331.88630
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 1331.88630, new balance: 899999999999990512.44825
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999990512.44825
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: TDG x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: TDG x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - TDG x1
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Buy order: COST x1 at week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase - Purchase committed: COST x1 for 984.60855
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Player test withdrew 984.60855, new balance: 899999999999989527.83970
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.Player - Notifying observers: money changed to 899999999999989527.83970
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Adding share to portfolio: COST x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Portfolio - Notifying observers: Portfolio changed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Was notified by portfolio change
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Refreshing portfolio
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Clearing shares
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.control.GameController - Portfolio refreshed
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionArchive - Adding transaction to archive: Purchase week 0
-[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: COST x1
-[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - COST x1
+[JavaFX Application Thread] INFO edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Purchase completed: GOOG x3
+[JavaFX Application Thread] DEBUG edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange - Notifying observers: purchase completed - GOOG x3

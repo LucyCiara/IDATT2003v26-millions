@@ -33,12 +33,15 @@ public class GameController implements GameObserver {
 
   private static NavigationController nav;
 
-  private boolean symbolToggle = false;
-  private boolean companyNameToggle = false;
-  private boolean quantityToggle = false;
-  private boolean purchasePriceToggle = false;
-  private boolean currentValueToggle = false;
+  private boolean symbolToggleShare = false;
+  private boolean companyNameToggleShare = false;
+  private boolean quantityToggleShare = false;
+  private boolean purchasePriceToggleShare = false;
+  private boolean currentValueToggleShare = false;
   private String lastShareSort = "None";
+  private boolean symbolToggleStock = false;
+  private boolean companyNameToggleStock = false;
+  private boolean purchasePriceToggleStock = false;
   private String lastStockSort = "None";
   
   private static final Logger logger
@@ -126,10 +129,10 @@ public class GameController implements GameObserver {
       }
     }
     nav.updateGamePage();
+    nav.updateGainersAndLosers();
+    this.fetchRefreshPortfolio();
+    this.fetchRefreshStockMarket();
     nav.showGamePage();
-    for (int i = 0; i < 20; i++) {
-      this.exchange.buy(this.exchange.getGainers(20).get(i).getSymbol(), new BigDecimal("1"), this.player); // TODO: remove these lines
-    }
   }
 
   public void onNewGame() {
@@ -197,6 +200,17 @@ public class GameController implements GameObserver {
     }
   }
 
+  private void fillStocks(List<Stock> stocks, int limit) {
+    for (int i = 0; i < limit && i < stocks.size(); i++) {
+      Stock stock = stocks.get(i);
+      nav.addStockToStockMarket(
+        stock.getSymbol(),
+        stock.getCompany(),
+        stock.getSalesPrice().toString()
+      );
+    }
+  }
+
   public void fetchPortfolio() {
     this.lastShareSort = "None";
     nav.clearPortfolioShares();
@@ -205,48 +219,74 @@ public class GameController implements GameObserver {
     logger.debug("Portfolio refreshed");
   }
 
-  // public void fetchStockMarket() {
-  //   this.lastStockSort = "None";
-  //   nav.clearStockMarketStocks();
-  //   List<Stock> stocks = this.exchange.getAllStock();
-  //   this.fillStock
-  // }
+  public void fetchStockMarket() {
+    this.lastStockSort = "None";
+    nav.clearStockMarketStocks();
+    List<Stock> stocks = this.exchange.getAllStock();
+    this.fillStocks(stocks, 10);
+  }
 
   public void fetchSymbolSortedPortfolio(boolean toggle) {
     this.lastShareSort = "Symbol";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesBySymbol();
-    if (this.symbolToggle) {
+    if (this.symbolToggleShare) {
       shares = shares.reversed();
     }
     if (toggle) {
-      this.symbolToggle = !this.symbolToggle;
+      this.symbolToggleShare = !this.symbolToggleShare;
     }
     this.fillShares(shares);
+  }
+
+  public void fetchSymbolSortedStockMarket(boolean toggle) {
+    this.lastStockSort = "Symbol";
+    nav.clearStockMarketStocks();
+    List<Stock> stocks = this.exchange.getAllStockBySymbol();
+    if (this.symbolToggleStock) {
+      stocks = stocks.reversed();
+    }
+    if (toggle) {
+      this.symbolToggleStock = !this.symbolToggleStock;
+    }
+    this.fillStocks(stocks);
   }
 
   public void fetchCompanySortedPortfolio(boolean toggle) {
     this.lastShareSort = "Company";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByCompany();
-    if (this.companyNameToggle) {
+    if (this.companyNameToggleShare) {
       shares = shares.reversed();
     }
     if (toggle) {
-      this.companyNameToggle = !this.companyNameToggle;
+      this.companyNameToggleShare = !this.companyNameToggleShare;
     }
     this.fillShares(shares);
+  }
+
+  public void fetchCompanySortedStockMarket(boolean toggle) {
+    this.lastStockSort = "Company";
+    nav.clearStockMarketStocks();
+    List<Stock> stocks = this.exchange.getAllStockByCompany();
+    if (this.companyNameToggleStock) {
+      stocks = stocks.reversed();
+    }
+    if (toggle) {
+      this.companyNameToggleStock = !this.companyNameToggleStock;
+    }
+    this.fillStocks(stocks);
   }
 
   public void fetchQuantitySortedPortfolio(boolean toggle) {
     this.lastShareSort = "Quantity";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByQuantity();
-    if (this.quantityToggle) {
+    if (this.quantityToggleShare) {
       shares = shares.reversed();
     }
     if (toggle) {
-      this.quantityToggle = !this.quantityToggle;
+      this.quantityToggleShare = !this.quantityToggleShare;
     }
     this.fillShares(shares);
   }
@@ -255,24 +295,37 @@ public class GameController implements GameObserver {
     this.lastShareSort = "Purchase Price";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByPurchasePrice();
-    if (this.purchasePriceToggle) {
+    if (this.purchasePriceToggleShare) {
       shares = shares.reversed();
     }
     if (toggle) {
-      this.purchasePriceToggle = !this.purchasePriceToggle;
+      this.purchasePriceToggleShare = !this.purchasePriceToggleShare;
     }
     this.fillShares(shares);
+  }
+
+  public void fetchPurchasePriceSortedStockMarket(boolean toggle) {
+    this.lastStockSort = "Purchase Price";
+    nav.clearStockMarketStocks();
+    List<Stock> stocks = this.exchange.getAllStockByPrice();
+    if (this.purchasePriceToggleStock) {
+      stocks = stocks.reversed();
+    }
+    if (toggle) {
+      this.purchasePriceToggleStock = !this.purchasePriceToggleStock;
+    }
+    this.fillStocks(stocks);
   }
 
   public void fetchCurrentValueSortedPortfolio(boolean toggle) {
     this.lastShareSort = "Current Value";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByCurrentValue();
-    if (this.currentValueToggle) {
+    if (this.currentValueToggleShare) {
       shares = shares.reversed();
     }
     if (toggle) {
-      this.currentValueToggle = !this.currentValueToggle;
+      this.currentValueToggleShare = !this.currentValueToggleShare;
     }
     this.fillShares(shares);
   }
@@ -281,6 +334,8 @@ public class GameController implements GameObserver {
     logger.debug("Refreshing portfolio");
     if (this.lastShareSort.equals("None")) {
       this.fetchPortfolio();
+    } else if (this.lastShareSort.equals("Symbol")) {
+      this.fetchSymbolSortedPortfolio(false);
     } else if (this.lastShareSort.equals("Company")) {
       this.fetchCompanySortedPortfolio(false);
     } else if (this.lastShareSort.equals("Quantity")) {
@@ -295,8 +350,32 @@ public class GameController implements GameObserver {
     }
   }
 
+  private void fetchRefreshStockMarket() {
+    logger.debug("Refreshing stock market");
+    if (this.lastStockSort.equals("None")) {
+      this.fetchStockMarket();
+    } else if (this.lastStockSort.equals("Symbol")) {
+      this.fetchSymbolSortedStockMarket(false);
+    } else if (this.lastStockSort.equals("Company")) {
+      this.fetchCompanySortedStockMarket(false);
+    } else if (this.lastStockSort.equals("Purchase Price")) {
+      this.fetchPurchasePriceSortedStockMarket(false);
+    } else {
+      logger.warn("Impossible state achieved");
+      this.fetchPortfolio();
+    }
+  }
+
   public void sellShare(String symbol) {
     this.exchange.sell(this.player.getPortfolio().getShare(symbol), this.player);
+  }
+
+  public void buyShare(String symbol, String quantity) {
+    try {
+      this.exchange.buy(symbol, new BigDecimal(quantity), this.player);
+    } catch (Exception e) {
+      nav.createErrorPopup("Quantity must be a valid number.");
+    }
   }
 
   public void sellAllShares() {
@@ -312,6 +391,27 @@ public class GameController implements GameObserver {
     this.fillShares(shares);
   }
 
+  public void searchStock(String query) {
+    nav.clearStockMarketStocks();
+    List<Stock> stocks = this.exchange.findStocks(query);
+    this.fillStocks(stocks);
+  }
+
+  public String getGainerSymbol(int i) {
+    return this.exchange.getGainers(i+1).get(i).getSymbol();
+  }
+
+  public String getGainerGain(int i) {
+    return this.exchange.getGainers(i+1).get(i).getLatestPriceChange().toString();
+  }
+
+  public String getLoserSymbol(int i) {
+    return this.exchange.getLosers(i+1).get(i).getSymbol();
+  }
+
+  public String getLoserGain(int i) {
+    return this.exchange.getLosers(i+1).get(i).getLatestPriceChange().toString();
+  }
 
 
   @Override
@@ -319,11 +419,14 @@ public class GameController implements GameObserver {
     System.out.println("test");
     nav.updateGamePage();
     this.fetchRefreshPortfolio();
+    this.fetchRefreshStockMarket();
   }
 
   @Override
   public void onStockPriceChanged(String symbol) {
     nav.updateGamePage();
+    nav.updateGainersAndLosers();
+    this.fetchRefreshStockMarket();
   }
 
   @Override

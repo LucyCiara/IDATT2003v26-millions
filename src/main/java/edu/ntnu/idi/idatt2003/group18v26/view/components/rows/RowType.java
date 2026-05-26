@@ -1,13 +1,13 @@
-package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game;
+package edu.ntnu.idi.idatt2003.group18v26.view.components.rows;
 
 import java.util.List;
 
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
-public class ShareRows extends ScrollPane {
+public class RowType extends ScrollPane {
   private VBox contents;
-  public ShareRows() {
+  public RowType() {
     this.contents = new VBox();
     this.contents.getStyleClass().add("page");
     this.contents.setFillWidth(true);
@@ -19,12 +19,6 @@ public class ShareRows extends ScrollPane {
 
   public void clear() {
     this.contents.getChildren().clear();
-  }
-
-  public void addItem(String shareSymbol, String shareName, String shareQty, String purchasePrice, String currentValue) {
-    this.contents.getChildren().add(
-        new ShareItem(shareSymbol, shareName, shareQty, purchasePrice, currentValue)
-    );
   }
 
   public VBox getContents() {
