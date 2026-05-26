@@ -38,22 +38,22 @@ public class GameController implements GameObserver {
 
   private static final int stockLimit = 20;
 
-  private boolean symbolToggleShare = false;
-  private boolean companyNameToggleShare = false;
-  private boolean quantityToggleShare = false;
-  private boolean purchasePriceToggleShare = false;
-  private boolean currentValueToggleShare = false;
+  private boolean symbolToggleShare = true;
+  private boolean companyNameToggleShare = true;
+  private boolean quantityToggleShare = true;
+  private boolean purchasePriceToggleShare = true;
+  private boolean currentValueToggleShare = true;
   private String lastShareSort = "None";
-  private boolean symbolToggleStock = false;
-  private boolean companyNameToggleStock = false;
-  private boolean purchasePriceToggleStock = false;
+  private boolean symbolToggleStock = true;
+  private boolean companyNameToggleStock = true;
+  private boolean purchasePriceToggleStock = true;
   private String lastStockSort = "None";
-  private boolean weekToggleTransaction = false;
-  private boolean typeToggleTransaction = false;
-  private boolean stockToggleTransaction = false;
-  private boolean quantityToggleTransaction = false;
-  private boolean priceToggleTransaction = false;
-  private boolean costRewardToggleTransaction = false;
+  private boolean weekToggleTransaction = true;
+  private boolean typeToggleTransaction = true;
+  private boolean stockToggleTransaction = true;
+  private boolean quantityToggleTransaction = true;
+  private boolean priceToggleTransaction = true;
+  private boolean costRewardToggleTransaction = true;
   private String lastTransactionSort = "Week";
 
   private static final Logger logger = LoggerFactory.getLogger(GameController.class);
@@ -376,11 +376,11 @@ public class GameController implements GameObserver {
     this.lastTransactionSort = "Week";
     nav.clearTransactionHistoryTransactions();
     List<Transaction> transactions = this.getTransactions();
-    if (this.weekToggleTransaction) {
-      transactions = transactions.reversed();
-    }
     if (toggle) {
       this.weekToggleTransaction = !this.weekToggleTransaction;
+    }
+    if (this.weekToggleTransaction) {
+      transactions = transactions.reversed();
     }
     this.fillTransaction(transactions);
   }
@@ -404,11 +404,11 @@ public class GameController implements GameObserver {
     transactions.clear();
     transactions.addAll(transactionsPurchases);
     transactions.addAll(transactionsSales);
-    if (this.weekToggleTransaction) {
-      transactions = transactions.reversed();
-    }
     if (toggle) {
       this.typeToggleTransaction = !this.typeToggleTransaction;
+    }
+    if (this.weekToggleTransaction) {
+      transactions = transactions.reversed();
     }
     this.fillTransaction(transactions);
   }
@@ -423,12 +423,13 @@ public class GameController implements GameObserver {
     this.lastShareSort = "Symbol";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesBySymbol();
-    if (this.symbolToggleShare) {
-      shares = shares.reversed();
-    }
     if (toggle) {
       this.symbolToggleShare = !this.symbolToggleShare;
     }
+    if (this.symbolToggleShare) {
+      shares = shares.reversed();
+    }
+    
     this.fillShares(shares);
   }
 
@@ -442,11 +443,11 @@ public class GameController implements GameObserver {
     this.lastStockSort = "Symbol";
     nav.clearStockMarketStocks();
     List<Stock> stocks = this.exchange.getAllStockBySymbol();
-    if (this.symbolToggleStock) {
-      stocks = stocks.reversed();
-    }
     if (toggle) {
       this.symbolToggleStock = !this.symbolToggleStock;
+    }
+    if (this.symbolToggleStock) {
+      stocks = stocks.reversed();
     }
     this.fillStocks(stocks, stockLimit);
   }
@@ -464,11 +465,11 @@ public class GameController implements GameObserver {
     List<Transaction> transactions = this.getTransactions().stream().sorted(
         (t1, t2) -> t1.getShare().stock().getSymbol()
         .compareTo(t2.getShare().stock().getSymbol())).toList();
-    if (this.stockToggleTransaction) {
-      transactions = transactions.reversed();
-    }
     if (toggle) {
       this.stockToggleTransaction = !this.stockToggleTransaction;
+    }
+    if (this.stockToggleTransaction) {
+      transactions = transactions.reversed();
     }
     this.fillTransaction(transactions);
   }
@@ -483,11 +484,11 @@ public class GameController implements GameObserver {
     this.lastShareSort = "Company";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByCompany();
-    if (this.companyNameToggleShare) {
-      shares = shares.reversed();
-    }
     if (toggle) {
       this.companyNameToggleShare = !this.companyNameToggleShare;
+    }
+    if (this.companyNameToggleShare) {
+      shares = shares.reversed();
     }
     this.fillShares(shares);
   }
@@ -502,11 +503,11 @@ public class GameController implements GameObserver {
     this.lastStockSort = "Company";
     nav.clearStockMarketStocks();
     List<Stock> stocks = this.exchange.getAllStockByCompany();
-    if (this.companyNameToggleStock) {
-      stocks = stocks.reversed();
-    }
     if (toggle) {
       this.companyNameToggleStock = !this.companyNameToggleStock;
+    }
+    if (this.companyNameToggleStock) {
+      stocks = stocks.reversed();
     }
     this.fillStocks(stocks, stockLimit);
   }
@@ -521,11 +522,11 @@ public class GameController implements GameObserver {
     this.lastShareSort = "Quantity";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByQuantity();
-    if (this.quantityToggleShare) {
-      shares = shares.reversed();
-    }
     if (toggle) {
       this.quantityToggleShare = !this.quantityToggleShare;
+    }
+    if (this.quantityToggleShare) {
+      shares = shares.reversed();
     }
     this.fillShares(shares);
   }
@@ -542,11 +543,11 @@ public class GameController implements GameObserver {
     nav.clearTransactionHistoryTransactions();
     List<Transaction> transactions = this.getTransactions().stream().sorted(
         (t1, t2) -> t1.getShare().quantity().compareTo(t2.getShare().quantity())).toList();
-    if (this.quantityToggleTransaction) {
-      transactions = transactions.reversed();
-    }
     if (toggle) {
       this.quantityToggleTransaction = !this.quantityToggleTransaction;
+    }
+    if (this.quantityToggleTransaction) {
+      transactions = transactions.reversed();
     }
     this.fillTransaction(transactions);
   }
@@ -561,11 +562,11 @@ public class GameController implements GameObserver {
     this.lastShareSort = "Purchase Price";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByPurchasePrice();
-    if (this.purchasePriceToggleShare) {
-      shares = shares.reversed();
-    }
     if (toggle) {
       this.purchasePriceToggleShare = !this.purchasePriceToggleShare;
+    }
+    if (this.purchasePriceToggleShare) {
+      shares = shares.reversed();
     }
     this.fillShares(shares);
   }
@@ -580,11 +581,11 @@ public class GameController implements GameObserver {
     this.lastStockSort = "Purchase Price";
     nav.clearStockMarketStocks();
     List<Stock> stocks = this.exchange.getAllStockByPrice();
-    if (this.purchasePriceToggleStock) {
-      stocks = stocks.reversed();
-    }
     if (toggle) {
       this.purchasePriceToggleStock = !this.purchasePriceToggleStock;
+    }
+    if (this.purchasePriceToggleStock) {
+      stocks = stocks.reversed();
     }
     this.fillStocks(stocks, stockLimit);
   }
@@ -602,11 +603,11 @@ public class GameController implements GameObserver {
     List<Transaction> transactions = this.getTransactions().stream().sorted(
         (t1, t2) -> t1.getShare().purchasePrice()
             .compareTo(t2.getShare().purchasePrice())).toList();
-    if (this.priceToggleTransaction) {
-      transactions = transactions.reversed();
-    }
     if (toggle) {
       this.priceToggleTransaction = !this.priceToggleTransaction;
+    }
+    if (this.priceToggleTransaction) {
+      transactions = transactions.reversed();
     }
     this.fillTransaction(transactions);
   }
@@ -621,11 +622,11 @@ public class GameController implements GameObserver {
     this.lastShareSort = "Current Value";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByCurrentValue();
-    if (this.currentValueToggleShare) {
-      shares = shares.reversed();
-    }
     if (toggle) {
       this.currentValueToggleShare = !this.currentValueToggleShare;
+    }
+    if (this.currentValueToggleShare) {
+      shares = shares.reversed();
     }
     this.fillShares(shares);
   }
@@ -643,11 +644,11 @@ public class GameController implements GameObserver {
     List<Transaction> transactions = this.getTransactions().stream().sorted(
         (t1, t2) -> t1.getCalculator().calculateTotal()
             .compareTo(t2.getCalculator().calculateTotal())).toList();
-    if (this.costRewardToggleTransaction) {
-      transactions = transactions.reversed();
-    }
     if (toggle) {
       this.costRewardToggleTransaction = !this.costRewardToggleTransaction;
+    }
+    if (this.costRewardToggleTransaction) {
+      transactions = transactions.reversed();
     }
     this.fillTransaction(transactions);
   }
