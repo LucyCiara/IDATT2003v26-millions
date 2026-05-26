@@ -1,15 +1,18 @@
 package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game;
 
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.VBox;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.searchbars.StockMarketSearchBar;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.rows.GainersAndLosers;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.rows.StockItemSorter;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.rows.StockRows;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 
+/**
+ * Class for the stock market content component
+ * which includes the stock area and gainers and losers.
+ */
 public class StockMarketContent extends GridPane {
   private VBox stockArea;
   private GainersAndLosers gainersAndLosers;
@@ -17,6 +20,9 @@ public class StockMarketContent extends GridPane {
   private StockItemSorter stockSorter;
   private StockRows stockRows;
   
+  /**
+   * Constructs a new StockMarketContent.
+   */
   public StockMarketContent() {
     super();
     this.stockArea = new VBox();

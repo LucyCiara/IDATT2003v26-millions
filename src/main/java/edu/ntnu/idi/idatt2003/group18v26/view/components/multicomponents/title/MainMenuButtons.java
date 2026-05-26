@@ -6,12 +6,18 @@ import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.NewGameButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.QuitButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.SettingsButton;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
+/**
+ * Class for the main menu buttons component, 
+ * which includes the new game, continue, settings, and quit buttons.
+ */
 public class MainMenuButtons extends VBox {
   private static final double BUTTON_WIDTH = 200;
+
+  /**
+   * Constructs a new MainMenuButtons.
+   */
   public MainMenuButtons() {
     
     setAlignment(Pos.CENTER);

@@ -5,9 +5,15 @@ import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.newgame
 import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.newgame.NewGameHeader;
 import javafx.scene.layout.BorderPane;
 
+/** 
+ * Class for the new game panel component in the application.
+ */
 public class NewGamePanel extends BorderPane {
   private NewGameFields newGameFields;
 
+  /**
+   * Constructs a new NewGamePanel.
+   */
   public NewGamePanel() {
     this.newGameFields = new NewGameFields();
 

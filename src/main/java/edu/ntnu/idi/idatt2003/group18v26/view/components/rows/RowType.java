@@ -1,12 +1,18 @@
 package edu.ntnu.idi.idatt2003.group18v26.view.components.rows;
 
-import java.util.List;
-
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * Class for the row type component in the application,
+ * which is a scrollable container for other components.
+ */
 public class RowType extends ScrollPane {
   private VBox contents;
+
+  /**
+   * Constructs a new RowType.
+   */
   public RowType() {
     this.contents = new VBox();
     this.contents.getStyleClass().add("page");
@@ -17,10 +23,18 @@ public class RowType extends ScrollPane {
     setFitToWidth(true);
   }
 
+  /**
+   * Clears the contents of the row.
+   */
   public void clear() {
     this.contents.getChildren().clear();
   }
 
+  /**
+   * Returns the VBox containing the contents of the row.
+   *
+   * @return the VBox containing the contents of the row
+   */
   public VBox getContents() {
     return this.contents;
   }
