@@ -1,7 +1,6 @@
 package edu.ntnu.idi.idatt2003.group18v26.model.property;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
-import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.PurchaseCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
@@ -35,24 +34,57 @@ public class Portfolio {
     return this.shares;
   }
 
+  /**
+   * Returns a list of all shares in the portfolio, sorted by their stock symbol.
+   *
+   * @return list of shares sorted by symbol
+   */
   public List<Share> getSharesBySymbol() {
-    return this.shares.stream().sorted((s1,s2) -> s1.stock().getSymbol().compareTo(s2.stock().getSymbol())).toList();
+    return this.shares.stream()
+      .sorted((s1, s2) -> s1.stock().getSymbol()
+      .compareTo(s2.stock().getSymbol())).toList();
   }
 
+  /**
+   * Returns a list of all shares in the portfolio, sorted by their company name.
+   *
+   * @return list of shares sorted by company name
+   */
   public List<Share> getSharesByCompany() {
-    return this.shares.stream().sorted((s1,s2) -> s1.stock().getCompany().compareTo(s2.stock().getCompany())).toList();
+    return this.shares.stream()
+      .sorted((s1, s2) -> s1.stock().getCompany()
+      .compareTo(s2.stock().getCompany())).toList();
   }
 
+  /**
+   * Returns a list of all shares in the portfolio, sorted by their quantity.
+   *
+   * @return list of shares sorted by quantity
+   */
   public List<Share> getSharesByQuantity() {
-    return this.shares.stream().sorted((s1,s2) -> s1.quantity().compareTo(s2.quantity())).toList();
+    return this.shares.stream()
+      .sorted((s1, s2) -> s1.quantity().compareTo(s2.quantity())).toList();
   }
 
+  /**
+   * Returns a list of all shares in the portfolio, sorted by their purchase price.
+   *
+   * @return list of shares sorted by purchase price
+   */
   public List<Share> getSharesByPurchasePrice() {
-    return this.shares.stream().sorted((s1,s2) -> s1.purchasePrice().compareTo(s2.purchasePrice())).toList();
+    return this.shares.stream()
+      .sorted((s1, s2) -> s1.purchasePrice().compareTo(s2.purchasePrice())).toList();
   }
 
+  /**
+   * Returns a list of all shares in the portfolio, sorted by their current value.
+   *
+   * @return list of shares sorted by current value
+   */
   public List<Share> getSharesByCurrentValue() {
-    return this.shares.stream().sorted((s1,s2) -> new SaleCalculator(s1).calculateTotal().compareTo(new SaleCalculator(s2).calculateTotal())).toList();
+    return this.shares.stream()
+        .sorted((s1, s2) -> new SaleCalculator(s1).calculateTotal()
+        .compareTo(new SaleCalculator(s2).calculateTotal())).toList();
   }
 
   /**
@@ -72,6 +104,12 @@ public class Portfolio {
     return null;
   }
 
+  /**
+   * Searches for shares in the portfolio based on a query string.
+   *
+   * @param query The string to search for.
+   * @return A list of matching shares.
+   */
   public List<Share> search(String query) {
     try {
       ParameterValidator.stringChecker(query, "query");
@@ -165,6 +203,9 @@ public class Portfolio {
     this.observers.remove(observer);
   }
 
+  /**
+   * Notifies all observers that the portfolio has changed.
+   */
   private void notifyPortfolioChanged() {
     logger.debug("Notifying observers: Portfolio changed");
     observers.forEach(observer -> observer.onPortfolioChanged());
