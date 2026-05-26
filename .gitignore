@@ -52,3 +52,4 @@ out/
 .classpath
 bin/*
 google_checks.xml
+*.log
