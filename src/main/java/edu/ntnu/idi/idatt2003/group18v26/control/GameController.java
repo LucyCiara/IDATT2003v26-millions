@@ -23,6 +23,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javafx.application.Platform;
 import javafx.scene.control.Button;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -562,8 +564,12 @@ public class GameController implements GameObserver {
 
   public void searchStock(String query) {
     nav.clearStockMarketStocks();
-    List<Stock> stocks = this.exchange.findStocks(query);
-    this.fillStocks(stocks);
+    if (query.isBlank()) {
+      this.fetchStockMarket();
+    } else {
+      List<Stock> stocks = this.exchange.findStocks(query);
+      this.fillStocks(stocks);
+    }
   }
 
   public void searchTransaction(String query) {
@@ -593,6 +599,32 @@ public class GameController implements GameObserver {
 
   public String getLoserGain(int i) {
     return this.exchange.getLosers(i+1).get(i).getLatestPriceChange().setScale(roundingNum, roundingMode).toString();
+  }
+
+  public void sellAllAndFinish() {
+    this.sellAllShares();
+    String[] lines = new String[] {
+      "Player:",
+      this.getPlayerName(),
+      "",
+      "Status:",
+      this.getPlayerStatus(),
+      "",
+      "Total Money:",
+      this.getMoney(),
+      "",
+      "Total Number of trades:",
+      Integer.toString(this.getTransactions().size()),
+      "",
+      "Number of Weeks:",
+      this.getWeek()
+    };
+    System.out.println("---------");
+    for (String line : lines) {
+      System.out.println(line);
+    }
+    System.out.println("---------");
+    Platform.exit();
   }
 
   @Override

@@ -3,11 +3,13 @@ package edu.ntnu.idi.idatt2003.group18v26.control;
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.StockQuantityField;
 import edu.ntnu.idi.idatt2003.group18v26.view.pages.GamePage;
+import edu.ntnu.idi.idatt2003.group18v26.view.pages.MenuPanel;
 import edu.ntnu.idi.idatt2003.group18v26.view.pages.NewGamePanel;
 import edu.ntnu.idi.idatt2003.group18v26.view.pages.TitlePage;
 import java.io.File;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Menu;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
@@ -27,6 +29,7 @@ public class NavigationController {
   private NewGamePanel newGamePanel;
   private FileChooser fileChooser;
   private GamePage gamePage;
+  private MenuPanel menu;
 
   private static final Logger logger = LoggerFactory.getLogger(GameController.class);
 
@@ -37,6 +40,7 @@ public class NavigationController {
     this.newGamePanel = new NewGamePanel();
     this.fileChooser = new FileChooser();
     this.gamePage = new GamePage();
+    this.menu = new MenuPanel();
 
     this.scene = new Scene(this.root, 1280, 720);
   }
@@ -160,5 +164,9 @@ public class NavigationController {
 
   public void clearTransactionHistoryTransactions() {
     this.gamePage.clearTransactions();
+  }
+
+  public void showMenu() {
+    this.root.getChildren().add(this.menu);
   }
 }
