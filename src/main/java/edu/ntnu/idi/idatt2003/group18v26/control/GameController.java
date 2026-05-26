@@ -13,10 +13,13 @@ import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ButtonType;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,6 +43,10 @@ public class GameController implements GameObserver {
   private static GameController instance;
 
   private static NavigationController nav;
+
+  private static final DecimalFormat dispDF = new DecimalFormat("0.00");
+  private static final int roundingNum = 2;
+  private static final RoundingMode roundingMode = RoundingMode.HALF_UP; 
 
   private boolean symbolToggleShare = false;
   private boolean companyNameToggleShare = false;
@@ -163,7 +170,7 @@ public class GameController implements GameObserver {
   }
 
   public String getMoney() {
-    return this.player.getMoney().toString();
+    return dispDF.format(this.player.getMoney().setScale(roundingNum, roundingMode));
   }
 
   public String getPlayerStatus() {
@@ -175,11 +182,11 @@ public class GameController implements GameObserver {
   }
 
   public String getNetWorth() {
-    return this.player.getNetWorth().toString();
+    return this.player.getNetWorth().setScale(roundingNum, roundingMode).toString();
   }
 
   public String getPortfolioWorth() {
-    return this.player.getPortfolio().getNetWorth().toString();
+    return this.player.getPortfolio().getNetWorth().setScale(roundingNum, roundingMode).toString();
   }
 
   public String getWeek() {
@@ -199,9 +206,13 @@ public class GameController implements GameObserver {
       nav.addShareToPortfolio(
         share.stock().getSymbol(),
         share.stock().getCompany(),
-        share.quantity().toString(),
-        share.purchasePrice().toString(),
-        new SaleCalculator(share).calculateTotal().toString()
+        share.quantity().setScale(roundingNum, roundingMode).toString(),
+        "$" + share.purchasePrice().setScale(roundingNum, roundingMode).toString(),
+        String.format(
+          "$%s ($%s)",
+          new SaleCalculator(share).calculateTotal().setScale(roundingNum, roundingMode).toString(),
+          share.stock().getSalesPrice().setScale(roundingNum, roundingMode)
+        )
       );
     }
   }
@@ -211,7 +222,7 @@ public class GameController implements GameObserver {
       nav.addStockToStockMarket(
         stock.getSymbol(),
         stock.getCompany(),
-        stock.getSalesPrice().toString()
+        "$" + stock.getSalesPrice().setScale(roundingNum, roundingMode).toString()
       );
     }
   }
@@ -222,7 +233,7 @@ public class GameController implements GameObserver {
       nav.addStockToStockMarket(
         stock.getSymbol(),
         stock.getCompany(),
-        stock.getSalesPrice().toString()
+        "$" + stock.getSalesPrice().setScale(roundingNum, roundingMode).toString()
       );
     }
   }
@@ -235,9 +246,9 @@ public class GameController implements GameObserver {
         Integer.toString(transaction.getWeek()),
         transaction.getClass().getSimpleName(),
         transaction.getShare().stock().getSymbol(),
-        transaction.getShare().quantity().toString(),
-        transaction.getShare().purchasePrice().toString(),
-        transaction.getCalculator().calculateTotal().toString()
+        transaction.getShare().quantity().setScale(roundingNum, roundingMode).toString(),
+        "$" + transaction.getShare().purchasePrice().setScale(roundingNum, roundingMode).toString(),
+        "$" + transaction.getCalculator().calculateTotal().setScale(roundingNum, roundingMode).toString()
       );
     }
   }
@@ -560,7 +571,7 @@ public class GameController implements GameObserver {
   }
 
   public String getGainerGain(int i) {
-    return this.exchange.getGainers(i+1).get(i).getLatestPriceChange().toString();
+    return this.exchange.getGainers(i+1).get(i).getLatestPriceChange().setScale(roundingNum, roundingMode).toString();
   }
 
   public String getLoserSymbol(int i) {
@@ -568,7 +579,7 @@ public class GameController implements GameObserver {
   }
 
   public String getLoserGain(int i) {
-    return this.exchange.getLosers(i+1).get(i).getLatestPriceChange().toString();
+    return this.exchange.getLosers(i+1).get(i).getLatestPriceChange().setScale(roundingNum, roundingMode).toString();
   }
 
   @Override
