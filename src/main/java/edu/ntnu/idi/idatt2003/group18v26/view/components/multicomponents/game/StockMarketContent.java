@@ -1,9 +1,9 @@
 package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game;
 
 import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.searchbars.StockMarketSearchBar;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.rows.GainersAndLosers;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.rows.StockItemSorter;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.rows.StockRows;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.rows.GainersAndLosers;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.rows.StockItemSorter;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.rows.StockRows;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;

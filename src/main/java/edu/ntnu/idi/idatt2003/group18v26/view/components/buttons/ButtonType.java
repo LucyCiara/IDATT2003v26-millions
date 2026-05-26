@@ -1,6 +1,5 @@
 package edu.ntnu.idi.idatt2003.group18v26.view.components.buttons;
 
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.text.TextAlignment;
 
