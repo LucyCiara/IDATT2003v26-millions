@@ -2,12 +2,11 @@ package edu.ntnu.idi.idatt2003.group18v26;
 
 import edu.ntnu.idi.idatt2003.group18v26.control.NavigationController;
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
- * Hello world!
+ * Main application class for the stock trading game. 
+ * Initializes the JavaFX application and sets up the primary stage.
  */
 public class App extends Application {
 
