@@ -427,13 +427,12 @@ public class GameController implements GameObserver {
     nav.updateGamePage();
     this.fetchRefreshPortfolio();
     this.fetchRefreshStockMarket();
+    nav.updateGainersAndLosers();
   }
 
   @Override
   public void onStockPriceChanged(String symbol) {
     nav.updateGamePage();
-    nav.updateGainersAndLosers();
-    this.fetchRefreshStockMarket();
   }
 
   @Override
