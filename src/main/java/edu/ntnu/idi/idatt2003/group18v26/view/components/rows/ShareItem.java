@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game;
+package edu.ntnu.idi.idatt2003.group18v26.view.components.rows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class ShareItem extends GridPane {
   private DisplayType qtyDisp;
   private DisplayType purchasePriceDisp;
   private DisplayType currentValueDisp;
-  private ButtonType sellBtn;
+  private SellButton sellBtn;
   private BorderPane sellWrapper;
 
   public ShareItem(String shareSymbol, String shareName, String shareQty, String purchasePrice, String currentValue) {

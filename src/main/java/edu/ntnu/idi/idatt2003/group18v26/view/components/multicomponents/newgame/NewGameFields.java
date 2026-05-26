@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ClearFileButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.OpenFileButton;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.NameField;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.StartingMoneyField;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.fieldtypes.NameField;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.fieldtypes.StartingMoneyField;
 import javafx.scene.layout.VBox;
 
 public class NewGameFields extends VBox {

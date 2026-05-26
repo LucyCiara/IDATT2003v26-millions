@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt2003.group18v26.view.components.fields;
+package edu.ntnu.idi.idatt2003.group18v26.view.components.fields.fieldtypes;
 
 import edu.ntnu.idi.idatt2003.group18v26.view.components.LabelStandard;
 import javafx.scene.control.TextField;

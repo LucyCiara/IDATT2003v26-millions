@@ -1,10 +1,10 @@
-package edu.ntnu.idi.idatt2003.group18v26.view.components.searchbars;
+package edu.ntnu.idi.idatt2003.group18v26.view.components.fields.searchbars;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import edu.ntnu.idi.idatt2003.group18v26.control.GameController;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.ShareRows;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.rows.ShareRows;
 import javafx.event.EventHandler;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -20,7 +20,6 @@ public abstract class SearchBar extends TextField {
   }
 
   public void setEvent(EventHandler<? super KeyEvent> e) {
-
     setOnKeyPressed(e);
   }
 

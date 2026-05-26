@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt2003.group18v26.control;
 
 import edu.ntnu.idi.idatt2003.group18v26.util.ParameterValidator;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.StockQuantityField;
 import edu.ntnu.idi.idatt2003.group18v26.view.pages.GamePage;
 import edu.ntnu.idi.idatt2003.group18v26.view.pages.NewGamePanel;
 import edu.ntnu.idi.idatt2003.group18v26.view.pages.TitlePage;
@@ -134,5 +135,22 @@ public class NavigationController {
   public void clearPortfolioShares() {
     logger.debug("Clearing shares");
     this.gamePage.clearShares();
+  }
+
+  public void addStockToStockMarket(String stockSymbol, String stockName, String purchasePrice) {
+    this.gamePage.addStock(stockSymbol, stockName, purchasePrice);
+  }
+
+  public void clearStockMarketStocks() {
+    this.gamePage.clearStock();
+  }
+
+  public void onBuy(String symbol, StockQuantityField qtyField) {
+    GameController.getInstance().buyShare(symbol, qtyField.getText());
+    qtyField.clear();
+  }
+
+  public void updateGainersAndLosers() {
+    this.gamePage.updateGainersAndLosers();
   }
 }

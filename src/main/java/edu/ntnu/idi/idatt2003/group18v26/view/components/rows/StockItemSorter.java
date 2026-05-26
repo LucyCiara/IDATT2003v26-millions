@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game;
+package edu.ntnu.idi.idatt2003.group18v26.view.components.rows;
 
 import java.util.Arrays;
 
@@ -9,6 +9,9 @@ import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.SharePurchasePr
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ShareQuantitySortButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ShareSellAllButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ShareSymbolSortButton;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.StockNameSortButton;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.StockPurchasePriceSortButton;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.StockSymbolSortButton;
 import javafx.geometry.HPos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -16,23 +19,17 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
-public class ShareItemSorter extends GridPane {
-  private ShareSymbolSortButton symSortBtn;
-  private ShareNameSortButton nameSortBtn;
-  private ShareQuantitySortButton qtySortBtn;
-  private SharePurchasePriceSortButton ppSortBtn;
-  private ShareCurrentValueSortButton currentValSortBtn;
-  private ShareSellAllButton sellAllBtn;
+public class StockItemSorter extends GridPane {
+  private StockSymbolSortButton symSortBtn;
+  private StockNameSortButton nameSortBtn;
+  private StockPurchasePriceSortButton ppSortBtn;
 
-  public ShareItemSorter() {
-    this.symSortBtn = new ShareSymbolSortButton();
-    this.nameSortBtn = new ShareNameSortButton();
-    this.qtySortBtn = new ShareQuantitySortButton();
-    this.ppSortBtn = new SharePurchasePriceSortButton();
-    this.currentValSortBtn = new ShareCurrentValueSortButton();
-    this.sellAllBtn = new ShareSellAllButton(); 
+  public StockItemSorter() {
+    this.symSortBtn = new StockSymbolSortButton();
+    this.nameSortBtn = new StockNameSortButton();
+    this.ppSortBtn = new StockPurchasePriceSortButton();
 
-    ButtonType[] buttons = new ButtonType[] {this.symSortBtn, this.nameSortBtn, this.qtySortBtn, this.ppSortBtn, this.currentValSortBtn, this.sellAllBtn};
+    ButtonType[] buttons = new ButtonType[] {this.symSortBtn, this.nameSortBtn, this.ppSortBtn};
     Arrays.asList(buttons).forEach(btn -> ((ButtonType) btn).setMaxWidth(Double.MAX_VALUE));
     ColumnConstraints columnConstraints = new ColumnConstraints();
     columnConstraints.setPercentWidth(100);
