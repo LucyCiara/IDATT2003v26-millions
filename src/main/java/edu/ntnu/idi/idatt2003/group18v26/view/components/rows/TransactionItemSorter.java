@@ -1,27 +1,21 @@
 package edu.ntnu.idi.idatt2003.group18v26.view.components.rows;
 
-import java.util.Arrays;
 
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ButtonType;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ShareCurrentValueSortButton;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ShareNameSortButton;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.SharePurchasePriceSortButton;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ShareQuantitySortButton;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ShareSellAllButton;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ShareSymbolSortButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.TransactionCostRewardSortButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.TransactionPriceSortButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.TransactionQuantitySortButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.TransactionStockSortButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.TransactionTypeSortButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.TransactionWeekSortButton;
+import java.util.Arrays;
 import javafx.geometry.HPos;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 
+/**
+ * Class for the transaction item sorter component in the application.
+ */
 public class TransactionItemSorter extends GridPane {
   private TransactionWeekSortButton weekBtn;
   private TransactionTypeSortButton typeBtn;
@@ -30,6 +24,9 @@ public class TransactionItemSorter extends GridPane {
   private TransactionPriceSortButton priceBtn;
   private TransactionCostRewardSortButton costRewardBtn;
 
+  /**
+   * Constructs a new TransactionItemSorter.
+   */
   public TransactionItemSorter() {
     this.weekBtn = new TransactionWeekSortButton();
     this.typeBtn = new TransactionTypeSortButton();

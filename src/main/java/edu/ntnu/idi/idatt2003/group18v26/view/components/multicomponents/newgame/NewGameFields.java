@@ -1,18 +1,22 @@
 package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.newgame;
 
-import java.util.HashMap;
 
-import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ClearFileButton;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.OpenFileButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.fieldtypes.NameField;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.fieldtypes.StartingMoneyField;
 import javafx.scene.layout.VBox;
 
+/**
+ * Class for the new game fields component, 
+ * which includes the name field, starting money field, and open file button.
+ */
 public class NewGameFields extends VBox {
   private NameField nameField;
   private StartingMoneyField startMoneyField;
   private OpenFile openFile;
 
+  /**
+   * Constructs a new NewGameFields.
+   */
   public NewGameFields() {
     this.nameField = new NameField();
     this.startMoneyField = new StartingMoneyField();

@@ -1,21 +1,16 @@
 package edu.ntnu.idi.idatt2003.group18v26.view.components.rows;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.ButtonType;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.SellButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.displays.DisplayType;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.displays.NameDisplay;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.TilePane;
 
+/**
+ * Class for the share item component in the application.
+ */
 public class ShareItem extends GridPane {
   private DisplayType symDisp;
   private DisplayType nameDisp;
@@ -25,7 +20,17 @@ public class ShareItem extends GridPane {
   private SellButton sellBtn;
   private BorderPane sellWrapper;
 
-  public ShareItem(String shareSymbol, String shareName, String shareQty, String purchasePrice, String currentValue) {
+  /**
+   * Constructs a new ShareItem with the given parameters.
+   *
+   * @param shareSymbol the symbol of the share
+   * @param shareName the name of the share
+   * @param shareQty the quantity of the share
+   * @param purchasePrice the purchase price of the share
+   * @param currentValue the current value of the share
+   */
+  public ShareItem(String shareSymbol, String shareName, 
+      String shareQty, String purchasePrice, String currentValue) {
     super();
     getStyleClass().add("page");
     this.symDisp = new DisplayType();
