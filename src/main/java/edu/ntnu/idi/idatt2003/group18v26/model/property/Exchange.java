@@ -214,15 +214,18 @@ public class Exchange {
   }
 
   public List<Stock> getAllStockBySymbol() {
-    return this.stockList.stream().sorted((s1,s2) -> s1.getSymbol().compareTo(s2.getSymbol())).toList();
+    return this.stockList.stream()
+      .sorted((s1, s2) -> s1.getSymbol().compareTo(s2.getSymbol())).toList();
   }
 
   public List<Stock> getAllStockByCompany() {
-    return this.stockList.stream().sorted((s1,s2) -> s1.getCompany().compareTo(s2.getCompany())).toList();
+    return this.stockList.stream()
+      .sorted((s1, s2) -> s1.getCompany().compareTo(s2.getCompany())).toList();
   }
 
   public List<Stock> getAllStockByPrice() {
-    return this.stockList.stream().sorted((s1,s2) -> s1.getSalesPrice().compareTo(s2.getSalesPrice())).toList();
+    return this.stockList.stream()
+      .sorted((s1, s2) -> s1.getSalesPrice().compareTo(s2.getSalesPrice())).toList();
   }
 
   /**
