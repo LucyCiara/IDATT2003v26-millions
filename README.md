@@ -38,7 +38,8 @@ edu/ntnu/idi/idatt2003/group18v26/
 │   ├── GameObserver.java
 │   ├── property/          (Portfolio, Stock, Share)
 │   ├── transaction/       (Transaction, Purchase, Sale)
-│   └── filehandling/      (CsvStockReader, CsvStockWriter)
+│   ├── persistence/ (Game saving)
+│   └── filehandling/      (CsvStockReader, CsvStockWriter, JsonGamestateReader, JsonGamestateWriter)
 ├── control/
 │   ├── GameController.java
 │   └── NavigationController.java
