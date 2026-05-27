@@ -2,12 +2,18 @@ package edu.ntnu.idi.idatt2003.group18v26.control;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.filehandling.CsvStockReader;
+import edu.ntnu.idi.idatt2003.group18v26.model.filehandling.GameStateReader;
+import edu.ntnu.idi.idatt2003.group18v26.model.filehandling.JsonGameStateReader;
 import edu.ntnu.idi.idatt2003.group18v26.model.filehandling.JsonGameStateWriter;
 import edu.ntnu.idi.idatt2003.group18v26.model.persistence.GameSerializer;
 import edu.ntnu.idi.idatt2003.group18v26.model.persistence.GameSnapshot;
+import edu.ntnu.idi.idatt2003.group18v26.model.persistence.ShareSnapshot;
+import edu.ntnu.idi.idatt2003.group18v26.model.persistence.TransactionSnapshot;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Purchase;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Sale;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Transaction;
 
@@ -21,7 +27,10 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javafx.application.Platform;
 
 import org.slf4j.Logger;
@@ -41,7 +50,7 @@ public class GameController {
   private static final int roundingNum = 2;
   private static final RoundingMode roundingMode = RoundingMode.HALF_UP;
 
-  private static final int stockLimit = 20;
+  private static final String SAVE_PATH = "saves/save.json";
 
   private boolean symbolToggleShare = true;
   private boolean companyNameToggleShare = true;
@@ -68,10 +77,12 @@ public class GameController {
   private Player player;
 
   private JsonGameStateWriter gameWriter;
+  private JsonGameStateReader gameReader;
 
   private GameController() {
     this.reader = new CsvStockReader();
     this.gameWriter = new JsonGameStateWriter();
+    this.gameReader = new JsonGameStateReader();
   }
 
   /**
@@ -171,6 +182,22 @@ public class GameController {
     nav.getGamepage().initGamePage(this.player.getName());
     nav.showGamePage();
   }
+
+  /**
+   * Starts the game by creating a player,
+   * loading the exchange data from a file if not already loaded,
+   * updating the game page, gainers and losers, portfolio, stock market, and transaction.
+   */
+  public void onGameStart(Player player, Exchange exchange) {
+    this.player = player;
+    this.exchange = exchange;
+    this.fetchRefreshPortfolio();
+    this.fetchRefreshStockMarket();
+    this.fetchRefreshTransactionHistory();
+    nav.getGamepage().initGamePage(this.player.getName());
+    nav.showGamePage();
+  }
+
 
   /**
    * Starts a new game by resetting the player and exchange, clearing the new game fields,
@@ -971,9 +998,52 @@ public class GameController {
   public void save() {
     GameSnapshot snapshot = new GameSerializer().toSnapshot(this.player, this.exchange);
     try {
-      this.gameWriter.writeGameState(snapshot, Path.of("saves/save.json"));
+      this.gameWriter.writeGameState(snapshot, Path.of(SAVE_PATH));
     } catch (IOException e) {
       logger.error("While saving file, met exception: {}", e);
     }
+  }
+
+  public void load() {
+    try {
+      GameSnapshot snapshot = this.gameReader.readGameState(Path.of(SAVE_PATH));
+      Player loadPlayer = new Player(snapshot.playerName, snapshot.startingMoney, snapshot.playerMoney);
+      Map<String, List<BigDecimal>> priceHist = snapshot.stockPriceHistory;
+      Map<String, String> stockCompany = snapshot.stockCompany;
+      List<Stock> stocks = new ArrayList<>();
+      for (String symbol : priceHist.keySet()) {
+        Stock stock = new Stock(symbol, stockCompany.get(symbol), priceHist.get(symbol).getFirst());
+        for (int i = 1; i < priceHist.get(symbol).size(); i++) {
+          stock.addNewSalesPrice(priceHist.get(symbol).get(i));
+        }
+        stocks.add(stock);
+      }
+      Exchange loadExchange = new Exchange("loaded exchange", stocks);
+      this.exchange = loadExchange;
+
+      for (ShareSnapshot share : snapshot.playerPortfolio) {
+        Stock stock = this.exchange.getStock(share.symbol);
+        loadPlayer.getPortfolio().addShare(new Share(stock, share.quantity, share.purchasePrice));
+      }
+
+      for (TransactionSnapshot transaction : snapshot.transactions) {
+        Transaction transaction2;
+        if (transaction.type.equals(Purchase.class.getSimpleName().toUpperCase())) {
+          Stock stock = this.exchange.getStock(transaction.symbol);
+          Share share = new Share(stock, transaction.quantity, transaction.purchasePrice);
+          transaction2 = new Purchase(share, transaction.week);
+        } else {
+          Stock stock = this.exchange.getStock(transaction.symbol);
+          Share share = new Share(stock, transaction.quantity, transaction.purchasePrice);
+          transaction2 = new Sale(share, transaction.week);
+        }
+        loadPlayer.getTransactionArchive().add(transaction2);
+
+        this.player = loadPlayer;
+      }
+    } catch (IOException e) {
+      logger.error("While loading file, met exception: {}", e);
+    }
+    this.onGameStart(this.player, this.exchange);
   }
 }
