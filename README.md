@@ -31,7 +31,21 @@ All source files are stored under the `src` directory.
 ### Main Package Structure (`src/main`)
 
 <pre>
-
+edu/ntnu/idi/idatt2003/group18v26/
+├── model/
+│   ├── Player.java
+│   ├── Exchange.java
+│   ├── GameObserver.java
+│   ├── property/          (Portfolio, Stock, Share)
+│   ├── transaction/       (Transaction, Purchase, Sale)
+│   └── filehandling/      (CsvStockReader, CsvStockWriter)
+├── control/
+│   ├── GameController.java
+│   └── NavigationController.java
+└── view/
+    ├── pages/            (TitlePage, GamePage, NewGamePanel)
+    ├── components/       (UI components: buttons, panels, etc.)
+    └── App.java
 </pre>
 [//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
 
