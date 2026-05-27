@@ -51,7 +51,7 @@ public class CsvStockWriter implements StockWriter {
 
   /**
    * Formats a Stock object into a CSV line.
-   * 
+   *
    * @param stock the Stock object to format.
    * @return a string representing the Stock in CSV format.
    */

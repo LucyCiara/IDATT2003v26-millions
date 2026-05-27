@@ -14,7 +14,7 @@ import java.util.List;
 public interface StockWriter {
   /**
    * Writes a list of Stock objects to a file at the specified path.
-   * 
+   *
    * @param stocks the list of Stock objects to be written to the file.
    * @param path the file path where the stock data should be written.
    * @throws IOException if an I/O error occurs while writing to the file.
