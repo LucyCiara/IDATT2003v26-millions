@@ -2,6 +2,9 @@ package edu.ntnu.idi.idatt2003.group18v26.control;
 
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.filehandling.CsvStockReader;
+import edu.ntnu.idi.idatt2003.group18v26.model.filehandling.JsonGameStateWriter;
+import edu.ntnu.idi.idatt2003.group18v26.model.persistence.GameSerializer;
+import edu.ntnu.idi.idatt2003.group18v26.model.persistence.GameSnapshot;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
@@ -12,11 +15,15 @@ import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Platform;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,8 +67,11 @@ public class GameController {
   private Exchange exchange;
   private Player player;
 
+  private JsonGameStateWriter gameWriter;
+
   private GameController() {
     this.reader = new CsvStockReader();
+    this.gameWriter = new JsonGameStateWriter();
   }
 
   /**
@@ -958,4 +968,12 @@ public class GameController {
         .setScale(roundingNum, roundingMode).toString();
   }
 
+  public void save() {
+    GameSnapshot snapshot = new GameSerializer().toSnapshot(this.player, this.exchange);
+    try {
+      this.gameWriter.writeGameState(snapshot, Path.of("saves/save.json"));
+    } catch (IOException e) {
+      logger.error("While saving file, met exception: {}", e);
+    }
+  }
 }
