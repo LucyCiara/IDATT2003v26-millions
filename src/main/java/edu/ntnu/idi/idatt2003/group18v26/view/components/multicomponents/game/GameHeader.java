@@ -18,10 +18,6 @@ public class GameHeader extends VBox {
     getChildren().addAll(this.infoPanel, this.navigator);
   }
 
-  public void updateInfo() {
-    this.infoPanel.updateDisplays();
-  }
-
   public void selectPortfolio() {
     this.navigator.selectPortfolio();
   }
@@ -32,5 +28,17 @@ public class GameHeader extends VBox {
 
   public void selectTransactionHistory() {
     this.navigator.selectTransactionHistory();
+  }
+
+  public void updateName(String name) {
+    this.infoPanel.updateName(name);
+  }
+
+  public void updateMoney() {
+    this.infoPanel.updateMoney();
+  }
+
+  public void updateStatus() {
+    this.infoPanel.updateStatus();
   }
 }

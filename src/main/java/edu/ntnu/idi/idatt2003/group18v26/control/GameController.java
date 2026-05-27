@@ -1,6 +1,5 @@
 package edu.ntnu.idi.idatt2003.group18v26.control;
 
-import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.filehandling.CsvStockReader;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange;
@@ -8,13 +7,13 @@ import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Transaction;
+
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Platform;
@@ -27,31 +26,32 @@ import org.slf4j.LoggerFactory;
  * It implements the GameObserver interface 
  * to receive updates from the model and update the view accordingly.
  */
-public class GameController implements GameObserver {
+public class GameController {
   private static GameController instance;
 
   private static NavigationController nav;
 
-  private static final DecimalFormat dispDF = new DecimalFormat("0.00");
   private static final int roundingNum = 2;
   private static final RoundingMode roundingMode = RoundingMode.HALF_UP;
 
-  private boolean symbolToggleShare = false;
-  private boolean companyNameToggleShare = false;
-  private boolean quantityToggleShare = false;
-  private boolean purchasePriceToggleShare = false;
-  private boolean currentValueToggleShare = false;
+  private static final int stockLimit = 20;
+
+  private boolean symbolToggleShare = true;
+  private boolean companyNameToggleShare = true;
+  private boolean quantityToggleShare = true;
+  private boolean purchasePriceToggleShare = true;
+  private boolean currentValueToggleShare = true;
   private String lastShareSort = "None";
-  private boolean symbolToggleStock = false;
-  private boolean companyNameToggleStock = false;
-  private boolean purchasePriceToggleStock = false;
+  private boolean symbolToggleStock = true;
+  private boolean companyNameToggleStock = true;
+  private boolean purchasePriceToggleStock = true;
   private String lastStockSort = "None";
-  private boolean weekToggleTransaction = false;
-  private boolean typeToggleTransaction = false;
-  private boolean stockToggleTransaction = false;
-  private boolean quantityToggleTransaction = false;
-  private boolean priceToggleTransaction = false;
-  private boolean costRewardToggleTransaction = false;
+  private boolean weekToggleTransaction = true;
+  private boolean typeToggleTransaction = true;
+  private boolean stockToggleTransaction = true;
+  private boolean quantityToggleTransaction = true;
+  private boolean priceToggleTransaction = true;
+  private boolean costRewardToggleTransaction = true;
   private String lastTransactionSort = "Week";
 
   private static final Logger logger = LoggerFactory.getLogger(GameController.class);
@@ -90,7 +90,7 @@ public class GameController implements GameObserver {
         this.exchange = new Exchange(
             file.getName(),
             this.reader.readStocks(file.toPath()));
-        this.exchange.addObserver(this);
+        this.exchange.addObserver(nav.getGamepage());
       } catch (IOException e) {
         nav.createErrorPopup("File must be a readable CSV.");
         this.setExchange(null);
@@ -126,23 +126,14 @@ public class GameController implements GameObserver {
           nav.createWarningPopup("Starting money must be more than 0.");
         } else {
           this.player = new Player(playerName, playerStartMoneyBigDec);
-          this.player.addObserver(this);
-          this.player.getPortfolio().addObserver(this);
+          this.player.addObserver(nav.getGamepage());
+          this.player.getPortfolio().addObserver(nav.getGamepage());
           System.out.println(String.format("%s, %5f", player.getName(), player.getMoney()));
         }
       } catch (Exception e) {
         nav.createWarningPopup("Starting money must be a valid decimal number.");
       }
     }
-  }
-
-  /** 
-   * Returns the name of the player.
-   *
-   * @return the player name
-   */
-  public String getPlayerName() {
-    return this.player.getName();
   }
 
   /**
@@ -164,11 +155,10 @@ public class GameController implements GameObserver {
         logger.error("Unexpected URI exception. Might be caused by sp500.csv missing.", e);
       }
     }
-    nav.updateGamePage();
-    nav.updateGainersAndLosers();
     this.fetchRefreshPortfolio();
     this.fetchRefreshStockMarket();
     this.fetchRefreshTransactionHistory();
+    nav.getGamepage().initGamePage(this.player.getName());
     nav.showGamePage();
   }
 
@@ -177,10 +167,13 @@ public class GameController implements GameObserver {
    * and showing the new game panel.
    */
   public void onNewGame() {
-    this.player = null;
+    logger.debug("Setting Exchange with null");
     this.setExchange(null);
+    logger.debug("Clearing NewGameFields");
     nav.clearNewGameFields();
+    logger.debug("Showing NewGamePanel");
     nav.showNewGamePanel();
+    logger.debug("Finished showing newGamePanel");
   }
 
   /** 
@@ -196,7 +189,7 @@ public class GameController implements GameObserver {
    * @return the player money
    */
   public String getMoney() {
-    return dispDF.format(this.player.getMoney().setScale(roundingNum, roundingMode));
+    return this.player.getMoney().setScale(roundingNum, roundingMode).toString();
   }
 
 
@@ -271,7 +264,7 @@ public class GameController implements GameObserver {
           String.format(
               "$%s ($%s)",
               new SaleCalculator(share).calculateTotal()
-              .setScale(roundingNum, roundingMode).toString(),
+              .setScale(roundingNum, roundingMode),
               share.stock().getSalesPrice().setScale(roundingNum, roundingMode)));
     }
   }
@@ -290,21 +283,6 @@ public class GameController implements GameObserver {
     }
   }
 
-  /**
-   * Fills the stock market with the given stocks, limited by the specified number.
-   *
-   * @param stocks the list of stocks to display
-   * @param limit the maximum number of stocks to display
-   */
-  private void fillStocks(List<Stock> stocks, int limit) {
-    for (int i = 0; i < limit && i < stocks.size(); i++) {
-      Stock stock = stocks.get(i);
-      nav.addStockToStockMarket(
-          stock.getSymbol(),
-          stock.getCompany(),
-          "$" + stock.getSalesPrice().setScale(roundingNum, roundingMode).toString());
-    }
-  }
 
   /**
    * Fills the transaction history with the given transactions.
@@ -345,7 +323,7 @@ public class GameController implements GameObserver {
     this.lastStockSort = "None";
     nav.clearStockMarketStocks();
     List<Stock> stocks = this.exchange.getAllStock();
-    this.fillStocks(stocks, 10);
+    this.fillStocks(stocks);
   }
 
   private List<Transaction> getTransactions() {
@@ -374,11 +352,11 @@ public class GameController implements GameObserver {
     this.lastTransactionSort = "Week";
     nav.clearTransactionHistoryTransactions();
     List<Transaction> transactions = this.getTransactions();
-    if (this.weekToggleTransaction) {
-      transactions = transactions.reversed();
-    }
     if (toggle) {
       this.weekToggleTransaction = !this.weekToggleTransaction;
+    }
+    if (this.weekToggleTransaction) {
+      transactions = transactions.reversed();
     }
     this.fillTransaction(transactions);
   }
@@ -402,11 +380,11 @@ public class GameController implements GameObserver {
     transactions.clear();
     transactions.addAll(transactionsPurchases);
     transactions.addAll(transactionsSales);
-    if (this.weekToggleTransaction) {
-      transactions = transactions.reversed();
-    }
     if (toggle) {
       this.typeToggleTransaction = !this.typeToggleTransaction;
+    }
+    if (this.weekToggleTransaction) {
+      transactions = transactions.reversed();
     }
     this.fillTransaction(transactions);
   }
@@ -421,12 +399,13 @@ public class GameController implements GameObserver {
     this.lastShareSort = "Symbol";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesBySymbol();
-    if (this.symbolToggleShare) {
-      shares = shares.reversed();
-    }
     if (toggle) {
       this.symbolToggleShare = !this.symbolToggleShare;
     }
+    if (this.symbolToggleShare) {
+      shares = shares.reversed();
+    }
+    
     this.fillShares(shares);
   }
 
@@ -440,11 +419,11 @@ public class GameController implements GameObserver {
     this.lastStockSort = "Symbol";
     nav.clearStockMarketStocks();
     List<Stock> stocks = this.exchange.getAllStockBySymbol();
-    if (this.symbolToggleStock) {
-      stocks = stocks.reversed();
-    }
     if (toggle) {
       this.symbolToggleStock = !this.symbolToggleStock;
+    }
+    if (this.symbolToggleStock) {
+      stocks = stocks.reversed();
     }
     this.fillStocks(stocks);
   }
@@ -462,11 +441,11 @@ public class GameController implements GameObserver {
     List<Transaction> transactions = this.getTransactions().stream().sorted(
         (t1, t2) -> t1.getShare().stock().getSymbol()
         .compareTo(t2.getShare().stock().getSymbol())).toList();
-    if (this.stockToggleTransaction) {
-      transactions = transactions.reversed();
-    }
     if (toggle) {
       this.stockToggleTransaction = !this.stockToggleTransaction;
+    }
+    if (this.stockToggleTransaction) {
+      transactions = transactions.reversed();
     }
     this.fillTransaction(transactions);
   }
@@ -481,11 +460,11 @@ public class GameController implements GameObserver {
     this.lastShareSort = "Company";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByCompany();
-    if (this.companyNameToggleShare) {
-      shares = shares.reversed();
-    }
     if (toggle) {
       this.companyNameToggleShare = !this.companyNameToggleShare;
+    }
+    if (this.companyNameToggleShare) {
+      shares = shares.reversed();
     }
     this.fillShares(shares);
   }
@@ -500,11 +479,11 @@ public class GameController implements GameObserver {
     this.lastStockSort = "Company";
     nav.clearStockMarketStocks();
     List<Stock> stocks = this.exchange.getAllStockByCompany();
-    if (this.companyNameToggleStock) {
-      stocks = stocks.reversed();
-    }
     if (toggle) {
       this.companyNameToggleStock = !this.companyNameToggleStock;
+    }
+    if (this.companyNameToggleStock) {
+      stocks = stocks.reversed();
     }
     this.fillStocks(stocks);
   }
@@ -519,11 +498,11 @@ public class GameController implements GameObserver {
     this.lastShareSort = "Quantity";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByQuantity();
-    if (this.quantityToggleShare) {
-      shares = shares.reversed();
-    }
     if (toggle) {
       this.quantityToggleShare = !this.quantityToggleShare;
+    }
+    if (this.quantityToggleShare) {
+      shares = shares.reversed();
     }
     this.fillShares(shares);
   }
@@ -540,11 +519,11 @@ public class GameController implements GameObserver {
     nav.clearTransactionHistoryTransactions();
     List<Transaction> transactions = this.getTransactions().stream().sorted(
         (t1, t2) -> t1.getShare().quantity().compareTo(t2.getShare().quantity())).toList();
-    if (this.quantityToggleTransaction) {
-      transactions = transactions.reversed();
-    }
     if (toggle) {
       this.quantityToggleTransaction = !this.quantityToggleTransaction;
+    }
+    if (this.quantityToggleTransaction) {
+      transactions = transactions.reversed();
     }
     this.fillTransaction(transactions);
   }
@@ -559,11 +538,11 @@ public class GameController implements GameObserver {
     this.lastShareSort = "Purchase Price";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByPurchasePrice();
-    if (this.purchasePriceToggleShare) {
-      shares = shares.reversed();
-    }
     if (toggle) {
       this.purchasePriceToggleShare = !this.purchasePriceToggleShare;
+    }
+    if (this.purchasePriceToggleShare) {
+      shares = shares.reversed();
     }
     this.fillShares(shares);
   }
@@ -578,11 +557,11 @@ public class GameController implements GameObserver {
     this.lastStockSort = "Purchase Price";
     nav.clearStockMarketStocks();
     List<Stock> stocks = this.exchange.getAllStockByPrice();
-    if (this.purchasePriceToggleStock) {
-      stocks = stocks.reversed();
-    }
     if (toggle) {
       this.purchasePriceToggleStock = !this.purchasePriceToggleStock;
+    }
+    if (this.purchasePriceToggleStock) {
+      stocks = stocks.reversed();
     }
     this.fillStocks(stocks);
   }
@@ -600,11 +579,11 @@ public class GameController implements GameObserver {
     List<Transaction> transactions = this.getTransactions().stream().sorted(
         (t1, t2) -> t1.getShare().purchasePrice()
             .compareTo(t2.getShare().purchasePrice())).toList();
-    if (this.priceToggleTransaction) {
-      transactions = transactions.reversed();
-    }
     if (toggle) {
       this.priceToggleTransaction = !this.priceToggleTransaction;
+    }
+    if (this.priceToggleTransaction) {
+      transactions = transactions.reversed();
     }
     this.fillTransaction(transactions);
   }
@@ -619,11 +598,11 @@ public class GameController implements GameObserver {
     this.lastShareSort = "Current Value";
     nav.clearPortfolioShares();
     List<Share> shares = this.player.getPortfolio().getSharesByCurrentValue();
-    if (this.currentValueToggleShare) {
-      shares = shares.reversed();
-    }
     if (toggle) {
       this.currentValueToggleShare = !this.currentValueToggleShare;
+    }
+    if (this.currentValueToggleShare) {
+      shares = shares.reversed();
     }
     this.fillShares(shares);
   }
@@ -641,11 +620,11 @@ public class GameController implements GameObserver {
     List<Transaction> transactions = this.getTransactions().stream().sorted(
         (t1, t2) -> t1.getCalculator().calculateTotal()
             .compareTo(t2.getCalculator().calculateTotal())).toList();
-    if (this.costRewardToggleTransaction) {
-      transactions = transactions.reversed();
-    }
     if (toggle) {
       this.costRewardToggleTransaction = !this.costRewardToggleTransaction;
+    }
+    if (this.costRewardToggleTransaction) {
+      transactions = transactions.reversed();
     }
     this.fillTransaction(transactions);
   }
@@ -654,7 +633,7 @@ public class GameController implements GameObserver {
    * fetches the portfolio and fills 
    * the portfolio with the shares, keeping the current sorting order.
    */
-  private void fetchRefreshPortfolio() {
+  public void fetchRefreshPortfolio() {
     logger.debug("Refreshing portfolio");
     if (this.lastShareSort.equals("None")) {
       this.fetchPortfolio();
@@ -696,7 +675,7 @@ public class GameController implements GameObserver {
   /**
    * Refreshes the transaction history based on the last sorting order.
    */
-  private void fetchRefreshTransactionHistory() {
+  public void fetchRefreshTransactionHistory() {
     logger.debug("Refreshing transaction history");
     if (this.lastTransactionSort.equals("Week")) {
       this.fetchWeekTransactionHistory(false);
@@ -722,7 +701,47 @@ public class GameController implements GameObserver {
    * @param symbol the stock symbol of the share to sell
    */
   public void sellShare(String symbol) {
-    this.exchange.sell(this.player.getPortfolio().getShare(symbol), this.player);
+    Share share = this.player.getPortfolio().getShare(symbol);
+    String quantity = share.quantity().setScale(roundingNum, roundingMode).toString();
+
+
+    String confirmationText
+        = "Do you confirm the sale of " + symbol + "x"
+        + quantity + "?";
+    
+    try {
+      if (nav.createConfirmation("Confirm Sale:", confirmationText)) {
+        Transaction sale = this.exchange.sell(share, this.player);
+        String purchasePrice = share.purchasePrice()
+            .setScale(roundingNum, roundingMode).toString();
+        String valueAtSale = share.stock().getSalesPrice()
+            .setScale(roundingNum, roundingMode).toString();
+        String gross = sale.getCalculator().calculateGross()
+            .setScale(roundingNum, roundingMode).toString();
+        String comissions = sale.getCalculator().calculateCommission()
+            .setScale(roundingNum, roundingMode).toString();
+        String tax = sale.getCalculator().calculateTax()
+            .setScale(roundingNum, roundingMode).toString();
+        String totalSaleAmount = sale.getCalculator().calculateTotal()
+            .setScale(roundingNum, roundingMode).toString();
+        String rapportText = String.format(
+            "Stock: %s\n"
+            + "Quantity: %s\n"
+            + "Value at purchase: %s\n"
+            + "Value at sale: %s\n"
+            + "Gross revenue: %s\n"
+            + "Comissions: %s\n"
+            + "Tax: %s\n"
+            + "---\n"
+            + "Total revenue: %s",
+            symbol, quantity, purchasePrice, valueAtSale, gross, comissions,
+            tax, totalSaleAmount
+        );
+        nav.createInfo("Transaction rapport:", rapportText);
+      }
+    } catch (Exception e) {
+      // Do nothing.
+    }
   }
 
   /**
@@ -733,9 +752,39 @@ public class GameController implements GameObserver {
    * @param quantity the quantity of shares to buy, expected to be a valid number in string format
    */
   public void buyShare(String symbol, String quantity) {
+    String confirmationText
+        = "Do you confirm the purchase of " + symbol + "x" + quantity + "?";
+          
     try {
-      this.exchange.buy(symbol, new BigDecimal(quantity), this.player);
-    } catch (Exception e) {
+      if (nav.createConfirmation("Confirm purchase:", confirmationText)) {
+        Transaction purchase
+            = this.exchange.buy(symbol, new BigDecimal(quantity), this.player);
+        String value = this.exchange.getStock(symbol).getSalesPrice()
+            .setScale(roundingNum, roundingMode).toString();
+        String gross = purchase.getCalculator().calculateGross()
+            .setScale(roundingNum, roundingMode).toString();
+        String comissions = purchase.getCalculator().calculateCommission()
+            .setScale(roundingNum, roundingMode).toString();
+        String tax = purchase.getCalculator().calculateTax()
+            .setScale(roundingNum, roundingMode).toString();
+        String total = purchase.getCalculator().calculateTotal()
+            .setScale(roundingNum, roundingMode).toString();
+        String rapportText = String.format(
+            "Stock: %s\n"
+            + "Quantity: %s\n"
+            + "Value: %s\n"
+            + "Gross cost: %s\n"
+            + "Comissions: %s\n"
+            + "Tax: %s\n"
+            + "---\n"
+            + "Total cost: %s",
+            symbol, quantity, value, gross, comissions, tax, total
+        );
+        nav.createInfo("Transaction rapport:", rapportText);
+      }
+    } catch (ArithmeticException e) {
+      nav.createErrorPopup("Insufficient funds.");
+    } catch (IllegalArgumentException e) {
       nav.createErrorPopup("Quantity must be a valid number.");
     }
   }
@@ -744,9 +793,14 @@ public class GameController implements GameObserver {
    * Sells all shares in the player's portfolio.
    */
   public void sellAllShares() {
-    logger.debug("Selling all shares");
-    for (Share share : new ArrayList<>(this.player.getPortfolio().getShares())) {
-      this.exchange.sell(share, this.player);
+    String confirmationText
+        = "Are you sure you want to sell ALL your shares?\n"
+        + "This cannot be undone";
+    if (nav.createConfirmation("Confirm Selling all shares:", confirmationText)) {
+      logger.debug("Selling all shares");
+      for (Share share : new ArrayList<>(this.player.getPortfolio().getShares())) {
+        this.exchange.sell(share, this.player);
+      }
     }
   }
 
@@ -818,7 +872,7 @@ public class GameController implements GameObserver {
    * @return the gain of the gainer
    */
   public String getGainerGain(int i) {
-    return this.exchange.getGainers(i + 1).get(i)
+    return "$ " + this.exchange.getGainers(i + 1).get(i)
     .getLatestPriceChange().setScale(roundingNum, roundingMode).toString();
   }
 
@@ -839,7 +893,7 @@ public class GameController implements GameObserver {
    * @return the gain of the loser
    */
   public String getLoserGain(int i) {
-    return this.exchange.getLosers(i + 1).get(i)
+    return "$ " + this.exchange.getLosers(i + 1).get(i)
     .getLatestPriceChange().setScale(roundingNum, roundingMode).toString();
   }
 
@@ -851,7 +905,7 @@ public class GameController implements GameObserver {
     this.sellAllShares();
     String[] lines = new String[] {
         "Player:",
-        this.getPlayerName(),
+        this.player.getName(),
         "",
         "Status:",
         this.getPlayerStatus(),
@@ -873,41 +927,35 @@ public class GameController implements GameObserver {
     Platform.exit();
   }
 
-  @Override
-  public void onWeekAdvanced(int newWeek) {
-    System.out.println("test");
-    nav.updateGamePage();
-    this.fetchRefreshPortfolio();
-    this.fetchRefreshStockMarket();
-    nav.updateGainersAndLosers();
+  public String getCompanyFromSymbol(String symbol) {
+    return this.exchange.getStock(symbol).getCompany();
   }
 
-  @Override
-  public void onStockPriceChanged(String symbol) {
-    nav.updateGamePage();
+  public List<BigDecimal> getPriceHistory(String symbol) {
+    return this.exchange.getStock(symbol).getHistoricalPrices();
   }
 
-  @Override
-  public void onPurchaseCompleted(String symbol, String quantity) {
-    nav.updateGamePage();
-    this.fetchRefreshTransactionHistory();
+  public BigDecimal getHighestPrice(String symbol) {
+    return this.exchange.getStock(symbol).getHighestPrice();
   }
 
-  @Override
-  public void onSaleCompleted(String symbol, String quantity) {
-    nav.updateGamePage();
-    this.fetchRefreshTransactionHistory();
+  public String getHighestPriceString(String symbol) {
+    return this.getHighestPrice(symbol).setScale(roundingNum, roundingMode)
+        .toString();
   }
 
-  @Override
-  public void onMoneyChanged(String newBalance) {
-    nav.updateGamePage();
+  public BigDecimal getLowestPrice(String symbol) {
+    return this.exchange.getStock(symbol).getLowestPrice();
   }
 
-  @Override
-  public void onPortfolioChanged() {
-    logger.debug("Was notified by portfolio change");
-    nav.updateGamePage();
-    this.fetchRefreshPortfolio();
+  public String getLowestPriceString(String symbol) {
+    return this.getLowestPrice(symbol).setScale(roundingNum, roundingMode)
+        .toString();
   }
+
+  public String getStockPrice(String symbol) {
+    return this.exchange.getStock(symbol).getSalesPrice()
+        .setScale(roundingNum, roundingMode).toString();
+  }
+
 }

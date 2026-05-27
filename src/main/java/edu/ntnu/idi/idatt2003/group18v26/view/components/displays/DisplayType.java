@@ -23,4 +23,8 @@ public class DisplayType extends BorderPane {
     this.text.setText(text);
   }
 
+  public String getDisplayText() {
+    return this.text.getText();
+  }
+
 }

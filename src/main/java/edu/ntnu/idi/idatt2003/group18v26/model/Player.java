@@ -152,4 +152,6 @@ public class Player {
     logger.debug("Notifying observers: money changed to {}", this.money);
     observers.forEach(observer -> observer.onMoneyChanged(this.money.toString()));
   }
+
+  
 }

@@ -2,8 +2,8 @@ package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game;
 
 import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.searchbars.PortfolioSearchBar;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.searchbars.SearchBar;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.rows.ShareItemSorter;
-import edu.ntnu.idi.idatt2003.group18v26.view.components.rows.ShareRows;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.rows.ShareItemSorter;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.rows.ShareRows;
 import javafx.scene.layout.VBox;
 
 public class PortFolioContent extends VBox {
@@ -25,4 +25,5 @@ public class PortFolioContent extends VBox {
   public void clearShares() {
     this.shares.clear();
   }
+
 }

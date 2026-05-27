@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt2003.group18v26.view.components.buttons;
 
 import javafx.scene.control.Button;
+import javafx.scene.text.TextAlignment;
 
 /**
  * Abstract class for buttons in the application.
@@ -11,6 +12,8 @@ public abstract class ButtonType extends Button {
   protected ButtonType() {
     setId("button1");
     getStyleClass().add("button");
+    setWrapText(true);
+    setTextAlignment(TextAlignment.CENTER);
   }
 
 }

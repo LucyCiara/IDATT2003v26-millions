@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt2003.group18v26.view.components.rows;
+package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.rows;
 
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;

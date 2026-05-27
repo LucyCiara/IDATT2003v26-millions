@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt2003.group18v26.view.components.rows;
+package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.rows;
 
 /**
  * Class for the transaction rows component in the application.

@@ -1,9 +1,12 @@
-package edu.ntnu.idi.idatt2003.group18v26.view.components.rows;
+package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.rows;
+
+import java.util.HashMap;
 
 /**
  * Class for the share rows component in the application.
  */
 public class ShareRows extends RowType {
+  
   public ShareRows() {
     super();
   }
@@ -19,9 +22,9 @@ public class ShareRows extends RowType {
    */
   public void addItem(String shareSymbol, String shareName, 
       String shareQty, String purchasePrice, String currentValue) {
-    this.getContents().getChildren().add(
-        new ShareItem(shareSymbol, shareName, shareQty, purchasePrice, currentValue)
-    );
+    ShareItem item = new ShareItem(shareSymbol, shareName, shareQty, purchasePrice, currentValue);
+    this.getContents().getChildren().add(item);
   }
+
 
 }

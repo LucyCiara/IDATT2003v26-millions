@@ -14,8 +14,11 @@ public class GameBottom extends BorderPane {
     setRight(weekWidget);
   }
 
-  public void updateInfo() {
-    this.weekWidget.updateWeek();
+  public void updateNetWorth() {
     this.netWorthDisp.update();
+  }
+
+  public void updateWeek(int week) {
+    this.weekWidget.updateWeek(week);
   }
 }

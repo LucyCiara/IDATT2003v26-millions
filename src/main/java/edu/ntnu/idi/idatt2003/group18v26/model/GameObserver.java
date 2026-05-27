@@ -48,4 +48,5 @@ public interface GameObserver {
    * Called when player's portfolio changes.
    */
   void onPortfolioChanged();
+
 }

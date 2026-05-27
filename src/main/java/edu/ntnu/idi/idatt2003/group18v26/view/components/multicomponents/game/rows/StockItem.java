@@ -1,7 +1,9 @@
-package edu.ntnu.idi.idatt2003.group18v26.view.components.rows;
+package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.rows;
 
 
+import edu.ntnu.idi.idatt2003.group18v26.control.GameController;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.BuyButton;
+import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.StockInfoButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.displays.DisplayType;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.StockQuantityField;
 import javafx.scene.layout.ColumnConstraints;
@@ -13,7 +15,7 @@ import javafx.scene.layout.RowConstraints;
  * Class for the stock item component in the application.
  */
 public class StockItem extends GridPane {
-  private DisplayType symDisp;
+  public StockInfoButton symbBtn;
   private DisplayType nameDisp;
   private DisplayType purchasePriceDisp;
   private StockQuantityField stockQtyField;
@@ -29,8 +31,7 @@ public class StockItem extends GridPane {
   public StockItem(String stockSymbol, String stockName, String purchasePrice) {
     super();
     getStyleClass().add("page");
-    this.symDisp = new DisplayType();
-    this.symDisp.setDisplayText(stockSymbol);
+    this.symbBtn = new StockInfoButton(stockSymbol);
     this.nameDisp = new DisplayType();
     this.nameDisp.setDisplayText(stockName);
     this.purchasePriceDisp = new DisplayType();
@@ -40,20 +41,26 @@ public class StockItem extends GridPane {
     this.buyBtn.setMaxWidth(Double.MAX_VALUE);
     this.buyBtn.setMaxHeight(Double.MAX_VALUE);
 
-    DisplayType[] displays = new DisplayType[] {this.symDisp, 
-      this.nameDisp, this.purchasePriceDisp};
-    ColumnConstraints columnConstraint = new ColumnConstraints();
-    columnConstraint.setPercentWidth(100);
+    ColumnConstraints cc = new ColumnConstraints();
+    cc.setPercentWidth(100);
+    add(symbBtn, 0, 0, 1, 1);
+    getColumnConstraints().add(cc);
+    DisplayType[] displays = new DisplayType[] { this.nameDisp,
+      this.purchasePriceDisp };
     for (int i = 0; i < displays.length; i++) {
-      add(displays[i], i, 0, 1, 1);
-      getColumnConstraints().add(columnConstraint);
+      add(displays[i], i+1, 0, 1, 1);
+      getColumnConstraints().add(cc);
     }
-    add(this.stockQtyField, displays.length, 0, 1, 1);
-    getColumnConstraints().add(columnConstraint);
-    add(this.buyBtn, displays.length + 1, 0, 1, 1);
-    getColumnConstraints().add(columnConstraint);
+    add(this.stockQtyField, displays.length + 1, 0, 1, 1);
+    getColumnConstraints().add(cc);
+    add(this.buyBtn, displays.length + 2, 0, 1, 1);
+    getColumnConstraints().add(cc);
     RowConstraints rowConstraint = new RowConstraints();
     rowConstraint.setPercentHeight(100);
     getRowConstraints().add(rowConstraint);
+  }
+
+  public void updatePrice() {
+    this.purchasePriceDisp.setDisplayText(GameController.getInstance().getStockPrice(this.symbBtn.getText()));
   }
 }

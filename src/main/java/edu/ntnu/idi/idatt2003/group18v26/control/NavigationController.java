@@ -7,8 +7,11 @@ import edu.ntnu.idi.idatt2003.group18v26.view.pages.MenuPanel;
 import edu.ntnu.idi.idatt2003.group18v26.view.pages.NewGamePanel;
 import edu.ntnu.idi.idatt2003.group18v26.view.pages.TitlePage;
 import java.io.File;
+import java.util.Optional;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
@@ -166,6 +169,33 @@ public class NavigationController {
   }
 
   /**
+   * This method creates a confirmation popup.
+   * 
+   * @param title The title and header for the popup.
+   * @param text The content-text of the popup.
+   * @return A boolean based on whether the OK button was clicked or not.
+   */
+  public boolean createConfirmation(String title, String text) {
+    Alert confirmation = new Alert(AlertType.CONFIRMATION);
+    confirmation.setTitle(title);
+    confirmation.setHeaderText(title);
+    confirmation.setContentText(text);
+    Optional<ButtonType> buttonType = confirmation.showAndWait();
+    if (buttonType.isPresent() && buttonType.get().equals(ButtonType.OK)) {
+      return true;
+    }
+    return false;
+  }
+
+  public void createInfo(String title, String text) {
+    Alert info = new Alert(AlertType.INFORMATION);
+    info.setTitle(title);
+    info.setHeaderText(title);
+    info.setContentText(text);
+    info.show();
+  }
+
+  /**
    * Clears the fields in the new game panel.
    */
   public void clearNewGameFields() {
@@ -178,13 +208,6 @@ public class NavigationController {
   public void showGamePage() {
     this.root.getChildren().clear();
     this.root.getChildren().add(this.gamePage);
-  }
-
-  /**
-   * Updates the information displayed on the game page.
-   */
-  public void updateGamePage() {
-    this.gamePage.updateInfo();
   }
 
   /**
@@ -260,13 +283,6 @@ public class NavigationController {
   }
 
   /**
-   * Updates the gainer and loser information on the game page.
-   */
-  public void updateGainersAndLosers() {
-    this.gamePage.updateGainersAndLosers();
-  }
-
-  /**
    * Adds a transaction to the transaction history on the game page.
    *
    * @param week the week of the transaction
@@ -294,4 +310,14 @@ public class NavigationController {
   public void showMenu() {
     this.root.getChildren().add(this.menu);
   }
+
+  public void selectStock(String symbol) {
+    this.gamePage.selectStock(symbol);
+  }
+
+  public GamePage getGamepage() {
+    return this.gamePage;
+  }
+
+
 }

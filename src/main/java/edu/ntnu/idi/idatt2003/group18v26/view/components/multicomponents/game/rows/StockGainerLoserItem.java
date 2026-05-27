@@ -1,4 +1,4 @@
-package edu.ntnu.idi.idatt2003.group18v26.view.components.rows;
+package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.rows;
 
 import edu.ntnu.idi.idatt2003.group18v26.view.components.displays.DisplayType;
 import javafx.scene.layout.ColumnConstraints;
