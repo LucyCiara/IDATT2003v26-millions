@@ -6,8 +6,11 @@ import edu.ntnu.idi.idatt2003.group18v26.model.filehandling.CsvStockReader;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.PurchaseCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Transaction;
+import edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionCalculator;
+
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -198,7 +201,7 @@ public class GameController implements GameObserver {
    * @return the player money
    */
   public String getMoney() {
-    return dispDF.format(this.player.getMoney().setScale(roundingNum, roundingMode));
+    return this.player.getMoney().setScale(roundingNum, roundingMode).toString();
   }
 
 
@@ -273,7 +276,7 @@ public class GameController implements GameObserver {
           String.format(
               "$%s ($%s)",
               new SaleCalculator(share).calculateTotal()
-              .setScale(roundingNum, roundingMode).toString(),
+              .setScale(roundingNum, roundingMode),
               share.stock().getSalesPrice().setScale(roundingNum, roundingMode)));
     }
   }
@@ -725,11 +728,19 @@ public class GameController implements GameObserver {
    * @param symbol the stock symbol of the share to sell
    */
   public void sellShare(String symbol) {
+    Share share = this.player.getPortfolio().getShare(symbol);
+    String confirmationText
+        = "Do you confirm the sale of " + symbol + "x"
+        + share.quantity().setScale(roundingNum, roundingMode).toString()
+        + " for $" + new SaleCalculator(share).calculateTotal();
+    
     try {
-      this.exchange.sell(
-          this.player.getPortfolio().getShare(symbol),
-          this.player
-      );
+      if (nav.createConfirmation("Confirm Sale:", confirmationText)) {
+        this.exchange.sell(
+            share,
+            this.player
+        );
+      }
     } catch (Exception e) {
       // Do nothing.
     }
@@ -743,8 +754,26 @@ public class GameController implements GameObserver {
    * @param quantity the quantity of shares to buy, expected to be a valid number in string format
    */
   public void buyShare(String symbol, String quantity) {
+    String purchasePrice;
     try {
-      this.exchange.buy(symbol, new BigDecimal(quantity), this.player);
+      purchasePrice = new PurchaseCalculator(
+          new Share(this.exchange.getStock(symbol),
+          new BigDecimal(quantity),
+          this.exchange.getStock(symbol).getSalesPrice())
+      ).calculateTotal().setScale(roundingNum, roundingMode).toString();
+     
+    } catch (Exception e) {
+      purchasePrice = "?";
+    }
+
+    String confirmationText
+        = "Do you confirm the purchase of " + symbol + "x" + quantity
+        + " for $" + purchasePrice;
+          
+    try {
+      if (nav.createConfirmation("Confirm purchase:", confirmationText)) {
+        this.exchange.buy(symbol, new BigDecimal(quantity), this.player);
+      }
     } catch (ArithmeticException e) {
       nav.createErrorPopup("Insufficient funds.");
     } catch (IllegalArgumentException e) {
@@ -756,9 +785,14 @@ public class GameController implements GameObserver {
    * Sells all shares in the player's portfolio.
    */
   public void sellAllShares() {
-    logger.debug("Selling all shares");
-    for (Share share : new ArrayList<>(this.player.getPortfolio().getShares())) {
-      this.exchange.sell(share, this.player);
+    String confirmationText
+        = "Are you sure you want to sell ALL your shares?\n"
+        + "This cannot be undone";
+    if (nav.createConfirmation("Confirm Selling all shares:", confirmationText)) {
+      logger.debug("Selling all shares");
+      for (Share share : new ArrayList<>(this.player.getPortfolio().getShares())) {
+        this.exchange.sell(share, this.player);
+      }
     }
   }
 
