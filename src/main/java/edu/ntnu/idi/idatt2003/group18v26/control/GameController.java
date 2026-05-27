@@ -131,7 +131,6 @@ public class GameController implements GameObserver {
           this.player = new Player(playerName, playerStartMoneyBigDec);
           this.player.addObserver(this);
           this.player.getPortfolio().addObserver(this);
-          System.out.println(String.format("%s, %5f", player.getName(), player.getMoney()));
         }
       } catch (Exception e) {
         nav.createWarningPopup("Starting money must be a valid decimal number.");

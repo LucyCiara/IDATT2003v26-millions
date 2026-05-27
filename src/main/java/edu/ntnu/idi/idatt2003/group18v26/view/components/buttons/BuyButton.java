@@ -6,6 +6,7 @@ import edu.ntnu.idi.idatt2003.group18v26.view.components.fields.StockQuantityFie
 public class BuyButton extends ButtonType {
   public BuyButton(String symbol, StockQuantityField stockQtyField) {
     super();
+    setId("Buy");
     setText("Buy");
     setOnAction(e -> NavigationController.getInstance().onBuy(symbol, stockQtyField));
   }

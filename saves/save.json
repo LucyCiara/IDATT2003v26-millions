@@ -1,0 +1,2024 @@
+{
+  "playerName": "test",
+  "playerMoney": 796,
+  "startingMoney": 796,
+  "playerPortfolio": [],
+  "week": 0,
+  "stockCompany": {
+    "TER": "Teradyne",
+    "SNDK": "Sandisk Corporation",
+    "LVS": "Las Vegas Sands",
+    "WYNN": "Wynn Resorts",
+    "TFC": "Truist Financial",
+    "TSLA": "Tesla Inc.",
+    "GLW": "Corning Inc.",
+    "CDW": "CDW",
+    "BBY": "Best Buy",
+    "UHS": "Universal Health Services",
+    "CEG": "Constellation Energy",
+    "HON": "Honeywell",
+    "ABBV": "AbbVie",
+    "WMB": "Williams Companies",
+    "IQV": "IQVIA",
+    "DGX": "Quest Diagnostics",
+    "EIX": "Edison International",
+    "XOM": "ExxonMobil",
+    "POOL": "Pool Corporation",
+    "RCL": "Royal Caribbean Group",
+    "HPE": "Hewlett Packard Enterprise",
+    "WMT": "Walmart",
+    "BA": "Boeing",
+    "TGT": "Target Corporation",
+    "A": "Agilent Technologies",
+    "NDAQ": "Nasdaq Inc.",
+    "C": "Citigroup",
+    "D": "Dominion Energy",
+    "DHI": "D. R. Horton",
+    "IRM": "Iron Mountain",
+    "CFG": "Citizens Financial Group",
+    "BG": "Bunge Global",
+    "F": "Ford Motor Company",
+    "AXON": "Axon Enterprise",
+    "HPQ": "HP Inc.",
+    "BK": "BNY Mellon",
+    "J": "Jacobs Solutions",
+    "L": "Loews Corporation",
+    "DHR": "Danaher Corporation",
+    "O": "Realty Income",
+    "FICO": "Fair Isaac",
+    "BR": "Broadridge Financial Solutions",
+    "Q": "Qnity Electronics",
+    "NTAP": "NetApp",
+    "ABT": "Abbott Laboratories",
+    "T": "AT\u0026T",
+    "LYB": "LyondellBasell",
+    "V": "Visa Inc.",
+    "BX": "Blackstone Inc.",
+    "BDX": "Becton Dickinson",
+    "LRCX": "Lam Research",
+    "VLO": "Valero Energy",
+    "ZTS": "Zoetis",
+    "CB": "Chubb Limited",
+    "NVDA": "Nvidia",
+    "IBKR": "Interactive Brokers Group",
+    "CF": "CF Industries",
+    "CI": "Cigna",
+    "JBHT": "J.B. Hunt",
+    "SMCI": "Supermicro",
+    "LYV": "Live Nation Entertainment",
+    "MTCH": "Match Group",
+    "CL": "Colgate-Palmolive",
+    "BEN": "Franklin Resources",
+    "ACN": "Accenture",
+    "VMC": "Vulcan Materials Company",
+    "DIS": "Walt Disney Company (The)",
+    "REG": "Regency Centers",
+    "INCY": "Incyte",
+    "GPC": "Genuine Parts Company",
+    "CTAS": "Cintas",
+    "FAST": "Fastenal",
+    "AMZN": "Amazon",
+    "CHD": "Church \u0026 Dwight",
+    "DD": "DuPont",
+    "DE": "Deere \u0026 Company",
+    "ARES": "Ares Management Corporation",
+    "CINF": "Cincinnati Financial",
+    "DG": "Dollar General",
+    "HRL": "Hormel Foods",
+    "GPN": "Global Payments",
+    "ADI": "Analog Devices",
+    "ADM": "Archer Daniels Midland",
+    "ADP": "Automatic Data Processing",
+    "ITW": "Illinois Tool Works",
+    "ELV": "Elevance Health",
+    "ACGL": "Arch Capital Group",
+    "EA": "Electronic Arts",
+    "EME": "EMCOR Group Inc.",
+    "PAYC": "Paycom",
+    "ED": "Consolidated Edison",
+    "AEE": "Ameren",
+    "EG": "Everest Group",
+    "TJX": "TJX Companies",
+    "SHW": "Sherwin-Williams",
+    "EL": "Estée Lauder Companies (The)",
+    "MSCI": "MSCI",
+    "HST": "Host Hotels \u0026 Resorts",
+    "EMR": "Emerson Electric",
+    "AEP": "American Electric Power",
+    "ES": "Eversource Energy",
+    "FOX": "Fox Corporation (Class B)",
+    "HSY": "Hershey Company (The)",
+    "AES": "AES Corporation",
+    "YUM": "Yum! Brands",
+    "EW": "Edwards Lifesciences",
+    "TRMB": "Trimble Inc.",
+    "PCG": "PG\u0026E Corporation",
+    "DECK": "Deckers Brands",
+    "TKO": "TKO Group Holdings",
+    "FE": "FirstEnergy",
+    "SOLV": "Solventum",
+    "TROW": "T. Rowe Price",
+    "CSCO": "Cisco",
+    "WRB": "W. R. Berkley Corporation",
+    "AFL": "Aflac",
+    "DLR": "Digital Realty",
+    "IVZ": "Invesco",
+    "UNH": "UnitedHealth Group",
+    "MSFT": "Microsoft",
+    "UNP": "Union Pacific Corporation",
+    "SJM": "J.M. Smucker Company (The)",
+    "EOG": "EOG Resources",
+    "GD": "General Dynamics",
+    "GE": "GE Aerospace",
+    "GOOG": "Alphabet Inc. (Class C)",
+    "HUM": "Humana",
+    "GL": "Globe Life",
+    "WELL": "Welltower",
+    "GM": "General Motors",
+    "GS": "Goldman Sachs",
+    "WSM": "Williams-Sonoma",
+    "LULU": "Lululemon Athletica",
+    "HOLX": "Hologic",
+    "PEG": "Public Service Enterprise Group",
+    "PAYX": "Paychex",
+    "TMO": "Thermo Fisher Scientific",
+    "WST": "West Pharmaceutical Services",
+    "PEP": "PepsiCo",
+    "HD": "Home Depot (The)",
+    "ISRG": "Intuitive Surgical",
+    "BF.B": "Brown–Forman",
+    "SLB": "Schlumberger",
+    "FRT": "Federal Realty Investment Trust",
+    "PFE": "Pfizer",
+    "CLX": "Clorox",
+    "RJF": "Raymond James Financial",
+    "PFG": "Principal Financial Group",
+    "SBUX": "Starbucks",
+    "KVUE": "Kenvue",
+    "UPS": "United Parcel Service",
+    "DOC": "Healthpeak Properties",
+    "CME": "CME Group",
+    "WTW": "Willis Towers Watson",
+    "CMG": "Chipotle Mexican Grill",
+    "CMI": "Cummins",
+    "HWM": "Howmet Aerospace",
+    "AIG": "American International Group",
+    "DLTR": "Dollar Tree",
+    "IP": "International Paper",
+    "EQR": "Equity Residential",
+    "BKR": "Baker Hughes",
+    "CMS": "CMS Energy",
+    "IR": "Ingersoll Rand",
+    "EQT": "EQT Corporation",
+    "DOV": "Dover Corporation",
+    "IT": "Gartner",
+    "MAA": "Mid-America Apartment Communities",
+    "DOW": "Dow Inc.",
+    "AIZ": "Assurant",
+    "VST": "Vistra Corp.",
+    "CNC": "Centene Corporation",
+    "PGR": "Progressive Corporation",
+    "MCHP": "Microchip Technology",
+    "HOOD": "Robinhood Markets Inc.",
+    "AJG": "Arthur J. Gallagher \u0026 Co.",
+    "MAS": "Masco",
+    "MAR": "Marriott International",
+    "BLK": "BlackRock",
+    "AMAT": "Applied Materials",
+    "MDLZ": "Mondelez International",
+    "PCAR": "Paccar",
+    "CNP": "CenterPoint Energy",
+    "CSGP": "CoStar Group",
+    "SNA": "Snap-on",
+    "FTV": "Fortive",
+    "URI": "United Rentals",
+    "DPZ": "Domino\u0027s",
+    "TPL": "Texas Pacific Land Corporation",
+    "FOXA": "Fox Corporation (Class A)",
+    "PHM": "PulteGroup",
+    "VTR": "Ventas",
+    "TPR": "Tapestry Inc.",
+    "VTRS": "Viatris",
+    "COF": "Capital One",
+    "PLTR": "Palantir Technologies",
+    "NFLX": "Netflix",
+    "KLAC": "KLA Corporation",
+    "COO": "Cooper Companies (The)",
+    "KO": "Coca-Cola Company (The)",
+    "ESS": "Essex Property Trust",
+    "COP": "ConocoPhillips",
+    "USB": "U.S. Bancorp",
+    "GWW": "W. W. Grainger",
+    "COR": "Cencora",
+    "NXPI": "NXP Semiconductors",
+    "KR": "Kroger",
+    "RMD": "ResMed",
+    "XYL": "Xylem Inc.",
+    "MCD": "McDonald\u0027s",
+    "NEE": "NextEra Energy",
+    "BMY": "Bristol Myers Squibb",
+    "MCK": "McKesson Corporation",
+    "CPB": "Campbell Soup Company",
+    "CHRW": "C.H. Robinson",
+    "NEM": "Newmont",
+    "ALB": "Albemarle Corporation",
+    "MCO": "Moody\u0027s Corporation",
+    "ROST": "Ross Stores",
+    "XYZ": "Block Inc.",
+    "CVNA": "Carvana Co.",
+    "IDXX": "Idexx Laboratories",
+    "GNRC": "Generac",
+    "DRI": "Darden Restaurants",
+    "CPAY": "Corpay",
+    "LH": "LabCorp",
+    "ETN": "Eaton Corporation",
+    "ODFL": "Old Dominion",
+    "TTWO": "Take-Two Interactive",
+    "LDOS": "Leidos",
+    "ALL": "Allstate",
+    "ANET": "Arista Networks",
+    "ETR": "Entergy",
+    "AMCR": "Amcor",
+    "CPT": "Camden Property Trust",
+    "ABNB": "Airbnb",
+    "SPG": "Simon Property Group",
+    "LW": "Lamb Weston",
+    "MA": "Mastercard",
+    "AMD": "Advanced Micro Devices",
+    "TRV": "Travelers Companies (The)",
+    "AME": "Ametek",
+    "MDT": "Medtronic",
+    "MO": "Altria",
+    "AMP": "Ameriprise Financial",
+    "ADSK": "Autodesk",
+    "MS": "Morgan Stanley",
+    "MU": "Micron Technology",
+    "AMT": "American Tower",
+    "ORCL": "Oracle Corporation",
+    "PKG": "Packaging Corporation of America",
+    "ROL": "Rollins Inc.",
+    "TSN": "Tyson Foods",
+    "ROK": "Rockwell Automation",
+    "ROP": "Roper Technologies",
+    "DTE": "DTE Energy",
+    "EBAY": "eBay",
+    "CRH": "CRH plc",
+    "SNPS": "Synopsys",
+    "NI": "NiSource",
+    "CHTR": "Charter Communications",
+    "CRL": "Charles River Laboratories",
+    "MET": "MetLife",
+    "CRM": "Salesforce",
+    "TTD": "The Trade Desk Inc.",
+    "SRE": "Sempra",
+    "EXPD": "Expeditors International",
+    "EXPE": "Expedia Group",
+    "AKAM": "Akamai Technologies",
+    "PLD": "Prologis",
+    "FFIV": "F5 Inc.",
+    "NCLH": "Norwegian Cruise Line Holdings",
+    "KEYS": "Keysight Technologies",
+    "DUK": "Duke Energy",
+    "DELL": "Dell Technologies",
+    "ON": "ON Semiconductor",
+    "AON": "Aon",
+    "PYPL": "PayPal",
+    "BALL": "Ball Corporation",
+    "AOS": "A. O. Smith",
+    "OKE": "ONEOK",
+    "CSX": "CSX Corporation",
+    "OTIS": "Otis Worldwide",
+    "DVA": "DaVita",
+    "EXC": "Exelon",
+    "APA": "APA Corporation",
+    "MGM": "MGM Resorts",
+    "EXE": "Expand Energy",
+    "NWSA": "News Corp (Class A)",
+    "LEN": "Lennar",
+    "APD": "Air Products",
+    "PG": "Procter \u0026 Gamble",
+    "PH": "Parker Hannifin",
+    "APH": "Amphenol",
+    "CDNS": "Cadence Design Systems",
+    "GILD": "Gilead Sciences",
+    "PM": "Philip Morris International",
+    "DVN": "Devon Energy",
+    "EXR": "Extra Space Storage",
+    "BRO": "Brown \u0026 Brown",
+    "APO": "Apollo Global Management",
+    "APP": "AppLovin Corporation",
+    "AAPL": "Apple Inc.",
+    "PNC": "PNC Financial Services",
+    "STE": "Steris",
+    "AMGN": "Amgen",
+    "STT": "State Street Corporation",
+    "GDDY": "GoDaddy",
+    "JBL": "Jabil",
+    "PNR": "Pentair",
+    "STX": "Seagate Technology",
+    "KDP": "Keurig Dr Pepper",
+    "STZ": "Constellation Brands",
+    "PNW": "Pinnacle West",
+    "META": "Meta Platforms",
+    "ZBH": "Zimmer Biomet",
+    "OMC": "Omnicom Group",
+    "BSX": "Boston Scientific",
+    "RSG": "Republic Services",
+    "NKE": "Nike Inc.",
+    "HUBB": "Hubbell Incorporated",
+    "JKHY": "Jack Henry \u0026 Associates",
+    "JCI": "Johnson Controls",
+    "RF": "Regions Financial Corporation",
+    "ARE": "Alexandria Real Estate Equities",
+    "EPAM": "EPAM Systems",
+    "RL": "Ralph Lauren Corporation",
+    "VRSK": "Verisk Analytics",
+    "MRNA": "Moderna",
+    "KEY": "KeyCorp",
+    "VRSN": "Verisign",
+    "CVS": "CVS Health",
+    "CVX": "Chevron Corporation",
+    "INTU": "Intuit",
+    "FISV": "Fiserv Inc.",
+    "PPG": "PPG Industries",
+    "DDOG": "Datadog",
+    "BLDR": "Builders FirstSource",
+    "TXN": "Texas Instruments",
+    "ALGN": "Align Technology",
+    "PPL": "PPL Corporation",
+    "FITB": "Fifth Third Bancorp",
+    "TXT": "Textron",
+    "IBM": "IBM",
+    "RTX": "RTX Corporation",
+    "SO": "Southern Company",
+    "LHX": "L3Harris",
+    "SW": "Smurfit WestRock",
+    "MKC": "McCormick \u0026 Company",
+    "TYL": "Tyler Technologies",
+    "SWK": "Stanley Black \u0026 Decker",
+    "VRTX": "Vertex Pharmaceuticals",
+    "ICE": "Intercontinental Exchange",
+    "CBOE": "Cboe Global Markets",
+    "LII": "Lennox International",
+    "LIN": "Linde plc",
+    "VICI": "Vici Properties",
+    "HAL": "Halliburton",
+    "INTC": "Intel",
+    "GEHC": "GE HealthCare",
+    "HAS": "Hasbro",
+    "REGN": "Regeneron Pharmaceuticals",
+    "ATO": "Atmos Energy",
+    "CTRA": "Coterra",
+    "TT": "Trane Technologies",
+    "HBAN": "Huntington Bancshares",
+    "EVRG": "Evergy",
+    "KHC": "Kraft Heinz",
+    "COIN": "Coinbase Global",
+    "MLM": "Martin Marietta Materials",
+    "PRU": "Prudential Financial",
+    "PSKY": "Paramount Skydance Corp",
+    "ORLY": "O\u0027Reilly Auto Parts",
+    "SBAC": "SBA Communications",
+    "CTSH": "Cognizant",
+    "PODD": "Insulet Corporation",
+    "MRSH": "Marsh \u0026 McLennan Companies Inc.",
+    "PSA": "Public Storage",
+    "SYF": "Synchrony Financial",
+    "NOC": "Northrop Grumman",
+    "NTRS": "Northern Trust",
+    "SYK": "Stryker Corporation",
+    "HCA": "HCA Healthcare",
+    "ERIE": "Erie Indemnity",
+    "MMM": "3M",
+    "AVB": "AvalonBay Communities",
+    "KIM": "Kimco Realty",
+    "TECH": "Bio-Techne",
+    "SYY": "Sysco",
+    "PSX": "Phillips 66",
+    "INVH": "Invitation Homes",
+    "NDSN": "Nordson Corporation",
+    "NOW": "ServiceNow",
+    "WAB": "Wabtec",
+    "BXP": "BXP Inc.",
+    "IEX": "IDEX Corporation",
+    "PTC": "PTC Inc.",
+    "CTVA": "Corteva",
+    "VZ": "Verizon",
+    "AVY": "Avery Dennison",
+    "BRK.B": "Berkshire Hathaway",
+    "IFF": "International Flavors \u0026 Fragrances",
+    "WAT": "Waters Corporation",
+    "CBRE": "CBRE Group",
+    "AWK": "American Water Works",
+    "WM": "Waste Management",
+    "LLY": "Lilly (Eli)",
+    "WBD": "Warner Bros. Discovery",
+    "WY": "Weyerhaeuser",
+    "MOH": "Molina Healthcare",
+    "SWKS": "Skyworks Solutions",
+    "APTV": "Aptiv",
+    "TMUS": "T-Mobile US",
+    "MOS": "Mosaic Company (The)",
+    "LMT": "Lockheed Martin",
+    "CMCSA": "Comcast",
+    "KKR": "KKR",
+    "AXP": "American Express",
+    "ALLE": "Allegion",
+    "EQIX": "Equinix",
+    "XEL": "Xcel Energy",
+    "MPC": "Marathon Petroleum",
+    "CARR": "Carrier Global",
+    "NRG": "NRG Energy",
+    "TSCO": "Tractor Supply",
+    "LNT": "Alliant Energy",
+    "WDC": "Western Digital",
+    "NSC": "Norfolk Southern Railway",
+    "KMB": "Kimberly-Clark",
+    "KMI": "Kinder Morgan",
+    "PWR": "Quanta Services",
+    "GEN": "Gen Digital",
+    "FSLR": "First Solar",
+    "WEC": "WEC Energy Group",
+    "LOW": "Lowe\u0027s",
+    "FTNT": "Fortinet",
+    "AZO": "AutoZone",
+    "GEV": "GE Vernova",
+    "FCX": "Freeport-McMoRan",
+    "UAL": "United Airlines Holdings",
+    "HSIC": "Henry Schein",
+    "MRK": "Merck \u0026 Co.",
+    "FDS": "FactSet",
+    "WFC": "Wells Fargo",
+    "QCOM": "Qualcomm",
+    "FDX": "FedEx",
+    "PANW": "Palo Alto Networks",
+    "NUE": "Nucor",
+    "MSI": "Motorola Solutions",
+    "CRWD": "CrowdStrike",
+    "ULTA": "Ulta Beauty",
+    "HIG": "Hartford (The)",
+    "HII": "Huntington Ingalls Industries",
+    "DAL": "Delta Air Lines",
+    "ECL": "Ecolab",
+    "CPRT": "Copart",
+    "SCHW": "Charles Schwab Corporation",
+    "MTB": "M\u0026T Bank",
+    "MTD": "Mettler Toledo",
+    "ZBRA": "Zebra Technologies",
+    "GOOGL": "Alphabet Inc. (Class A)",
+    "TAP": "Molson Coors Beverage Company",
+    "JNJ": "Johnson \u0026 Johnson",
+    "NVR": "NVR Inc.",
+    "DASH": "DoorDash",
+    "CIEN": "Ciena Corporation",
+    "OXY": "Occidental Petroleum",
+    "FANG": "Diamondback Energy",
+    "VLTO": "Veralto",
+    "MPWR": "Monolithic Power Systems",
+    "UDR": "UDR Inc.",
+    "CAG": "Conagra Brands",
+    "CAH": "Cardinal Health",
+    "NWS": "News Corp (Class B)",
+    "GIS": "General Mills",
+    "CAT": "Caterpillar Inc.",
+    "ADBE": "Adobe Inc.",
+    "STLD": "Steel Dynamics",
+    "BIIB": "Biogen",
+    "TRGP": "Targa Resources",
+    "AVGO": "Broadcom",
+    "JPM": "JPMorgan Chase",
+    "HLT": "Hilton Worldwide",
+    "COST": "Costco",
+    "TDG": "TransDigm Group",
+    "EFX": "Equifax",
+    "SPGI": "S\u0026P Global",
+    "UBER": "Uber",
+    "BKNG": "Booking Holdings",
+    "DXCM": "Dexcom",
+    "BAC": "Bank of America",
+    "MNST": "Monster Beverage",
+    "CCI": "Crown Castle",
+    "TDY": "Teledyne Technologies",
+    "LUV": "Southwest Airlines",
+    "CCL": "Carnival",
+    "GRMN": "Garmin",
+    "WDAY": "Workday Inc.",
+    "RVTY": "Revvity",
+    "FIS": "Fidelity National Information Services",
+    "FIX": "Comfort Systems USA Inc.",
+    "BAX": "Baxter International",
+    "TEL": "TE Connectivity"
+  },
+  "stockPriceHistory": {
+    "TER": [
+      323.92
+    ],
+    "SNDK": [
+      607.86
+    ],
+    "LVS": [
+      57.75
+    ],
+    "WYNN": [
+      115.18
+    ],
+    "TFC": [
+      54.42
+    ],
+    "TSLA": [
+      426.52
+    ],
+    "GLW": [
+      134.16
+    ],
+    "CDW": [
+      135.32
+    ],
+    "BBY": [
+      66.84
+    ],
+    "UHS": [
+      231.22
+    ],
+    "CEG": [
+      274.37
+    ],
+    "HON": [
+      243.56
+    ],
+    "ABBV": [
+      220.17
+    ],
+    "WMB": [
+      71.48
+    ],
+    "IQV": [
+      175.80
+    ],
+    "DGX": [
+      209.53
+    ],
+    "EIX": [
+      66.94
+    ],
+    "XOM": [
+      155.28
+    ],
+    "POOL": [
+      270.70
+    ],
+    "RCL": [
+      331.76
+    ],
+    "HPE": [
+      23.62
+    ],
+    "WMT": [
+      128.75
+    ],
+    "BA": [
+      236.98
+    ],
+    "TGT": [
+      114.12
+    ],
+    "A": [
+      128.22
+    ],
+    "NDAQ": [
+      81.05
+    ],
+    "C": [
+      117.93
+    ],
+    "D": [
+      64.61
+    ],
+    "DHI": [
+      163.35
+    ],
+    "IRM": [
+      99.67
+    ],
+    "CFG": [
+      66.87
+    ],
+    "BG": [
+      121.39
+    ],
+    "F": [
+      13.78
+    ],
+    "AXON": [
+      436.36
+    ],
+    "HPQ": [
+      19.63
+    ],
+    "BK": [
+      122.83
+    ],
+    "J": [
+      142.70
+    ],
+    "L": [
+      110.15
+    ],
+    "DHR": [
+      219.80
+    ],
+    "O": [
+      64.39
+    ],
+    "FICO": [
+      1369.86
+    ],
+    "BR": [
+      167.88
+    ],
+    "Q": [
+      114.06
+    ],
+    "NTAP": [
+      105.69
+    ],
+    "ABT": [
+      112.97
+    ],
+    "T": [
+      28.21
+    ],
+    "LYB": [
+      59.29
+    ],
+    "V": [
+      329.54
+    ],
+    "BX": [
+      133.29
+    ],
+    "BDX": [
+      179.62
+    ],
+    "LRCX": [
+      236.60
+    ],
+    "VLO": [
+      203.89
+    ],
+    "ZTS": [
+      128.19
+    ],
+    "CB": [
+      328.82
+    ],
+    "NVDA": [
+      191.27
+    ],
+    "IBKR": [
+      76.54
+    ],
+    "CF": [
+      97.23
+    ],
+    "CI": [
+      292.46
+    ],
+    "JBHT": [
+      231.62
+    ],
+    "SMCI": [
+      31.69
+    ],
+    "LYV": [
+      150.60
+    ],
+    "MTCH": [
+      31.27
+    ],
+    "CL": [
+      95.04
+    ],
+    "BEN": [
+      27.64
+    ],
+    "ACN": [
+      230.79
+    ],
+    "VMC": [
+      321.01
+    ],
+    "DIS": [
+      108.30
+    ],
+    "REG": [
+      76.49
+    ],
+    "INCY": [
+      99.35
+    ],
+    "GPC": [
+      149.43
+    ],
+    "CTAS": [
+      201.10
+    ],
+    "FAST": [
+      47.14
+    ],
+    "AMZN": [
+      204.62
+    ],
+    "CHD": [
+      100.17
+    ],
+    "DD": [
+      51.29
+    ],
+    "DE": [
+      610.03
+    ],
+    "ARES": [
+      137.90
+    ],
+    "CINF": [
+      164.11
+    ],
+    "DG": [
+      147.49
+    ],
+    "HRL": [
+      23.79
+    ],
+    "GPN": [
+      72.67
+    ],
+    "ADI": [
+      336.71
+    ],
+    "ADM": [
+      69.24
+    ],
+    "ADP": [
+      217.59
+    ],
+    "ITW": [
+      298.50
+    ],
+    "ELV": [
+      329.59
+    ],
+    "ACGL": [
+      98.49
+    ],
+    "EA": [
+      201.72
+    ],
+    "EME": [
+      803.53
+    ],
+    "PAYC": [
+      117.68
+    ],
+    "ED": [
+      109.36
+    ],
+    "AEE": [
+      106.08
+    ],
+    "EG": [
+      331.67
+    ],
+    "TJX": [
+      150.56
+    ],
+    "SHW": [
+      364.16
+    ],
+    "EL": [
+      106.09
+    ],
+    "MSCI": [
+      519.16
+    ],
+    "HST": [
+      19.98
+    ],
+    "EMR": [
+      156.30
+    ],
+    "AEP": [
+      122.18
+    ],
+    "ES": [
+      69.77
+    ],
+    "FOX": [
+      56.02
+    ],
+    "HSY": [
+      231.46
+    ],
+    "AES": [
+      16.45
+    ],
+    "YUM": [
+      160.35
+    ],
+    "EW": [
+      78.67
+    ],
+    "TRMB": [
+      65.06
+    ],
+    "PCG": [
+      17.02
+    ],
+    "DECK": [
+      115.15
+    ],
+    "TKO": [
+      210.88
+    ],
+    "FE": [
+      47.94
+    ],
+    "SOLV": [
+      81.25
+    ],
+    "TROW": [
+      94.24
+    ],
+    "CSCO": [
+      85.82
+    ],
+    "WRB": [
+      71.20
+    ],
+    "AFL": [
+      116.20
+    ],
+    "DLR": [
+      174.16
+    ],
+    "IVZ": [
+      26.42
+    ],
+    "UNH": [
+      278.79
+    ],
+    "MSFT": [
+      404.68
+    ],
+    "UNP": [
+      261.95
+    ],
+    "SJM": [
+      109.98
+    ],
+    "EOG": [
+      117.39
+    ],
+    "GD": [
+      348.79
+    ],
+    "GE": [
+      314.37
+    ],
+    "GOOG": [
+      311.62
+    ],
+    "HUM": [
+      176.34
+    ],
+    "GL": [
+      144.35
+    ],
+    "WELL": [
+      208.65
+    ],
+    "GM": [
+      79.78
+    ],
+    "GS": [
+      949.29
+    ],
+    "WSM": [
+      214.52
+    ],
+    "LULU": [
+      176.88
+    ],
+    "HOLX": [
+      75.11
+    ],
+    "PEG": [
+      83.85
+    ],
+    "PAYX": [
+      94.49
+    ],
+    "TMO": [
+      525.00
+    ],
+    "WST": [
+      247.87
+    ],
+    "PEP": [
+      168.71
+    ],
+    "HD": [
+      389.46
+    ],
+    "ISRG": [
+      496.14
+    ],
+    "BF.B": [
+      30.11
+    ],
+    "SLB": [
+      51.14
+    ],
+    "FRT": [
+      107.14
+    ],
+    "PFE": [
+      27.77
+    ],
+    "CLX": [
+      125.65
+    ],
+    "RJF": [
+      159.60
+    ],
+    "PFG": [
+      92.86
+    ],
+    "SBUX": [
+      99.03
+    ],
+    "KVUE": [
+      18.44
+    ],
+    "UPS": [
+      119.93
+    ],
+    "DOC": [
+      16.95
+    ],
+    "CME": [
+      303.44
+    ],
+    "WTW": [
+      282.86
+    ],
+    "CMG": [
+      37.35
+    ],
+    "CMI": [
+      601.45
+    ],
+    "HWM": [
+      233.13
+    ],
+    "AIG": [
+      79.36
+    ],
+    "DLTR": [
+      125.35
+    ],
+    "IP": [
+      48.64
+    ],
+    "EQR": [
+      65.09
+    ],
+    "BKR": [
+      61.16
+    ],
+    "CMS": [
+      74.16
+    ],
+    "IR": [
+      96.98
+    ],
+    "EQT": [
+      56.73
+    ],
+    "DOV": [
+      232.52
+    ],
+    "IT": [
+      160.21
+    ],
+    "MAA": [
+      136.74
+    ],
+    "DOW": [
+      33.98
+    ],
+    "AIZ": [
+      216.77
+    ],
+    "VST": [
+      160.43
+    ],
+    "CNC": [
+      40.26
+    ],
+    "PGR": [
+      209.33
+    ],
+    "MCHP": [
+      80.90
+    ],
+    "HOOD": [
+      77.55
+    ],
+    "AJG": [
+      207.61
+    ],
+    "MAS": [
+      76.24
+    ],
+    "MAR": [
+      360.71
+    ],
+    "BLK": [
+      1083.35
+    ],
+    "AMAT": [
+      342.19
+    ],
+    "MDLZ": [
+      61.45
+    ],
+    "PCAR": [
+      129.93
+    ],
+    "CNP": [
+      40.91
+    ],
+    "CSGP": [
+      48.09
+    ],
+    "SNA": [
+      383.21
+    ],
+    "FTV": [
+      58.93
+    ],
+    "URI": [
+      870.17
+    ],
+    "DPZ": [
+      385.50
+    ],
+    "TPL": [
+      416.14
+    ],
+    "FOXA": [
+      61.76
+    ],
+    "PHM": [
+      139.04
+    ],
+    "VTR": [
+      85.29
+    ],
+    "TPR": [
+      154.43
+    ],
+    "VTRS": [
+      16.02
+    ],
+    "COF": [
+      214.93
+    ],
+    "PLTR": [
+      135.59
+    ],
+    "NFLX": [
+      79.94
+    ],
+    "KLAC": [
+      1492.27
+    ],
+    "COO": [
+      82.84
+    ],
+    "KO": [
+      78.51
+    ],
+    "ESS": [
+      262.76
+    ],
+    "COP": [
+      110.75
+    ],
+    "USB": [
+      59.25
+    ],
+    "GWW": [
+      1202.13
+    ],
+    "COR": [
+      365.43
+    ],
+    "NXPI": [
+      249.26
+    ],
+    "KR": [
+      68.68
+    ],
+    "RMD": [
+      259.29
+    ],
+    "XYL": [
+      126.71
+    ],
+    "MCD": [
+      323.50
+    ],
+    "NEE": [
+      91.19
+    ],
+    "BMY": [
+      60.18
+    ],
+    "MCK": [
+      944.20
+    ],
+    "CPB": [
+      29.16
+    ],
+    "CHRW": [
+      196.77
+    ],
+    "NEM": [
+      123.89
+    ],
+    "ALB": [
+      176.03
+    ],
+    "MCO": [
+      415.20
+    ],
+    "ROST": [
+      192.31
+    ],
+    "XYZ": [
+      53.87
+    ],
+    "CVNA": [
+      365.94
+    ],
+    "IDXX": [
+      647.63
+    ],
+    "GNRC": [
+      214.94
+    ],
+    "DRI": [
+      212.58
+    ],
+    "CPAY": [
+      346.25
+    ],
+    "LH": [
+      289.08
+    ],
+    "ETN": [
+      394.94
+    ],
+    "ODFL": [
+      195.74
+    ],
+    "TTWO": [
+      204.25
+    ],
+    "LDOS": [
+      174.83
+    ],
+    "ALL": [
+      205.91
+    ],
+    "ANET": [
+      141.06
+    ],
+    "ETR": [
+      100.79
+    ],
+    "AMCR": [
+      49.62
+    ],
+    "CPT": [
+      111.66
+    ],
+    "ABNB": [
+      119.56
+    ],
+    "SPG": [
+      195.66
+    ],
+    "LW": [
+      50.33
+    ],
+    "MA": [
+      539.52
+    ],
+    "AMD": [
+      213.00
+    ],
+    "TRV": [
+      299.75
+    ],
+    "AME": [
+      236.33
+    ],
+    "MDT": [
+      100.87
+    ],
+    "MO": [
+      65.72
+    ],
+    "AMP": [
+      489.27
+    ],
+    "ADSK": [
+      232.93
+    ],
+    "MS": [
+      176.86
+    ],
+    "MU": [
+      411.25
+    ],
+    "AMT": [
+      179.46
+    ],
+    "ORCL": [
+      157.08
+    ],
+    "PKG": [
+      244.06
+    ],
+    "ROL": [
+      65.74
+    ],
+    "TSN": [
+      64.52
+    ],
+    "ROK": [
+      413.43
+    ],
+    "ROP": [
+      333.96
+    ],
+    "DTE": [
+      139.17
+    ],
+    "EBAY": [
+      82.95
+    ],
+    "CRH": [
+      127.89
+    ],
+    "SNPS": [
+      433.56
+    ],
+    "NI": [
+      44.78
+    ],
+    "CHTR": [
+      241.08
+    ],
+    "CRL": [
+      164.83
+    ],
+    "MET": [
+      78.87
+    ],
+    "CRM": [
+      184.94
+    ],
+    "TTD": [
+      27.19
+    ],
+    "SRE": [
+      90.83
+    ],
+    "EXPD": [
+      163.06
+    ],
+    "EXPE": [
+      235.08
+    ],
+    "AKAM": [
+      95.00
+    ],
+    "PLD": [
+      140.35
+    ],
+    "FFIV": [
+      282.22
+    ],
+    "NCLH": [
+      22.76
+    ],
+    "KEYS": [
+      237.88
+    ],
+    "DUK": [
+      124.86
+    ],
+    "DELL": [
+      124.37
+    ],
+    "ON": [
+      70.68
+    ],
+    "AON": [
+      314.02
+    ],
+    "PYPL": [
+      40.26
+    ],
+    "BALL": [
+      67.29
+    ],
+    "AOS": [
+      80.03
+    ],
+    "OKE": [
+      85.03
+    ],
+    "CSX": [
+      41.30
+    ],
+    "OTIS": [
+      89.85
+    ],
+    "DVA": [
+      144.55
+    ],
+    "EXC": [
+      44.57
+    ],
+    "APA": [
+      28.11
+    ],
+    "MGM": [
+      36.39
+    ],
+    "EXE": [
+      103.09
+    ],
+    "NWSA": [
+      23.30
+    ],
+    "LEN": [
+      120.76
+    ],
+    "APD": [
+      293.38
+    ],
+    "PG": [
+      159.45
+    ],
+    "PH": [
+      998.24
+    ],
+    "APH": [
+      144.60
+    ],
+    "CDNS": [
+      298.74
+    ],
+    "GILD": [
+      155.71
+    ],
+    "PM": [
+      185.99
+    ],
+    "DVN": [
+      44.78
+    ],
+    "EXR": [
+      142.02
+    ],
+    "BRO": [
+      67.07
+    ],
+    "APO": [
+      127.53
+    ],
+    "APP": [
+      459.27
+    ],
+    "AAPL": [
+      276.43
+    ],
+    "PNC": [
+      237.28
+    ],
+    "STE": [
+      243.09
+    ],
+    "AMGN": [
+      364.77
+    ],
+    "STT": [
+      131.37
+    ],
+    "GDDY": [
+      91.44
+    ],
+    "JBL": [
+      260.92
+    ],
+    "PNR": [
+      99.79
+    ],
+    "STX": [
+      409.41
+    ],
+    "KDP": [
+      29.84
+    ],
+    "STZ": [
+      163.02
+    ],
+    "PNW": [
+      95.57
+    ],
+    "META": [
+      669.41
+    ],
+    "ZBH": [
+      95.21
+    ],
+    "OMC": [
+      69.53
+    ],
+    "BSX": [
+      73.76
+    ],
+    "RSG": [
+      226.72
+    ],
+    "NKE": [
+      62.43
+    ],
+    "HUBB": [
+      513.63
+    ],
+    "JKHY": [
+      165.63
+    ],
+    "JCI": [
+      140.75
+    ],
+    "RF": [
+      30.86
+    ],
+    "ARE": [
+      53.92
+    ],
+    "EPAM": [
+      180.79
+    ],
+    "RL": [
+      359.55
+    ],
+    "VRSK": [
+      171.87
+    ],
+    "MRNA": [
+      40.21
+    ],
+    "KEY": [
+      22.67
+    ],
+    "VRSN": [
+      215.66
+    ],
+    "CVS": [
+      76.36
+    ],
+    "CVX": [
+      185.66
+    ],
+    "INTU": [
+      401.05
+    ],
+    "FISV": [
+      62.72
+    ],
+    "PPG": [
+      130.53
+    ],
+    "DDOG": [
+      126.70
+    ],
+    "BLDR": [
+      125.44
+    ],
+    "TXN": [
+      226.34
+    ],
+    "ALGN": [
+      197.24
+    ],
+    "PPL": [
+      35.97
+    ],
+    "FITB": [
+      54.59
+    ],
+    "TXT": [
+      96.68
+    ],
+    "IBM": [
+      273.86
+    ],
+    "RTX": [
+      197.56
+    ],
+    "SO": [
+      90.86
+    ],
+    "LHX": [
+      341.14
+    ],
+    "SW": [
+      50.23
+    ],
+    "MKC": [
+      70.30
+    ],
+    "TYL": [
+      339.51
+    ],
+    "SWK": [
+      90.31
+    ],
+    "VRTX": [
+      459.93
+    ],
+    "ICE": [
+      153.60
+    ],
+    "CBOE": [
+      271.99
+    ],
+    "LII": [
+      553.57
+    ],
+    "LIN": [
+      466.04
+    ],
+    "VICI": [
+      29.18
+    ],
+    "HAL": [
+      34.84
+    ],
+    "INTC": [
+      47.85
+    ],
+    "GEHC": [
+      79.29
+    ],
+    "HAS": [
+      105.26
+    ],
+    "REGN": [
+      780.09
+    ],
+    "ATO": [
+      175.22
+    ],
+    "CTRA": [
+      31.48
+    ],
+    "TT": [
+      473.75
+    ],
+    "HBAN": [
+      18.02
+    ],
+    "EVRG": [
+      78.94
+    ],
+    "KHC": [
+      24.88
+    ],
+    "COIN": [
+      152.61
+    ],
+    "MLM": [
+      663.38
+    ],
+    "PRU": [
+      105.34
+    ],
+    "PSKY": [
+      10.96
+    ],
+    "ORLY": [
+      93.87
+    ],
+    "SBAC": [
+      190.43
+    ],
+    "CTSH": [
+      71.22
+    ],
+    "PODD": [
+      253.09
+    ],
+    "MRSH": [
+      174.09
+    ],
+    "PSA": [
+      293.33
+    ],
+    "SYF": [
+      72.95
+    ],
+    "NOC": [
+      680.45
+    ],
+    "NTRS": [
+      147.45
+    ],
+    "SYK": [
+      362.53
+    ],
+    "HCA": [
+      531.83
+    ],
+    "ERIE": [
+      279.84
+    ],
+    "MMM": [
+      173.46
+    ],
+    "AVB": [
+      179.80
+    ],
+    "KIM": [
+      21.96
+    ],
+    "TECH": [
+      63.46
+    ],
+    "SYY": [
+      88.04
+    ],
+    "PSX": [
+      161.13
+    ],
+    "INVH": [
+      27.16
+    ],
+    "NDSN": [
+      295.64
+    ],
+    "NOW": [
+      101.55
+    ],
+    "WAB": [
+      255.15
+    ],
+    "BXP": [
+      61.61
+    ],
+    "IEX": [
+      211.28
+    ],
+    "PTC": [
+      155.52
+    ],
+    "CTVA": [
+      75.48
+    ],
+    "VZ": [
+      48.55
+    ],
+    "AVY": [
+      192.77
+    ],
+    "BRK.B": [
+      501.05
+    ],
+    "IFF": [
+      76.65
+    ],
+    "WAT": [
+      331.52
+    ],
+    "CBRE": [
+      151.76
+    ],
+    "AWK": [
+      123.54
+    ],
+    "WM": [
+      234.67
+    ],
+    "LLY": [
+      1014.43
+    ],
+    "WBD": [
+      28.01
+    ],
+    "WY": [
+      27.09
+    ],
+    "MOH": [
+      122.46
+    ],
+    "SWKS": [
+      63.62
+    ],
+    "APTV": [
+      83.64
+    ],
+    "TMUS": [
+      207.62
+    ],
+    "MOS": [
+      31.21
+    ],
+    "LMT": [
+      630.54
+    ],
+    "CMCSA": [
+      32.53
+    ],
+    "KKR": [
+      105.28
+    ],
+    "AXP": [
+      355.18
+    ],
+    "ALLE": [
+      179.40
+    ],
+    "EQIX": [
+      863.66
+    ],
+    "XEL": [
+      77.79
+    ],
+    "MPC": [
+      207.85
+    ],
+    "CARR": [
+      66.80
+    ],
+    "NRG": [
+      160.11
+    ],
+    "TSCO": [
+      54.53
+    ],
+    "LNT": [
+      68.17
+    ],
+    "WDC": [
+      277.26
+    ],
+    "NSC": [
+      316.73
+    ],
+    "KMB": [
+      107.35
+    ],
+    "KMI": [
+      31.64
+    ],
+    "PWR": [
+      523.69
+    ],
+    "GEN": [
+      24.64
+    ],
+    "FSLR": [
+      227.60
+    ],
+    "WEC": [
+      113.19
+    ],
+    "LOW": [
+      286.57
+    ],
+    "FTNT": [
+      87.72
+    ],
+    "AZO": [
+      3733.09
+    ],
+    "GEV": [
+      822.50
+    ],
+    "FCX": [
+      65.30
+    ],
+    "UAL": [
+      113.50
+    ],
+    "HSIC": [
+      81.21
+    ],
+    "MRK": [
+      118.79
+    ],
+    "FDS": [
+      193.29
+    ],
+    "WFC": [
+      89.07
+    ],
+    "QCOM": [
+      141.90
+    ],
+    "FDX": [
+      368.49
+    ],
+    "PANW": [
+      165.49
+    ],
+    "NUE": [
+      194.78
+    ],
+    "MSI": [
+      423.10
+    ],
+    "CRWD": [
+      414.94
+    ],
+    "ULTA": [
+      684.25
+    ],
+    "HIG": [
+      142.02
+    ],
+    "HII": [
+      392.15
+    ],
+    "DAL": [
+      71.16
+    ],
+    "ECL": [
+      301.35
+    ],
+    "CPRT": [
+      39.73
+    ],
+    "SCHW": [
+      95.50
+    ],
+    "MTB": [
+      235.06
+    ],
+    "MTD": [
+      1391.33
+    ],
+    "ZBRA": [
+      250.71
+    ],
+    "GOOGL": [
+      311.20
+    ],
+    "TAP": [
+      52.98
+    ],
+    "JNJ": [
+      240.70
+    ],
+    "NVR": [
+      8082.38
+    ],
+    "DASH": [
+      175.41
+    ],
+    "CIEN": [
+      301.11
+    ],
+    "OXY": [
+      47.34
+    ],
+    "FANG": [
+      168.93
+    ],
+    "VLTO": [
+      95.33
+    ],
+    "MPWR": [
+      1197.55
+    ],
+    "UDR": [
+      39.84
+    ],
+    "CAG": [
+      19.95
+    ],
+    "CAH": [
+      225.15
+    ],
+    "NWS": [
+      26.91
+    ],
+    "GIS": [
+      48.40
+    ],
+    "CAT": [
+      773.53
+    ],
+    "ADBE": [
+      258.39
+    ],
+    "STLD": [
+      206.43
+    ],
+    "BIIB": [
+      191.29
+    ],
+    "TRGP": [
+      222.03
+    ],
+    "AVGO": [
+      343.35
+    ],
+    "JPM": [
+      311.14
+    ],
+    "HLT": [
+      327.38
+    ],
+    "COST": [
+      979.71
+    ],
+    "TDG": [
+      1325.26
+    ],
+    "EFX": [
+      197.29
+    ],
+    "SPGI": [
+      396.65
+    ],
+    "UBER": [
+      70.72
+    ],
+    "BKNG": [
+      4322.85
+    ],
+    "DXCM": [
+      68.19
+    ],
+    "BAC": [
+      54.06
+    ],
+    "MNST": [
+      80.88
+    ],
+    "CCI": [
+      85.66
+    ],
+    "TDY": [
+      657.92
+    ],
+    "LUV": [
+      51.66
+    ],
+    "CCL": [
+      32.80
+    ],
+    "GRMN": [
+      206.52
+    ],
+    "WDAY": [
+      145.19
+    ],
+    "RVTY": [
+      100.89
+    ],
+    "FIS": [
+      48.73
+    ],
+    "FIX": [
+      1345.62
+    ],
+    "BAX": [
+      22.30
+    ],
+    "TEL": [
+      227.16
+    ]
+  },
+  "transactions": []
+}
