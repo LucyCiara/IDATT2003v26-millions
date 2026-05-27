@@ -34,7 +34,6 @@ public class GameController implements GameObserver {
 
   private static NavigationController nav;
 
-  private static final DecimalFormat dispDF = new DecimalFormat("0.00");
   private static final int roundingNum = 2;
   private static final RoundingMode roundingMode = RoundingMode.HALF_UP;
 
@@ -966,9 +965,8 @@ public class GameController implements GameObserver {
   }
 
   public String getHighestPriceString(String symbol) {
-    return dispDF.format(
-      this.getHighestPrice(symbol).setScale(roundingNum, roundingMode)
-    );
+    return this.getHighestPrice(symbol).setScale(roundingNum, roundingMode)
+        .toString();
   }
 
   public BigDecimal getLowestPrice(String symbol) {
@@ -976,9 +974,8 @@ public class GameController implements GameObserver {
   }
 
   public String getLowestPriceString(String symbol) {
-    return dispDF.format(
-      this.getLowestPrice(symbol).setScale(roundingNum, roundingMode)
-    );
+    return this.getLowestPrice(symbol).setScale(roundingNum, roundingMode)
+        .toString();
   }
 
   @Override
