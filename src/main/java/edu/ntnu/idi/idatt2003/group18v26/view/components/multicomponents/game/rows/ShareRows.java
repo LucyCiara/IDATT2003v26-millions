@@ -6,11 +6,9 @@ import java.util.HashMap;
  * Class for the share rows component in the application.
  */
 public class ShareRows extends RowType {
-  private HashMap<String, ShareItem> items;
   
   public ShareRows() {
     super();
-    this.items = new HashMap<>();
   }
 
   /**
@@ -26,15 +24,7 @@ public class ShareRows extends RowType {
       String shareQty, String purchasePrice, String currentValue) {
     ShareItem item = new ShareItem(shareSymbol, shareName, shareQty, purchasePrice, currentValue);
     this.getContents().getChildren().add(item);
-    this.items.putIfAbsent(shareSymbol, item);
   }
 
-  public void update(String symbol) {
-    try {
-      this.items.get(symbol).updatePrice();
-    } catch (Exception e) {
-      // Do nothing. 
-    }
-  }
 
 }

@@ -22,8 +22,6 @@ public class GamePage extends BorderPane implements GameObserver {
   private TransactionHistoryContent transHistContent;
   private StockContent stockContent;
 
-  private static final Logger logger = LoggerFactory.getLogger(GameController.class);
-  
   public GamePage() {
     getStyleClass().add("page");
     this.header = new GameHeader();
@@ -94,7 +92,7 @@ public class GamePage extends BorderPane implements GameObserver {
   @Override
   public void onStockPriceChanged(String symbol) {
     this.stockMarketContent.updateStocks(symbol);
-    this.portfolioContent.updateShares(symbol);
+    GameController.getInstance().fetchRefreshPortfolio();
     if (this.stockContent != null) {
       this.stockContent.update(symbol);
     }

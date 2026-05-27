@@ -26,7 +26,4 @@ public class PortFolioContent extends VBox {
     this.shares.clear();
   }
 
-  public void updateShares(String symbol) {
-
-  }
 }

@@ -74,7 +74,4 @@ public class ShareItem extends GridPane {
     getRowConstraints().add(rowConstraint);
   }
 
-  public void updatePrice() {
-    this.purchasePriceDisp.setDisplayText(GameController.getInstance().getStockPrice(this.symDisp.getDisplayText()));
-  }
 }
