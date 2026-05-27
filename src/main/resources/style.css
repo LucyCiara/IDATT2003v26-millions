@@ -62,3 +62,11 @@
   -fx-background-color: black;
   -fx-opacity: 0.5;
 }
+
+#buy {
+  -fx-background-color: #B9C9B9;
+}
+
+#sell {
+  -fx-backround-color: #C9B9B9;
+}
