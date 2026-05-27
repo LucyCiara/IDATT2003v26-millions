@@ -1005,45 +1005,46 @@ public class GameController {
   }
 
   public void load() {
-    try {
-      GameSnapshot snapshot = this.gameReader.readGameState(Path.of(SAVE_PATH));
-      Player loadPlayer = new Player(snapshot.playerName, snapshot.startingMoney, snapshot.playerMoney);
-      Map<String, List<BigDecimal>> priceHist = snapshot.stockPriceHistory;
-      Map<String, String> stockCompany = snapshot.stockCompany;
-      List<Stock> stocks = new ArrayList<>();
-      for (String symbol : priceHist.keySet()) {
-        Stock stock = new Stock(symbol, stockCompany.get(symbol), priceHist.get(symbol).getFirst());
-        for (int i = 1; i < priceHist.get(symbol).size(); i++) {
-          stock.addNewSalesPrice(priceHist.get(symbol).get(i));
-        }
-        stocks.add(stock);
-      }
-      Exchange loadExchange = new Exchange("loaded exchange", stocks);
-      this.exchange = loadExchange;
+  //   try {
+  //     GameSnapshot snapshot = this.gameReader.readGameState(Path.of(SAVE_PATH));
+  //     Player loadPlayer = new Player(snapshot.playerName, snapshot.startingMoney, snapshot.playerMoney);
+  //     Map<String, List<BigDecimal>> priceHist = snapshot.stockPriceHistory;
+  //     Map<String, String> stockCompany = snapshot.stockCompany;
+  //     List<Stock> stocks = new ArrayList<>();
+  //     for (String symbol : priceHist.keySet()) {
+  //       Stock stock = new Stock(symbol, stockCompany.get(symbol), priceHist.get(symbol).getFirst());
+  //       for (int i = 1; i < priceHist.get(symbol).size(); i++) {
+  //         stock.addNewSalesPrice(priceHist.get(symbol).get(i));
+  //       }
+  //       stocks.add(stock);
+  //     }
+  //     Exchange loadExchange = new Exchange("loaded exchange", stocks);
+  //     this.exchange = loadExchange;
 
-      for (ShareSnapshot share : snapshot.playerPortfolio) {
-        Stock stock = this.exchange.getStock(share.symbol);
-        loadPlayer.getPortfolio().addShare(new Share(stock, share.quantity, share.purchasePrice));
-      }
+  //     for (ShareSnapshot share : snapshot.playerPortfolio) {
+  //       Stock stock = this.exchange.getStock(share.symbol);
+  //       loadPlayer.getPortfolio().addShare(new Share(stock, share.quantity, share.purchasePrice));
+  //     }
 
-      for (TransactionSnapshot transaction : snapshot.transactions) {
-        Transaction transaction2;
-        if (transaction.type.equals(Purchase.class.getSimpleName().toUpperCase())) {
-          Stock stock = this.exchange.getStock(transaction.symbol);
-          Share share = new Share(stock, transaction.quantity, transaction.purchasePrice);
-          transaction2 = new Purchase(share, transaction.week);
-        } else {
-          Stock stock = this.exchange.getStock(transaction.symbol);
-          Share share = new Share(stock, transaction.quantity, transaction.purchasePrice);
-          transaction2 = new Sale(share, transaction.week);
-        }
-        loadPlayer.getTransactionArchive().add(transaction2);
+  //     for (TransactionSnapshot transaction : snapshot.transactions) {
+  //       Transaction transaction2;
+  //       if (transaction.type.equals(Purchase.class.getSimpleName().toUpperCase())) {
+  //         Stock stock = this.exchange.getStock(transaction.symbol);
+  //         Share share = new Share(stock, transaction.quantity, transaction.purchasePrice);
+  //         transaction2 = new Purchase(share, transaction.week);
+  //       } else {
+  //         Stock stock = this.exchange.getStock(transaction.symbol);
+  //         Share share = new Share(stock, transaction.quantity, transaction.purchasePrice);
+  //         transaction2 = new Sale(share, transaction.week);
+  //       }
+  //       loadPlayer.getTransactionArchive().add(transaction2);
 
-        this.player = loadPlayer;
-      }
-    } catch (IOException e) {
-      logger.error("While loading file, met exception: {}", e);
-    }
-    this.onGameStart(this.player, this.exchange);
+  //       this.player = loadPlayer;
+  //     }
+  //   } catch (IOException e) {
+  //     logger.error("While loading file, met exception: {}", e);
+  //   }
+  //   this.onGameStart(this.player, this.exchange);
+  // }
   }
 }
