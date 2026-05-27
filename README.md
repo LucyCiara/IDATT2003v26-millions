@@ -52,17 +52,45 @@ edu/ntnu/idi/idatt2003/group18v26/
 ### 📦 Package Responsibilities
 
 #### Models: Business logic and data entities
+Core business logic: Player state, Exchange operations, Portfolio management, Stock/Share data structures, Transaction handling, CSV file I/O
+* model/property: Financial entities: Exchange (market), Stock (individual securities), Share (portfolio holdings), Portfolio (player's holdings collection)
+* model/transaction: Transaction operations: Purchase and Sale transactions, Transaction archive and history tracking
+* model/filehandling: Data persistence: Reading/writing CSV stock data, managing external data sources
 
 #### Controller:  Bridge between UI and business logic
+Application coordination: GameController (game flow, model-view coordination), NavigationController (UI page switching/navigation)
 
 #### View: JavaFX UI components
+JavaFX UI: Pages (main screens), Components (reusable UI elements like buttons and panels), App (entry point)
 
 #### Utils:  Helper functions
+Input validation and defensive programming: Validates parameter types (String, Object, BigDecimal, int) before they're used in critical business logic;
+throws IllegalArgumentException with descriptive messages for null, blank, or invalid values; prevents common errors like null pointer exceptions and invalid money amounts before they propagate through the application
+
+
 
 ### JUnit Tests (`src/test`)
 
 The JUnit tests are stored under `src/test/java/edu/ntnu/idi/idatt2003/group18v26` and mirror the main package structure. These tests cover both positive and negative test of all classes (except `App.java` and UI classes) and their methods ensuring program reliability according to the specification given in the portofolie project descriptions
 <pre>
+    edu.ntnu.idi.idatt2003.group18v26/
+├── AppTest.java                                (Integration entry point)
+├── model/
+│   ├── PlayerTest.java
+│   ├── property/
+│   │   ├── ExchangeTest.java
+│   │   ├── StockTest.java
+│   │   ├── ShareTest.java
+│   │   └── PortfolioTest.java
+│   ├── transaction/
+│   │   ├── PurchaseTest.java
+│   │   ├── SaleTest.java
+│   │   ├── PurchaseCalculatorTest.java
+│   │   ├── SaleCalculatorTest.java
+│   │   └── TransactionArchiveTest.java
+│   └── filehandling/
+│       ├── CsvStockReaderTest.java
+│       └── CsvStockWriterTest.java
 </pre>
 
 ### Maven Layout
