@@ -53,3 +53,4 @@ out/
 bin/*
 google_checks.xml
 *.log
+saves/
