@@ -38,6 +38,7 @@ public class GameSerializer {
     snapshot.startingMoney = player.getStartingMoney();
     snapshot.playerPortfolio = extractPortfolio(player.getPortfolio());
     snapshot.week = exchange.getWeek();
+    snapshot.stockCompany = extractStockCompanyRelations(exchange);
     snapshot.stockPriceHistory = extractStockPriceHistory(exchange);
     snapshot.transactions = extractTransactions(player);
 
@@ -84,6 +85,15 @@ public class GameSerializer {
     return history;
   }
 
+  private Map<String, String> extractStockCompanyRelations(Exchange exchange) {
+    Map<String, String> symbolCompany = new HashMap<>();
+
+    exchange.getStocks().forEach(stock -> {
+      symbolCompany.put(stock.getSymbol(), stock.getCompany());
+    });
+    return symbolCompany;
+  }
+
   /**
    * Extract transaction history into list of TransactionSnapshots.
    *
@@ -101,6 +111,7 @@ public class GameSerializer {
           type,
           transaction.getShare().stock().getSymbol(),
           transaction.getShare().quantity(),
+          transaction.getShare().purchasePrice(),
           transaction.getCalculator().calculateTotal(),
           transaction.getWeek()
       );

@@ -24,14 +24,14 @@ class GameSnapshotTest {
 
   @Test
   void constructorSetsFieldsCorrectly() {
-    GameSnapshot snapshot = new GameSnapshot(
-        "Alice",
-        new BigDecimal("100"),
-        new BigDecimal("500"),
-        List.of(),
-        2,
-        Map.of(),
-        List.of());
+    GameSnapshot snapshot = new GameSnapshot();
+    snapshot.playerName = "Alice";
+    snapshot.playerMoney = new BigDecimal("100");
+    snapshot.startingMoney = new BigDecimal("500");
+    snapshot.playerPortfolio = List.of();
+    snapshot.week = 2;
+    snapshot.stockPriceHistory = Map.of();
+    snapshot.transactions = List.of();
 
     assertEquals("Alice", snapshot.playerName);
     assertEquals(0, snapshot.playerMoney.compareTo(new BigDecimal("100")));

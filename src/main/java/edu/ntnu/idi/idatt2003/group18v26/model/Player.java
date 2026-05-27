@@ -38,6 +38,23 @@ public class Player {
   }
 
   /**
+   * The constructor, which takes a name and the starting money.
+   *
+   * @param name          The name of the player.
+   * @param startingMoney The starting money for the player.
+   */
+  public Player(String name, BigDecimal startingMoney, BigDecimal currentMoney) {
+    ParameterValidator.stringChecker(name, "name");
+    ParameterValidator.bigDecimalChecker(startingMoney, "startingMoney");
+    this.name = name;
+    this.startingMoney = startingMoney;
+    this.money = currentMoney;
+    this.portfolio = new Portfolio();
+    this.transArchive = new TransactionArchive();
+  }
+
+
+  /**
    * A method to get the name of the player.
    *
    * @return Returns the name of the player.
