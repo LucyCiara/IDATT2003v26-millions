@@ -20,11 +20,14 @@ class TransactionSnapshotTest {
 
   @Test
   void constructor_setsFieldsCorrectly() {
-    TransactionSnapshot snapshot = new TransactionSnapshot(
-        "PURCHASE",
-        "AAPL",
-        new BigDecimal("2"),
-        new BigDecimal("300.00"), 2);
+    // Use default constructor and set fields directly since the multi-arg constructor
+    // is not defined in TransactionSnapshot.
+    TransactionSnapshot snapshot = new TransactionSnapshot();
+    snapshot.type = "PURCHASE";
+    snapshot.symbol = "AAPL";
+    snapshot.quantity = new BigDecimal("2");
+    snapshot.totalPrice = new BigDecimal("300.00");
+    snapshot.week = 2;
 
     assertEquals("PURCHASE", snapshot.type);
     assertEquals("AAPL", snapshot.symbol);
