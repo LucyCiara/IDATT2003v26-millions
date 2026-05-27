@@ -11,7 +11,6 @@ import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.Tr
 import javafx.scene.layout.BorderPane;
 
 public class GamePage extends BorderPane implements GameObserver {
-  private GameController gameCont = GameController.getInstance();
 
   private GameHeader header;
   private GameBottom bottom;
@@ -97,12 +96,12 @@ public class GamePage extends BorderPane implements GameObserver {
 
   @Override
   public void onPurchaseCompleted(String symbol, String quantity) {
-    this.gameCont.fetchRefreshTransactionHistory();
+    GameController.getInstance().fetchRefreshTransactionHistory();
   }
 
   @Override
   public void onSaleCompleted(String symbol, String quantity) {
-    this.gameCont.fetchRefreshTransactionHistory();
+    GameController.getInstance().fetchRefreshTransactionHistory();
   }
 
   @Override
@@ -113,7 +112,7 @@ public class GamePage extends BorderPane implements GameObserver {
 
   @Override
   public void onPortfolioChanged() {
-    this.gameCont.fetchRefreshPortfolio();
+    GameController.getInstance().fetchRefreshPortfolio();
   }
 
   @Override
