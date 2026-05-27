@@ -954,7 +954,7 @@ public class GameController {
   }
 
   public String getStockPrice(String symbol) {
-    return this.exchange.getStock(symbol).getSalesPrice()
+    return "$" + this.exchange.getStock(symbol).getSalesPrice()
         .setScale(roundingNum, roundingMode).toString();
   }
 
