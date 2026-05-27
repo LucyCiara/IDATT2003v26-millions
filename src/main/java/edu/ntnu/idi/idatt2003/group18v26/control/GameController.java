@@ -158,6 +158,7 @@ public class GameController {
     this.fetchRefreshPortfolio();
     this.fetchRefreshStockMarket();
     this.fetchRefreshTransactionHistory();
+    nav.getGamepage().initGamePage(this.player.getName());
     nav.showGamePage();
   }
 
@@ -282,21 +283,6 @@ public class GameController {
     }
   }
 
-  /**
-   * Fills the stock market with the given stocks, limited by the specified number.
-   *
-   * @param stocks the list of stocks to display
-   * @param limit the maximum number of stocks to display
-   */
-  private void fillStocks(List<Stock> stocks, int limit) {
-    for (int i = 0; i < limit && i < stocks.size(); i++) {
-      Stock stock = stocks.get(i);
-      nav.addStockToStockMarket(
-          stock.getSymbol(),
-          stock.getCompany(),
-          "$" + stock.getSalesPrice().setScale(roundingNum, roundingMode).toString());
-    }
-  }
 
   /**
    * Fills the transaction history with the given transactions.
@@ -337,7 +323,7 @@ public class GameController {
     this.lastStockSort = "None";
     nav.clearStockMarketStocks();
     List<Stock> stocks = this.exchange.getAllStock();
-    this.fillStocks(stocks, stockLimit);
+    this.fillStocks(stocks);
   }
 
   private List<Transaction> getTransactions() {
@@ -439,7 +425,7 @@ public class GameController {
     if (this.symbolToggleStock) {
       stocks = stocks.reversed();
     }
-    this.fillStocks(stocks, stockLimit);
+    this.fillStocks(stocks);
   }
 
   /**
@@ -499,7 +485,7 @@ public class GameController {
     if (this.companyNameToggleStock) {
       stocks = stocks.reversed();
     }
-    this.fillStocks(stocks, stockLimit);
+    this.fillStocks(stocks);
   }
 
   /**
@@ -577,7 +563,7 @@ public class GameController {
     if (this.purchasePriceToggleStock) {
       stocks = stocks.reversed();
     }
-    this.fillStocks(stocks, stockLimit);
+    this.fillStocks(stocks);
   }
 
   /**

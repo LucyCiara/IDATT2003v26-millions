@@ -11,9 +11,8 @@ public class StockRows extends RowType {
   }
 
   public void addItem(String stockSymbol, String stockName, String purchasePrice) {
-    StockItem item = new StockItem(stockSymbol, stockName, purchasePrice);
-    this.getContents().getChildren().add(item);
-    this.items.putIfAbsent(stockSymbol, item);
+    this.items.put(stockSymbol, new StockItem(stockSymbol, stockName, purchasePrice));
+    this.getContents().getChildren().add(items.get(stockSymbol));
   }
 
   public void update(String symbol) {

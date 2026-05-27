@@ -30,7 +30,11 @@ public class ShareRows extends RowType {
   }
 
   public void update(String symbol) {
-    this.items.get(symbol).updatePrice();
+    try {
+      this.items.get(symbol).updatePrice();
+    } catch (Exception e) {
+      // Do nothing. 
+    }
   }
 
 }

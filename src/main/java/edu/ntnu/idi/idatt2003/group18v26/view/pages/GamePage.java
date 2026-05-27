@@ -1,5 +1,8 @@
 package edu.ntnu.idi.idatt2003.group18v26.view.pages;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import edu.ntnu.idi.idatt2003.group18v26.control.GameController;
 import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.GameBottom;
@@ -19,6 +22,8 @@ public class GamePage extends BorderPane implements GameObserver {
   private TransactionHistoryContent transHistContent;
   private StockContent stockContent;
 
+  private static final Logger logger = LoggerFactory.getLogger(GameController.class);
+  
   public GamePage() {
     getStyleClass().add("page");
     this.header = new GameHeader();
@@ -90,7 +95,9 @@ public class GamePage extends BorderPane implements GameObserver {
   public void onStockPriceChanged(String symbol) {
     this.stockMarketContent.updateStocks(symbol);
     this.portfolioContent.updateShares(symbol);
-    this.stockContent.update(symbol);
+    if (this.stockContent != null) {
+      this.stockContent.update(symbol);
+    }
     this.bottom.updateNetWorth();
   }
 
@@ -115,10 +122,11 @@ public class GamePage extends BorderPane implements GameObserver {
     GameController.getInstance().fetchRefreshPortfolio();
   }
 
-  @Override
-  public void onPlayerCreated(String name) {
-    this.header.updateName(name);
+ 
+  public void initGamePage(String playerName) {
+    this.header.updateName(playerName);
     this.header.updateMoney();
+    this.header.updateStatus();
     this.bottom.updateNetWorth();
     this.bottom.updateWeek(0);
   }

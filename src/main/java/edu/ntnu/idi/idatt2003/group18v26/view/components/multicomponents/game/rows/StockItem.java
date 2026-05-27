@@ -15,7 +15,7 @@ import javafx.scene.layout.RowConstraints;
  * Class for the stock item component in the application.
  */
 public class StockItem extends GridPane {
-  private StockInfoButton symbBtn;
+  public StockInfoButton symbBtn;
   private DisplayType nameDisp;
   private DisplayType purchasePriceDisp;
   private StockQuantityField stockQtyField;
