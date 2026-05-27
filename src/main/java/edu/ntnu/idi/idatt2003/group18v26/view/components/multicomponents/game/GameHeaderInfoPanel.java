@@ -29,12 +29,16 @@ public class GameHeaderInfoPanel extends HBox {
     this.getChildren().forEach(obj -> setHgrow(obj, Priority.ALWAYS));
   }
 
-  /**
-   * Updates all the displays in the info panel.
-   */
-  public void updateDisplays() {
-    this.nameDisp.update();
+  public void updateName(String name) {
+    this.nameDisp.update(name);
+  }
+
+  public void updateMoney() {
     this.moneyDisp.update();
+  }
+
+  public void updateStatus() {
     this.statusDisp.update();
   }
+
 }

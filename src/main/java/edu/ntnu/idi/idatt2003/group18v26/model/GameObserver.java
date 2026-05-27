@@ -48,4 +48,9 @@ public interface GameObserver {
    * Called when player's portfolio changes.
    */
   void onPortfolioChanged();
+
+  /**
+   * Called when a player is created.
+   */
+  void onPlayerCreated(String name);
 }

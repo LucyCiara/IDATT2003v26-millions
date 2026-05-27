@@ -60,4 +60,5 @@ public class TransactionItem extends GridPane {
     all.setPercentHeight(100);
     getRowConstraints().add(all);
   }
+
 }

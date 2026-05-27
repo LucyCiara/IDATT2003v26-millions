@@ -35,6 +35,7 @@ public class Player {
     this.money = startingMoney;
     this.portfolio = new Portfolio();
     this.transArchive = new TransactionArchive();
+    this.notifyPlayerCreated();
   }
 
   /**
@@ -151,5 +152,13 @@ public class Player {
   private void notifyMoneyChanged() {
     logger.debug("Notifying observers: money changed to {}", this.money);
     observers.forEach(observer -> observer.onMoneyChanged(this.money.toString()));
+  }
+
+  /**
+   * Notify all observers that player was created.
+   */
+  private void notifyPlayerCreated() {
+    logger.debug("Notifying observers: player created");
+    observers.forEach(observer -> observer.onPlayerCreated(this.name));
   }
 }

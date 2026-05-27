@@ -54,4 +54,8 @@ public class StockMarketContent extends GridPane {
   public void updateGainersAndLosers() {
     this.gainersAndLosers.update();
   }
+
+  public void updateStocks(String symbol) {
+    this.stockRows.update(symbol);
+  }
 }

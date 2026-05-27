@@ -1,12 +1,10 @@
 package edu.ntnu.idi.idatt2003.group18v26.control;
 
-import edu.ntnu.idi.idatt2003.group18v26.model.GameObserver;
 import edu.ntnu.idi.idatt2003.group18v26.model.Player;
 import edu.ntnu.idi.idatt2003.group18v26.model.filehandling.CsvStockReader;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Exchange;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Share;
 import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
-import edu.ntnu.idi.idatt2003.group18v26.model.transaction.PurchaseCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Transaction;
 
@@ -16,7 +14,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.application.Platform;
@@ -29,7 +26,7 @@ import org.slf4j.LoggerFactory;
  * It implements the GameObserver interface 
  * to receive updates from the model and update the view accordingly.
  */
-public class GameController implements GameObserver {
+public class GameController {
   private static GameController instance;
 
   private static NavigationController nav;
@@ -93,7 +90,7 @@ public class GameController implements GameObserver {
         this.exchange = new Exchange(
             file.getName(),
             this.reader.readStocks(file.toPath()));
-        this.exchange.addObserver(this);
+        this.exchange.addObserver(nav.getGamepage());
       } catch (IOException e) {
         nav.createErrorPopup("File must be a readable CSV.");
         this.setExchange(null);
@@ -129,23 +126,14 @@ public class GameController implements GameObserver {
           nav.createWarningPopup("Starting money must be more than 0.");
         } else {
           this.player = new Player(playerName, playerStartMoneyBigDec);
-          this.player.addObserver(this);
-          this.player.getPortfolio().addObserver(this);
+          this.player.addObserver(nav.getGamepage());
+          this.player.getPortfolio().addObserver(nav.getGamepage());
           System.out.println(String.format("%s, %5f", player.getName(), player.getMoney()));
         }
       } catch (Exception e) {
         nav.createWarningPopup("Starting money must be a valid decimal number.");
       }
     }
-  }
-
-  /** 
-   * Returns the name of the player.
-   *
-   * @return the player name
-   */
-  public String getPlayerName() {
-    return this.player.getName();
   }
 
   /**
@@ -167,8 +155,6 @@ public class GameController implements GameObserver {
         logger.error("Unexpected URI exception. Might be caused by sp500.csv missing.", e);
       }
     }
-    nav.updateGamePage();
-    nav.updateGainersAndLosers();
     this.fetchRefreshPortfolio();
     this.fetchRefreshStockMarket();
     this.fetchRefreshTransactionHistory();
@@ -180,10 +166,13 @@ public class GameController implements GameObserver {
    * and showing the new game panel.
    */
   public void onNewGame() {
-    this.player = null;
+    logger.debug("Setting Exchange with null");
     this.setExchange(null);
+    logger.debug("Clearing NewGameFields");
     nav.clearNewGameFields();
+    logger.debug("Showing NewGamePanel");
     nav.showNewGamePanel();
+    logger.debug("Finished showing newGamePanel");
   }
 
   /** 
@@ -658,7 +647,7 @@ public class GameController implements GameObserver {
    * fetches the portfolio and fills 
    * the portfolio with the shares, keeping the current sorting order.
    */
-  private void fetchRefreshPortfolio() {
+  public void fetchRefreshPortfolio() {
     logger.debug("Refreshing portfolio");
     if (this.lastShareSort.equals("None")) {
       this.fetchPortfolio();
@@ -700,7 +689,7 @@ public class GameController implements GameObserver {
   /**
    * Refreshes the transaction history based on the last sorting order.
    */
-  private void fetchRefreshTransactionHistory() {
+  public void fetchRefreshTransactionHistory() {
     logger.debug("Refreshing transaction history");
     if (this.lastTransactionSort.equals("Week")) {
       this.fetchWeekTransactionHistory(false);
@@ -930,7 +919,7 @@ public class GameController implements GameObserver {
     this.sellAllShares();
     String[] lines = new String[] {
         "Player:",
-        this.getPlayerName(),
+        this.player.getName(),
         "",
         "Status:",
         this.getPlayerStatus(),
@@ -978,41 +967,8 @@ public class GameController implements GameObserver {
         .toString();
   }
 
-  @Override
-  public void onWeekAdvanced(int newWeek) {
-    nav.updateGamePage();
-    this.fetchRefreshPortfolio();
-    this.fetchRefreshStockMarket();
-    nav.updateGainersAndLosers();
-    nav.updateStockContent();
-  }
-
-  @Override
-  public void onStockPriceChanged(String symbol) {
-    nav.updateGamePage();
-  }
-
-  @Override
-  public void onPurchaseCompleted(String symbol, String quantity) {
-    nav.updateGamePage();
-    this.fetchRefreshTransactionHistory();
-  }
-
-  @Override
-  public void onSaleCompleted(String symbol, String quantity) {
-    nav.updateGamePage();
-    this.fetchRefreshTransactionHistory();
-  }
-
-  @Override
-  public void onMoneyChanged(String newBalance) {
-    nav.updateGamePage();
-  }
-
-  @Override
-  public void onPortfolioChanged() {
-    logger.debug("Was notified by portfolio change");
-    nav.updateGamePage();
-    this.fetchRefreshPortfolio();
+  public String getStockPrice(String symbol) {
+    return this.exchange.getStock(symbol).getSalesPrice()
+        .setScale(roundingNum, roundingMode).toString();
   }
 }

@@ -1,6 +1,7 @@
 package edu.ntnu.idi.idatt2003.group18v26.view.components.multicomponents.game.rows;
 
 
+import edu.ntnu.idi.idatt2003.group18v26.control.GameController;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.BuyButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.buttons.StockInfoButton;
 import edu.ntnu.idi.idatt2003.group18v26.view.components.displays.DisplayType;
@@ -57,5 +58,9 @@ public class StockItem extends GridPane {
     RowConstraints rowConstraint = new RowConstraints();
     rowConstraint.setPercentHeight(100);
     getRowConstraints().add(rowConstraint);
+  }
+
+  public void updatePrice() {
+    this.purchasePriceDisp.setDisplayText(GameController.getInstance().getStockPrice(this.symbBtn.getText()));
   }
 }

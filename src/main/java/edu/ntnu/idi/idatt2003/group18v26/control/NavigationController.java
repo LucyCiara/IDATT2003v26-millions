@@ -211,13 +211,6 @@ public class NavigationController {
   }
 
   /**
-   * Updates the information displayed on the game page.
-   */
-  public void updateGamePage() {
-    this.gamePage.updateInfo();
-  }
-
-  /**
    * Selects the portfolio tab on the game page.
    */
   public void selectPortfolio() {
@@ -290,13 +283,6 @@ public class NavigationController {
   }
 
   /**
-   * Updates the gainer and loser information on the game page.
-   */
-  public void updateGainersAndLosers() {
-    this.gamePage.updateGainersAndLosers();
-  }
-
-  /**
    * Adds a transaction to the transaction history on the game page.
    *
    * @param week the week of the transaction
@@ -329,9 +315,7 @@ public class NavigationController {
     this.gamePage.selectStock(symbol);
   }
 
-  public void updateStockContent() {
-    if (this.gamePage.stockContentIsInitialized()) {
-      this.gamePage.updateStockContent();
-    }
+  public GamePage getGamepage() {
+    return this.gamePage;
   }
 }

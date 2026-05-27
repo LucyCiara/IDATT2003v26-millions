@@ -38,7 +38,7 @@ public class StockContent extends BorderPane {
     highLowPrice.getChildren().addAll(this.highestPrice, this.lowestPrice);
     setRight(highLowPrice);
 
-    this.update();
+    this.update(symbol);
   }
 
   private void renderPriceHist() {
@@ -78,8 +78,10 @@ public class StockContent extends BorderPane {
     );
   }
 
-  public void update() {
-    this.renderPriceHist();
-    this.setHighestAndLowestPrice();
+  public void update(String symbol) {
+    if (this.symbol.equals(symbol)) {
+      this.renderPriceHist();
+      this.setHighestAndLowestPrice();
+    }
   }
 }

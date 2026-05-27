@@ -16,7 +16,7 @@ public class WeekWidget extends VBox {
     getChildren().addAll(this.weekDisp, this.advWeekBtn);
   }
 
-  public void updateWeek() {
-    this.weekDisp.update();
+  public void updateWeek(int week) {
+    this.weekDisp.update(week);
   }
 }
