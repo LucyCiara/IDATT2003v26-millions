@@ -9,7 +9,6 @@ import edu.ntnu.idi.idatt2003.group18v26.model.property.Stock;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.PurchaseCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.SaleCalculator;
 import edu.ntnu.idi.idatt2003.group18v26.model.transaction.Transaction;
-import edu.ntnu.idi.idatt2003.group18v26.model.transaction.TransactionCalculator;
 
 import java.io.File;
 import java.io.IOException;
@@ -729,17 +728,42 @@ public class GameController implements GameObserver {
    */
   public void sellShare(String symbol) {
     Share share = this.player.getPortfolio().getShare(symbol);
+    String quantity = share.quantity().setScale(roundingNum, roundingMode).toString();
+
+
     String confirmationText
         = "Do you confirm the sale of " + symbol + "x"
-        + share.quantity().setScale(roundingNum, roundingMode).toString()
-        + " for $" + new SaleCalculator(share).calculateTotal();
+        + quantity + "?";
     
     try {
       if (nav.createConfirmation("Confirm Sale:", confirmationText)) {
-        this.exchange.sell(
-            share,
-            this.player
+        Transaction sale = this.exchange.sell(share, this.player);
+        String purchasePrice = share.purchasePrice()
+            .setScale(roundingNum, roundingMode).toString();
+        String valueAtSale = share.stock().getSalesPrice()
+            .setScale(roundingNum, roundingMode).toString();
+        String gross = sale.getCalculator().calculateGross()
+            .setScale(roundingNum, roundingMode).toString();
+        String comissions = sale.getCalculator().calculateCommission()
+            .setScale(roundingNum, roundingMode).toString();
+        String tax = sale.getCalculator().calculateTax()
+            .setScale(roundingNum, roundingMode).toString();
+        String totalSaleAmount = sale.getCalculator().calculateTotal()
+            .setScale(roundingNum, roundingMode).toString();
+        String rapportText = String.format(
+            "Stock: %s\n"
+            + "Quantity: %s\n"
+            + "Value at purchase: %s\n"
+            + "Value at sale: %s\n"
+            + "Gross revenue: %s\n"
+            + "Comissions: %s\n"
+            + "Tax: %s\n"
+            + "---\n"
+            + "Total revenue: %s",
+            symbol, quantity, purchasePrice, valueAtSale, gross, comissions,
+            tax, totalSaleAmount
         );
+        nav.createInfo("Transaction rapport:", rapportText);
       }
     } catch (Exception e) {
       // Do nothing.
@@ -754,25 +778,35 @@ public class GameController implements GameObserver {
    * @param quantity the quantity of shares to buy, expected to be a valid number in string format
    */
   public void buyShare(String symbol, String quantity) {
-    String purchasePrice;
-    try {
-      purchasePrice = new PurchaseCalculator(
-          new Share(this.exchange.getStock(symbol),
-          new BigDecimal(quantity),
-          this.exchange.getStock(symbol).getSalesPrice())
-      ).calculateTotal().setScale(roundingNum, roundingMode).toString();
-     
-    } catch (Exception e) {
-      purchasePrice = "?";
-    }
-
     String confirmationText
-        = "Do you confirm the purchase of " + symbol + "x" + quantity
-        + " for $" + purchasePrice;
+        = "Do you confirm the purchase of " + symbol + "x" + quantity + "?";
           
     try {
       if (nav.createConfirmation("Confirm purchase:", confirmationText)) {
-        this.exchange.buy(symbol, new BigDecimal(quantity), this.player);
+        Transaction purchase
+            = this.exchange.buy(symbol, new BigDecimal(quantity), this.player);
+        String value = this.exchange.getStock(symbol).getSalesPrice()
+            .setScale(roundingNum, roundingMode).toString();
+        String gross = purchase.getCalculator().calculateGross()
+            .setScale(roundingNum, roundingMode).toString();
+        String comissions = purchase.getCalculator().calculateCommission()
+            .setScale(roundingNum, roundingMode).toString();
+        String tax = purchase.getCalculator().calculateTax()
+            .setScale(roundingNum, roundingMode).toString();
+        String total = purchase.getCalculator().calculateTotal()
+            .setScale(roundingNum, roundingMode).toString();
+        String rapportText = String.format(
+            "Stock: %s\n"
+            + "Quantity: %s\n"
+            + "Value: %s\n"
+            + "Gross cost: %s\n"
+            + "Comissions: %s\n"
+            + "Tax: %s\n"
+            + "---\n"
+            + "Total cost: %s",
+            symbol, quantity, value, gross, comissions, tax, total
+        );
+        nav.createInfo("Transaction rapport:", rapportText);
       }
     } catch (ArithmeticException e) {
       nav.createErrorPopup("Insufficient funds.");
@@ -949,7 +983,6 @@ public class GameController implements GameObserver {
 
   @Override
   public void onWeekAdvanced(int newWeek) {
-    System.out.println("test");
     nav.updateGamePage();
     this.fetchRefreshPortfolio();
     this.fetchRefreshStockMarket();

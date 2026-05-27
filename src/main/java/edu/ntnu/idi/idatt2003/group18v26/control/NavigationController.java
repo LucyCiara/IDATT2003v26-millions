@@ -187,6 +187,14 @@ public class NavigationController {
     return false;
   }
 
+  public void createInfo(String title, String text) {
+    Alert info = new Alert(AlertType.INFORMATION);
+    info.setTitle(title);
+    info.setHeaderText(title);
+    info.setContentText(text);
+    info.show();
+  }
+
   /**
    * Clears the fields in the new game panel.
    */
